@@ -1,0 +1,326 @@
+{
+    "miztinker_tab": "米工匠",
+
+    "modifier.miztinker.alloying":"合金化",
+    "modifier.miztinker.alloying.flavor": "比普通金属更加强大",
+    "modifier.miztinker.alloying.description": "每级减少7%受到的伤害",
+
+    "modifier.miztinker.ironman":"铁人",
+    "modifier.miztinker.ironman.flavor": "真正的铁人,身体各处都充满了铁",
+    "modifier.miztinker.ironman.description": "每1点护甲值增加0.1%伤害减免,随等级变动,该特性最高减免95%",
+
+    "modifier.miztinker.blood_bat":"血液蝙蝠",
+    "modifier.miztinker.blood_bat.flavor": "一只纯血组成的蝙蝠",
+    "modifier.miztinker.blood_bat.description": "当处于蝙蝠状态时,你可以无视所有攻击,除非对面比你强大太多",
+
+    "modifier.miztinker.eternalsunscreen":"永恒防晒霜",
+    "modifier.miztinker.eternalsunscreen.flavor": "为什么会产生'防晒霜'这种物质,仍旧是个迷",
+    "modifier.miztinker.eternalsunscreen.description": "为你带来取之不尽用之不竭的防晒霜",
+
+    "modifier.miztinker.draculasblood":"德古拉之血",
+    "modifier.miztinker.draculasblood.flavor": "作为血祖,拥有对血液的最高控制力",
+    "modifier.miztinker.draculasblood.description": "当血量下降到最大生命值的10%时,将生命值回复至最大生命值,默认冷却120秒,每吸血鬼等级冷却下降8秒",
+
+    "modifier.miztinker.eternalblood":"血池",
+    "modifier.miztinker.eternalblood.flavor": "来源于一部国产灾难(划掉)修仙漫画",
+    "modifier.miztinker.eternalblood.description": "使吸血鬼犹如浸泡在血池中一样,一直拥有无限的血液",
+
+    "modifier.miztinker.dynamax":"极巨化",
+    "modifier.miztinker.dynamax.flavor": "来自伽勒尔的粒子作用在你的武器上",
+    "modifier.miztinker.dynamax.description": "使你的武器拥有200倍增伤",
+
+    "modifier.miztinker.dynamax_armor":"极巨化",
+    "modifier.miztinker.dynamax_armor.flavor": "来自伽勒尔的粒子作用在你的防具上",
+    "modifier.miztinker.dynamax_armor.description": "使你免疫200点以下伤害",
+
+    "modifier.miztinker.blood_wing":"血族之翼",
+    "modifier.miztinker.blood_wing.flavor": "更加掌握了自己的身体,实现了局部蝙蝠化",
+    "modifier.miztinker.blood_wing.description": "使4级及以上的吸血鬼拥有随时飞行的能力",
+
+    "modifier.miztinker.venom":"蝎毒",
+    "modifier.miztinker.venom.flavor": "攻击你的对手,就像蝎子毒针一样",
+    "modifier.miztinker.venom.description": "攻击对方时,给对方10秒的中毒,不可叠加",
+
+    "modifier.miztinker.venom_damage":"毒素激活",
+    "modifier.miztinker.venom_damage.flavor": "诱发对方体内的毒素来增强对方受到的伤害",
+    "modifier.miztinker.venom_damage.description": "如果对方有中毒效果,则你造成的伤害增加250%",
+
+    "modifier.miztinker.chlorine":"氯",
+    "modifier.miztinker.chlorine.flavor": "起源于...",
+    "modifier.miztinker.chlorine.description": "当你的工具损失耐久时,在当前位置生成一圈半径为3,持续2秒的中毒药水云",
+
+    "modifier.miztinker.sodium":"钠",
+    "modifier.miztinker.sodium.flavor": "遇水变....",
+    "modifier.miztinker.sodium.description": "当你处于水中时,立刻爆炸,并且清除周围3x3x3的水方块",
+
+    "modifier.miztinker.xxkiller":"xx杀手",
+    "modifier.miztinker.xxkiller.flavor": "银获得了进化,掌握了对所有种族造成额外伤害的能力",
+    "modifier.miztinker.xxkiller.description": "对亡灵生物,节肢生物,水生生物,火生生物,虚无生物,类人生物,灾厄村民,吸血鬼,龙,动物,人类,造成1.75倍伤害,随等级变动",
+
+    "modifier.miztinker.abyssal_protection":"深渊保护",
+    "modifier.miztinker.abyssal_protection.flavor": "来自深渊的力量庇护着你",
+    "modifier.miztinker.abyssal_protection.description": "使你的最大生命值提升30",
+
+    "modifier.miztinker.bloodshield":"血液护盾",
+    "modifier.miztinker.bloodshield.flavor": "你对血液的控制力更上一层楼",
+    "modifier.miztinker.bloodshield.description": "凝聚出血液护盾,免疫30点及以下的伤害,此外每1点伤害消耗0.005血液值(最小消耗1)",
+
+    "modifier.miztinker.fly":"飞行",
+    "modifier.miztinker.fly.flavor": "无数人想要的能力",
+    "modifier.miztinker.fly.description": "穿上后就可以创造飞行",
+
+    "modifier.miztinker.water_power":"水龙之力",
+    "modifier.miztinker.water_power.flavor": "你感到水龙的力量在你脚下涌现",
+    "modifier.miztinker.water_power.description": "脚下每10t尝试生成一次水方块",
+
+    "modifier.miztinker.lava_explosion":"熔岩大爆弹!",
+    "modifier.miztinker.lava_explosion.flavor": "高温加剧了爆炸反应",
+    "modifier.miztinker.lava_explosion.description": "当你处于熔岩中时,造成爆炸并产生高额爆炸伤害,同时清除一定范围内的熔岩",
+
+    "modifier.miztinker.mega_big_magnetic":"超级极巨化磁性",
+    "modifier.miztinker.mega_big_magnetic.flavor": "mega进化+极巨化,这合法吗?",
+    "modifier.miztinker.mega_big_magnetic.description": "对自己周围的生物每秒造成该生物当前生命值20%的伤害,同时这部分生命值会加到你自己身上",
+
+    "modifier.miztinker.strengthen_breathing":"强化呼吸系统",
+    "modifier.miztinker.strengthen_breathing.flavor": "伸出氧气管,插向你的敌人和亚空间",
+    "modifier.miztinker.strengthen_breathing.description": "拥有无限的氧气,并且攻击敌人造成伤害的30%会转化为窒息伤害",
+
+    "modifier.miztinker.ravenous":"饥渴进化",
+    "modifier.miztinker.ravenous.flavor": "从蕴含饥渴者力量的奖杯中探寻到了他的能力",
+    "modifier.miztinker.ravenous.description": "拥有6次进化次数,将会在你死亡时触发,每次进化你会增加20%最大生命值,6次进化次数用尽后,销毁该工具",
+
+    "modifier.miztinker.berserk":"狂暴",
+    "modifier.miztinker.berserk.flavor": "从地狱中成功爬出来了,超级无敌生气暴怒",
+    "modifier.miztinker.berserk.description": "物品栏右键开启狂暴,开启后拥有400%伤害加成,急迫,速度,力量buff,但是每秒强制损耗1耐久,物品栏再次右键关闭",
+
+    "modifier.miztinker.grasp_heart":"心脏掌握",
+    "modifier.miztinker.grasp_heart.flavor": "第八位阶魔法,某人面对低端局最爱用",
+    "modifier.miztinker.grasp_heart.description": "每角色等级(level)有0.01%的概率对对方发动一次心脏掌握,造成大量伤害",
+
+    "modifier.miztinker.wall_of_skeleton":"骸骨障壁",
+    "modifier.miztinker.wall_of_skeleton.flavor": "第五位阶魔法,会在你释放魔法后保护你",
+    "modifier.miztinker.wall_of_skeleton.description": "当你铁魔法法力值不为满时,给予你抗性提升5",
+
+    "modifier.miztinker.souleat":"噬魂",
+    "modifier.miztinker.souleat.flavor": "最典型的成长性特性,无数类似特性的模板",
+    "modifier.miztinker.souleat.description": "每击杀一个生物,该生物10%的血量会增加到你的武器上,增长比例随等级提升",
+
+    "modifier.miztinker.real_souleat": "仍不满足",
+    "modifier.miztinker.real_souleat.flavor": "需要更多的灵魂量,一万不够,十万不够,百万不够...",
+    "modifier.miztinker.real_souleat.description": "揭示它的真实形态！",
+
+    "modifier.miztinker.sb_cancel":"后摇取消",
+    "modifier.miztinker.sb_cancel.flavor": "吓哭了",
+    "modifier.miztinker.sb_cancel.description": "副手盾牌举盾后放下会迅速减少主手武器攻击冷却",
+
+    "modifier.miztinker.stredgeuniverse":"宇宙终结",
+    "modifier.miztinker.stredgeuniverse.flavor": "万物星空",
+    "modifier.miztinker.stredgeuniverse.description": "空挥时释放万物星空环形幻影剑阵",
+
+    "modifier.miztinker.gatling_sword":"加特林幻影剑",
+    "modifier.miztinker.gatling_sword.flavor": "拔刀剑x枪械?",
+    "modifier.miztinker.gatling_sword.description": "空挥时释放一轮伤害相当于主手武器面板伤害一半的疾风幻影剑",
+
+
+    "modifier.miztinker.deceivedevil":"欺骗恶魔",
+    "modifier.miztinker.deceivedevil.flavor": "有钱能使鬼推磨",
+    "modifier.miztinker.deceivedevil.description": "下蹲+右键绑定当前坐标,当你之后死亡时,消耗66个金锭,你会取消死亡并传送到绑定的坐标点",
+
+    "modifier.miztinker.circleslash":"匠之呼吸 贰之型-圆舞",
+    "modifier.miztinker.circleslash.flavor": "来自x灭之刃",
+    "modifier.miztinker.circleslash.description": "空挥时释放4道相当于自身盔甲值÷盔甲韧性的商x0.5伤害的圆刃(适用拔刀剑sss评级4倍伤害)",
+
+    
+    "modifier.miztinker.capturin":"捕捉",
+    "modifier.miztinker.capturin.flavor": "简直就像作弊",
+    "modifier.miztinker.capturin.description": "每特性等级有2.5%的概率击杀生物后掉落对应的刷怪蛋",
+
+    "modifier.miztinker.dragon_greedy":"龙贪",
+    "modifier.miztinker.dragon_greedy.flavor": "龙的贪婪超过了很多人的想象,但仍旧不及...",
+    "modifier.miztinker.dragon_greedy.description": "强制掉落冰火传说生物的'稀有战利品',对于其他生物则会掉落双倍掉落物",
+
+    "modifier.miztinker.atomslash":"原子斩",
+    "modifier.miztinker.atomslash.flavor": "アトミック斩!",
+    "modifier.miztinker.atomslash.description": "你学会了原子斩,所以可以空挥释放合计25道的斩击,每击斩击造成击中生物当前生命值一半的伤害",
+
+    "modifier.miztinker.sleepinstant":"便携式睡袋",
+    "modifier.miztinker.sleepinstant.flavor": "为什么睡袋可以安装在匠魂工具上",
+    "modifier.miztinker.sleepinstant.description": "手持时使用下蹲加右键即可进入梦乡",
+
+    "modifier.miztinker.death_eye":"死神之眼",
+    "modifier.miztinker.death_eye.flavor": "是的,你不支付一半的寿命也可以拥有了",
+    "modifier.miztinker.death_eye.description": "获得永久的夜视,同时物品栏中右键还可以开启死神之眼模式",
+
+    "modifier.miztinker.bfg2000":"BFG-2000",
+    "modifier.miztinker.bfg2000.flavor": "你知道吗:这个bfg的意思是BIG F**KING GUN的意思",
+    "modifier.miztinker.bfg2000.description": "按住右键射出一道激光,造成大量范围伤害并烧毁沿途方块,同时也要消耗巨量耐久",
+
+    "modifier.miztinker.souldrain":"灵魂汲取",
+    "modifier.miztinker.souldrain.flavor": "从骨头中摄取力量的传统或许起源于萨满教",
+    "modifier.miztinker.souldrain.description": "从部分生物的头骨中提取力量,每级提升你0.5的最大生命值和0.1的生命回复",
+
+    
+    "modifier.miztinker.retributionexplosion":"怨念爆破",
+    "modifier.miztinker.retributionexplosion.flavor": "利用怨念的力量产生爆破",
+    "modifier.miztinker.retributionexplosion.description": "受到伤害会产生爆炸,受到的伤害决定爆炸的伤害以及半径",
+
+    "modifier.miztinker.kineticamplifier":"动能冲击",
+    "modifier.miztinker.kineticamplifier.flavor": "众所周知瞬间冲击的速度会影响造成的伤害",
+    "modifier.miztinker.kineticamplifier.description": "瞬时速度越快,造成的伤害倍率越高,反之亦然",
+
+    "modifier.miztinker.vexsummoner":"恼鬼召唤术",
+    "modifier.miztinker.vexsummoner.flavor": "唤魔者来了",
+    "modifier.miztinker.vexsummoner.description": "每5次攻击召唤一只跟随你的恼鬼",
+
+    "modifier.miztinker.etherealminer":"空灵矿工",
+    "modifier.miztinker.etherealminer.flavor": "一名因沙砾挤压而死的矿工,没有选择憎恶其他人,而是选择了徘徊在世间,阻止其他类似的事件发生",
+    "modifier.miztinker.etherealminer.description": "挖掘方块后将如果上放存在重力方块,则将其替换,防止更上方的重力方块坠落",
+
+    "modifier.miztinker.whispering":"细语",
+    "modifier.miztinker.whispering.flavor": "被你制成材料的寄生体们并没有完全死亡,牠们仍然会发声",
+    "modifier.miztinker.whispering.description": "时不时对你讲话",
+
+    "modifier.miztinker.ignisterfield":"伊格尼斯领域",
+    "modifier.miztinker.ignisterfield.flavor": "超绝！豪快！闷绝！优雅！超级！超超级!",
+    "modifier.miztinker.ignisterfield.description": "每完成6个进度,即可根据武器面板伤害额外使用一次火灵天星支援造成伤害",
+
+    "modifier.miztinker.configuration":"配重",
+    "modifier.miztinker.configuration.flavor": "在重力的作用下镐子也增加了挖掘速度",
+    "modifier.miztinker.configuration.description": "当你不站在地面上时,增加7点挖掘速度",
+
+    "modifier.miztinker.eatstone":"赤石",
+    "modifier.miztinker.eatstone.flavor": "花朵 树木 天空 微风 云彩 太阳 彩虹 沙滩 森林 沙粒 大地",
+    "modifier.miztinker.eatstone.description": "你会直接吃掉挖掘的石头类方块或者矿石类方块",
+
+    "modifier.miztinker.emerald_splash":"绿宝石水花飞溅",
+    "modifier.miztinker.emerald_splash.flavor": "接招吧 dio!这半径20米的绿宝石水花飞溅!",
+    "modifier.miztinker.emerald_splash.description": "被生物攻击受到伤害时会以自己为中心发射许多条射程为20格的绿宝石水花,伤害为自己最大生命值减当前生命值的差",
+
+    "modifier.miztinker.awakendoomguy.requirements":"需要The Only Thing They Fear Is You作为前置",
+    "modifier.miztinker.awaken_doomguy": "The Only Thing They Fear Is You·觉醒",
+    "modifier.miztinker.awaken_doomguy.flavor": "来自毁灭战士 永恒",
+    "modifier.miztinker.awaken_doomguy.description":"攻击时造成大量给予目标生命值的切断伤害,持有时同时获得较强的防御效果,还常驻速度4跳跃提升2",
+  
+    "modifier.miztinker.doom_guy": "The Only Thing They Fear Is You",
+    "modifier.miztinker.doom_guy.flavor": "纯音乐，请欣赏",
+    "modifier.miztinker.doom_guy.description":"在背包里右键播放",
+
+    "modifier.miztinker.ultraman": "Theme from ULTRAMAN",
+    "modifier.miztinker.ultraman.flavor": "纯音乐，请欣赏",
+    "modifier.miztinker.ultraman.description":"在背包里右键播放",
+
+    "modifier.miztinker.awakenultraman.requirements":"需要Theme from ULTRAMAN作为前置",
+    "modifier.miztinker.awaken_ultraman": "Theme from ULTRAMAN·觉醒",
+    "modifier.miztinker.awaken_ultraman.flavor": "银色的流星,ULTRAMAN",
+    "modifier.miztinker.awaken_ultraman.description":"获得飞行能力,穿戴上时按下匠魂的护腿交互键变身,再次按下取消,变身后获得1000点最大生命值,抗性提升4,体型会变得很大,同时持续下蹲8秒以后释放进化光流,持续下蹲即可持续发射,进化光流造成切断伤害",
+
+    "modifier.miztinker.greymatter":"小奇兵",
+    "modifier.miztinker.greymatter.flavor": "哦 烦馁,应该变四手霸王或者钻石战神的 ",
+    "modifier.miztinker.greymatter.description": "穿戴上时按下匠魂的头盔交互键变身,再次按下取消,变身后获得跳跃提升10,速度5,最大生命值变为5,体型会变得很小,但在你变身后周围3x3范围内的掉落物会每隔5分钟翻倍一次",
+
+    "modifier.miztinker.woundeffectattack":"致命创伤PLUS",
+    "modifier.miztinker.woundeffectattack.flavor": "正如你所见,是致命创伤的PLUS版本",
+    "modifier.miztinker.woundeffectattack.description": "攻击后给予对方10秒'致命创伤PLUS'效果,会禁止99.99%类型的生命回复",
+
+    "modifier.miztinker.tiga":"迪迦之光",
+    "modifier.miztinker.tiga.flavor": "只是一点残存的光",
+    "modifier.miztinker.tiga.description": "时刻在脚下放置光源方块,如果自身存在村庄英雄效果,则开启闪耀环身盾,开启后对自身3x3范围内的敌人每5tick造成100点魔法伤害",
+
+    "modifier.miztinker.antonbloodline":"安东血脉",
+    "modifier.miztinker.antonbloodline.flavor": "利用冷到骨子里的寒气冻结tnt和弹射物",
+    "modifier.miztinker.antonbloodline.description": "使你受到的弹射物伤害降低至最多5,同时清除你周围的点燃的tnt实体",
+
+    "modifier.miztinker.enchantedgold":"附魔金",
+    "modifier.miztinker.enchantedgold.flavor": "附魔金的力量使你身上所有的食物都变成了附魔金xx",
+    "modifier.miztinker.enchantedgold.description": "你吃的每个食物都会相当于是附魔金苹果",
+
+    "modifier.miztinker.plumber":"水管工",
+    "modifier.miztinker.plumber.flavor": "Hi,I'm Mario!",
+    "modifier.miztinker.plumber.description": "化身马里奥,对踩在脚底下的生物造成巨大伤害,同时再次弹起",
+
+    "modifier.miztinker.infinitum":"亘古永恒",
+    "modifier.miztinker.infinitum.flavor": "由归纳而证明！",
+    "modifier.miztinker.infinitum.description": "这件装备无法被破坏。",
+
+    "modifier.miztinker.blockingdamage":"右键格挡",
+    "modifier.miztinker.blockingdamage.flavor": "就像1.8那样",
+    "modifier.miztinker.blockingdamage.description": "右键开启格挡,开启后减免50%伤害",
+
+    "modifier.miztinker.bronofstorm":"暴风雨所诞生的",
+    "modifier.miztinker.bronofstorm.flavor": "保尔·柯察金 著",
+    "modifier.miztinker.bronofstorm.description": "物品栏右键切换天气",
+
+    "modifier.miztinker.steelhowforged":"钢铁是怎样练成的",
+    "modifier.miztinker.steelhowforged.flavor": "奥斯特洛夫斯基 著",
+    "modifier.miztinker.steelhowforged.description": "穿戴在身上的盔甲每有1级该特性,获得1级持续的抗性提升",
+
+    "modifier.miztinker.astral":"星能力共鸣·时钟座",
+    "modifier.miztinker.astral.flavor": "大部分人认为的最强星能力共鸣",
+    "modifier.miztinker.astral.description": "攻击到的生物会被时停2秒,等级每提升1级时停时长增加1秒",
+
+
+    "modifier.miztinker.onimiko":"No.§m01§r06 鬼巫女的[领域]",
+    "modifier.miztinker.onimiko.flavor": "这难道不是博丽灵梦吗?!",
+    "modifier.miztinker.onimiko.description": "使你拥有鬼巫女的防御能力",
+
+
+    "effect.miztinker.woundeffect": "致命创伤PLUS",
+    "effect.miztinker.horologiumnoai": "星能力共鸣·时钟座",
+    
+    "modifier.miztinker.entropy_decay":"熵蚀",
+    "modifier.miztinker.entropy_decay.flavor": "你猜减到最后会怎么样",
+    "modifier.miztinker.entropy_decay.description": "第一次击杀生物得到大量面板伤害加成,后面每次击杀生物,该生物的最大生命值的一定量会扣除你的武器面板伤害",
+
+    "material.miztinker.ten_thousand_souls": "万魂",
+    "material.miztinker.ten_thousand_souls.flavor": "由一万个灵魂聚合合成",
+    "material.miztinker.ten_thousand_souls.encyclopedia": "仍不满足,仍可以继续吞噬灵魂",
+
+    "material.miztinker.nihilite_souls": "虚魂",
+    "material.miztinker.nihilite_soulsflavor": "吞噬了足够多的灵魂",
+    "material.miztinker.nihilite_souls.encyclopedia": "被吞噬的灵魂开始向你展开复仇了",
+
+    "material.miztinker.abyss_silver": "深渊银",
+    "material.miztinker.abyss_silver.flavor": "自深渊崛起",
+    "material.miztinker.abyss_silver.encyclopedia": "被遗忘的金属借用银为主体重新聚合,这本是不可能的",
+
+    "material.miztinker.starmetal": "星辉",
+    "material.miztinker.starmetal.flavor": "继承了最强的能力",
+    "material.miztinker.starmetal.encyclopedia": "虽然只继承了一个能力,但这也许是最强的那个",
+
+     "item.miztinker.big_manyullyn_ingot": "超极巨化玛玉灵锭",
+
+      "item.miztinker.mega_big_iron_ingot": "超级极巨化铁锭",
+
+      "item.miztinker.dx": "迪拉熊",
+
+      "item.miztinker.ignister": "电子界到临者@伊格尼斯星",
+
+      "item.miztinker.ten_thousand_souls_item": "万魂锭",
+
+      "item.miztinker.abyss_silver_item": "深渊银锭",
+      "fluid.miztinker.molten_abyss_silver": "熔融深渊银",
+      "item.miztinker.molten_abyss_silver_bucket": "熔融深渊银桶",
+      "block.miztinker.molten_abyss_silver_fluid": "熔融深渊银",
+
+
+      "item.miztinker.oni_miko_bow": "鬼巫女的大蝴蝶结",
+      "tooltip.miztinker.oni_miko_bow": "§d还带着一点点鬼巫女的气味",
+
+      "item.miztinker.how_the_steel_was_tempered": "《钢铁是怎样练成的》",
+
+      "item.miztinker.starmetal_ingot": "星辉锭",
+      "tooltip.miztinker.starmetal_ingot": "在夜晚y大于300的地方露天放置2分钟转化",
+
+      "item.miztinker.born_of_the_storm": "《暴风雨所诞生的》",
+      "tooltip.miztinker.born_of_the_storm": "在雷暴天的情况下露天放置2分钟转化",
+      
+      "miztinker.tool.tab": "米工匠-工具",
+      "item.miztinker.lollipop": "棒棒糖",
+      "item.miztinker.lollipop.description": "一种猪猪侠最爱的匠魂工具，可以吃哦",
+
+      "item.miztinker.old_sword": "1.8剑",
+      "item.miztinker.old_sword.description": "来自1.8更加遥远的遗产,拥有很高的攻速,让你攻击不再有攻击冷却,还还原了1.8的右键格挡减伤极致",
+
+      "item.miztinker.tinker_loli_pickaxe": "普通萝莉",
+      "item.miztinker.tinker_loli_pickaxe.description": "来自1.12的遥远遗产，可以同时作为镐子，铲子和斧头！\n右键对10 x 10 x 10的生物造成一次攻击\n“延展”强化会提供群体攻击范围和挖掘范围！ "
+}

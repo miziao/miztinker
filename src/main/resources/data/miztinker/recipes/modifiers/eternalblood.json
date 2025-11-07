@@ -1,0 +1,34 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 64,
+      "item": "vampirism:human_heart"
+    },
+    {
+      "amount_needed": 64,
+      "item": "vampirism:human_heart"
+    },
+    {
+      "amount_needed": 64,
+      "item": "vampirism:human_heart"
+    },
+    {
+      "amount_needed": 64,
+      "item": "vampirism:human_heart"
+    },
+    {
+      "amount_needed": 64,
+      "item": "vampirism:human_heart"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:eternalblood",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor"
+  }
+}

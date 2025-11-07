@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "tag": "iceandfire:dragon_skulls"
+    },
+    {
+      "tag": "iceandfire:dragon_hearts"
+    },
+    {
+      "tag": "iceandfire:dragon_skulls"
+    },
+    {
+      "tag": "iceandfire:dragon_skulls"
+    },
+    {
+      "tag": "iceandfire:dragon_skulls"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:dragon_greedy",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}

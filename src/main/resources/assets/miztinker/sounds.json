@@ -1,0 +1,26 @@
+{
+  "doom_guy": {
+    "sounds": [
+      {
+        "name":"miztinker:doom_guy",
+        "stream": true
+      }
+    ]
+  },
+  "ultraman": {
+    "sounds": [
+      {
+        "name":"miztinker:ultraman",
+        "stream": true
+      }
+    ]
+  },
+  "mario": {
+    "sounds": [
+      {
+        "name":"miztinker:mario",
+        "stream": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "priority": 200,
+  "package": "com.mizi.miztinker.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "miztinker.refmap.json",
+  "mixins": [
+    "WoundEffectHealthMixin",
+    "LivingEntityTickMixin"
+  ],
+  "client": [
+    "TestMixin" 
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

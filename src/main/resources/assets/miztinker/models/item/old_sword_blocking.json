@@ -1,0 +1,41 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "miztinker:item/old_sword",
+  "textures": {
+    "blade": "miztinker:item/tool/old_sword/blade",
+    "handle": "miztinker:item/tool/old_sword/handle",
+    "guard": "miztinker:item/tool/old_sword/guard",
+    "broken_blade": "miztinker:item/tool/old_sword/broken_blade",
+    "large_blade": "miztinker:item/tool/old_sword/large/blade",
+    "large_handle": "miztinker:item/tool/old_sword/large/handle",
+    "large_guard": "miztinker:item/tool/old_sword/large/guard",
+    "large_broken_blade": "miztinker:item/tool/old_sword/large/broken_blade"
+  },
+  "modifier_roots": {
+    "small": [
+      "miztinker:item/tool/old_sword/modifiers/"
+    ],
+    "large": [
+      "miztinker:item/tool/old_sword/large/modifiers/"
+    ]
+  },
+  "large": true,
+  "large_offset": [6, -6],
+  "parts": [
+    { "name": "blade", "index": 0, "broken": "broken_blade" },
+    { "name": "handle", "index": 1 },
+    { "name": "guard", "index": 2 }
+  ],
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [0, 180, -5],
+      "translation": [-5, -2, -0.2],
+      "scale": [1, 1, 1]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 0, 5],
+      "translation": [-5, -2, -0.2],
+      "scale": [1, 1, 1]
+    }
+  }
+}

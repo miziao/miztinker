@@ -1,0 +1,30 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "block_factorys_bosses:sandworm_dart"
+    },
+    {
+      "item": "threateningly_mobs:basalt_wyvern_horn"
+    },
+    {
+      "amount_needed": 32,
+      "item": "craziness_awakened:stinger_dart"
+    },
+    {
+      "item": "jerotesvillage:gemstone_throwing_knives"
+    },
+    {
+      "item": "jerotesvillage:gemstone_throwing_knives"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:gatling_sword",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}

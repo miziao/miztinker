@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "tag": "vampirism:vampire_cloak"
+    },
+    {
+      "item": "vampirism:vampire_clothing_crown"
+    },
+    {
+      "item": "vampirism:blood_infused_enhanced_iron_block"
+    },
+    {
+      "item": "vampirism:impure_blood_bucket"
+    },
+    {
+      "item": "vampirism:impure_blood_bucket"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:draculasblood",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor"
+  }
+}

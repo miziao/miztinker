@@ -1,0 +1,33 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      " f ",
+      "a e",
+      "bcd"
+    ],
+    "key": {
+      "a": {
+        "item": "legendary_monsters:the_great_frost"
+      },
+      "b": {
+        "item": "legendary_monsters:fiery_jaw"
+      },
+      "c": {
+        "item": "legendary_monsters:chorus_blade"
+      },
+      "d": {
+        "item": "legendary_monsters:soul_great_sword"
+      },
+      "e": {
+        "item": "legendary_monsters:mossy_hammer"
+      },
+      "f": {
+        "item": "legendary_monsters:axe_of_lightning"
+      }
+    },
+    "result": {
+      "item": "miztinker:ignister",
+      "count": 1
+    }
+}

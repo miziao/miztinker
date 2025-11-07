@@ -1,0 +1,25 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "forge:item/default-tool",
+  "textures": {
+    "head":   "miztinker:item/tool/old_sword/blade",
+    "handle": "miztinker:item/tool/old_sword/handle",
+    "guard":  "miztinker:item/tool/old_sword/guard"
+  },
+  "modifier_roots": [ "miztinker:item/tool/old_sword/modifiers/" ],
+  "parts": [
+    { "name": "handle", "index": 1 },
+    { "name": "head",   "index": 0 },
+    { "name": "guard",  "index": 2 }
+  ],
+  "overrides": [
+    {
+      "predicate": { "tconstruct:charging": 2 },
+      "model": "miztinker:item/tool/old_sword/blocking"
+    },
+    {
+      "predicate": { "tconstruct:broken": 1 },
+      "model": "miztinker:item/tool/old_sword/broken"
+    }
+  ]
+}

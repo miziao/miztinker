@@ -1,0 +1,31 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "vampirism:altar_inspiration"
+    },
+    {
+      "item": "vampirism:umbrella"
+    },
+    {
+      "item": "vampirism:blood_infused_enhanced_iron_ingot"
+    },
+    {
+      "amount_needed": 8,
+      "item": "vampirism:human_heart"
+    },
+    {
+      "amount_needed": 8,
+      "item": "vampirism:human_heart"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:eternalsunscreen",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor"
+  }
+}

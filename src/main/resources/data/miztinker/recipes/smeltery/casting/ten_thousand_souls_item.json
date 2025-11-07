@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "item": "goety:cursed_ingot"
+  },
+  "cast_consumed": false,
+  "fluid": {
+    "name": "tconstruct:liquid_soul",
+    "amount": 1000000
+  },
+  "result": "miztinker:ten_thousand_souls_item",
+  "cooling_time": 1000
+}

@@ -1,0 +1,17 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "miztinker:ignister"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:ignisterfield",
+  "slots": {
+   "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}

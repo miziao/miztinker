@@ -1,0 +1,31 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 2,
+      "item": "slashblade:proudsoul_trapezohedron"
+    },
+    {
+      "item": "slashblade:slashblade"
+    },
+    {
+      "amount_needed": 2,
+      "item": "slashblade:proudsoul_trapezohedron"
+    },
+    {
+      "item": "tconstruct:encyclopedia"
+    },
+    {
+      "item": "tconstruct:smeltery_controller"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:circleslash",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}

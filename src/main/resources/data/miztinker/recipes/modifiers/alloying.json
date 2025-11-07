@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "tconstruct:pig_iron_block"
+    },
+    {
+      "item": "tconstruct:slimesteel_block"
+    },
+    {
+      "item": "tconstruct:cinderslime_block"
+    },
+    {
+      "item": "minecraft:netherite_block"
+    },
+    {
+      "item": "tconstruct:amethyst_bronze_block"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:alloying",
+  "slots": {
+    "defense": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor"
+  }
+}

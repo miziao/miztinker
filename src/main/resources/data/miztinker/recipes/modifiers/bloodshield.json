@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "tag": "kubejs:vampirism"
+    },
+    {
+      "item": "vampirism:vampire_blood_bottle"
+    },
+    {
+      "tag": "vampirism:pure_blood"
+    },
+    {
+      "item": "vampirism:vampire_orchid"
+    },
+    {
+      "item": "vampirism:blood_bottle"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:bloodshield",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor"
+  }
+}

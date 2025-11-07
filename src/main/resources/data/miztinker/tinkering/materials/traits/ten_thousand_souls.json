@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "name": "miztinker:souleat",
+      "level": 1
+    },
+    {
+      "name": "miztinker:real_souleat",
+      "level": 1
+    }
+  ]
+}

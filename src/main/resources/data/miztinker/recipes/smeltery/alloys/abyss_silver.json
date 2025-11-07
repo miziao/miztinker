@@ -1,0 +1,26 @@
+{
+    "type": "tconstruct:alloy",
+    "inputs": [
+      {
+        "name": "tconstruct:molten_silver",
+        "amount": 360
+      },
+      {
+        "name": "tconstruct:molten_iron",
+        "amount": 360
+      },
+      {
+        "name": "tconstruct:molten_tin",
+        "amount": 900
+      },
+      {
+        "name": "tconstruct:molten_nickel",
+        "amount": 180
+      }
+    ],
+    "result": {
+      "fluid": "miztinker:molten_abyss_silver",
+      "amount": 90
+    },
+    "temperature": 1500
+  }

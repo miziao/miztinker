@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "vampirism:blood_bucket"
+    },
+    {
+      "item": "vampirism:vampire_fang"
+    },
+    {
+      "item": "vampirism:blood_bucket"
+    },
+    {
+      "item": "vampirism:blood_bucket"
+    },
+    {
+      "item": "vampirism:blood_bucket"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:blood_bat",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor"
+  }
+}

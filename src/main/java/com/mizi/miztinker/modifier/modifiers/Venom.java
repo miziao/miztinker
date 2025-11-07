@@ -1,0 +1,29 @@
+package com.mizi.miztinker.modifier.modifiers;
+
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
+import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
+import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
+
+public class Venom extends NoLevelsModifier implements MeleeHitModifierHook {
+
+    @Override
+    public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
+        if (damageDealt <= 0) return;
+
+        LivingEntity target = context.getLivingTarget();
+        if (target != null && target.isAlive()) {
+            target.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 0)); // 10秒毒
+        }
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, slimeknights.tconstruct.library.modifiers.ModifierHooks.MELEE_HIT);
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:anvil"
+    },
+    {
+      "item": "minecraft:chain"
+    },
+    {
+      "item": "minecraft:anvil"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:configuration",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/harvest"
+  }
+}

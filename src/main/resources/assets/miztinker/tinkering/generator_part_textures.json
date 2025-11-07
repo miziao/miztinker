@@ -1,0 +1,35 @@
+{
+    "parts": [
+        {
+            "path": "miztinker:item/tool/lollipop/part_1",
+            "stat_type": "tconstruct:binding"
+        },
+        {
+            "path": "miztinker:item/tool/lollipop/part_2",
+            "stat_type": "tconstruct:binding"
+        },
+        {
+            "path": "miztinker:item/tool/lollipop/broken_part",
+            "stat_type": "tconstruct:binding"
+        },
+        {
+            "path": "miztinker:item/tool/old_sword/blade",
+            "stat_type": "tconstruct:head"
+          },
+          {
+            "path": "miztinker:item/tool/old_sword/blade_broken",
+            "stat_type": "tconstruct:head"
+          },
+          {
+            "path": "miztinker:item/tool/old_sword/guard",
+            "stat_type": "tconstruct:handle"
+          },
+          {
+            "path": "miztinker:item/tool/old_sword/handle",
+            "stat_type": "tconstruct:handle"
+          }
+
+
+    ],
+    "replace": false
+}

@@ -1,0 +1,33 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "miztinker:item/mega_big_iron_ingot"
+  },
+ "display": {
+  "thirdperson_righthand": {
+    "rotation": [0, 90, 0],
+    "translation": [0, 11, -10],
+    "scale": [9.36, 9.36, 9.36]
+  },
+  "thirdperson_lefthand": {
+    "rotation": [0, -90, 0],
+    "translation": [0, 11, -10],
+    "scale": [9.36, 9.36, 9.36]
+  },
+  "firstperson_righthand": {
+    "rotation": [-20, -90, 10],
+    "translation": [1.13, 5.2, -0.26],
+    "scale": [9.09, 9.09, 9.09]
+  },
+  "firstperson_lefthand": {
+    "rotation": [-20, -90, -80],
+    "translation": [1.13, 5.2, -0.26],
+    "scale": [9.09, 9.09, 9.09]
+  },
+  "gui": {
+    "rotation": [0, 0, 0],
+    "translation": [0, 0, 0],
+    "scale": [8.88, 8.88, 8.88]
+  }
+  }
+}

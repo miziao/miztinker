@@ -1,0 +1,31 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 2,
+      "item": "minecraft:phantom_membrane"
+    },
+    {
+      "item": "vampirism:vampire_fang"
+    },
+    {
+      "amount_needed": 2,
+      "item": "minecraft:phantom_membrane"
+    },
+    {
+      "item": "vampirism:vampire_blood_bottle"
+    },
+    {
+      "item": "vampirism:vampire_blood_bottle"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:blood_wing",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor"
+  }
+}
