@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": { "tag": "miztinker:template" },
+  "base": { "item": "miztinker:qivium_new" },
+  "addition": { "item": "miztinker:primal_reversion_qivium" },
+  "result": { "item": "miztinker:qivium_ingot_old" }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": { "tag": "miztinker:template" },
+  "base": { "item": "miztinker:lavium_new" },
+  "addition": { "item": "miztinker:primal_reversion_lavium" },
+  "result": { "item": "miztinker:lavium_ingot_old" }
+}

@@ -13,21 +13,21 @@ public abstract class LivingEntityTickMixin {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void stopTickIfHorologium(CallbackInfo ci) {
-        LivingEntity self = (LivingEntity) (Object) this;
+        if (!((Object)this instanceof LivingEntity self)) return;
 
         if (self.hasEffect(MiztinkerEffect.HorologiumNoAI.get())) {
             if (self instanceof Mob mob) {
-                mob.setNoAi(true); // 暂停AI
+                mob.setNoAi(true);
             }
         }
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void resetNoAiFlag(CallbackInfo ci) {
-        LivingEntity self = (LivingEntity) (Object) this;
+        if (!((Object)this instanceof LivingEntity self)) return;
 
         if (self instanceof Mob mob) {
-            mob.setNoAi(false); // 无论效果是否存在，都恢复AI
+            mob.setNoAi(false);
         }
     }
 }

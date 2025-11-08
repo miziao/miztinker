@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      "bab",
+      "bab",
+      "bab"
+    ],
+    "key": {
+      "a": {
+        "tag": "forge:ingots/iron"
+      },
+      "b": {
+        "tag": "forge:gems/diamond"
+      }
+    },
+    "result": {
+      "item": "miztinker:nether_reactor",
+      "count": 1
+    }
+}

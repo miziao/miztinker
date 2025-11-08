@@ -64,7 +64,18 @@
      "blockingdamage":"#D8BFD8",
      "steelhowforged":"#C0C0C0",
      "bronofstorm":"#4169E1",
-     "astral":"#0000CD"
+     "astral":"#0000CD",
+     "elemental":"#00FF7F",
+     "terrafirma":"#00FA9A",
+     "bloodmary":"#FF0000",
+     "life_steal":"#90EE90",
+     "life_steal_armor":"#90EE90",
+     "trade_off":"#C71585",
+     "haorans_cult":"#DC143C",
+     "hell_fire":"#90EE90",
+     "mythical_push":"#C71585",
+     "hell_fire_armor":"#90EE90",
+     "mythical_push_armor":"#C71585"
   },
   "material.miztinker": {
     "ten_thousand_souls": "#CD853F",

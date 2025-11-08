@@ -32,78 +32,61 @@ public abstract class WoundEffectHealthMixin {
     @Shadow
     private net.minecraft.world.entity.Entity entity;
 
-    /** 防止递归写入死循环 */
     @Unique
     private boolean inSet = false;
 
-    /**
-     * 拦截 set 方法，禁止带有 WoundEffect 的实体回血。
-     */
-    @Inject(
-            method = "set(Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;)V",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    private <T> void onSet(EntityDataAccessor<T> key, T value, CallbackInfo ci) {
-        handleSet(key, value, ci);
-    }
-
-    /**
-     * 拦截带 boolean 参数的 set 方法版本。
-     */
-    @Inject(
-            method = "set(Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;Z)V",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    private <T> void onSetWithForce(EntityDataAccessor<T> key, T value, boolean force, CallbackInfo ci) {
-        handleSet(key, value, ci);
-    }
-
-    /**
-     * 统一处理 set 逻辑，防止血量上升。
-     */
     private <T> void handleSet(EntityDataAccessor<T> key, T value, CallbackInfo ci) {
-        if (inSet) return;
-        if (!(entity instanceof LivingEntity living)) return;
+        // 安全保护：实体或 SynchedEntityData 未初始化时直接返回
+        if (inSet || entity == null || !(entity instanceof LivingEntity living)) return;
+        if (living.getEntityData() == null) return;
 
-        // 只处理 float 类型（血量字段）
         if (key.getSerializer() == EntityDataSerializers.FLOAT && value instanceof Float newHealth) {
             if (living.hasEffect(new WoundEffect())) {
-                float lastHealth = living.getEntityData().get(WOUND_EFFECT_LAST_HEALTH);
+                float lastHealth = getLastHealthSafe(living);
                 float forced = Math.min(newHealth, lastHealth);
 
-                // 防止无限递归写入
                 inSet = true;
                 try {
                     living.getEntityData().set((EntityDataAccessor<Float>) key, forced);
                 } finally {
                     inSet = false;
                 }
-
-                ci.cancel(); // 取消原始 set 调用
+                ci.cancel();
             }
         }
     }
 
-    /**
-     * 在 get 方法返回时注入逻辑。
-     * 如果实体有 WoundEffect，则返回 Math.min(实际血量, 禁疗记录)，
-     * 避免视觉上显示回血。
-     */
-    @Inject(
-            method = "get(Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object;",
-            at = @At("RETURN"),
-            cancellable = true
-    )
+    @Inject(method = "set(Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;)V",
+            at = @At("HEAD"), cancellable = true)
+    private <T> void onSet(EntityDataAccessor<T> key, T value, CallbackInfo ci) {
+        handleSet(key, value, ci);
+    }
+
+    @Inject(method = "set(Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;Z)V",
+            at = @At("HEAD"), cancellable = true)
+    private <T> void onSetWithForce(EntityDataAccessor<T> key, T value, boolean force, CallbackInfo ci) {
+        handleSet(key, value, ci);
+    }
+
+    @Inject(method = "get(Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object;",
+            at = @At("RETURN"), cancellable = true)
     private <T> void onGet(EntityDataAccessor<T> key, CallbackInfoReturnable<Object> cir) {
-        if (!(entity instanceof LivingEntity living)) return;
+        if (entity == null || !(entity instanceof LivingEntity living) || living.getEntityData() == null) return;
 
         Object original = cir.getReturnValue();
         if (key.getSerializer() == EntityDataSerializers.FLOAT && living.hasEffect(new WoundEffect())) {
             float originalHealth = (float) original;
-            float lastHealth = getLastHealth(living);
+            float lastHealth = getLastHealthSafe(living);
             cir.setReturnValue(Math.min(originalHealth, lastHealth));
+        }
+    }
+
+    @Unique
+    private float getLastHealthSafe(LivingEntity entity) {
+        try {
+            return entity.getEntityData().get(WOUND_EFFECT_LAST_HEALTH);
+        } catch (Exception e) {
+            return entity.getHealth(); // fallback，防止 null
         }
     }
 }

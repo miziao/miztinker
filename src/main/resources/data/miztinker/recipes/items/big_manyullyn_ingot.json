@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "tconstruct:manyullyn_ingot" },
+    { "item": "miztinker:dynamax_band" }
+  ],
+  "result": {
+    "item": "miztinker:big_manyullyn_ingot",
+    "count": 1
+  }
+}

@@ -1,0 +1,22 @@
+{
+    "type": "tconstruct:alloy",
+    "inputs": [
+      {
+        "name": "tconstruct:molten_debris",
+        "amount": 180
+      },
+      {
+        "name": "tconstruct:molten_glass",
+        "amount": 100
+      },
+      {
+        "name": "tconstruct:ender_slime",
+        "amount": 500
+      } 
+    ],
+    "result": {
+      "fluid": "miztinker:molten_qivium_new",
+      "amount": 90
+    },
+    "temperature": 1000
+  }

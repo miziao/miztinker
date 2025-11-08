@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+  "item":"miztinker:fumo_gold_ingot"
+  },
+  "value": 1,
+  "needed": 1,
+  "material": "miztinker:fumo_gold"
+}

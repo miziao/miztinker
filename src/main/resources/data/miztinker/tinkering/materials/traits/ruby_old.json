@@ -1,0 +1,17 @@
+{
+    "default": [
+        {
+            "name": "miztinker:blood_mary",
+            "level": 1
+        }
+    ],
+    "perStat": {
+        "tconstruct:armor": [
+            {
+                "name": "miztinker:haorans_cult",
+                "level": 1
+            }
+        ]
+    }
+    
+}

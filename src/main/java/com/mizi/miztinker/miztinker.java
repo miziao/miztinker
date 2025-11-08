@@ -56,6 +56,8 @@ public class miztinker {
 
         MiztinkerEffect.EFFECTS.register(modBus);
 
+        MiztinkerBlocks.BLOCKS.register(modBus);
+
         DiademaRegister.DIADEMA_TYPES.register(modBus);
 
         MiztinkerTab.CREATIVE_MODE_TABS.register(modBus);

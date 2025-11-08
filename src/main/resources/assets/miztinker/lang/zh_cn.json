@@ -78,7 +78,7 @@
     "modifier.miztinker.lava_explosion.description": "当你处于熔岩中时,造成爆炸并产生高额爆炸伤害,同时清除一定范围内的熔岩",
 
     "modifier.miztinker.mega_big_magnetic":"超级极巨化磁性",
-    "modifier.miztinker.mega_big_magnetic.flavor": "mega进化+极巨化,这合法吗?",
+     "modifier.miztinker.mega_big_magnetic.flavor": "你有没有想过当磁性进化到不吸取物品改为吸收生命会怎么样?",
     "modifier.miztinker.mega_big_magnetic.description": "对自己周围的生物每秒造成该生物当前生命值20%的伤害,同时这部分生命值会加到你自己身上",
 
     "modifier.miztinker.strengthen_breathing":"强化呼吸系统",
@@ -258,6 +258,50 @@
     "modifier.miztinker.astral.flavor": "大部分人认为的最强星能力共鸣",
     "modifier.miztinker.astral.description": "攻击到的生物会被时停2秒,等级每提升1级时停时长增加1秒",
 
+    "modifier.miztinker.elemental": "原始回归·本源",
+    "modifier.miztinker.elemental.flavor": "我把你带回来了...",
+    "modifier.miztinker.elemental.description":"在玩家使用该工具攻击成功时，随机给予玩家两个正面效果,持续三秒",
+  
+    "modifier.miztinker.terrafirma": "原始回归·坚实基础",
+    "modifier.miztinker.terrafirma.flavor": "我把你带回来了...",
+    "modifier.miztinker.terrafirma.description":"每tick有5%的几率使得玩家恢复(效果等级÷3)点生命",
+  
+    "modifier.miztinker.blood_mary": "原始回归·血腥玛丽",
+    "modifier.miztinker.blood_mary.flavor": "我把你带回来了...",
+    "modifier.miztinker.blood_mary.description":"根据目标已失去的生命值造成额外伤害",
+  
+    "modifier.miztinker.life_steal": "原始回归·Life Steal",
+    "modifier.miztinker.life_steal.flavor": "我把你带回来了...",
+    "modifier.miztinker.life_steal.description":"攻击敌对生物后，获得持续5秒的等级为（伤害/4取整）的伤害吸收",
+  
+    "modifier.miztinker.life_steal_armor": "原始回归·Life Steal",
+    "modifier.miztinker.life_steal_armor.flavor": "我把你带回来了...",
+    "modifier.miztinker.life_steal_armor.description":"受到伤害时获得4点伤害吸收",
+  
+    "modifier.miztinker.trade_off": "原始回归·Tradeoff",
+    "modifier.miztinker.trade_off.flavor": "我把你带回来了...",
+    "modifier.miztinker.trade_off.description":"作用于工具面板攻击、攻速、挖掘速度*2，作用于盔甲的击退抗性，护甲，韧性*2",
+  
+    "modifier.miztinker.haorans_cult": "原始回归·Haoran的崇拜",
+    "modifier.miztinker.haorans_cult.flavor": "我把你带回来了...",
+    "modifier.miztinker.haorans_cult.description":"当你受到凋零效果时，每秒使范围内所有生物的HP减少30%",
+
+    "modifier.miztinker.hell_fire": "地狱之火",
+    "modifier.miztinker.hell_fire.description": "在下界时对生物造成更多伤害",
+    "modifier.miztinker.hell_fire.flavor": "地狱之火",
+  
+    "modifier.miztinker.mythical_push": "神话推动",
+    "modifier.miztinker.mythical_push.description": "在下界破坏方块速度更快",
+    "modifier.miztinker.mythical_push.flavor": "神话推动",
+
+    "modifier.miztinker.hell_fire_armor": "地狱使者",
+    "modifier.miztinker.hell_fire_armor.description": "在下界时受到的伤害降低20%",
+    "modifier.miztinker.hell_fire_armor.flavor": "地狱使者",
+  
+    "modifier.miztinker.mythical_push_armor": "神话助力",
+    "modifier.miztinker.mythical_push_armor.description": "在下界时获得速度2",
+    "modifier.miztinker.mythical_push_armor.flavor": "神话助力",
+
 
     "modifier.miztinker.onimiko":"No.§m01§r06 鬼巫女的[领域]",
     "modifier.miztinker.onimiko.flavor": "这难道不是博丽灵梦吗?!",
@@ -287,6 +331,51 @@
     "material.miztinker.starmetal.flavor": "继承了最强的能力",
     "material.miztinker.starmetal.encyclopedia": "虽然只继承了一个能力,但这也许是最强的那个",
 
+    "material.miztinker.fumo_gold": "fumo金",
+    "material.miztinker.fumo_gold.flavor": "FUNKY⭐",
+    "material.miztinker.fumo_gold.encyclopedia": "我有fumo金苹果.jpg",
+
+    "material.miztinker.salt": "盐",
+    "material.miztinker.salt.flavor": "氯化钠",
+    "material.miztinker.salt.encyclopedia": "氯+钠",
+
+    "material.miztinker.big_manyullyn": "极巨化玛玉灵",
+    "material.miztinker.big_manyullyn.flavor": "极巨化能量",
+    "material.miztinker.big_manyullyn.encyclopedia": "被极巨化能量加持的玛玉灵",
+
+    "material.miztinker.mega_big_iron": "超级极巨化铁",
+    "material.miztinker.mega_big_iron.flavor": "mega进化+极巨化 这合法吗",
+    "material.miztinker.mega_big_iron.encyclopedia": "这个组合本不可能出现...",
+
+    "material.miztinker.emerald_old": "绿宝石_原始回归",
+    "material.miztinker.emerald_old.flavor": "回归到tic2状态的绿宝石",
+    "material.miztinker.emerald_old.encyclopedia": "这会是这个材料的巅峰吗?",
+
+   "material.miztinker.lavium": "拉维姆",
+    "material.miztinker.lavium.flavor": "tic3状态的拉维姆",
+    "material.miztinker.lavium.encyclopedia": "这会是这个材料的巅峰吗?",
+
+   "material.miztinker.qivium": "奇维姆",
+    "material.miztinker.qivium.flavor": "tic3状态的奇维姆",
+    "material.miztinker.qivium.encyclopedia": "这会是这个材料的巅峰吗?",
+
+    "material.miztinker.lavium_old": "拉维姆_原始回归",
+    "material.miztinker.lavium_old.flavor": "回归到tic2状态的拉维姆",
+    "material.miztinker.lavium_old.encyclopedia": "这会是这个材料的巅峰吗?",
+
+   "material.miztinker.qivium_old": "奇维姆_原始回归",
+    "material.miztinker.qivium_old.flavor": "回归到tic2状态的奇维姆",
+    "material.miztinker.qivium_old.encyclopedia": "这会是这个材料的巅峰吗?",
+
+   "material.miztinker.ruby_old": "红宝石_原始回归",
+    "material.miztinker.ruby_old.flavor": "回归到tic2状态的红宝石",
+    "material.miztinker.ruby_old.encyclopedia": "这会是这个材料的巅峰吗?",
+
+
+"block.miztinker.nether_reactor": "下界反应核",
+
+
+
      "item.miztinker.big_manyullyn_ingot": "超极巨化玛玉灵锭",
 
       "item.miztinker.mega_big_iron_ingot": "超级极巨化铁锭",
@@ -302,17 +391,59 @@
       "item.miztinker.molten_abyss_silver_bucket": "熔融深渊银桶",
       "block.miztinker.molten_abyss_silver_fluid": "熔融深渊银",
 
+      
+      "item.miztinker.lavium_new": "拉维姆",
+      "fluid.miztinker.molten_lavium_new": "熔融拉维姆",
+      "item.miztinker.molten_lavium_new_bucket": "熔融拉维姆桶",
+      "block.miztinker.molten_lavium_new_fluid": "熔融拉维姆银",
+
+      "item.miztinker.qivium_new": "奇维姆",
+      "fluid.miztinker.molten_qivium_new": "熔融奇维姆",
+      "item.miztinker.molten_qivium_new_bucket": "熔融奇维姆桶",
+      "block.miztinker.molten_qivium_new_fluid": "熔融奇维姆",
+
 
       "item.miztinker.oni_miko_bow": "鬼巫女的大蝴蝶结",
       "tooltip.miztinker.oni_miko_bow": "§d还带着一点点鬼巫女的气味",
 
-      "item.miztinker.how_the_steel_was_tempered": "《钢铁是怎样练成的》",
+
+      "item.miztinker.qivium_ingot_old": "原始回归奇维姆",
+
+      "item.miztinker.lavium_ingot_old": "原始回归拉维姆",
+
+      "item.miztinker.emerald_gem_old": "原始回归绿宝石",
+
+      "item.miztinker.ruby_gem_old": "原始回归红宝石",
+
+      "item.miztinker.primal_reversion_emerald": "原始回归催化剂",
+      "tooltip.miztinker.primal_reversion_emerald": "§b使你的材料回归到tic2的状态!",
+
+"item.miztinker.primal_reversion_lavium": "原始回归催化剂",
+      "tooltip.miztinker.primal_reversion_lavium": "§b使你的材料回归到tic2的状态!",
+
+      "item.miztinker.primal_reversion_qivium": "原始回归催化剂",
+      "tooltip.miztinker.primal_reversion_qivium": "§b使你的材料回归到tic2的状态!",
+
+      "item.miztinker.primal_reversion_ruby": "原始回归催化剂",
+      "tooltip.miztinker.primal_reversion_ruby": "§b使你的材料回归到tic2的状态!",
+
 
       "item.miztinker.starmetal_ingot": "星辉锭",
       "tooltip.miztinker.starmetal_ingot": "在夜晚y大于300的地方露天放置2分钟转化",
 
+      "item.miztinker.fumo_gold_ingot": "FUMO金锭",
+      "tooltip.miztinker.fumo_gold_ingot": "金锭右键书架转化",
+
       "item.miztinker.born_of_the_storm": "《暴风雨所诞生的》",
       "tooltip.miztinker.born_of_the_storm": "在雷暴天的情况下露天放置2分钟转化",
+
+      "item.miztinker.salt_ingot": "盐砖锭",
+
+      "item.miztinker.megastone_iron": "mega进化石-铁",
+      "tooltip.miztinker.megastone_iron": "§b使你的材料超级进化!",
+
+      "item.miztinker.dynamax_band": "极巨腕带",
+      "tooltip.miztinker.dynamax_band": "§b使你的材料极巨化!",
       
       "miztinker.tool.tab": "米工匠-工具",
       "item.miztinker.lollipop": "棒棒糖",

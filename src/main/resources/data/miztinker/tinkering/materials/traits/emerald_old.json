@@ -1,0 +1,16 @@
+{
+  "default": [
+    {
+      "name": "miztinker:elemental",
+      "level": 1
+  }
+  ],
+  "perStat": {
+        "tconstruct:armor": [
+            {
+                "name": "miztinker:terrafirma",
+                "level": 1
+            }
+        ]
+    }
+}

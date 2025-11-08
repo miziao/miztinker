@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "abc",
+    "def",
+    "hig"
+  ],
+  "key": {
+    "a": { "item": "minecraft:red_bed" },
+    "b": { "tag": "miztinker:chainmail" },
+    "c": { "item": "minecraft:crying_obsidian" },
+    "d": { "item": "minecraft:stonecutter" },
+    "e": { "tag": "forge:ingots/iron" },
+    "f": { "item": "minecraft:beacon" },
+    "g": { "item": "minecraft:leather_horse_armor" },
+    "h": { "item": "minecraft:enchanted_golden_apple" },
+    "i": { "item": "miztinker:nether_reactor" }
+  },
+  "result": {
+    "item": "miztinker:megastone_iron",
+    "count": 1
+  }
+}

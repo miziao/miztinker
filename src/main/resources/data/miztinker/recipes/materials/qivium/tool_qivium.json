@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "miztinker:qivium",
+  "result": {
+    "amount": 90,
+    "fluid": "miztinker:molten_qivium_new"
+  },
+  "temperature": 1000
+}

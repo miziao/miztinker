@@ -1,0 +1,16 @@
+{
+  "default": [
+    {
+      "name": "miztinker:hell_fire",
+      "level": 1
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+        {
+            "name": "miztinker:hell_fire_armor",
+            "level": 1
+        }
+    ]
+}
+}

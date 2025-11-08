@@ -1,0 +1,16 @@
+{
+  "default": [
+    {
+      "name": "miztinker:mythical_push",
+      "level": 1
+    }
+  ],
+  "perStat": {
+        "tconstruct:armor": [
+            {
+                "name": "miztinker:mythical_push_armor",
+                "level": 1
+            }
+        ]
+    }
+}

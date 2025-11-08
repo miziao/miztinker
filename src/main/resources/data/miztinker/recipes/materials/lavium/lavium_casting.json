@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/ingot"
+  },
+  "cast_consumed": false,
+  "fluid": {
+    "name": "miztinker:molten_lavium_new",
+    "amount": 90
+  },
+  "result": "miztinker:lavium_new",
+  "cooling_time": 50
+}

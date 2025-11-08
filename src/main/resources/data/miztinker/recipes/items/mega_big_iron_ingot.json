@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "tag": "forge:ingots/iron" },
+    { "item": "miztinker:megastone_iron" },
+    { "item": "miztinker:dynamax_band" }
+  ],
+  "result": {
+    "item": "miztinker:mega_big_iron_ingot",
+    "count": 1
+  }
+}

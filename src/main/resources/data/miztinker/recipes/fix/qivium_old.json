@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material",
+    "ingredient": {
+    "item":"miztinker:qivium_ingot_old"
+    },
+    "value": 1,
+    "needed": 1,
+    "material": "miztinker:qivium_old"
+  }

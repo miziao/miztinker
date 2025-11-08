@@ -1,0 +1,13 @@
+{
+  "type":"tconstruct:melting",
+  "ingredient":{
+    "item":"miztinker:qivium_new"
+  },
+  "temperature": 1000,
+  "time": 50,
+  "result":
+  {
+    "fluid": "miztinker:molten_qivium_new",
+    "amount": 90
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": { "tag": "miztinker:template" },
+  "base": { "tag": "forge:gems/ruby" },
+  "addition": { "item": "miztinker:primal_reversion_ruby" },
+  "result": { "item": "miztinker:ruby_gem_old" }
+}

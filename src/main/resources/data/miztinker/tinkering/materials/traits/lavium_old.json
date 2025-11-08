@@ -1,0 +1,16 @@
+{
+  "default": [
+    {
+      "name": "miztinker:life_steal",
+      "level": 1
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+        {
+            "name": "miztinker:life_steal_armor",
+            "level": 1
+        }
+    ]
+}
+}

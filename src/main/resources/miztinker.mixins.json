@@ -6,7 +6,6 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "miztinker.refmap.json",
   "mixins": [
-    "WoundEffectHealthMixin",
     "LivingEntityTickMixin"
   ],
   "client": [

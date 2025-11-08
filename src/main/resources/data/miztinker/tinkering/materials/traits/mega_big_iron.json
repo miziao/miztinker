@@ -1,0 +1,38 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "tconstruct:magnetic"
+    },
+    {
+      "level": 1,
+      "name": "miztinker:mega_big_magnetic"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "tconstruct:projectile_protection"
+      },
+      {
+        "level": 1,
+        "name": "miztinker:mega_big_magnetic"
+      }
+    ],
+    "tconstruct:skull": [
+      {
+        "level": 1,
+        "name": "tconstruct:plague"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:husk_disguise"
+      },
+      {
+        "level": 1,
+        "name": "miztinker:mega_big_magnetic"
+      }
+    ]
+  }
+}

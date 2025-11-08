@@ -192,6 +192,28 @@ public class MiztinkerModifiers {
 
     public static final StaticModifier<Astral> ASTRAL_STATIC_MODIFIER = MODIFIERS.register("astral", Astral::new);
 
+    public static final StaticModifier<Elemental> ELEMENTAL_STATIC_MODIFIER = MODIFIERS.register("elemental", Elemental::new);
+
+    public static final StaticModifier<Terrafirma> TERRAFIRMA_STATIC_MODIFIER = MODIFIERS.register("terrafirma", Terrafirma::new);
+
+    public static StaticModifier<?> BLOOD_MARY = null;
+
+    public static final StaticModifier<LifeSteal> LIFE_STEAL_STATIC_MODIFIER = MODIFIERS.register("life_steal", LifeSteal::new);
+
+    public static final StaticModifier<LifeStealArmor> LIFE_STEAL_ARMOR_STATIC_MODIFIER = MODIFIERS.register("life_steal_armor", LifeStealArmor::new);
+
+    public static final StaticModifier<TradeOff> TRADE_OFF_STATIC_MODIFIER = MODIFIERS.register("trade_off", TradeOff::new);
+
+    public static final StaticModifier<HaoransCult> HAORANS_CULT_STATIC_MODIFIER = MODIFIERS.register("haorans_cult", HaoransCult::new);
+
+    public static final StaticModifier<HellFire> HELL_FIRE_STATIC_MODIFIER = MODIFIERS.register("hell_fire", HellFire::new);
+
+    public static final StaticModifier<MythicalPush> MYTHICAL_PUSH_STATIC_MODIFIER = MODIFIERS.register("mythical_push", MythicalPush::new);
+
+    public static final StaticModifier<HellFireArmor> HELL_FIRE_ARMOR_STATIC_MODIFIER = MODIFIERS.register("hell_fire_armor", HellFireArmor::new);
+
+    public static final StaticModifier<MythicalPushArmor> MYTHICAL_PUSH_ARMOR_STATIC_MODIFIER = MODIFIERS.register("mythical_push_armor", MythicalPushArmor::new);
+
 
     public static final StaticModifier<DiademaModifier> ONIMIKO_STATIC_MODIFIER =
             MODIFIERS.register("onimiko", CommonDiademaModifier.Create(DiademaRegister.ONIMIKO::get));

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "miztinker:lavium",
+  "result": {
+    "amount": 90,
+    "fluid": "miztinker:molten_lavium_new"
+  },
+  "temperature": 1000
+}

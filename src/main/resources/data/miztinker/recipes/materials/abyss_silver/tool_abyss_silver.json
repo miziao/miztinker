@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "miztinker:abyss_silver",
+  "result": {
+    "amount": 90,
+    "fluid": "miztinker:molten_abyss_silver"
+  },
+  "temperature": 1500
+}

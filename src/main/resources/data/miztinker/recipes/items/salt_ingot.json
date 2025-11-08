@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "   "
+  ],
+  "key": {
+    "a": { "tag": "forge:storage_blocks/salt" }
+  },
+  "result": {
+    "item": "miztinker:salt_ingot",
+    "count": 1
+  }
+}

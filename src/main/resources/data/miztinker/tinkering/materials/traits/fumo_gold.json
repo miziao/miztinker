@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "miztinker:enchantedgold"
+    },
+    {
+      "level": 1,
+      "name": "tconstruct:shiny"
+    }
+  ]
+}
