@@ -75,7 +75,20 @@
      "hell_fire":"#90EE90",
      "mythical_push":"#C71585",
      "hell_fire_armor":"#90EE90",
-     "mythical_push_armor":"#C71585"
+     "mythical_push_armor":"#C71585",
+     "wizardflight":"#E1FFFF",
+     "scorchedbone":"#696969",
+     "timetyrant":"#FFFF00",
+     "lungspast":"#B0E0E6",
+     "celestial_aura":"#90EE90",
+     "celestial_strike":"#5F9EA0",
+     "emc_torrent":"#C71585",
+     "guanyu":"#FF4500",
+     "triple_seven":"#FF8C00",
+     "awakenknight_of_night":"#4169E1",
+     "knight_of_night":"#4169E1",
+     "ez_constant":"#1E90FF",
+     "ghostsoul":"#7FFFAA"
   },
   "material.miztinker": {
     "ten_thousand_souls": "#CD853F",

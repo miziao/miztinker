@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+     "item": "minecraft:glass_bottle"
+  },
+  "cast_consumed": false,
+  "fluid": {
+    "name": "miztinker:molten_black",
+    "amount": 90
+  },
+  "result": "miztinker:black",
+  "cooling_time": 1
+}

@@ -4,6 +4,7 @@ package com.mizi.miztinker.item.tool.until;
 import com.mizi.miztinker.item.tool.lollipop;
 import com.mizi.miztinker.item.tool.tinker_loli_pickaxe;
 import com.mizi.miztinker.item.tool.old_sword;
+import com.mizi.miztinker.item.tool.Broom;
 import com.mizi.miztinker.MiztinkerTab;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -60,11 +61,13 @@ public class MiztinkerTools extends MiztinkerTab {
     public static final ItemObject<ModifiableItem> lollipop = TINKER_ITEMS.register("lollipop",()->new lollipop(new Item.Properties().stacksTo(1)));
     public static final ItemObject<ModifiableItem> tinker_loli_pickaxe = TINKER_ITEMS.register("tinker_loli_pickaxe",()->new tinker_loli_pickaxe(new Item.Properties().stacksTo(1)));
     public static final ItemObject<ModifiableItem> old_sword = TINKER_ITEMS.register("old_sword",()->new old_sword(new Item.Properties().stacksTo(1)));
+    public static final ItemObject<ModifiableItem> broom = TINKER_ITEMS.register("broom",()->new Broom(new Item.Properties().stacksTo(1)));
 
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output tab) {
         Consumer<ItemStack> output = tab::accept;
         acceptTool(output, MiztinkerTools.lollipop);
         acceptTool(output, MiztinkerTools.tinker_loli_pickaxe);
         acceptTool(output, MiztinkerTools.old_sword);
+        acceptTool(output, MiztinkerTools.broom);
     }
 }

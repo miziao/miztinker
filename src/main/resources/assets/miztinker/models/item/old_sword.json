@@ -4,11 +4,12 @@
   "textures": {
     "head":   "miztinker:item/tool/old_sword/blade",
     "handle": "miztinker:item/tool/old_sword/handle",
-    "guard":  "miztinker:item/tool/old_sword/guard"
+    "guard":  "miztinker:item/tool/old_sword/guard",
+    "blade_broken": "miztinker:item/tool/old_sword/blade_broken"
   },
   "modifier_roots": [ "miztinker:item/tool/old_sword/modifiers/" ],
   "parts": [
-    { "name": "handle", "index": 1 },
+    { "name": "handle", "index": 1 ,"broken": "blade_broken"},
     { "name": "head",   "index": 0 },
     { "name": "guard",  "index": 2 }
   ],
@@ -16,10 +17,6 @@
     {
       "predicate": { "tconstruct:charging": 2 },
       "model": "miztinker:item/tool/old_sword/blocking"
-    },
-    {
-      "predicate": { "tconstruct:broken": 1 },
-      "model": "miztinker:item/tool/old_sword/broken"
     }
   ]
 }

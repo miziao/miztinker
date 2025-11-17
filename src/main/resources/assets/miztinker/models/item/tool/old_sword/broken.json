@@ -1,0 +1,27 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "forge:item/default-tool",
+  "textures": {
+    "head": "miztinker:item/tool/sword_old/blade_broken",
+    "handle": "miztinker:item/tool/sword_old/handle",
+    "guard": "miztinker:item/tool/sword_old/guard"
+  },
+  "modifier_roots": [
+    "miztinker:item/tool/sword_old/modifiers/broken/",
+    "miztinker:item/tool/sword_old/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "handle",
+      "index": 1
+    },
+    {
+      "name": "head",
+      "index": 0
+    },
+    {
+      "name": "guard",
+      "index": 2
+    }
+  ]
+}

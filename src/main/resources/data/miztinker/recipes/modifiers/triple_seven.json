@@ -1,0 +1,23 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "miztinker:7_1"
+    },
+    {
+      "item": "miztinker:7_2"
+    },
+    {
+      "item": "miztinker:7_3"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:triple_seven",
+  "slots": {
+    "upgrades": 7
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}

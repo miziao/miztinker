@@ -22,12 +22,15 @@
           },
           {
             "path": "miztinker:item/tool/old_sword/guard",
-            "stat_type": "tconstruct:handle"
+            "stat_type": "tconstruct:tool_binding"
           },
           {
             "path": "miztinker:item/tool/old_sword/handle",
-            "stat_type": "tconstruct:handle"
-          }
+            "stat_type": "tconstruct:tough_handle"
+          },
+          { "path": "miztinker:item/tool/broom/head",        "stat_type": "tconstruct:head" },
+          { "path": "miztinker:item/tool/broom/head_broken", "stat_type": "tconstruct:head" },
+          { "path": "miztinker:item/tool/broom/handle",      "stat_type": "tconstruct:handle" }
 
 
     ],

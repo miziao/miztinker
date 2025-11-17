@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 4,
+      "item": "minecraft:fire_charge"
+    },
+    {
+      "amount_needed": 4,
+      "item": "tconstruct:blazing_bone"
+    },
+    {
+      "item": "minecraft:flint_and_steel"
+    },
+    {
+      "amount_needed": 16,
+      "tag": "minecraft:coals"
+    },
+    {
+      "amount_needed": 16,
+      "tag": "forge:dyes/black"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:scorchedbone",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}

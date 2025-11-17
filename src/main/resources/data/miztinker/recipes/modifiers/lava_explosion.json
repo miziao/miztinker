@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "thelegendofthebraveii:lavathunder_bucket"
+    },
+    {
+      "item": "projecte:volcanite_amulet"
+    },
+    {
+      "item": "thelegendofthebraveii:lavawater_bucket"
+    },
+    {
+      "item": "luckytntmod:solar_eruption"
+    },
+    {
+      "item": "luckytntmod:solar_eruption"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:lava_explosion",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type":"tconstruct:melting",
+  "ingredient":{
+    "item":"miztinker:ravenous_ingot"
+  },
+  "temperature": 2000,
+  "time": 100,
+  "result":
+  {
+    "fluid": "miztinker:molten_ravenous",
+    "amount": 90
+  }
+}

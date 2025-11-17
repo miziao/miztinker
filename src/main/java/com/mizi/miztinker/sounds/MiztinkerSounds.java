@@ -17,7 +17,13 @@ public class MiztinkerSounds {
     public static final RegistryObject<SoundEvent> ULTRAMAN = SOUND_EVENTS.register("ultraman",
             () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(miztinker.MODID, "ultraman")));
 
+    public static final RegistryObject<SoundEvent> GUANYU = SOUND_EVENTS.register("guanyu",
+            () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(miztinker.MODID, "guanyu")));
+
     public static final RegistryObject<SoundEvent> MARIO = SOUND_EVENTS.register("mario",
             () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(miztinker.MODID, "mario")));
+
+    public static final RegistryObject<SoundEvent> KNIGHT_OF_NIGHT = SOUND_EVENTS.register("knight_of_night",
+            () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(miztinker.MODID, "knight_of_night")));
 }
 

@@ -1,0 +1,23 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "craziness_awakened:royal_guardian_sword"
+    },
+    {
+      "item": "mechapillagerboss:enhanced_energy_sword"
+    },
+    {
+      "item": "craziness_awakened:crystal_error_sword"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:atomslash",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}

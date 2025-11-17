@@ -66,9 +66,11 @@ public class AwakenDoomGuy extends NoLevelsModifier implements
     }
 
     /* ===== 条件验证 ===== */
+
     @Override
     public @Nullable Component validate(IToolStackView tool, ModifierEntry entry) {
-        if (tool.getModifierLevel(MiztinkerModifiers.DOOM_GUY.getId()) > 0) return null;
+        if (tool.getModifierLevel(MiztinkerModifiers.DOOM_GUY.getId()) > 0)
+            return null;
         return requirementsError(entry);
     }
 

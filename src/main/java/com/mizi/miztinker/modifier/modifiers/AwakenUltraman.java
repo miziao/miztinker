@@ -1,6 +1,5 @@
 package com.mizi.miztinker.modifier.modifiers;
 
-import com.mizi.miztinker.miztinker;
 import com.mizi.miztinker.modifier.register.MiztinkerModifiers;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -71,9 +70,11 @@ public class AwakenUltraman extends NoLevelsModifier implements
         hookBuilder.addHook(this, ModifierHooks.ARMOR_INTERACT);
     }
 
+
     @Override
     public @Nullable Component validate(IToolStackView tool, ModifierEntry entry) {
-        if (tool.getModifierLevel(MiztinkerModifiers.ULTRAMAN.getId()) > 0) return null;
+        if (tool.getModifierLevel(MiztinkerModifiers.ULTRAMAN.getId()) > 0)
+            return null;
         return requirementsError(entry);
     }
 

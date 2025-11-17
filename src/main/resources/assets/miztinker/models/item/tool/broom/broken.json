@@ -1,0 +1,12 @@
+{
+"loader": "tconstruct:tool",
+"parent": "forge:item/default-tool",
+"textures": {
+  "head":   "miztinker:item/tool/broom/head_broken",
+  "handle": "miztinker:item/tool/broom/handle"
+},
+"parts": [
+  { "name": "handle", "index": 1 },
+  { "name": "head",   "index": 0 }
+]
+}

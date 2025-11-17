@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "craziness_awakened:water_dragon_scale"
+    },
+    {
+      "item": "craziness_awakened:water_dragon_scale"
+    },
+    {
+      "item": "craziness_awakened:water_dragon_scale"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:water_power",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor/boots"
+  }
+}

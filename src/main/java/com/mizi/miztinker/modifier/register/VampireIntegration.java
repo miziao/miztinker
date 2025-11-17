@@ -15,6 +15,7 @@ public class VampireIntegration {
             MiztinkerModifiers.MODIFIERS.register("blood_wing", Blood_Wing::new);
             MiztinkerModifiers.MODIFIERS.register("bloodshield", BloodShield::new);
             MiztinkerModifiers.MODIFIERS.register("eternalsunscreen", EternalSunscreen::new);
+            MiztinkerModifiers.MODIFIERS.register("lungspast", LungsPast::new);
             LOGGER.info("Successfully registered some modifier with VampireIntegration");
         } catch (Throwable t) {
             LOGGER.error("Failed to register some modifier: {}", t.getMessage());

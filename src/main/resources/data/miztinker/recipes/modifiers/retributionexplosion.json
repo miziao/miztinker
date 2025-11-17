@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "luckytntmod:tnt_x2000"
+    },
+    {
+      "item": "goety:grimoire_of_grudges"
+    },
+    {
+      "item": "luckytntmod:tnt_x2000"
+    },
+    {
+      "item": "luckytntmod:tnt_x2000"
+    },
+    {
+      "item": "luckytntmod:tnt_x2000"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:retributionexplosion",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor"
+  }
+}

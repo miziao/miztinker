@@ -3,6 +3,9 @@ package com.mizi.miztinker.modifier.register;
 
 import com.mizi.miztinker.item.DynamaxBandItem;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.DeferredRegister;
@@ -158,6 +161,122 @@ public class MiztinkerItems {
                     tooltip.add(Component.translatable("tooltip.miztinker.primal_reversion_ruby"));
                 }
             });
+
+    public static final RegistryObject<Item> DAIGO_ITEM = ITEMS.register("daigo_item",
+            () -> new DynamaxBandItem(new Item.Properties().stacksTo(64).rarity(Rarity.RARE)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.daigo_item"));
+                }
+            });
+
+    public static final RegistryObject<Item> MEGA_MANYULLYN_BOOSTER_ENERGY = ITEMS.register("mega_manyullyn_booster_energy",
+            () -> new DynamaxBandItem(new Item.Properties().stacksTo(8).rarity(Rarity.EPIC)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.mega_manyullyn_booster_energy"));
+                }
+            });
+
+    public static final RegistryObject<Item> PINK = ITEMS.register("pink",
+            () -> new Item(new Item.Properties()
+                    .stacksTo(64)
+                    .rarity(Rarity.EPIC)
+                    .food(new FoodProperties.Builder()
+                            .nutrition(5) // 饥饿值
+                            .saturationMod(0.1f) // 饱和度
+                            .alwaysEat()
+                            // 效果 (持续20t * 秒数)
+                            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20 * 15, 2), 1.0f)
+                            .effect(() -> new MobEffectInstance(MobEffects.DIG_SPEED, 20 * 15, 2), 1.0f)
+                            .effect(() -> new MobEffectInstance(MobEffects.JUMP, 20 * 15, 2), 1.0f)
+                            .effect(() -> new MobEffectInstance(MobEffects.HEAL, 20 * 10, 4), 1.0f)
+                            .build())
+            ) {
+                @Override
+                public UseAnim getUseAnimation(ItemStack stack) {
+                    return UseAnim.DRINK; // 饮料动画
+                }
+
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.pink"));
+                }
+            });
+    public static final RegistryObject<Item> BLACK = ITEMS.register("black",
+            () -> new Item(new Item.Properties()
+                    .stacksTo(64)
+                    .rarity(Rarity.EPIC)
+                    .food(new FoodProperties.Builder()
+                            .nutrition(5)
+                            .saturationMod(0.1f)
+                            .alwaysEat()
+                            .effect(() -> new MobEffectInstance(MobEffects.HARM, 20 * 2, 2), 1.0f)
+                            .effect(() -> new MobEffectInstance(MobEffects.WEAKNESS, 20 * 15, 2), 1.0f)
+                            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 15, 2), 1.0f)
+                            .effect(() -> new MobEffectInstance(MobEffects.DARKNESS, 20 * 15, 2), 1.0f)
+                            .effect(() -> new MobEffectInstance(MobEffects.WITHER, 20 * 15, 2), 1.0f)
+                            .build())
+            ) {
+                @Override
+                public UseAnim getUseAnimation(ItemStack stack) {
+                    return UseAnim.DRINK;
+                }
+
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.black"));
+                }
+            });
+
+    public static final RegistryObject<Item> RAVENOUS_INGOT= ITEMS.register("ravenous_ingot",
+            () -> new DynamaxBandItem(new Item.Properties().stacksTo(64).rarity(Rarity.RARE)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.ravenous_ingot"));
+                }
+            });
+
+    public static final RegistryObject<Item> TERRESTRIAL_ARTIFACT_ITEM= ITEMS.register("terrestrial_artifact_item",
+            () -> new DynamaxBandItem(new Item.Properties().stacksTo(64).rarity(Rarity.EPIC)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.terrestrial_artifact_item"));
+                }
+            });
+
+    public static final RegistryObject<Item> ITEM_7_1= ITEMS.register("7_1",
+            () -> new DynamaxBandItem(new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.7_1"));
+                }
+            });
+
+    public static final RegistryObject<Item> ITEM_7_2= ITEMS.register("7_2",
+            () -> new DynamaxBandItem(new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.7_2"));
+                }
+            });
+
+    public static final RegistryObject<Item> ITEM_7_3= ITEMS.register("7_3",
+            () -> new DynamaxBandItem(new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.7_3"));
+                }
+            });
+
+    public static final RegistryObject<Item> RADIATION_ARGENT_ENERGY= ITEMS.register("radiation_argent_energy",
+            () -> new DynamaxBandItem(new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.radiation_argent_energy"));
+                }
+            });
+
 
 
     public static final RegistryObject<Item> NETHER_REACTOR = ITEMS.register(

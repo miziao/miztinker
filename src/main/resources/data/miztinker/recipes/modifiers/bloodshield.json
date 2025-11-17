@@ -3,7 +3,7 @@
   "allow_crystal": true,
   "inputs": [
     {
-      "tag": "kubejs:vampirism"
+      "tag": "miztinker:vampirism_item"
     },
     {
       "item": "vampirism:vampire_blood_bottle"

@@ -1,0 +1,26 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:iron_sword"
+    },
+    {
+      "item": "minecraft:clock"
+    },
+    {
+      "item": "minecraft:iron_sword"
+    },
+    {
+      "item": "minecraft:iron_sword"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:knight_of_night",
+  "slots": {
+    "dx": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "abc",
+    "def",
+    "hig"
+  ],
+  "key": {
+    "a": { "tag": "forge:gems/niter" },
+    "b": { "tag": "forge:gems/cinnabar" },
+    "c": { "tag": "forge:gems/emerald" },
+    "d": { "tag": "forge:gems/ruby" },
+    "e":{ "item": "projecte:catalytic_lens" },
+    "f": { "tag": "forge:gems/ocean_gemstone" },
+    "g": { "tag": "forge:gems/sapphire" },
+    "h": { "tag": "forge:gems/amethyst" },
+    "i": { "tag": "forge:gems/diamond" }
+  },
+  "result": { "item": "miztinker:terrestrial_artifact_item", "count": 1 }
+}

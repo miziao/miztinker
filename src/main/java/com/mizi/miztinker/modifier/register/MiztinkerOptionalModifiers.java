@@ -104,5 +104,17 @@ public class MiztinkerOptionalModifiers  {
 
         }
 
+        if (OptionalDependencyHandler.isClassPresent("moze_intel.projecte.api.capabilities.PECapabilities")) {
+            try {
+                projecteIntegration.registerModifiers();
+                LOGGER.info("Successfully initialized projecte integration");
+            } catch (Exception e) {
+                LOGGER.error("Failed to initialize projecte integration: {}", e.getMessage());
+            }
+        } else {
+            LOGGER.info("projecte not found, some modifier will not be registered");
+
+        }
+
     }
 }

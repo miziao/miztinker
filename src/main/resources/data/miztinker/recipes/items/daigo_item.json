@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "abc",
+    "def",
+    " g "
+  ],
+  "key": {
+    "a": {
+      "item": "tconstruct:venombone"
+    },
+    "b": {
+      "item": "iceandfire:dragonbone"
+    },
+    "c": {
+      "item": "irons_spellbooks:frozen_bone"
+    },
+    "d": {
+      "item": "tconstruct:necronium_bone"
+    },
+    "e": {
+      "item": "tconstruct:necrotic_bone"
+    },
+    "f": {
+      "item": "tconstruct:blazing_bone"
+    },
+    "g": {
+      "item": "minecraft:bowl"
+    }
+  },
+  "result": {
+    "item": "miztinker:daigo_item",
+    "count": 1
+  }
+}

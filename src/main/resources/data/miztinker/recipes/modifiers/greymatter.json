@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "jerotesvillage:refine_meror_metal_ingot"
+    },
+    {
+      "item": "minecraft:clock"
+    },
+    {
+      "item": "jerotesvillage:refine_meror_metal_ingot"
+    },
+    {
+      "item": "goety:howling_soul"
+    },
+    {
+      "item": "goety:philosophers_stone"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:greymatter",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor/helmets"
+  }
+}

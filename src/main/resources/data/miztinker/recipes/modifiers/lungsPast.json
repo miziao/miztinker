@@ -1,0 +1,23 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:oak_door"
+    },
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "vampirism:holy_water_bottle_ultimate"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:lungspast",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor/helmets"
+  }
+}

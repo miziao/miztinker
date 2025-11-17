@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "projecte:klein_star_omega"
+    },
+    {
+      "item": "projecte:divining_rod_3"
+    },
+    {
+      "item": "projecte:klein_star_omega"
+    },
+    {
+      "item": "projecte:klein_star_omega"
+    },
+    {
+      "item": "projecte:klein_star_omega"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:emc_torrent",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}

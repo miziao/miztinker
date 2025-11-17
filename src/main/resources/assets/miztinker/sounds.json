@@ -15,6 +15,22 @@
       }
     ]
   },
+  "guanyu": {
+    "sounds": [
+      {
+        "name":"miztinker:guanyu",
+        "stream": true
+      }
+    ]
+  },
+  "knight_of_night": {
+    "sounds": [
+      {
+        "name":"miztinker:knight_of_night",
+        "stream": true
+      }
+    ]
+  },
   "mario": {
     "sounds": [
       {

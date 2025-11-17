@@ -1,0 +1,34 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 64,
+      "tag": "forge:storage_blocks/netherite"
+    },
+    {
+      "amount_needed": 15,
+      "tag": "forge:ingots/netherite"
+    },
+    {
+      "amount_needed": 60,
+      "tag": "forge:ingots/gold"
+    },
+    {
+      "amount_needed": 15,
+      "tag": "forge:ingots/silver"
+    },
+    {
+      "amount_needed": 3,
+      "tag": "forge:ingots/copper"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:ez_constant",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "craziness_awakened:ultimate_ray_gun"
+    },
+    {
+      "item": "irons_spellbooks:energized_core"
+    },
+    {
+      "item": "thermal:rf_potato"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:bfg2000",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}

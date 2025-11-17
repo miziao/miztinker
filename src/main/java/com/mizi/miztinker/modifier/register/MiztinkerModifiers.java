@@ -164,11 +164,17 @@ public class MiztinkerModifiers {
     public static final StaticModifier<BaseToolMusic> ULTRAMAN =
             MODIFIERS.register("ultraman", () -> new BaseToolMusic(() -> MiztinkerSounds.ULTRAMAN.get()));
 
+    public static final StaticModifier<BaseToolMusic> GUANYU =
+            MODIFIERS.register("guanyu", () -> new BaseToolMusic(() -> MiztinkerSounds.GUANYU.get()));
+
+    public static final StaticModifier<BaseToolMusic> KNIGHT_OF_NIGHT =
+            MODIFIERS.register("knight_of_night", () -> new BaseToolMusic(() -> MiztinkerSounds.KNIGHT_OF_NIGHT.get()));
+
     public static StaticModifier<?> awakenDoomGuyStaticModifier = null;
 
     public static final StaticModifier<AwakenUltraman> AWAKEN_ULTRAMAN_STATIC_MODIFIER = MODIFIERS.register("awaken_ultraman", AwakenUltraman::new);
 
-    public static StaticModifier<?> GREY_MATTER_STATIC_MODIFIER = null;
+    public static StaticModifier<?> GREY_MATTER_STATIC_MODIFIER = MODIFIERS.register("greymatter", GreyMatter::new);
 
     public static final StaticModifier<WoundEffectAttack > WOUND_EFFECT_ATTACK_STATIC_MODIFIER = MODIFIERS.register("woundeffectattack", WoundEffectAttack ::new);
 
@@ -196,7 +202,7 @@ public class MiztinkerModifiers {
 
     public static final StaticModifier<Terrafirma> TERRAFIRMA_STATIC_MODIFIER = MODIFIERS.register("terrafirma", Terrafirma::new);
 
-    public static StaticModifier<?> BLOOD_MARY = null;
+    public static StaticModifier<?> BLOODMARY_STATIC_MODIFIER = null;
 
     public static final StaticModifier<LifeSteal> LIFE_STEAL_STATIC_MODIFIER = MODIFIERS.register("life_steal", LifeSteal::new);
 
@@ -214,6 +220,27 @@ public class MiztinkerModifiers {
 
     public static final StaticModifier<MythicalPushArmor> MYTHICAL_PUSH_ARMOR_STATIC_MODIFIER = MODIFIERS.register("mythical_push_armor", MythicalPushArmor::new);
 
+    public static final StaticModifier<WizardFlight> WIZARD_FLIGHT_STATIC_MODIFIER = MODIFIERS.register("wizardflight", WizardFlight::new);
+
+    public static final StaticModifier<ScorchedBone> SCORCHED_BONE_STATIC_MODIFIER = MODIFIERS.register("scorchedbone", ScorchedBone::new);
+
+    public static final StaticModifier<TimeTyrant> TIME_TYRANT_STATIC_MODIFIER = MODIFIERS.register("timetyrant", TimeTyrant::new);
+
+    public static final StaticModifier<Celestial_Aura> CELESTIAL_AURA_STATIC_MODIFIER = MODIFIERS.register("celestial_aura", Celestial_Aura::new);
+
+    public static final StaticModifier<CelestialStrike> CELESTIAL_STRIKE_STATIC_MODIFIER = MODIFIERS.register("celestial_strike", CelestialStrike::new);
+
+    public static StaticModifier<?> LUNGS_PAST_STATIC_MODIFIER = null;
+
+    public static StaticModifier<?> EMC_TORRENT = null;
+
+    public static final StaticModifier<Triple_Seven> TRIPLE_SEVEN_STATIC_MODIFIER = MODIFIERS.register("triple_seven", Triple_Seven::new);
+
+    public static final StaticModifier<AwakenKnight_of_Night> AWAKEN_KNIGHT_OF_NIGHT_STATIC_MODIFIER = MODIFIERS.register("awakenknight_of_night", AwakenKnight_of_Night::new);
+
+    public static final StaticModifier<EZ_Constant> EZ_CONSTANT_STATIC_MODIFIER = MODIFIERS.register("ez_constant", EZ_Constant::new);
+
+    public static final StaticModifier<GhostSoul> GHOST_SOUL_STATIC_MODIFIER = MODIFIERS.register("ghostsoul", GhostSoul::new);
 
     public static final StaticModifier<DiademaModifier> ONIMIKO_STATIC_MODIFIER =
             MODIFIERS.register("onimiko", CommonDiademaModifier.Create(DiademaRegister.ONIMIKO::get));

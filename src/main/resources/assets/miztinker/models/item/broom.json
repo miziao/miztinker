@@ -1,0 +1,19 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "forge:item/default-tool",
+  "textures": {
+    "head":   "miztinker:item/tool/broom/head",
+    "handle": "miztinker:item/tool/broom/handle",
+    "head_broken": "miztinker:item/tool/broom/head_broken"
+  },
+  "parts": [
+    { "name": "handle", "index": 1 , "broken": "head_broken"},
+    { "name": "head",   "index": 0 }
+  ],
+  "overrides": [
+    {
+      "predicate": { "tconstruct:charging": 2 },
+      "model": "miztinker:item/broom/blocking"
+    }
+  ]
+}

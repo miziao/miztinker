@@ -55,6 +55,14 @@ public class MiztinkerFluidRegister {
 
     public static final FluidObject<ForgeFlowingFluid> MOLTEN_LAVIUM_NEW = registerHotBurning(FLUIDS,"molten_lavium_new",1500,4,18,4f,false);
 
+    public static final FluidObject<ForgeFlowingFluid> MOLTEN_BLACK = registerHotBurning(FLUIDS,"molten_black",1500,0,18,0f,false);
+    public static final FluidObject<ForgeFlowingFluid> MOLTEN_PINK = registerHotBurning(FLUIDS,"molten_pink",1500,0,18,0f,false);
+
+    public static final FluidObject<ForgeFlowingFluid> MOLTEN_RAVENOUS = registerHotBurning(FLUIDS,"molten_ravenous",1500,4,18,4f,false);
+
+    public static final FluidObject<ForgeFlowingFluid> MOLTEN_TERRESTRIAL_ARTIFACT = registerHotBurning(FLUIDS,"molten_terrestrial_artifact",1500,4,18,4f,false);
+
+
 
 
 

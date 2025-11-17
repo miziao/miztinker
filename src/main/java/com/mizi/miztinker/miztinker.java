@@ -3,6 +3,7 @@ package com.mizi.miztinker;
 import com.mizi.miztinker.item.tool.until.MiztinkerTools;
 import com.mizi.miztinker.modifier.diadema.DiademaRegister;
 import com.mizi.miztinker.modifier.register.*;
+import com.mizi.miztinker.network.MiztinkerNetwork;
 import com.mizi.miztinker.sounds.MiztinkerSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.effect.MobEffect;
@@ -66,6 +67,8 @@ public class miztinker {
 
         MiztinkerTools.initRegisters();
 
+        MiztinkerNetwork.register();
+
 
 
 
@@ -96,10 +99,12 @@ public class miztinker {
                         TinkerItemProperties.registerToolProperties(lollipop.get());
                         TinkerItemProperties.registerBrokenProperty(lollipop.get());
                         TinkerItemProperties.registerToolProperties(old_sword.get());
+                        TinkerItemProperties.registerToolProperties(broom.get());
 
                         TinkerItemProperties.registerToolProperties(tinker_loli_pickaxe.get());
                         TinkerItemProperties.registerBrokenProperty(tinker_loli_pickaxe.get());
                         TinkerItemProperties.registerBrokenProperty(old_sword.get());
+                        TinkerItemProperties.registerBrokenProperty(broom.get());
                     });
                 }
             }

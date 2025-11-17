@@ -48,7 +48,7 @@ public class Entropy_Decay extends NoLevelsModifier implements MeleeHitModifierH
         }
 
         // 每次击杀降低攻击力 0.1%
-        float reduction = target.getMaxHealth() * 0.001f;
+        float reduction = target.getMaxHealth() * 0.01f;
         currentDamage -= reduction;
 
         // 若降至 0 以下，则进入熵崩坏态（无穷大）

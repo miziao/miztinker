@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 2,
+      "item": "craziness_awakened:scorpion_stinger"
+    },
+    {
+      "amount_needed": 2,
+      "item": "craziness_awakened:scorpion_stinger"
+    },
+    {
+      "amount_needed": 2,
+      "item": "craziness_awakened:scorpion_stinger"
+    },{
+      "amount_needed": 2,
+      "item": "craziness_awakened:scorpion_stinger"
+    },
+    {
+      "amount_needed": 2,
+      "item": "craziness_awakened:scorpion_stinger"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:venom",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}

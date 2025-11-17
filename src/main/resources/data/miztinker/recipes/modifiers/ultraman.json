@@ -1,0 +1,31 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 64,
+      "item": "abominations_infection:putrid_flesh_block"
+    },
+    {
+      "item": "abominations_infection:flugzeug_core"
+    },
+    {
+      "amount_needed": 32,
+      "item": "abominations_infection:tooth_block"
+    },
+    {
+      "item": "minecraft:elytra"
+    },
+    {
+      "item": "minecraft:amethyst_cluster"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:ultraman",
+  "slots": {
+    "dx": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor/leggings"
+  }
+}

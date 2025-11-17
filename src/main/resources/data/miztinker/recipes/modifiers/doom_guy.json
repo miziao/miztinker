@@ -1,0 +1,23 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "miztinker:radiation_argent_energy"
+    },
+    {
+      "item": "fromtheshadows:devil_splitter"
+    },
+    {
+      "item": "luckytntmod:fiery_hell"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:doom_guy",
+  "slots": {
+    "dx": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}

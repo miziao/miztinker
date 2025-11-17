@@ -1,0 +1,12 @@
+{
+  "default": [
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "miztinker:ravenous"
+      }
+    ]
+  }
+}

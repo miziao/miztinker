@@ -1,0 +1,13 @@
+{
+  "type":"tconstruct:melting",
+  "ingredient":{
+    "item":"the_ravenous:ravenous_trophy"
+  },
+  "temperature": 2000,
+  "time": 100,
+  "result":
+  {
+    "fluid": "miztinker:molten_ravenous",
+    "amount": 360
+  }
+}

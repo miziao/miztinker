@@ -1,0 +1,32 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 32,
+      "item": "minecraft:firework_rocket"
+    },
+    {
+      "amount_needed": 2,
+      "tag": "kubejs:feather"
+    },
+    {
+      "amount_needed": 32,
+      "item": "minecraft:firework_rocket"
+    },
+    {
+      "item": "tconstruct:seared_drain"
+    },
+    {
+      "item": "tconstruct:seared_drain"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:kineticamplifier",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}

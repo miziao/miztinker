@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "projecte:watch_of_flowing_time"
+    },
+    {
+      "item": "minecraft:dragon_head"
+    },
+    {
+      "tag": "miztinker:dragonsteel"
+    },
+    {
+      "item": "minecraft:clock"
+    },
+    {
+      "item": "minecraft:bell"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:timetyrant",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type":"tconstruct:melting",
+  "ingredient":{
+    "item":"miztinker:terrestrial_artifact_item"
+  },
+  "temperature": 1500,
+  "time": 100,
+  "result":
+  {
+    "fluid": "miztinker:molten_terrestrial_artifact",
+    "amount": 270
+  }
+}

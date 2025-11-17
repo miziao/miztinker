@@ -1,5 +1,7 @@
 package com.mizi.miztinker.modifier.modifiers;
 
+import com.mizi.miztinker.network.MiztinkerNetwork;
+import com.mizi.miztinker.network.WeatherChangePacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -9,6 +11,7 @@ import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -41,25 +44,20 @@ public class BornOfStorm extends NoLevelsModifier implements SlotStackModifierHo
     @Override
     public boolean overrideOtherStackedOnMe(IToolStackView tool, ModifierEntry entry,
                                             ItemStack held, Slot slot, Player player, SlotAccess access) {
-        // 仅空手
         if (!held.isEmpty()) return false;
         if (slot.container != player.getInventory()) return false;
 
         ModDataNBT data = tool.getPersistentData();
         int current = data.getInt(WEATHER_KEY);
-        int next = (current + 1) % 3; // 0=晴天, 1=雨天, 2=雷暴
+        int next = (current + 1) % 3;
         data.putInt(WEATHER_KEY, next);
 
-        Level level = player.level();
-        if (!level.isClientSide && level instanceof ServerLevel server) {
-            switch (next) {
-                case 0 -> server.setWeatherParameters(12000, 0, false, false);
-                case 1 -> server.setWeatherParameters(0, 12000, true, false);
-                case 2 -> server.setWeatherParameters(0, 12000, true, true);
-            }
+        // ✅ 客户端发包同步到服务端
+        if (player.level().isClientSide) {
+            MiztinkerNetwork.CHANNEL.send(PacketDistributor.SERVER.noArg(), new WeatherChangePacket(next));
         }
 
-        // 客户端显示提示
+        // 客户端即时显示提示
         String msg = switch (next) {
             case 1 -> "§b现在是§3雨天§b。";
             case 2 -> "§9现在是§1暴风雨§9！";
@@ -67,7 +65,7 @@ public class BornOfStorm extends NoLevelsModifier implements SlotStackModifierHo
         };
         player.displayClientMessage(Component.literal(msg), true);
 
-        return true; // 消耗操作
+        return true;
     }
 
     /** Tooltip 显示当前天气状态 */

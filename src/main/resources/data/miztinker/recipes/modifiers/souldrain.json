@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "tag": "kubejs:skull"
+    },
+    {
+      "tag": "kubejs:skull"
+    }
+  ],
+  "level": {
+    "max": 100
+  },
+  "result": "miztinker:souldrain",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor"
+  }
+}

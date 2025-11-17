@@ -1,6 +1,8 @@
 {
     "miztinker_tab": "米工匠",
 
+    "Miztinker.tool.tab":"米工匠 工具",
+
     "modifier.miztinker.alloying":"合金化",
     "modifier.miztinker.alloying.flavor": "比普通金属更加强大",
     "modifier.miztinker.alloying.description": "每级减少7%受到的伤害",
@@ -199,11 +201,24 @@
     "modifier.miztinker.awakendoomguy.requirements":"需要The Only Thing They Fear Is You作为前置",
     "modifier.miztinker.awaken_doomguy": "The Only Thing They Fear Is You·觉醒",
     "modifier.miztinker.awaken_doomguy.flavor": "来自毁灭战士 永恒",
-    "modifier.miztinker.awaken_doomguy.description":"攻击时造成大量给予目标生命值的切断伤害,持有时同时获得较强的防御效果,还常驻速度4跳跃提升2",
+    "modifier.miztinker.awaken_doomguy.description":"攻击时造成大量基于目标生命值的切断伤害,持有时同时获得较强的防御效果,还常驻速度4跳跃提升2",
   
     "modifier.miztinker.doom_guy": "The Only Thing They Fear Is You",
     "modifier.miztinker.doom_guy.flavor": "纯音乐，请欣赏",
     "modifier.miztinker.doom_guy.description":"在背包里右键播放",
+
+    "modifier.miztinker.knight_of_night": "ナイト・オブ・ナイツ(骑士之夜)",
+    "modifier.miztinker.knight_of_night.flavor": "纯音乐，请欣赏",
+    "modifier.miztinker.knight_of_night.description":"在背包里右键播放",
+
+    "modifier.miztinker.AwakenKnight_of_Night.requirements":"需要ナイト・オブ・ナイツ(骑士之夜)作为前置",
+    "modifier.miztinker.awakenknight_of_night": "ナイト・オブ・ナイツ(骑士之夜)·觉醒",
+    "modifier.miztinker.awakenknight_of_night.flavor": "from Izayoi Sakuya and Dio",
+    "modifier.miztinker.awakenknight_of_night.description":"下蹲右键使全图生物时间停止",
+
+    "modifier.miztinker.guanyu": "关羽之歌",
+    "modifier.miztinker.guanyu.flavor": "三军听令，战至最后一刻，自刎归天！",
+    "modifier.miztinker.guanyu.description":"在背包右键获得恢复五,吗",
 
     "modifier.miztinker.ultraman": "Theme from ULTRAMAN",
     "modifier.miztinker.ultraman.flavor": "纯音乐，请欣赏",
@@ -231,7 +246,7 @@
     "modifier.miztinker.antonbloodline.description": "使你受到的弹射物伤害降低至最多5,同时清除你周围的点燃的tnt实体",
 
     "modifier.miztinker.enchantedgold":"附魔金",
-    "modifier.miztinker.enchantedgold.flavor": "附魔金的力量使你身上所有的食物都变成了附魔金xx",
+    "modifier.miztinker.enchantedgold.flavor": "附魔金的力量使你身上所有的食物都变成了附魔金(正在吃的食物)",
     "modifier.miztinker.enchantedgold.description": "你吃的每个食物都会相当于是附魔金苹果",
 
     "modifier.miztinker.plumber":"水管工",
@@ -266,9 +281,9 @@
     "modifier.miztinker.terrafirma.flavor": "我把你带回来了...",
     "modifier.miztinker.terrafirma.description":"每tick有5%的几率使得玩家恢复(效果等级÷3)点生命",
   
-    "modifier.miztinker.blood_mary": "原始回归·血腥玛丽",
-    "modifier.miztinker.blood_mary.flavor": "我把你带回来了...",
-    "modifier.miztinker.blood_mary.description":"根据目标已失去的生命值造成额外伤害",
+    "modifier.miztinker.bloodmary": "原始回归·血腥玛丽",
+    "modifier.miztinker.bloodmary.flavor": "我把你带回来了...",
+    "modifier.miztinker.bloodmary.description":"根据目标已失去的生命值造成额外伤害",
   
     "modifier.miztinker.life_steal": "原始回归·Life Steal",
     "modifier.miztinker.life_steal.flavor": "我把你带回来了...",
@@ -302,6 +317,46 @@
     "modifier.miztinker.mythical_push_armor.description": "在下界时获得速度2",
     "modifier.miztinker.mythical_push_armor.flavor": "神话助力",
 
+  "modifier.miztinker.wizardflight": "巫师飞行",
+    "modifier.miztinker.wizardflight.flavor": "骑着扫帚,像个巫师一样飞行",
+    "modifier.miztinker.wizardflight.description":"主手持有时每1秒消耗1耐久进行创造飞行",
+
+    "modifier.miztinker.scorchedbone": "焦骨",
+    "modifier.miztinker.scorchedbone.flavor": "烧焦或染黑,总有个方法能让骨头变黑",
+    "modifier.miztinker.scorchedbone.description":"击杀骷髅时会有概率额外掉落凋零之骨和百分百掉落凋零骷髅头颅",
+
+    "modifier.miztinker.timetyrant": "时间暴君",
+    "modifier.miztinker.timetyrant.flavor": "吾名为米扎艾尔...",
+    "modifier.miztinker.timetyrant.description":"物品栏右键切换时间,并且会在工具上显示具体时间",
+
+    "modifier.miztinker.lungspast": "曾经之肺",
+    "modifier.miztinker.lungspast.flavor": "就像mc1.14之前一样",
+    "modifier.miztinker.lungspast.description":"只需要接触到空气一瞬间,你的氧气值就会回满,但如此强力的变化只有[猎人]才可以适应",
+
+    "modifier.miztinker.celestial_aura": "天地灵气",
+    "modifier.miztinker.celestial_aura.flavor": "天地之精华流入体内，自然治愈加速",
+    "modifier.miztinker.celestial_aura.description":"每次自然回血会额外回复最大生命值的5%,随特性等级变动",
+
+    "modifier.miztinker.celestial_strike": "天威",
+    "modifier.miztinker.celestial_strike.flavor": "天威无崩之地",
+    "modifier.miztinker.celestial_strike.description":"每次攻击会麻痹敌人0.5秒,同时生成一道闪电链对半径3格(随等级变动)的敌人造成连锁伤害,连锁伤害同样会触发麻痹和下一轮的闪电链",
+
+    "modifier.miztinker.emc_torrent": "emc洪流",
+    "modifier.miztinker.emc_torrent.flavor": "你发动了攻击,感到一阵阵的能量灌入你的体内",
+    "modifier.miztinker.emc_torrent.description":"攻击时会将造成伤害的600%变为emc增加给你",
+
+    "modifier.miztinker.triple_seven": "777",
+    "modifier.miztinker.triple_seven.flavor": "这真的是你抽出来的吗?",
+    "modifier.miztinker.triple_seven.description":"暴击时的倍率从7到777中挑选",
+
+    "modifier.miztinker.ez_constant": "ez常数",
+    "modifier.miztinker.ez_constant.flavor": "桑铂颗够吗?",
+    "modifier.miztinker.ez_constant.description":"死亡时掉落591下界合金锭 60金锭 15银锭 3铜锭",
+
+    "modifier.miztinker.ghostsoul": "幽灵的灵魂",
+    "modifier.miztinker.ghostsoul.flavor": "得到了一些先天特征",
+    "modifier.miztinker.ghostsoul.description":"有50%的概率闪避攻击",
+
 
     "modifier.miztinker.onimiko":"No.§m01§r06 鬼巫女的[领域]",
     "modifier.miztinker.onimiko.flavor": "这难道不是博丽灵梦吗?!",
@@ -309,7 +364,7 @@
 
 
     "effect.miztinker.woundeffect": "致命创伤PLUS",
-    "effect.miztinker.horologiumnoai": "星能力共鸣·时钟座",
+    "effect.miztinker.horologiumnoai": "时停中",
     
     "modifier.miztinker.entropy_decay":"熵蚀",
     "modifier.miztinker.entropy_decay.flavor": "你猜减到最后会怎么样",
@@ -371,6 +426,18 @@
     "material.miztinker.ruby_old.flavor": "回归到tic2状态的红宝石",
     "material.miztinker.ruby_old.encyclopedia": "这会是这个材料的巅峰吗?",
 
+    "material.miztinker.daigo": "大骨队员",
+    "material.miztinker.daigo.flavor": "根本赢不了?我听不懂",
+    "material.miztinker.daigo.encyclopedia": "让巨人复苏的方法只有一个，那就是将大骨熬成汤",
+
+    "material.miztinker.ravenous": "饥渴合金",
+    "material.miztinker.ravenous.flavor": "有这么多手?你是tenk....",
+    "material.miztinker.ravenous.encyclopedia": "饥渴者的力量融入你的身体,使你可以复活6次",
+
+    "material.miztinker.terrestrial_artifact": "天地宝晶",
+    "material.miztinker.terrestrial_artifact.flavor": "天下宝石之合",
+    "material.miztinker.terrestrial_artifact.encyclopedia": "融合了天下至宝,让你可以行使天道的权力",
+
 
 "block.miztinker.nether_reactor": "下界反应核",
 
@@ -378,13 +445,35 @@
 
      "item.miztinker.big_manyullyn_ingot": "超极巨化玛玉灵锭",
 
+     "item.miztinker.mega_manyullyn_booster_energy": "超级玛玉灵驱劲能量",
+     "tooltip.miztinker.mega_manyullyn_booster_energy": "§b使你的玛玉灵超级进化！",
+
       "item.miztinker.mega_big_iron_ingot": "超级极巨化铁锭",
+      
 
       "item.miztinker.dx": "迪拉熊",
 
       "item.miztinker.ignister": "电子界到临者@伊格尼斯星",
 
       "item.miztinker.ten_thousand_souls_item": "万魂锭",
+
+      "item.miztinker.black": "黑魔爪",
+      "tooltip.miztinker.black": "§b某人最讨厌的饮料之一",
+      "fluid.miztinker.molten_black": "液态黑魔爪",
+      "item.miztinker.molten_black_bucket": "液态黑魔爪桶",
+      "block.miztinker.molten_black_fluid": "液态黑魔爪",
+
+      "item.miztinker.pink": "粉魔爪",
+      "tooltip.miztinker.pink": "§b好喝爱喝",
+      "fluid.miztinker.molten_pink": "液态粉魔爪",
+      "item.miztinker.molten_pink_bucket": "液态粉魔爪桶",
+      "block.miztinker.molten_pink_fluid": "液态粉魔爪",
+
+      "item.miztinker.ravenous_ingot": "饥渴合金",
+      "tooltip.miztinker.ravenous_ingot": "§b蕴含了一整个饥渴者的力量",
+      "fluid.miztinker.molten_ravenous": "熔融饥渴合金",
+      "item.miztinker.molten_ravenous_bucket": "熔融饥渴合金桶",
+      "block.miztinker.molten_ravenous_fluid": "熔融饥渴合金",
 
       "item.miztinker.abyss_silver_item": "深渊银锭",
       "fluid.miztinker.molten_abyss_silver": "熔融深渊银",
@@ -405,6 +494,23 @@
 
       "item.miztinker.oni_miko_bow": "鬼巫女的大蝴蝶结",
       "tooltip.miztinker.oni_miko_bow": "§d还带着一点点鬼巫女的气味",
+
+      "item.miztinker.daigo_item": "大骨队员",
+      "tooltip.miztinker.daigo_item": "§e大骨熬成汤",
+
+      "item.miztinker.how_the_steel_was_tempered": "《钢铁是怎样炼成的》",
+
+      "item.miztinker.7_1": "7卡",
+      "tooltip.miztinker.7_1": "§b三张7卡集齐会发生什么呢",
+
+      "item.miztinker.7_2": "7卡",
+      "tooltip.miztinker.7_2": "§b三张7卡集齐会发生什么呢",
+
+      "item.miztinker.7_3": "7卡",
+      "tooltip.miztinker.7_3": "§b三张7卡集齐会发生什么呢",
+
+      "item.miztinker.radiation_argent_energy": "辐射亚金能源",
+      "tooltip.miztinker.radiation_argent_energy": "§b击败pigzilla模组里的猪斯拉掉落",
 
 
       "item.miztinker.qivium_ingot_old": "原始回归奇维姆",
@@ -427,9 +533,17 @@
       "item.miztinker.primal_reversion_ruby": "原始回归催化剂",
       "tooltip.miztinker.primal_reversion_ruby": "§b使你的材料回归到tic2的状态!",
 
+      "item.minecraft.hay_block":"干草块",
+
 
       "item.miztinker.starmetal_ingot": "星辉锭",
-      "tooltip.miztinker.starmetal_ingot": "在夜晚y大于300的地方露天放置2分钟转化",
+      "tooltip.miztinker.starmetal_ingot": "将铁锭放在夜晚y大于300的地方露天放置2分钟转化",
+
+      "item.miztinker.terrestrial_artifact_item": "天地宝晶",
+      "tooltip.miztinker.terrestrial_artifact_item": "§b天地至宝,日月灵气",
+      "fluid.miztinker.molten_terrestrial_artifact": "熔融天地宝晶",
+      "item.miztinker.molten_terrestrial_artifact_bucket": "熔融天地宝晶桶",
+      "block.miztinker.molten_terrestrial_artifact_fluid": "熔融天地宝晶",
 
       "item.miztinker.fumo_gold_ingot": "FUMO金锭",
       "tooltip.miztinker.fumo_gold_ingot": "金锭右键书架转化",
@@ -451,6 +565,9 @@
 
       "item.miztinker.old_sword": "1.8剑",
       "item.miztinker.old_sword.description": "来自1.8更加遥远的遗产,拥有很高的攻速,让你攻击不再有攻击冷却,还还原了1.8的右键格挡减伤极致",
+
+      "item.miztinker.broom": "扫帚",
+      "item.miztinker.broom.description": "主手时可以像巫师那样飞行,同时还可以当作铲子使用",
 
       "item.miztinker.tinker_loli_pickaxe": "普通萝莉",
       "item.miztinker.tinker_loli_pickaxe.description": "来自1.12的遥远遗产，可以同时作为镐子，铲子和斧头！\n右键对10 x 10 x 10的生物造成一次攻击\n“延展”强化会提供群体攻击范围和挖掘范围！ "

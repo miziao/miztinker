@@ -1,0 +1,8 @@
+{
+  "type": "tconstruct:tool_building",
+  "extra_requirements": [
+    { "item": "minecraft:hay_block" }
+  ],
+  "result": "miztinker:broom",
+  "result_count": 1
+}

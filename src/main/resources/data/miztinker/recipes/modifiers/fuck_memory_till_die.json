@@ -1,0 +1,34 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 64,
+      "item": "jzyy:overflowed_memory"
+    },
+    {
+      "amount_needed": 1,
+      "item": "dimensional_administrator:dimensional_administrator"
+    },
+    {
+      "amount_needed": 64,
+      "item": "jzyy:overflowed_memory"
+    },
+    {
+      "amount_needed": 64,
+      "item": "jzyy:overflowed_memory"
+    },
+    {
+      "amount_needed": 64,
+      "item": "jzyy:overflowed_memory"
+    }
+  ],
+  "level": 1,
+  "result": "jzyy:fuck_memory_till_die",
+  "slots": {
+   "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}
