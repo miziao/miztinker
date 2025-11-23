@@ -46,33 +46,6 @@ public class AbsoluteSeverance extends NoLevelsModifier implements MeleeHitModif
 
     private static final Map<UUID, Long> NULL_ENTITY_TIMES = new HashMap<>();
 
-//    @Override
-//    public float getMeleeDamage(IToolStackView tool, ModifierEntry entry, ToolAttackContext context, float baseDamage, float damage) {
-//        LivingEntity target = context.getLivingTarget();
-//        Player player = context.getPlayerAttacker();
-//        if (target != null && player != null && target.getHealth() > 0) {
-//            if (target.getHealth() <= 0) return damage;
-//            if (isFromDummmmmmyMod(target)) return damage;
-//            if (isDefender(target)) return damage;
-//            float toolDamage = tool.getStats().get(ToolStats.ATTACK_DAMAGE);
-//            modifierAbsoluteSeverance(target,player,toolDamage,this.value + 1);
-//        }
-//        return damage;
-//    }
-
-
-
-//    @Override
-//    public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-//        LivingEntity target = context.getLivingTarget();
-//        Player player = context.getPlayerAttacker();
-//        if (target != null && player != null && target.getHealth() > 0) {
-//            if (target.getHealth() <= 0) return;
-//            if (isFromDummmmmmyMod(target)) return;
-//            float toolDamage = tool.getStats().get(ToolStats.ATTACK_DAMAGE);
-//            modifierAbsoluteSeverance(target,player,toolDamage,this.value);
-//        }
-//    }
 
     /**
      * 手动触发 Advancements (成就)

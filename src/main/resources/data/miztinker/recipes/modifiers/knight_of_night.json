@@ -18,7 +18,7 @@
   "level": 1,
   "result": "miztinker:knight_of_night",
   "slots": {
-    "dx": 1
+    "music": 1
   },
   "tools": {
     "tag": "tconstruct:modifiable"

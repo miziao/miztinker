@@ -1,0 +1,14 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "goety:totem_of_souls"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:souls",
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

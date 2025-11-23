@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "kubejs:undead_item", 
+    "irons_spellbooks:frozen_bone", 
+    "minecraft:bone",
+    "tconstruct:necrotic_bone",
+    "iceandfire:witherbone",
+    "minecraft:rotten_flesh"
+  ]
+}

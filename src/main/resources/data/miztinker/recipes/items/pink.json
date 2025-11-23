@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "miztinker:mozhua_cap"
+    }
+  ],
+  "result": {
+    "item": "miztinker:pink",
+    "count": 1
+  }
+}

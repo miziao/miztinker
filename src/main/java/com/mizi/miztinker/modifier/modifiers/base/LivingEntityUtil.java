@@ -725,27 +725,6 @@ public class LivingEntityUtil {
             e.printStackTrace();
         }
     }
-    public static void modifierSeverance(LivingEntity target, Player player, float damage,float value,float baseDamage){
-        if (target.getHealth() <= 0) return;
-        var playerKill = target.level().damageSources().playerAttack(player);
-        target.hurt(playerKill,1);
-        float reHealth = target.getHealth() - damage * value - target.getMaxHealth() * 0.01f - baseDamage;
-        forceSetAllCandidateHealth(target,reHealth);
-        if (isFromOmniMod(target)) {
-            CompoundTag tag = new CompoundTag();
-            tag.putFloat("Health", reHealth);
-            try {
-                target.readAdditionalSaveData(tag);
-            } catch (Exception ignored) {
-            }
-        }
-        if (reHealth <= 0 || target.getHealth() <= 0){
-            forceSetAllCandidateHealth(target,0);
-            triggerKillAdvancement(target,playerKill);
-            setEntityDead(target);
-            dropLoot(target,playerKill);
-        }
-    }
 
 
 

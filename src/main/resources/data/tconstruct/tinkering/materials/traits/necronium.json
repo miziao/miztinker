@@ -1,0 +1,20 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "tconstruct:decay"
+    }
+  ],
+  "perStat": {
+    "tconstruct:head": [
+      {
+        "level": 1,
+        "name": "tconstruct:decay"
+      },
+      {
+          "name": "miztinker:woundeffectattack",
+          "level": 1
+      }
+  ]
+    }
+}

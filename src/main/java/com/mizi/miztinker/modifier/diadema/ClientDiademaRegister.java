@@ -8,6 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import com.mizi.miztinker.miztinker;
 import com.mizi.miztinker.modifier.diadema.onimiko.OniMikoClientDiadema;
+import com.mizi.miztinker.modifier.diadema.miziao.MusicGameClientDiadema;
 
 @OnlyIn(Dist.CLIENT)
 public class ClientDiademaRegister {
@@ -28,5 +29,8 @@ public class ClientDiademaRegister {
 
     public static final RegistryObject<ClientDiademaType> ONIMIKO =
             CLIENT_DIADEMA_TYPES.register("onimiko", () -> ClientDiademaType.Create(OniMikoClientDiadema::new));
+
+    public static final RegistryObject<ClientDiademaType> MUSICGAMEDIADEMA =
+            CLIENT_DIADEMA_TYPES.register("musicgamediadema", () -> ClientDiademaType.Create(MusicGameClientDiadema::new));
 
 }

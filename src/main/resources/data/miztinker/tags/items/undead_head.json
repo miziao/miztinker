@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:zombie_head", 
+    "minecraft:wither_skeleton_skull",
+    "tconstruct:drowned_head",
+    "tconstruct:husk_head",
+    "minecraft:skeleton_skull",
+    "tconstruct:stray_head",
+    "tconstruct:zombified_piglin_head"
+  ]
+}

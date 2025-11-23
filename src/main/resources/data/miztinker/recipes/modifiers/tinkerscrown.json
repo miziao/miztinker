@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 10,
+      "item": "tconstruct:dragon_scale"
+    },
+    {
+      "item": "irons_spellbooks:tarnished_helmet"
+    },
+    {
+      "amount_needed": 5,
+      "item": "tconstruct:cinderslime_block"
+    },
+    {
+      "amount_needed": 5,
+      "item": "tconstruct:hepatizon_block"
+    },
+    {
+      "amount_needed": 5,
+      "item": "tconstruct:manyullyn_block"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:tinkerscrown",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor/helmets"
+  }
+}

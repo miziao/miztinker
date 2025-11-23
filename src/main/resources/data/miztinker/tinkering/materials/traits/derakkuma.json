@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "name": "miztinker:derakkuma",
+      "level": 1
+    },
+    {
+      "name": "miztinker:refill",
+      "level": 1
+    }
+  ]
+}

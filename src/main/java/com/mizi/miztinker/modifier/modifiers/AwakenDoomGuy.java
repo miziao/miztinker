@@ -1,6 +1,7 @@
 package com.mizi.miztinker.modifier.modifiers;
 
 import com.mizi.miztinker.miztinker;
+import com.mizi.miztinker.modifier.modifiers.base.ForceHurtUtil;
 import com.mizi.miztinker.modifier.register.MiztinkerModifiers;
 import com.yellowbrossproductions.yellowbrossextras.entities.DefenderEntity;
 import net.minecraft.nbt.CompoundTag;
@@ -31,8 +32,6 @@ import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import lombok.Getter;
 
-import static com.mizi.miztinker.modifier.modifiers.base.AbsoluteSeverance.*;
-import static com.mizi.miztinker.modifier.modifiers.base.LivingEntityUtil.forceSetAllCandidateHealth;
 
 
 @Getter
@@ -57,6 +56,8 @@ public class AwakenDoomGuy extends NoLevelsModifier implements
         hookBuilder.addHook(this, ModifierHooks.MELEE_HIT);
         hookBuilder.addHook(this, ModifierHooks.INVENTORY_TICK);
         hookBuilder.addHook(this, ModifierHooks.DAMAGE_BLOCK);
+        hookBuilder.addHook(this, ModifierHooks.REQUIREMENTS);
+        hookBuilder.addHook(this, ModifierHooks.VALIDATE);
     }
 
     @Override
@@ -91,23 +92,19 @@ public class AwakenDoomGuy extends NoLevelsModifier implements
         if (target == null || player == null) return knockback;
         if (target.getHealth() <= 0 || isFromDummmmmmyMod(target) || isDefender(target)) return knockback;
 
-        applyHalfMaxHealthDamage(target, player);
+        float halfMax = target.getMaxHealth() / 2f;
+
+        ForceHurtUtil.forceHurtWithNoHealable(
+                target,
+                player.damageSources().playerAttack(player),
+                halfMax
+        );
 
         return knockback;
     }
 
-    @Override
-    public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier,
-                               ToolAttackContext context, float damageAttempted) {
 
-        LivingEntity target = context.getLivingTarget();
-        Player player = context.getPlayerAttacker();
 
-        if (target == null || player == null) return;
-        if (target.getHealth() <= 0 || isFromDummmmmmyMod(target) || isDefender(target)) return;
-
-        applyHalfMaxHealthDamage(target, player);
-    }
 
     /* ===== 持续药水效果 ===== */
     @Override
@@ -117,41 +114,15 @@ public class AwakenDoomGuy extends NoLevelsModifier implements
 
         if (!(living instanceof Player player)) return;
 
+        // 仅主手持有该武器时触发
+        if (!isSelected || player.getMainHandItem() != stack) return;
+
         player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, EFFECT_DURATION, 3, true, false, false));
         player.addEffect(new MobEffectInstance(MobEffects.JUMP, EFFECT_DURATION, 1, true, false, false));
     }
 
     /* ===== 半血伤害方法 ===== */
-    public static void applyHalfMaxHealthDamage(LivingEntity target, Player player) {
-        if (target.getHealth() <= 0) return;
 
-        var playerKill = target.level().damageSources().playerAttack(player);
-
-        // 先造成 1 点伤害保证触发事件
-        target.hurt(playerKill, 1);
-
-        // 剩余生命值 = 当前生命 - 最大生命的一半 - 1%
-        float reHealth = target.getHealth() - target.getMaxHealth() / 2f - target.getMaxHealth() * 0.01f;
-
-        forceSetAllCandidateHealth(target, reHealth);
-
-        // OmniMod 兼容
-        if (isFromOmniMod(target)) {
-            CompoundTag tag = new CompoundTag();
-            tag.putFloat("Health", reHealth);
-            try {
-                target.readAdditionalSaveData(tag);
-            } catch (Exception ignored) {}
-        }
-
-        // 死亡判定
-        if (reHealth <= 0 || target.getHealth() <= 0) {
-            forceSetAllCandidateHealth(target, 0);
-            triggerKillAdvancement(target, playerKill);
-            setEntityDead(target);
-            dropLoot(target, playerKill);
-        }
-    }
 
     /* ===== 工具方法 ===== */
     public static boolean isFromDummmmmmyMod(Entity entity) {

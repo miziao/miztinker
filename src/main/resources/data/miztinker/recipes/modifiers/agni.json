@@ -1,0 +1,20 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "vampirism:item_alchemical_fire"
+    },
+    {
+      "item": "iceandfire:hydra_heart"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:agni",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor"
+  }
+}

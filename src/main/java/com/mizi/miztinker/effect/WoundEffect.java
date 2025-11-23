@@ -1,47 +1,65 @@
 package com.mizi.miztinker.effect;
 
+import com.mizi.miztinker.modifier.modifiers.base.ForceHurtUtil;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import static com.mizi.miztinker.modifier.modifiers.base.ForceHurtUtil.forceHurtWithNoHealable;
 
-/**
- * 创伤效果：存在期间禁止生命恢复。
- */
 
 public class WoundEffect extends MobEffect {
 
     public WoundEffect() {
-        super(MobEffectCategory.HARMFUL, 0x555555); // 设置禁疗效果颜色
+        super(MobEffectCategory.HARMFUL, 0x555555);
     }
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
-        return true; // 每 tick 执行一次
+        return true; // 每 tick 执行
     }
 
-    @Override
+    /*@Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
-        // 获取当前生命值和存储的上次生命值
+
         float current = entity.getHealth();
-        // 如果 key 不存在，则初始化为当前生命值
-        if (!entity.getPersistentData().contains("wound_effect_last_health")) {
-            entity.getPersistentData().putFloat("wound_effect_last_health", current);
-            return; // 第一次 tick 不处理
-        }
-        float last = entity.getPersistentData().getFloat("wound_effect_last_health");
 
-        // 禁止回血
-        if (current > last) {
-            entity.setHealth(last);
+        // 从 UnhealableEntityData 中读出当前累计伤害 offset
+        ForceHurtUtil.UnhealableEntityData data = getData(entity);
+
+        // offset = 向下修正回血量
+        // 如果 offset < 当前血量 → 说明这期间产生了回血
+        float allowedHealth = current - data.hurtOffset;
+
+        if (current > allowedHealth) {
+            float healAmount = current - allowedHealth;
+
+            // 反向伤害相同数值，抵消回血（禁疗核心）
+            forceHurtWithNoHealable(entity, entity.damageSources().magic(), healAmount);
         }
 
-        // 更新 last
-        entity.getPersistentData().putFloat("wound_effect_last_health", entity.getHealth());
+        // 每 tick 重置 offset，只保留新的受伤部分
+        data.hurtOffset = 0f;
     }
+
     @Override
     public void removeAttributeModifiers(LivingEntity entity, net.minecraft.world.entity.ai.attributes.AttributeMap attributes, int amplifier) {
-        // 移除时清空数据
-        entity.getPersistentData().remove("wound_effect_last_health");
+        // 清空 offset
+        ForceHurtUtil.UnhealableEntityData data = getData(entity);
+        data.hurtOffset = 0f;
         super.removeAttributeModifiers(entity, attributes, amplifier);
+    }*/
+
+    @Override
+    public void addAttributeModifiers(LivingEntity entity, AttributeMap attributeMap, int amplifier) {
+        super.addAttributeModifiers(entity, attributeMap, amplifier);
+        ForceHurtUtil.makeNoHealable(entity);
+    }
+
+    @Override
+    public void removeAttributeModifiers(LivingEntity entity, AttributeMap attributeMap, int amplifier) {
+        super.removeAttributeModifiers(entity, attributeMap, amplifier);
+        ForceHurtUtil.recoverFromNoHealable(entity);;
+        
     }
 }

@@ -25,5 +25,11 @@ public class MiztinkerSounds {
 
     public static final RegistryObject<SoundEvent> KNIGHT_OF_NIGHT = SOUND_EVENTS.register("knight_of_night",
             () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(miztinker.MODID, "knight_of_night")));
+
+    public static final RegistryObject<SoundEvent> DISCONNECTED = SOUND_EVENTS.register("disconnected",
+            () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(miztinker.MODID, "disconnected")));
+
+    public static final RegistryObject<SoundEvent> UMIYURI_KAITEITAN = SOUND_EVENTS.register("umiyuri_kaiteitan",
+            () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(miztinker.MODID, "umiyuri_kaiteitan")));
 }
 

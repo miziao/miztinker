@@ -233,6 +233,14 @@
     "modifier.miztinker.greymatter.flavor": "哦 烦馁,应该变四手霸王或者钻石战神的 ",
     "modifier.miztinker.greymatter.description": "穿戴上时按下匠魂的头盔交互键变身,再次按下取消,变身后获得跳跃提升10,速度5,最大生命值变为5,体型会变得很小,但在你变身后周围3x3范围内的掉落物会每隔5分钟翻倍一次",
 
+    "modifier.miztinker.souls": "灵魂共生",
+    "modifier.miztinker.souls.flavor": "萨满巫术...",
+    "modifier.miztinker.souls.description": "为你的工具带来一个额外的灵魂槽,使你可以借用其他生物的力量",
+
+    "modifier.miztinker.pro_mk2": "增强mk2",
+    "modifier.miztinker.pro_mk2.flavor": "更加闪亮!",
+    "modifier.miztinker.pro_mk2.description": "他的兄弟玫瑰金可以为你带来强化槽,而他继承了他兄弟的能力,但是是为你带来能力槽!",
+
     "modifier.miztinker.woundeffectattack":"致命创伤PLUS",
     "modifier.miztinker.woundeffectattack.flavor": "正如你所见,是致命创伤的PLUS版本",
     "modifier.miztinker.woundeffectattack.description": "攻击后给予对方10秒'致命创伤PLUS'效果,会禁止99.99%类型的生命回复",
@@ -357,6 +365,39 @@
     "modifier.miztinker.ghostsoul.flavor": "得到了一些先天特征",
     "modifier.miztinker.ghostsoul.description":"有50%的概率闪避攻击",
 
+    "modifier.miztinker.agni": "炎拳",
+    "modifier.miztinker.agni.flavor": "对他使用炎拳吧",
+    "modifier.miztinker.agni.description":"你获得无与伦比的恢复能力,但烈火会永远伴随你,同时你以及你身边的生物也会遭受这仿佛来自地狱的烈火",
+
+    "modifier.miztinker.rainbowlife": "虹之生命",
+    "modifier.miztinker.rainbowlife.flavor": "你甚至不需要再丢弃一张手牌发动",
+    "modifier.miztinker.rainbowlife.description":"你受到的伤害会全额转化为对应的治疗量",
+
+    "modifier.miztinker.tinkerscrown": "Tinker的皇冠",
+    "modifier.miztinker.tinkerscrown.flavor": "拥有传奇工匠灵魂加持的黯淡皇冠",
+    "modifier.miztinker.tinkerscrown.description":"装备时增加75%冷却缩减,200%法术强度,10000最大法力值,+50%施法速度",
+
+    "modifier.miztinker.derakkuma": "迪拉熊之力",
+    "modifier.miztinker.derakkuma.flavor": "要开始了哟",
+    "modifier.miztinker.derakkuma.description":"来自maimai でらっくす的熊为你带来了能在工具上强化音乐的能力",
+
+    "modifier.miztinker.ender_man_soul": "末影人的灵魂",
+    "modifier.miztinker.ender_man_soul.flavor": "得到了一些先天特征",
+    "modifier.miztinker.ender_man_soul.description":"闪避投射物，但水是有害的",
+
+    "modifier.miztinker.undead_soul": "不死者的灵魂",
+    "modifier.miztinker.undead_soul.flavor":"得到了一些先天特征",
+    "modifier.miztinker.undead_soul.description":"拥有夜视，但无法承受阳炎",
+
+    "modifier.miztinker.refill": "再来一瓶",
+    "modifier.miztinker.refill.flavor":"虽然你可能一次都没喝过,但你仍然可以再来一瓶",
+    "modifier.miztinker.refill.description":"拥有夜视，但无法承受阳炎",
+
+
+    "modifier.miztinker.sever": "断绝",
+    "modifier.miztinker.sever.flavor": "可悲的尝试",
+    "modifier.miztinker.sever.description":"「绝对切断」5%效能",
+
 
     "modifier.miztinker.onimiko":"No.§m01§r06 鬼巫女的[领域]",
     "modifier.miztinker.onimiko.flavor": "这难道不是博丽灵梦吗?!",
@@ -365,6 +406,9 @@
 
     "effect.miztinker.woundeffect": "致命创伤PLUS",
     "effect.miztinker.horologiumnoai": "时停中",
+
+    "stat.tconstruct.slot.display.music": "音乐",
+    "stat.tconstruct.slot.prefix.music": "音乐槽：",
     
     "modifier.miztinker.entropy_decay":"熵蚀",
     "modifier.miztinker.entropy_decay.flavor": "你猜减到最后会怎么样",
@@ -438,8 +482,15 @@
     "material.miztinker.terrestrial_artifact.flavor": "天下宝石之合",
     "material.miztinker.terrestrial_artifact.encyclopedia": "融合了天下至宝,让你可以行使天道的权力",
 
+    "material.miztinker.derakkuma": "舞萌合金",
+    "material.miztinker.derakkuma.flavor": "迪..迪拉熊?",
+    "material.miztinker.derakkuma.encyclopedia": "你现在可以为你的武器添加音乐以及觉醒效果",
+
 
 "block.miztinker.nether_reactor": "下界反应核",
+
+"entity.miztinker.mizi_ao": "「舞萌高手」米子山民",
+"entity.miztinker.mizi_ao.chujing": "「神碑的终结者」米子山民",
 
 
 
@@ -452,6 +503,8 @@
       
 
       "item.miztinker.dx": "迪拉熊",
+
+      "item.miztinker.mozhua_cap": "再来一瓶",
 
       "item.miztinker.ignister": "电子界到临者@伊格尼斯星",
 
@@ -497,6 +550,9 @@
 
       "item.miztinker.daigo_item": "大骨队员",
       "tooltip.miztinker.daigo_item": "§e大骨熬成汤",
+
+      "item.miztinker.dx_ingot": "舞萌合金锭",
+      "tooltip.miztinker.dx_ingot": "§e蕴含音乐的力量",
 
       "item.miztinker.how_the_steel_was_tempered": "《钢铁是怎样炼成的》",
 

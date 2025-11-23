@@ -24,5 +24,8 @@ public class ModifierRegister {
 
     public static final StaticModifier<DiademaModifier> ONIMIKO_STATIC_MODIFIER =
             MODIFIERS.register("onimiko", CommonDiademaModifier.Create(DiademaRegister.ONIMIKO::get));
+
+    public static final StaticModifier<DiademaModifier> MUSICGAME_STATIC_MODIFIER=
+            MODIFIERS.register("musicgame", CommonDiademaModifier.Create(DiademaRegister.MUSICGAME::get));
 }
 

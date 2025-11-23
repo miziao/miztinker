@@ -38,5 +38,21 @@
         "stream": true
       }
     ]
+  },
+  "disconnected": {
+    "sounds": [
+      {
+        "name":"miztinker:disconnected",
+        "stream": false
+      }
+    ]
+  },
+  "umiyuri_kaiteitan": {
+    "sounds": [
+      {
+        "name":"miztinker:umiyuri_kaiteitan",
+        "stream": true
+      }
+    ]
   }
 }

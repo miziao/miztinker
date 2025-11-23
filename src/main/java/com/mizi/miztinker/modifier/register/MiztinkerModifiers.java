@@ -6,6 +6,7 @@ import com.mizi.miztinker.miztinker;
 import com.mizi.miztinker.modifier.diadema.DiademaRegister;
 import com.mizi.miztinker.modifier.modifiers.*;
 import com.mizi.miztinker.modifier.modifiers.base.BaseToolMusic;
+import com.mizi.miztinker.modifier.modifiers.base.DamageModifier;
 import com.mizi.miztinker.sounds.MiztinkerSounds;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
@@ -234,13 +235,29 @@ public class MiztinkerModifiers {
 
     public static StaticModifier<?> EMC_TORRENT = null;
 
+    public static StaticModifier<?> TINKERSCROWN = null;
+
+    public static final StaticModifier<DamageModifier> SEVER = MODIFIERS.register("sever", () -> new DamageModifier(0, 0.5F));
+
     public static final StaticModifier<Triple_Seven> TRIPLE_SEVEN_STATIC_MODIFIER = MODIFIERS.register("triple_seven", Triple_Seven::new);
+
+    public static final StaticModifier<EnderManSoul> ENDER_MAN_SOUL_STATIC_MODIFIER = MODIFIERS.register("ender_man_soul", EnderManSoul::new);
+
+    public static final StaticModifier<UnDeadSoul> UN_DEAD_SOUL_STATIC_MODIFIER = MODIFIERS.register("undead_soul", UnDeadSoul::new);
+
+    public static final StaticModifier<Derakkuma> DERAKKUMA_STATIC_MODIFIER = MODIFIERS.register("derakkuma", Derakkuma::new);
+
+    public static final StaticModifier<Refill> REFILL_STATIC_MODIFIER = MODIFIERS.register("refill", Refill::new);
 
     public static final StaticModifier<AwakenKnight_of_Night> AWAKEN_KNIGHT_OF_NIGHT_STATIC_MODIFIER = MODIFIERS.register("awakenknight_of_night", AwakenKnight_of_Night::new);
 
     public static final StaticModifier<EZ_Constant> EZ_CONSTANT_STATIC_MODIFIER = MODIFIERS.register("ez_constant", EZ_Constant::new);
 
     public static final StaticModifier<GhostSoul> GHOST_SOUL_STATIC_MODIFIER = MODIFIERS.register("ghostsoul", GhostSoul::new);
+
+    public static final StaticModifier<Agni> AGNI_STATIC_MODIFIER = MODIFIERS.register("agni", Agni::new);
+
+    public static final StaticModifier<RainbowLife> RAINBOW_LIFE_STATIC_MODIFIER = MODIFIERS.register("rainbowlife", RainbowLife::new);
 
     public static final StaticModifier<DiademaModifier> ONIMIKO_STATIC_MODIFIER =
             MODIFIERS.register("onimiko", CommonDiademaModifier.Create(DiademaRegister.ONIMIKO::get));

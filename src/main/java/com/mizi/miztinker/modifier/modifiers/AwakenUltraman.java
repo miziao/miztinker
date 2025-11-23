@@ -39,13 +39,12 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleTypes;
 
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import static com.mizi.miztinker.modifier.modifiers.base.LivingEntityUtil.modifierSeverance;
+import static com.mizi.miztinker.modifier.modifiers.base.ForceHurtUtil.forceHurt;
 
 public class AwakenUltraman extends NoLevelsModifier implements
         EquipmentChangeModifierHook,
@@ -54,22 +53,23 @@ public class AwakenUltraman extends NoLevelsModifier implements
         InventoryTickModifierHook,
         KeybindInteractModifierHook {
 
-    private static final int MAX_CHARGE_TICKS = 160;  // 8秒
+    private static final int MAX_CHARGE_TICKS = 160;  // 8 秒
     private static final float MAX_SCALE = 7.0f;
-    private static final int BEAM_DAMAGE = 700;
-    private static final int FIRING_COOLDOWN_KEY = 10;   // 0.5秒 = 10 tick
+    private static final int BEAM_DAMAGE = 35;
+
     private static final ResourceLocation CHARGE_KEY = new ResourceLocation("miztinker", "ultraman_charge");
     private static final ResourceLocation GIANT_KEY = new ResourceLocation("miztinker", "ultraman_giant");
-    private static final UUID HEALTH_UUID = UUID.fromString("12345678-1234-1234-1234-123456789abc");
 
+    private static final UUID HEALTH_UUID = UUID.fromString("12345678-1234-1234-1234-123456789abc");
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.INVENTORY_TICK);
         hookBuilder.addHook(this, ModifierHooks.EQUIPMENT_CHANGE);
         hookBuilder.addHook(this, ModifierHooks.ARMOR_INTERACT);
+        hookBuilder.addHook(this, ModifierHooks.REQUIREMENTS);
+        hookBuilder.addHook(this, ModifierHooks.VALIDATE);
     }
-
 
     @Override
     public @Nullable Component validate(IToolStackView tool, ModifierEntry entry) {
@@ -83,167 +83,188 @@ public class AwakenUltraman extends NoLevelsModifier implements
         return Component.translatable("modifier.miztinker.awakenultraman.requirements");
     }
 
+    /* ===== 变身 / 取消（通过盔甲交互键触发） ===== */
     @Override
     public boolean startInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot, TooltipKey key) {
         CompoundTag data = player.getPersistentData();
         boolean isGiant = data.getBoolean(GIANT_KEY.toString());
 
         if (!isGiant) {
-            toggleScale(player); // 变身
+            toggleScale(player);
         } else {
-            resetScaleAndHealth(player); // 取消变身
-            // 重置蓄力和冷却
+            resetScaleAndHealth(player);
             data.putInt(CHARGE_KEY.toString(), 0);
-            data.putInt(String.valueOf(FIRING_COOLDOWN_KEY), 0);
         }
-
-        return true; // 事件已处理
+        return true;
     }
 
     @Override
-    public void stopInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot) {
-        // 按键松开不做额外操作
-    }
+    public void stopInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot) {}
 
+    /* ===== Tick 逻辑（注意：只有当该工具在“正确槽位”时才会被调用） ===== */
     @Override
     public void onInventoryTick(IToolStackView tool, ModifierEntry modifier,
                                 Level level, LivingEntity living,
                                 int slot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
-        if (!(living instanceof Player player) || level.isClientSide || !isCorrectSlot) return;
+
+        // 仅服务端玩家并且确实在“正确槽位”（即装备栏）才生效
+        if (!(living instanceof Player player)) return;
+        if (!isCorrectSlot || level.isClientSide()) return;
 
         CompoundTag data = player.getPersistentData();
+
+        // 只有装备在盔甲栏位时才允许飞行（持续设置确保状态不会残留）
         player.getAbilities().mayfly = true;
+        player.onUpdateAbilities();
 
         boolean isGiant = data.getBoolean(GIANT_KEY.toString());
-        boolean isShift = player.isShiftKeyDown(); // 下蹲判断
+        boolean isShift = player.isShiftKeyDown();
 
-        // 巨大化持续抗性效果
+        /* === 巨化 → 加上抗性 III === */
         if (isGiant) {
             player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 10, 3, true, false, false));
         }
 
-        // 光线蓄力逻辑（必须巨化且下蹲才生效）
+        /* === 蓄力光线 === */
         if (isGiant && isShift) {
-            int chargeTicks = data.getInt(CHARGE_KEY.toString()) + 1;
-            data.putInt(CHARGE_KEY.toString(), chargeTicks);
+            int ticks = data.getInt(CHARGE_KEY.toString()) + 1;
+            data.putInt(CHARGE_KEY.toString(), ticks);
 
-            int secondsLeft = Math.max(0, (MAX_CHARGE_TICKS - chargeTicks) / 20);
-            player.displayClientMessage(Component.literal("§b蓄力中: " + secondsLeft + "秒"), true);
+            // 显示剩余秒数（客户端提示）
+            player.displayClientMessage(Component.literal("§b蓄力中: " + Math.max(0, (MAX_CHARGE_TICKS - ticks) / 20) + "秒"), true);
 
-            int cooldown = data.getInt(String.valueOf(FIRING_COOLDOWN_KEY));
-            if (chargeTicks >= MAX_CHARGE_TICKS && cooldown <= 0) {
-                if (level instanceof ServerLevel serverLevel) {
-                    shootBeam(serverLevel, player);
-                }
-                data.putInt(String.valueOf(FIRING_COOLDOWN_KEY), 10);
-            } else if (cooldown > 0) {
-                data.putInt(String.valueOf(FIRING_COOLDOWN_KEY), cooldown - 1);
-            }
+            // 蓄满发射（仅服务端真正发射）
+            if (ticks >= MAX_CHARGE_TICKS && level instanceof ServerLevel server)
+                shootBeam(server, player);
+
         } else {
-            // 玩家没有下蹲或未巨化 → 重置蓄力计数和冷却
             data.putInt(CHARGE_KEY.toString(), 0);
-            data.putInt(String.valueOf(FIRING_COOLDOWN_KEY), 0);
         }
     }
 
-    @Override
-    public void onEquip(@NotNull IToolStackView tool, @NotNull ModifierEntry entry, EquipmentChangeContext context) {
-        if (!(context.getEntity() instanceof ServerPlayer player)) return;
-        player.getAbilities().mayfly = true;
-    }
-
-    @Override
-    public void onUnequip(@NotNull IToolStackView tool, @NotNull ModifierEntry entry, EquipmentChangeContext context) {
-        if (!(context.getEntity() instanceof ServerPlayer player)) return;
-
-        IToolStackView replacement = context.getReplacementTool();
-        if (replacement != null && replacement.getModifierLevel(this) > 0) return;
-
-        GameType gm = player.gameMode.getGameModeForPlayer();
-        if (gm != GameType.SPECTATOR && gm != GameType.CREATIVE) {
-            player.getAbilities().mayfly = false;
-            player.getAbilities().flying = false;
-        }
-
-        resetScaleAndHealth(player);
-    }
-
+    /* ===== 发射光线（服务端） ===== */
     private void shootBeam(ServerLevel level, Player player) {
         Vec3 start = player.getEyePosition();
         Vec3 look = player.getLookAngle().normalize();
+
         Set<LivingEntity> hitEntities = new HashSet<>();
         int steps = 120;
 
-        // 信标音效
         level.playSound(null, player.blockPosition(), SoundEvents.BEACON_ACTIVATE,
                 SoundSource.PLAYERS, 1.0f, 1.0f);
 
         for (int i = 0; i < steps; i++) {
             Vec3 pos = start.add(look.scale(i * 0.5));
+
             level.sendParticles(ParticleTypes.ELECTRIC_SPARK, pos.x, pos.y, pos.z, 10, 0.3, 0.3, 0.3, 0.05);
             level.sendParticles(ParticleTypes.END_ROD, pos.x, pos.y, pos.z, 5, 0.2, 0.2, 0.2, 0.05);
             level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, pos.x, pos.y, pos.z, 7, 0.3, 0.3, 0.3, 0.5);
 
             AABB box = new AABB(pos.subtract(1.5, 1.5, 1.5), pos.add(1.5, 1.5, 1.5));
-            List<LivingEntity> nearby = level.getEntitiesOfClass(LivingEntity.class, box,
-                    e -> e != player && e.isAlive() && !hitEntities.contains(e));
+
+            List<LivingEntity> nearby = level.getEntitiesOfClass(
+                    LivingEntity.class, box,
+                    e -> e != player && e.isAlive() && !hitEntities.contains(e)
+            );
 
             for (LivingEntity target : nearby) {
-                modifierSeverance(target, player, BEAM_DAMAGE, 1.0f, 0.0f);
+                forceHurt(target, player.damageSources().generic(), BEAM_DAMAGE);
                 hitEntities.add(target);
             }
         }
     }
 
+    /* ===== 巨化开关 ===== */
     private void toggleScale(Player player) {
         CompoundTag tag = player.getPersistentData();
         boolean isGiant = tag.getBoolean(GIANT_KEY.toString());
 
         ScaleData scale = ScaleTypes.BASE.getScaleData(player);
         AttributeInstance health = player.getAttribute(Attributes.MAX_HEALTH);
-        if (health == null) return;
-
-        // 保存原本飞行状态
-        boolean wasFlying = player.getAbilities().flying;
-        boolean canFly = player.getAbilities().mayfly;
 
         if (!isGiant) {
+            // 放大
             scale.setTargetScale(MAX_SCALE);
 
-            // 移除已有的同 UUID modifier 避免重复
-            if (health.getModifier(HEALTH_UUID) != null) {
+            if (health != null && health.getModifier(HEALTH_UUID) != null) {
                 health.removeModifier(HEALTH_UUID);
             }
-            health.addTransientModifier(new AttributeModifier(HEALTH_UUID, "Ultraman Health", 1000, AttributeModifier.Operation.ADDITION));
+
+            if (health != null) {
+                health.addTransientModifier(new AttributeModifier(
+                        HEALTH_UUID, "Ultraman Health", 1000, AttributeModifier.Operation.ADDITION));
+            }
+
             player.setHealth(player.getMaxHealth());
             tag.putBoolean(GIANT_KEY.toString(), true);
 
-            // 恢复飞行
-            player.getAbilities().mayfly = true;
-            player.getAbilities().flying = wasFlying;
-            player.onUpdateAbilities();
         } else {
             resetScaleAndHealth(player);
         }
     }
 
+    /* ===== 恢复规模 / 血量（注意：这里要关闭 mayfly，防止残留） ===== */
     private void resetScaleAndHealth(Player player) {
         ScaleData scale = ScaleTypes.BASE.getScaleData(player);
+        scale.setTargetScale(1.0f);
+
         AttributeInstance health = player.getAttribute(Attributes.MAX_HEALTH);
         if (health != null && health.getModifier(HEALTH_UUID) != null) {
             health.removeModifier(HEALTH_UUID);
-            if (player.getHealth() > player.getMaxHealth()) {
+            if (player.getHealth() > player.getMaxHealth())
                 player.setHealth(player.getMaxHealth());
-            }
         }
-        scale.setTargetScale(1.0f);
 
-        CompoundTag tag = player.getPersistentData();
-        tag.remove(GIANT_KEY.toString());
+        // 移除巨化标记
+        player.getPersistentData().remove(GIANT_KEY.toString());
 
-        // 恢复飞行状态（可根据需求调整）
-        player.getAbilities().mayfly = true;
+        // 重置飞行权限：恢复为不可飞（默认由 onEquip/onInventoryTick 控制）
+        // 如果玩家在创造/旁观则保持允许（但一般这里我们统一关闭然后由装备判定开启）
+        player.getAbilities().mayfly = false;
         player.getAbilities().flying = false;
         player.onUpdateAbilities();
+    }
+
+    /* ===== 装备栏事件（装备） ===== */
+    @Override
+    public void onEquip(@NotNull IToolStackView tool, @NotNull ModifierEntry entry, EquipmentChangeContext context) {
+        // 仅当装备在盔甲槽才赋予 mayfly（避免其它槽位误触发）
+        if (!(context.getEntity() instanceof ServerPlayer player)) return;
+
+        // 如果替换物仍然有该 modifier，则不关闭飞行
+        IToolStackView replacement = context.getReplacementTool();
+        if (replacement != null && replacement.getModifierLevel(this) > 0) {
+            return;
+        }
+
+        // 保护创意/旁观模式玩家
+        GameType gm = player.gameMode.getGameModeForPlayer();
+        if (gm == GameType.SPECTATOR || gm == GameType.CREATIVE) return;
+
+        player.getAbilities().mayfly = false;
+        player.getAbilities().flying = false;
+    }
+
+    /* ===== 装备栏事件（脱下） ===== */
+    @Override
+    public void onUnequip(@NotNull IToolStackView tool, @NotNull ModifierEntry entry, EquipmentChangeContext context) {
+        if (!(context.getEntity() instanceof ServerPlayer player)) return;
+
+        // 如果替换物仍然带有该 modifier，则不移除权限（比如换了一件也带有特性的盔甲）
+        IToolStackView replacement = context.getReplacementTool();
+        if (replacement != null && replacement.getModifierLevel(this) > 0) return;
+
+        // 只有在非创造/旁观模式下关闭飞行权限
+        GameType gm = player.gameMode.getGameModeForPlayer();
+        if (gm != GameType.CREATIVE && gm != GameType.SPECTATOR) {
+            player.getAbilities().mayfly = false;
+            player.getAbilities().flying = false;
+            player.onUpdateAbilities();
+        }
+
+        // 同步重置所有巨化相关状态，防止残留
+        resetScaleAndHealth(player);
+        // 清除蓄力计数
+        player.getPersistentData().putInt(CHARGE_KEY.toString(), 0);
     }
 }

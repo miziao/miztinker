@@ -277,6 +277,18 @@ public class MiztinkerItems {
                 }
             });
 
+    public static final RegistryObject<Item> MOZHUA_CAP= ITEMS.register("mozhua_cap",
+            () -> new DynamaxBandItem(new Item.Properties().stacksTo(64).rarity(Rarity.RARE)) {
+            });
+
+    public static final RegistryObject<Item> DX_INGOT= ITEMS.register("dx_ingot",
+            () -> new DynamaxBandItem(new Item.Properties().stacksTo(64).rarity(Rarity.EPIC)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.dx_ingot"));
+                }
+            });
+
 
 
     public static final RegistryObject<Item> NETHER_REACTOR = ITEMS.register(
