@@ -1,0 +1,32 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "tconstruct:overcast"
+    },
+    {
+      "level": 1,
+      "name": "tconstruct:overslime"
+    },
+    {
+      "level": 1,
+      "name": "miztinker:mercy"
+    }
+  ],
+  "perStat": {
+    "tconstruct:head": [
+      {
+        "level": 1,
+        "name": "tconstruct:overcast"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:overslime"
+      },
+      {
+          "name": "miztinker:mercy",
+          "level": 1
+      }
+  ]
+    }
+}

@@ -7,7 +7,6 @@ import com.mizi.miztinker.item.tool.until.MiztinkerTools;
 import com.mizi.miztinker.modifier.diadema.ClientDiademaRegister;
 import com.mizi.miztinker.modifier.diadema.DiademaRegister;
 import com.mizi.miztinker.modifier.register.*;
-import com.mizi.miztinker.network.MiztinkerNetwork;
 import com.mizi.miztinker.network.MiztinkerSyncing;
 import com.mizi.miztinker.particle.register.MiztinkerParticlesRegister;
 import com.mizi.miztinker.sounds.MiztinkerSounds;

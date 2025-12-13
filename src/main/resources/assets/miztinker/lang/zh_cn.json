@@ -108,7 +108,7 @@
     "modifier.miztinker.souleat.description": "每击杀一个生物,该生物10%的血量会增加到你的武器上,增长比例随等级提升",
 
     "modifier.miztinker.real_souleat": "仍不满足",
-    "modifier.miztinker.real_souleat.flavor": "需要更多的灵魂量,一万不够,十万不够,百万不够...",
+    "modifier.miztinker.real_souleat.flavor": "需要更多的灵魂量,一万不够,十万不够,百万不够,直至满足,于工具上抚摸他",
     "modifier.miztinker.real_souleat.description": "揭示它的真实形态！",
 
     "modifier.miztinker.sb_cancel":"后摇取消",
