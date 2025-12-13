@@ -4,17 +4,17 @@ import com.mizi.miztinker.entity.MiztinkerEntityRegister;
 import com.mizi.miztinker.entity.boss.entity.MiziAo;
 import com.mizi.miztinker.entity.boss.render.MiziAoRenderer;
 import com.mizi.miztinker.item.tool.until.MiztinkerTools;
-import com.mizi.miztinker.key.MiztinkerKey;
 import com.mizi.miztinker.modifier.diadema.ClientDiademaRegister;
 import com.mizi.miztinker.modifier.diadema.DiademaRegister;
 import com.mizi.miztinker.modifier.register.*;
 import com.mizi.miztinker.network.MiztinkerNetwork;
+import com.mizi.miztinker.network.MiztinkerSyncing;
 import com.mizi.miztinker.particle.register.MiztinkerParticlesRegister;
 import com.mizi.miztinker.sounds.MiztinkerSounds;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -26,6 +26,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
@@ -35,6 +37,7 @@ import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
 
 import static com.mizi.miztinker.item.tool.until.MiztinkerTools.*;
 import static com.mizi.miztinker.miztinker.MODID;
+import static com.mojang.text2speech.Narrator.LOGGER;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(MODID)
@@ -47,6 +50,10 @@ public class miztinker {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
     public static ModifierDeferredRegister MODIFIERS = ModifierDeferredRegister.create(MODID);
+
+    public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
+
+    public static final DeferredRegister<EntityType<?>> ENTITY = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, miztinker.MODID);
 
     public miztinker() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -73,7 +80,6 @@ public class miztinker {
         // ⭐⭐⭐ 在这里实例化你的村民交易事件处理类
         new com.mizi.miztinker.recipes.VillagerTradeHandler();
     }
-
     public static void initOptionalModifiers() {
         MiztinkerOptionalModifiers.voidregisterOptionalModifiers();
     }
@@ -98,9 +104,6 @@ public class miztinker {
         );
     }
 
-    public static ResourceLocation getResource(String id) {
-        return new ResourceLocation(MODID, id);
-    }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Some common setup code
