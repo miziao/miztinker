@@ -46,14 +46,7 @@ public class miztinker {
     //Minecart mc =Minecart.getInstance();
     public static final String MODID = "miztinker";
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-
     public static ModifierDeferredRegister MODIFIERS = ModifierDeferredRegister.create(MODID);
-
-    public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
-
-    public static final DeferredRegister<EntityType<?>> ENTITY = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, miztinker.MODID);
 
     public miztinker() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -104,6 +97,9 @@ public class miztinker {
         );
     }
 
+    public static ResourceLocation getResource(String id) {
+        return new ResourceLocation(MODID, id);
+    }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Some common setup code
