@@ -58,38 +58,6 @@ public class lollipop extends ModifiableItem {
         return true;
     }
 
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        ToolStack tool = ToolStack.from(stack);
-        tool.getPersistentData().putInt(KEY_DRAWTIME,32);
-        player.startUsingItem(hand);
-        if (tool.isBroken()){
-            return InteractionResultHolder.fail(stack);
-        }else if (!tool.isBroken()) {
-            return InteractionResultHolder.pass(stack);
-        }
-        return InteractionResultHolder.consume(stack);
-    }
-
-    @Override
-    public @NotNull ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
-//        ScopeModifier.stopScoping(livingEntity);
-        ToolStack tool = ToolStack.from(stack);
-        if (tool.isBroken()){
-            tool.getPersistentData().remove(KEY_DRAWTIME);
-            return stack;
-        }
-        if (!tool.isBroken()) {
-            eat(tool, livingEntity);
-            if (livingEntity instanceof ServerPlayer player) {
-                player.awardStat(Stats.ITEM_USED.get(this));
-                ToolDamageUtil.damageAnimated(tool, 1, player);
-                tool.getPersistentData().remove(KEY_DRAWTIME);
-            }
-        }
-        return stack;
-    }
-
     private static final Lazy<ItemStack> BACON_STACK = Lazy.of(() -> new ItemStack(TinkerCommons.bacon));
     private void eat(IToolStackView tool, LivingEntity entity) {
         if (entity instanceof Player player && player.canEat(false)) {
@@ -107,13 +75,6 @@ public class lollipop extends ModifiableItem {
         }
     }
 
-    public int getUseDuration(ItemStack stack) {
-        return 32;
-    }
-    @Override
-    public UseAnim getUseAnimation(ItemStack stack) {
-        return BlockingModifier.blockWhileCharging(ToolStack.from(stack), UseAnim.EAT);
-    }
     public List<Component> getStatInformation(IToolStackView tool, @Nullable Player player, List<Component> tooltips, TooltipKey key, TooltipFlag tooltipFlag) {
         tooltips = this.getTooltipStats(tool, player, tooltips, key, tooltipFlag);
         return tooltips;

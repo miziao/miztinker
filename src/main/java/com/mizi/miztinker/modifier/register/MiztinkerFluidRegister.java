@@ -62,6 +62,9 @@ public class MiztinkerFluidRegister {
 
     public static final FluidObject<ForgeFlowingFluid> MOLTEN_TERRESTRIAL_ARTIFACT = registerHotBurning(FLUIDS,"molten_terrestrial_artifact",1500,4,18,4f,false);
 
+    public static final FluidObject<ForgeFlowingFluid> MOLTEN_ULTIMATE = registerHotBurning(FLUIDS,"molten_ultimate",3500,4,18,4f,false);
+
+    public static final FluidObject<ForgeFlowingFluid> MOLTEN_AETERNALIS_FUEL = registerHotBurning(FLUIDS,"molten_aeternalis_fuel",3500,4,18,4f,false);
 
 
 

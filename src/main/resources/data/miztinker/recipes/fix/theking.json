@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+  "item":"craziness_awakened:king_scales"
+  },
+  "value": 1,
+  "needed": 1,
+  "material": "miztinker:theking"
+}

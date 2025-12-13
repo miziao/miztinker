@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "miztinker:maimai_1" },
+    { "item": "miztinker:maimai_2" },
+    { "item": "miztinker:maimai_3" }
+  ],
+  "result": {
+    "item": "miztinker:maimai_full"
+  }
+}

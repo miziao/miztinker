@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "miztinker:diamond_coin" },
+    { "item": "miztinker:diamond_coin" },
+    { "item": "miztinker:diamond_coin" },
+    { "item": "miztinker:diamond_coin" },
+    { "item": "miztinker:diamond_coin" },
+    { "item": "miztinker:diamond_coin" },
+    { "item": "miztinker:diamond_coin" },
+    { "item": "miztinker:diamond_coin" },
+    { "item": "miztinker:diamond_coin" }
+  ],
+  "result": {
+    "item": "miztinker:netherite_coin"
+  }
+}

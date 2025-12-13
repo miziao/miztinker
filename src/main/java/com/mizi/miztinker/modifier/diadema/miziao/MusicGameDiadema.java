@@ -1,5 +1,6 @@
 package com.mizi.miztinker.modifier.diadema.miziao;
 
+import com.mizi.miztinker.modifier.modifiers.base.EntityRemoveUtil;
 import com.mizi.miztinker.network.packets.PlaySoundPacket;
 import com.csdy.tcondiadema.diadema.api.ranges.SphereDiademaRange;
 import com.csdy.tcondiadema.frames.diadema.Diadema;
@@ -12,24 +13,32 @@ import lombok.NonNull;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.PacketDistributor;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static com.mizi.miztinker.modifier.modifiers.base.ForceHurtUtil.forceHurt;
+
+import static com.mizi.miztinker.modifier.modifiers.base.ForceHurtUtil.forceHurtWithNoHealable;
+import static com.mizi.miztinker.modifier.modifiers.base.LivingEntityUtil.forceSetAllCandidateHealth;
+
 
 public class MusicGameDiadema extends Diadema {
 
     private static final double RADIUS = 16.0; // 效果范围
     private static final int SOUND_INTERVAL = 200; // 200 ticks = 10秒
-    private static final int DAMAGE_DELAY = 25; // 25 ticks = 1.25秒
+    private static final int DAMAGE_DELAY = 35; // 25 ticks = 1.25秒
 
     private int soundTickCounter = 0;
     private int damageTickCounter = -1; // -1 表示未激活
 
 
     private final Entity holder = getCoreEntity();
+
+    private final Map<LivingEntity, Integer> hitCounter = new HashMap<>();
 
     public MusicGameDiadema(DiademaType type, DiademaMovement movement) {
         super(type, movement);
@@ -90,23 +99,27 @@ public class MusicGameDiadema extends Diadema {
             if (entity == holder) continue;
             if (!(entity instanceof LivingEntity living)) continue;
 
-            // --- 判断是否向上跳跃（躲避） ---
-            // 如果上升速度大于 0.1 就视为跳跃成功，不受伤害
-            if (living.getDeltaMovement().y > 0.1D) {
-                continue; // 跳了 → 不受伤
-            }
+            // 跳跃躲避
+            if (living.getDeltaMovement().y > 0.1D) continue;
 
-            // --- 不需要 kill()，改用 forceHurt ---
+            // 直接算出伤害（让血量归零）
             float hp = living.getHealth();
-            float damage = hp * 10.0F;  // 当前生命值 × 10
+            float damage = hp; // 伤害 = 当前HP
 
-            living.hurtTime = 0; // reset if needed
-
-            forceHurt(
+            // ① 使用不可回血版本的 hurt（受伤动画 + 声音 + lastHurt + 无法回血）
+            forceHurtWithNoHealable(
                     living,
-                    holder.damageSources().generic(), // 伤害来源（generic 或你想换成 playerAttack）
+                    holder.damageSources().generic(),
                     damage
             );
+
+            // ② 确保血量真的归零（同步到客户端）
+            forceSetAllCandidateHealth(living, 0F);
+
+            // ③ 如果不是玩家，直接强制移除（不管是否死亡）
+            if (!(living instanceof Player)) {
+                EntityRemoveUtil.forceRemoveEntity(living);
+            }
         }
     }
 

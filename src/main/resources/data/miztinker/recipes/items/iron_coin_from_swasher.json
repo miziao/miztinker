@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "tconstruct:swasher" }
+  ],
+  "result": {
+    "item": "miztinker:iron_coin"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 4,
+      "tag": "kubejs:evolution_gold_1"
+    },
+    {
+      "amount_needed": 4,
+      "tag": "kubejs:evolution_gold_2"
+    },
+    {
+      "amount_needed": 4,
+      "tag": "kubejs:evolution_gold_3"
+    },
+    {
+      "amount_needed": 4,
+      "tag": "miztinker:sin_items"
+    },
+    {
+      "amount_needed": 1,
+      "item": "minecraft:painting"
+    }
+  ],
+  "result": "miztinker:scepter_of_divine_society",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}

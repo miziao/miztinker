@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "miztinker:copper_coin" },
+    { "item": "miztinker:copper_coin" },
+    { "item": "miztinker:copper_coin" },
+    { "item": "miztinker:copper_coin" },
+    { "item": "miztinker:copper_coin" },
+    { "item": "miztinker:copper_coin" },
+    { "item": "miztinker:copper_coin" },
+    { "item": "miztinker:copper_coin" },
+    { "item": "miztinker:copper_coin" }
+  ],
+  "result": {
+    "item": "miztinker:iron_coin"
+  }
+}

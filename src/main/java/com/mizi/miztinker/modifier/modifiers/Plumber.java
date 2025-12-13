@@ -1,11 +1,17 @@
 package com.mizi.miztinker.modifier.modifiers;
 
+import com.mizi.miztinker.network.MiztinkerSyncing;
+import com.mizi.miztinker.network.packets.PlaySoundPacket;
 import com.mizi.miztinker.sounds.MiztinkerSounds;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.PacketDistributor;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
@@ -13,13 +19,14 @@ import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
+import java.util.Collection;
 import java.util.List;
 
 public class Plumber extends NoLevelsModifier implements InventoryTickModifierHook {
 
-    private static final double MIN_FALL_SPEED = 0.5; // 最小下落速度触发
-    private static final double BOUNCE_UP = 1.0;      // 弹起速度
-    private static final float DAMAGE = 10000f;       // 对生物造成伤害
+    private static final double MIN_FALL_SPEED = 0.5;
+    private static final double BOUNCE_UP = 1.0;
+    private static final float DAMAGE = 10000f;
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
@@ -30,28 +37,52 @@ public class Plumber extends NoLevelsModifier implements InventoryTickModifierHo
     public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world,
                                 LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (!(holder instanceof Player player)) return;
-        if (!isCorrectSlot) return; // 只在正确槽位
-        if (player.isFallFlying()) return; // 滑翔中不触发
+        if (!isCorrectSlot) return;
+        if (player.isFallFlying()) return;
 
-        // 获取玩家的下落速度
         Vec3 motion = player.getDeltaMovement();
-        if (motion.y > -MIN_FALL_SPEED) return; // 下落速度不够，不触发
+        if (motion.y > -MIN_FALL_SPEED) return;
 
-        // 获取玩家脚下碰撞的实体
-        List<LivingEntity> entities = world.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(0.5, 0.1, 0.5),
-                e -> e != player && player.getY() > e.getY() + e.getBbHeight() * 0.5);
+        List<LivingEntity> entities = world.getEntitiesOfClass(
+                LivingEntity.class,
+                player.getBoundingBox().inflate(0.5, 0.1, 0.5),
+                e -> e != player && player.getY() > e.getY() + e.getBbHeight() * 0.5
+        );
 
         for (LivingEntity entity : entities) {
-            // 对实体造成伤害
-            entity.hurt(player.damageSources().playerAttack((Player) holder), DAMAGE);
 
-            // 让玩家弹起
+            entity.hurt(player.damageSources().playerAttack(player), DAMAGE);
+
             player.setDeltaMovement(motion.x, BOUNCE_UP, motion.z);
 
-            // 播放音效
-            player.playSound(MiztinkerSounds.MARIO.get());
+            // 🔥 使用网络包播放音效
+            notifyPlayersSound(player, MiztinkerSounds.MARIO.get().getLocation(), 1.0f, 1.0f);
 
-            break; // 一次只处理一个生物
+            break;
+        }
+    }
+
+    /**
+     * 🔥 给范围内的所有玩家播放音效（服务器端执行）
+     */
+    private void notifyPlayersSound(Entity source, ResourceLocation soundRL, float volume, float pitch) {
+        if (source.level().isClientSide()) return;
+
+        List<ServerPlayer> players = source.level().getEntitiesOfClass(
+                ServerPlayer.class,
+                source.getBoundingBox().inflate(20)
+        );
+
+        for (ServerPlayer serverPlayer : players) {
+            MiztinkerSyncing.CHANNEL.send(
+                    PacketDistributor.PLAYER.with(() -> serverPlayer),
+                    new PlaySoundPacket(
+                            source.position(),   // ✔ 声音从事件中心发出
+                            soundRL,             // ✔ 使用传入参数，而不是写死
+                            volume,
+                            pitch
+                    )
+            );
         }
     }
 }

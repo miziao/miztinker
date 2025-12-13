@@ -237,7 +237,7 @@ public class MiztinkerModifiers {
 
     public static StaticModifier<?> TINKERSCROWN = null;
 
-    public static final StaticModifier<DamageModifier> SEVER = MODIFIERS.register("sever", () -> new DamageModifier(0, 0.5F));
+    public static final StaticModifier<DamageModifier> SEVER = MODIFIERS.register("sever", () -> new DamageModifier(0.5F, 0));
 
     public static final StaticModifier<Triple_Seven> TRIPLE_SEVEN_STATIC_MODIFIER = MODIFIERS.register("triple_seven", Triple_Seven::new);
 
@@ -258,6 +258,32 @@ public class MiztinkerModifiers {
     public static final StaticModifier<Agni> AGNI_STATIC_MODIFIER = MODIFIERS.register("agni", Agni::new);
 
     public static final StaticModifier<RainbowLife> RAINBOW_LIFE_STATIC_MODIFIER = MODIFIERS.register("rainbowlife", RainbowLife::new);
+
+    public static final StaticModifier<FutureDiary> FUTURE_DIARY_STATIC_MODIFIER = MODIFIERS.register("futurediary", FutureDiary::new);
+
+    public static final StaticModifier<DropFountain> DROP_FOUNTAIN_STATIC_MODIFIER = MODIFIERS.register("dropfountain", DropFountain::new);
+
+    public static final StaticModifier<Flattening> FLATTENING_STATIC_MODIFIER = MODIFIERS.register("flattening", Flattening::new);
+
+    public static final StaticModifier<OverHeal> OVER_HEAL_STATIC_MODIFIER = MODIFIERS.register("overheal", OverHeal::new);
+
+    public static final StaticModifier<EntropyStrike> ENTROPY_STRIKE_STATIC_MODIFIER = MODIFIERS.register("entropystrike", EntropyStrike::new);
+
+    public static final StaticModifier<SuperLollipop> SUPER_LOLLIPOP_STATIC_MODIFIER = MODIFIERS.register("superlollipop", SuperLollipop::new);
+
+    public static final StaticModifier<Tasty> TASTY_STATIC_MODIFIER = MODIFIERS.register("tasty", Tasty::new);
+
+    public static final StaticModifier<VoidImmunity> VOID_IMMUNITY_STATIC_MODIFIER = MODIFIERS.register("void_immunity", VoidImmunity::new);
+
+    public static final StaticModifier<Ubbo_Sathla> UBBO_SATHLA_STATIC_MODIFIER = MODIFIERS.register("ubbo_sathla", Ubbo_Sathla::new);
+
+    public static final StaticModifier<Death_Note> DEATH_NOTE_STATIC_MODIFIER = MODIFIERS.register("death_note", Death_Note::new);
+
+    public static final StaticModifier<All_Perfect> ALL_PERFECT_STATIC_MODIFIER = MODIFIERS.register("all_perfect", All_Perfect::new);
+
+    public static final StaticModifier<Mercy> MERCY_STATIC_MODIFIER = MODIFIERS.register("mercy", Mercy::new);
+
+    public static final StaticModifier<ScepterOfDivineSociety> SCEPTER_OF_DIVINE_SOCIETY_STATIC_MODIFIER = MODIFIERS.register("scepter_of_divine_society", ScepterOfDivineSociety::new);
 
     public static final StaticModifier<DiademaModifier> ONIMIKO_STATIC_MODIFIER =
             MODIFIERS.register("onimiko", CommonDiademaModifier.Create(DiademaRegister.ONIMIKO::get));

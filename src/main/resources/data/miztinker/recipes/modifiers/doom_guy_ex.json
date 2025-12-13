@@ -3,7 +3,7 @@
   "allow_crystal": true,
   "inputs": [
     {
-      "item": "kubejs:netherite_coin"
+      "item": "miztinker:netherite_coin"
     }
   ],
   "level": 1,

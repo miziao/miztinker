@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "miztinker:maimai_full" },
+    { "item": "miztinker:dx" },
+    { "tag": "forge:ingots" }
+  ],
+  "result": {
+    "item": "miztinker:dx_ingot"
+  }
+}

@@ -1,0 +1,82 @@
+{
+    "default": [
+        {
+            "name": "tconstruct:reinforced",
+            "level": 3
+        }
+    ],
+    "perStat": {
+        "tconstruct:armor": [
+            {
+                "name": "tconstruct:melee_protection",
+                "level": 5
+            },
+            {
+                "name": "tconstruct:fire_protection",
+                "level": 5
+            },
+            {
+                "name": "tconstruct:blast_protection",
+                "level": 5
+            },
+            {
+                "name": "tconstruct:projectile_protection",
+                "level": 5
+            }
+        ],
+        "tconstruct:ranged": [
+            {
+                "name": "tconstruct:fiery",
+                "level": 3
+            },
+            {
+                "name": "tconstruct:punch",
+                "level": 5
+            },
+            {
+                "name": "tconstruct:power",
+                "level": 1
+            },
+            {
+                "name": "tconstruct:crystalshot",
+                "level": 1
+            }
+        ],
+        "tconstruct:head": [
+            {
+                "name": "tconstruct:looting",
+                "level": 3
+            },
+            {
+                "name": "tconstruct:fortune",
+                "level": 3
+            },
+            {
+                "name": "tconstruct:knockback",
+                "level": 3
+            },
+            {
+                "name": "tconstruct:fiery",
+                "level": 2
+            }
+        ],
+        "tconstruct:handle": [
+            {
+                "name": "tconstruct:smite",
+                "level": 5
+            },
+            {
+                "name": "tconstruct:bane_of_sssss",
+                "level": 5
+            },
+            {
+                "name": "tconstruct:antiaquatic",
+                "level": 3
+            },
+            {
+                "name": "tconstruct:cooling",
+                "level": 5
+            }
+        ]
+    }
+}

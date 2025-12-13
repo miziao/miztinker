@@ -3,6 +3,10 @@
     {
       "name": "miztinker:entropy_decay",
       "level": 1
+    },
+    {
+      "name": "miztinker:entropystrike",
+      "level": 1
     }
   ]
 }

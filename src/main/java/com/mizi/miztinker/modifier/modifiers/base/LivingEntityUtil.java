@@ -1,16 +1,19 @@
 package com.mizi.miztinker.modifier.modifiers.base;
 
+import com.yellowbrossproductions.yellowbrossextras.entities.DefenderEntity;
 import net.minecraft.nbt.*;
 import net.minecraft.network.protocol.game.ClientboundRemoveMobEffectPacket;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -89,6 +92,23 @@ public class LivingEntityUtil {
         }
     }
 
+    ///反射贯穿伤害<br/>
+    ///@param target 目标<br/>
+    ///@param attacker 攻击者<br/>
+    ///@param value 造成的伤害<br/>
+    ///  打穿王八壳,放手一搏吧<br/>
+    /// 普猫无视这个，不是永远都有用,,,,,
+    public static void reflectionPenetratingDamage(Entity target, LivingEntity attacker, float value) {
+        if (!(target instanceof LivingEntity living)) return;
+        if (DATA_HEALTH_ID == null) return;
+        float currentHealth = living.getEntityData().get(DATA_HEALTH_ID);
+        float newHealth = currentHealth-value;
+        living.getEntityData().set(DATA_HEALTH_ID, newHealth);
+        if (living.getHealth() <= 0.0F) {
+            if (living instanceof Player player) living.die(living.level().damageSources().playerAttack(player));
+            else living.die(living.level().damageSources.mobAttack(attacker));
+        }
+    }
 
     ///反射最大生命切断<br/>
     ///@param target 目标<br/>
@@ -280,11 +300,7 @@ public class LivingEntityUtil {
     }
 
 
-    /**
-     * 覆盖实体所有候选生命值字段（包括 DataAccessor 和 NBT 方式），确保与预期生命值一致
-     * 同时也有Attribute修改
-     * 我称它为“绝对切断”（Absolute Severance）
-     */
+
     public static void forceSetAllCandidateHealth(LivingEntity entity, float newHealth) {
 
         if (entity.isDeadOrDying() || !entity.isAlive()) {
@@ -296,37 +312,21 @@ public class LivingEntityUtil {
 
         // 2. 如果实体生命值仍不符合预期，则使用综合方案
 
-            // 方法A: 使用DataAccessor查找和修改
-            List<EntityDataAccessor<Number>> candidates = findCandidateHealthAccessors(entity);
-            for (EntityDataAccessor<Number> accessor : candidates) {
-                forceSetHealthByAccessor(entity, accessor, newHealth);
-            }
-
-            // 方法B: 使用增强的NBT遍历修改
-            forceSetCandidateNBTEnhanced(entity, newHealth);
-
-
-            if (isFromWzzMod(entity)){
-                aggressivelyModifyAllHealthFields(entity,newHealth);
-            }
-
-    }
-
-    public static boolean isFromWzzMod(Entity entity) {
-        if (entity == null) {
-            return false;
+        // 方法A: 使用DataAccessor查找和修改
+        List<EntityDataAccessor<Number>> candidates = findCandidateHealthAccessors(entity);
+        for (EntityDataAccessor<Number> accessor : candidates) {
+            forceSetHealthByAccessor(entity, accessor, newHealth);
         }
-        return entity.getClass().getName().contains("witherzilla");
-    }
 
-    public static boolean isFromIceAndFire(Entity entity) {
-        if (entity == null) {
-            return false;
+        // 方法B: 使用增强的NBT遍历修改
+        forceSetCandidateNBTEnhanced(entity, newHealth);
+
+
+        if (isFromWzzMod(entity)){
+            aggressivelyModifyAllHealthFields(entity,newHealth);
         }
-        return entity.getClass().getName().contains("iceandfire");
+
     }
-
-
 
 
     public static void forceSetCandidateNBTEnhanced(LivingEntity entity, float newHealth) {
@@ -723,6 +723,104 @@ public class LivingEntityUtil {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public static boolean isFromDummmmmmyMod(Entity entity) {
+        if (entity == null) {
+            return false;
+        }
+        // 方法1：检查实体的命名空间（推荐）
+        ResourceLocation entityId = EntityType.getKey(entity.getType());
+        if (entityId != null && entityId.getNamespace().equals("dummmmmmy")) {
+            return true;
+        }
+
+        // 方法2：检查实体的类路径（备用方案）
+        return entity.getClass().getName().contains("dummmmmmy");
+    }
+
+    public static boolean isDefender(Entity entity) {
+        if (entity == null) {
+            return false;
+        }
+
+        if (entity instanceof DefenderEntity defender){
+//            System.out.println("防御者状态为"+defender.getPhase());
+            return defender.getPhase() == 0;
+        }
+        return false;
+    }
+
+
+    public static boolean isFromOmniMod(Entity entity) {
+        if (entity == null) {
+            return false;
+        }
+        return entity.getClass().getName().contains("omnimobs");
+    }
+
+    public static boolean isFromWzzMod(Entity entity) {
+        if (entity == null) {
+            return false;
+        }
+        return entity.getClass().getName().contains("witherzilla");
+    }
+
+    public static boolean isFromIceAndFire(Entity entity) {
+        if (entity == null) {
+            return false;
+        }
+        return entity.getClass().getName().contains("iceandfire");
+    }
+
+    public static void modifierAbsoluteSeverance(LivingEntity target, Player player, float damage, float value){
+        if (target.getHealth() <= 0) return;
+        float reHealth = target.getHealth() - damage * value - target.getMaxHealth() * 0.01f;
+        var playerKill = target.level().damageSources.playerAttack(player);
+        target.hurt(playerKill,1);
+        setAbsoluteSeveranceHealth(target, reHealth);
+        forceSetAllCandidateHealth(target,reHealth);
+        if (isFromOmniMod(target)) {
+            CompoundTag tag = new CompoundTag();
+            tag.putFloat("Health", reHealth);
+            try {
+                target.readAdditionalSaveData(tag);
+            } catch (Exception ignored) {
+            }
+        }
+        if (reHealth <= 0 || target.getHealth() <= 0){
+//            System.out.println("绝对切断强制掉落");
+            forceSetAllCandidateHealth(target, 0);
+            setAbsoluteSeveranceHealth(target, 0);
+//            target.die(playerKill);
+            triggerKillAdvancement(target, playerKill);
+            setEntityDead(target);
+            dropLoot(target, playerKill);
+            target.dropAllDeathLoot(playerKill);
+        }
+    }
+
+    public static void modifierSeverance(LivingEntity target, Player player, float damage,float value,float baseDamage){
+        if (target.getHealth() <= 0) return;
+        var playerKill = target.level().damageSources.playerAttack(player);
+        target.hurt(playerKill,1);
+        float reHealth = target.getHealth() - damage * value - target.getMaxHealth() * 0.01f - baseDamage;
+        forceSetAllCandidateHealth(target,reHealth);
+        if (isFromOmniMod(target)) {
+            CompoundTag tag = new CompoundTag();
+            tag.putFloat("Health", reHealth);
+            try {
+                target.readAdditionalSaveData(tag);
+            } catch (Exception ignored) {
+            }
+        }
+        if (reHealth <= 0 || target.getHealth() <= 0){
+            forceSetAllCandidateHealth(target,0);
+            triggerKillAdvancement(target,playerKill);
+            setEntityDead(target);
+            dropLoot(target,playerKill);
+            target.dropAllDeathLoot(playerKill);
         }
     }
 

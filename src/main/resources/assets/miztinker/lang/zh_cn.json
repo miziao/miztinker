@@ -327,7 +327,7 @@
 
   "modifier.miztinker.wizardflight": "巫师飞行",
     "modifier.miztinker.wizardflight.flavor": "骑着扫帚,像个巫师一样飞行",
-    "modifier.miztinker.wizardflight.description":"主手持有时每1秒消耗1耐久进行创造飞行",
+    "modifier.miztinker.wizardflight.description":"主副手持有时每1秒消耗1耐久进行创造飞行",
 
     "modifier.miztinker.scorchedbone": "焦骨",
     "modifier.miztinker.scorchedbone.flavor": "烧焦或染黑,总有个方法能让骨头变黑",
@@ -391,12 +391,68 @@
 
     "modifier.miztinker.refill": "再来一瓶",
     "modifier.miztinker.refill.flavor":"虽然你可能一次都没喝过,但你仍然可以再来一瓶",
-    "modifier.miztinker.refill.description":"拥有夜视，但无法承受阳炎",
+    "modifier.miztinker.refill.description":"挖掘和攻击生物有概率产出 再来一瓶",
+
+    "modifier.miztinker.futurediary": "未来日记",
+    "modifier.miztinker.futurediary.flavor":"当'无差别日记'与'爱人日记'组合起来会发生什么?",
+    "modifier.miztinker.futurediary.description":"副手持有时生效,持有时闪避一切伤害,但是每次闪避有低概率直接损坏对应工具,损坏时强制死亡",
+
+    "modifier.miztinker.dropfountain": "掉落物喷泉",
+    "modifier.miztinker.dropfountain.flavor":"持续喷射,直到死亡",
+    "modifier.miztinker.dropfountain.description":"攻击生物后,该生物的掉落物会持续喷射直到他死亡",
+
+    "modifier.miztinker.flattening": "开山棒pro",
+    "modifier.miztinker.flattening.flavor":"卒于1.11.2",
+    "modifier.miztinker.flattening.description":"每100级经验会增加你任何掉落物1倍",
+
+    "modifier.miztinker.overheal": "过度治疗",
+    "modifier.miztinker.overheal.flavor":"血液量甚至隐隐有涨破皮肤的趋势",
+    "modifier.miztinker.overheal.description":"超过最大生命值的治疗量会转化为你的额外生命值",
+
+    "modifier.miztinker.entropystrike": "熵击",
+    "modifier.miztinker.entropystrike.flavor":"二重冲击",
+    "modifier.miztinker.entropystrike.description":"攻击时额外造成一次等同于近战武器面板伤害的伤害",
+
+    "modifier.miztinker.superlollipop": "超级棒棒糖",
+    "modifier.miztinker.superlollipop.flavor":"猪猪侠,你太依赖超级棒棒糖了",
+    "modifier.miztinker.superlollipop.description":"食用后消耗棒棒糖十分之一的耐久,再从这部分消耗的耐久中转化百分之一作为最大生命值加成",
+
+    "modifier.miztinker.tasty": "美味棒棒糖",
+    "modifier.miztinker.tasty.flavor":"猪猪侠最爱的食物之一",
+    "modifier.miztinker.tasty.description":"右键食用,消耗耐久度回复饥饿值",
+
+    "modifier.miztinker.scepter_of_divine_society": "山河社稷图",
+    "modifier.miztinker.scepter_of_divine_society.flavor":"将战利品封入画中",
+    "modifier.miztinker.scepter_of_divine_society.description":"下蹲右键没有开启过的箱子记录战利品表,下次击杀生物会生成一次该战利品表内的所有物品(遵循权重)",
+
+    "modifier.miztinker.void_immunity": "虚空幸存者",
+    "modifier.miztinker.void_immunity.flavor":"虚空中的幸存者",
+    "modifier.miztinker.void_immunity.description":"完全免疫虚空伤害",
+
+    "modifier.miztinker.ubbo_sathla": "乌波-萨斯拉",
+    "modifier.miztinker.ubbo_sathla.flavor":"无源之源，自在自存之源，究极祖神",
+    "modifier.miztinker.ubbo_sathla.description":"攻击生物记录id,主手持有下蹲每t消耗2经验尝试召唤对应生物,增加等级会减少所需的时间,此外到达3级时,会记录生物的完整nbt",
+
+    "modifier.miztinker.pickaxe_strike": "镐击",
+    "modifier.miztinker.pickaxe_strike.flavor":"石粒针难人",
+    "modifier.miztinker.pickaxe_strike.description":"使你的武器获得20点伤害加成和挖掘等级提升至铁",
+
+    "modifier.miztinker.death_note": "死亡笔记",
+    "modifier.miztinker.death_note.flavor":"基拉就是你吧?",
+    "modifier.miztinker.death_note.description":"下蹲右键秒杀全图和你对应工具'名字'相同的生物(如果你不知道他们的'名字'是什么,可以获得死神之眼再来查看)",
+
+    "modifier.miztinker.all_perfect": "All Perfect Plus!",
+    "modifier.miztinker.all_perfect.flavor":"还有理论值",
+    "modifier.miztinker.all_perfect.description":"不会受到大于101的伤害",
+
+    "modifier.miztinker.mercy": "仁慈",
+    "modifier.miztinker.mercy.flavor":"慈爱的战士 Cosmos!",
+    "modifier.miztinker.mercy.description":"你的攻击不会击杀生物",
 
 
-    "modifier.miztinker.sever": "断绝",
-    "modifier.miztinker.sever.flavor": "可悲的尝试",
-    "modifier.miztinker.sever.description":"「绝对切断」5%效能",
+    "modifier.miztinker.sever": "雷切-RAIKIRI-",
+    "modifier.miztinker.sever.flavor": "来自更高维度的攻击",
+    "modifier.miztinker.sever.description":"「切断」50%效能",
 
 
     "modifier.miztinker.onimiko":"No.§m01§r06 鬼巫女的[领域]",
@@ -406,6 +462,7 @@
 
     "effect.miztinker.woundeffect": "致命创伤PLUS",
     "effect.miztinker.horologiumnoai": "时停中",
+    "effect.miztinker.dropfountaineffect": "掉落物喷泉",
 
     "stat.tconstruct.slot.display.music": "音乐",
     "stat.tconstruct.slot.prefix.music": "音乐槽：",
@@ -421,7 +478,7 @@
     "material.miztinker.nihilite_souls": "虚魂",
     "material.miztinker.nihilite_soulsflavor": "吞噬了足够多的灵魂",
     "material.miztinker.nihilite_souls.encyclopedia": "被吞噬的灵魂开始向你展开复仇了",
-
+ 
     "material.miztinker.abyss_silver": "深渊银",
     "material.miztinker.abyss_silver.flavor": "自深渊崛起",
     "material.miztinker.abyss_silver.encyclopedia": "被遗忘的金属借用银为主体重新聚合,这本是不可能的",
@@ -429,6 +486,10 @@
     "material.miztinker.starmetal": "星辉",
     "material.miztinker.starmetal.flavor": "继承了最强的能力",
     "material.miztinker.starmetal.encyclopedia": "虽然只继承了一个能力,但这也许是最强的那个",
+
+    "material.miztinker.death_book": "死亡笔记",
+    "material.miztinker.death_book.flavor": "你就是L吧?",
+    "material.miztinker.death_book.encyclopedia": "秒杀所有和你工具'同名'的生物",
 
     "material.miztinker.fumo_gold": "fumo金",
     "material.miztinker.fumo_gold.flavor": "FUNKY⭐",
@@ -486,6 +547,24 @@
     "material.miztinker.derakkuma.flavor": "迪..迪拉熊?",
     "material.miztinker.derakkuma.encyclopedia": "你现在可以为你的武器添加音乐以及觉醒效果",
 
+    "material.miztinker.diabolium": "恶魔",
+    "material.miztinker.diabolium.flavor": "来自尼希莫斯",
+    "material.miztinker.diabolium.encyclopedia": "来自恶魔的力量使你可以超越极限,使你承受近乎无限多的治疗量",
+
+    "material.miztinker.ultimate": "终极",
+    "material.miztinker.ultimate.flavor": "多种稀有金属制成",
+    "material.miztinker.ultimate.encyclopedia": "极限之力!",
+
+    "material.miztinker.theking": "基多拉鳞片",
+    "material.miztinker.theking.flavor": "使用强力生物的鳞片",
+
+    "material.miztinker.mobzela": "哥斯拉鳞片",
+    "material.miztinker.mobzela.flavor": "使用强力生物的鳞片",
+
+    "material.miztinker.mothzela": "摩斯拉鳞片",
+    "material.miztinker.mothzela.flavor": "使用强力生物的鳞片",
+
+
 
 "block.miztinker.nether_reactor": "下界反应核",
 
@@ -496,13 +575,20 @@
 
      "item.miztinker.big_manyullyn_ingot": "超极巨化玛玉灵锭",
 
+     "item.miztinker.oni_miko_bow": "鬼巫女的大蝴蝶结",
+     "tooltip.miztinker.oni_miko_bow": "§b从鬼巫女身上掉下来的,还带着一点她的气味",
+
      "item.miztinker.mega_manyullyn_booster_energy": "超级玛玉灵驱劲能量",
      "tooltip.miztinker.mega_manyullyn_booster_energy": "§b使你的玛玉灵超级进化！",
 
       "item.miztinker.mega_big_iron_ingot": "超级极巨化铁锭",
       
 
-      "item.miztinker.dx": "迪拉熊",
+      "item.miztinker.dx": "舞萌核心",
+      "tooltip.miztinker.dx": "§b蕴含着音乐的力量,击杀mizi掉落",
+
+      "item.miztinker.death_note": "死亡笔记",
+      "tooltip.miztinker.death_note": "§b书与笔从最高处的死神界坠落至最低处的人间界",
 
       "item.miztinker.mozhua_cap": "再来一瓶",
 
@@ -510,8 +596,21 @@
 
       "item.miztinker.ten_thousand_souls_item": "万魂锭",
 
+      "item.miztinker.villager_business_card": "村民大师名片",
+      "item.miztinker.villager_business_card.inventory_name": "升职器",
+      "item.miztinker.villager_business_card.default_name": "村民大师名片",
+      "item.miztinker.villager_business_card_line1": "将任意有职业的村民直接变为大师级",
+
+      "fluid.miztinker.molten_ultimate": "熔融终极",
+      "item.miztinker.molten_ultimate_bucket": "熔融终极桶",
+      "block.miztinker.molten_ultimate_fluid": "熔融终极",
+
+      "fluid.miztinker.molten_aeternalis_fuel": "熔融永恒燃料",
+      "item.miztinker.molten_aeternalis_fuel_bucket": "熔融永恒燃料桶",
+      "block.miztinker.molten_aeternalis_fuel_fluid": "熔融永恒燃料",
+
       "item.miztinker.black": "黑魔爪",
-      "tooltip.miztinker.black": "§b某人最讨厌的饮料之一",
+      "tooltip.miztinker.black": "§b某人最讨厌的饮料之一,丢在地上或许会引来什么",
       "fluid.miztinker.molten_black": "液态黑魔爪",
       "item.miztinker.molten_black_bucket": "液态黑魔爪桶",
       "block.miztinker.molten_black_fluid": "液态黑魔爪",
@@ -544,9 +643,15 @@
       "item.miztinker.molten_qivium_new_bucket": "熔融奇维姆桶",
       "block.miztinker.molten_qivium_new_fluid": "熔融奇维姆",
 
+      "item.miztinker.maimai_full": "舞萌DX!",
+      "tooltip.miztinker.maimai_full": "§dWellcome to MaiMai!",
 
-      "item.miztinker.oni_miko_bow": "鬼巫女的大蝴蝶结",
-      "tooltip.miztinker.oni_miko_bow": "§d还带着一点点鬼巫女的气味",
+      "item.miztinker.maimai_1": "舞萌外键",
+
+      "item.miztinker.maimai_2": "舞萌框体",
+
+
+      "item.miztinker.maimai_3": "舞萌内屏",
 
       "item.miztinker.daigo_item": "大骨队员",
       "tooltip.miztinker.daigo_item": "§e大骨熬成汤",
@@ -577,6 +682,14 @@
 
       "item.miztinker.ruby_gem_old": "原始回归红宝石",
 
+      "item.miztinker.copper_coin": "铜币",
+      "item.miztinker.iron_coin": "铁币",
+      "item.miztinker.gold_coin": "金币",
+      "tooltip.miztinker.gold_coin": "§b满级的盔甲匠 武器匠 工具匠都有高概率交易到",
+      "item.miztinker.diamond_coin": "钻石币",
+      "item.miztinker.netherite_coin": "下界合金币",
+      "tooltip.miztinker.netherite_coin": "§b流浪商人有低概率交易到",
+
       "item.miztinker.primal_reversion_emerald": "原始回归催化剂",
       "tooltip.miztinker.primal_reversion_emerald": "§b使你的材料回归到tic2的状态!",
 
@@ -602,10 +715,10 @@
       "block.miztinker.molten_terrestrial_artifact_fluid": "熔融天地宝晶",
 
       "item.miztinker.fumo_gold_ingot": "FUMO金锭",
-      "tooltip.miztinker.fumo_gold_ingot": "金锭右键书架转化",
+      "tooltip.miztinker.fumo_gold_ingot": "§b金锭右键书架转化",
 
       "item.miztinker.born_of_the_storm": "《暴风雨所诞生的》",
-      "tooltip.miztinker.born_of_the_storm": "在雷暴天的情况下露天放置2分钟转化",
+      "tooltip.miztinker.born_of_the_storm": "§b书在雷暴天的情况下露天放置2分钟转化",
 
       "item.miztinker.salt_ingot": "盐砖锭",
 
@@ -617,13 +730,13 @@
       
       "miztinker.tool.tab": "米工匠-工具",
       "item.miztinker.lollipop": "棒棒糖",
-      "item.miztinker.lollipop.description": "一种猪猪侠最爱的匠魂工具，可以吃哦",
+      "item.miztinker.lollipop.description": "一种猪猪侠最爱的匠魂工具，可以吃哦,还可以当作所有工具使用",
 
       "item.miztinker.old_sword": "1.8剑",
       "item.miztinker.old_sword.description": "来自1.8更加遥远的遗产,拥有很高的攻速,让你攻击不再有攻击冷却,还还原了1.8的右键格挡减伤极致",
 
       "item.miztinker.broom": "扫帚",
-      "item.miztinker.broom.description": "主手时可以像巫师那样飞行,同时还可以当作铲子使用",
+      "item.miztinker.broom.description": "主副手时可以像巫师那样飞行,同时还可以当作铲子使用",
 
       "item.miztinker.tinker_loli_pickaxe": "普通萝莉",
       "item.miztinker.tinker_loli_pickaxe.description": "来自1.12的遥远遗产，可以同时作为镐子，铲子和斧头！\n右键对10 x 10 x 10的生物造成一次攻击\n“延展”强化会提供群体攻击范围和挖掘范围！ "

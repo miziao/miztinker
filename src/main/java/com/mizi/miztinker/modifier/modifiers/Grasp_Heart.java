@@ -22,9 +22,9 @@ public class Grasp_Heart extends NoLevelsModifier implements MeleeHitModifierHoo
 
 
     /** 每级基础触发概率 0.1% */
-    private final double baseCritChance = 0.001;
+    private final double baseCritChance = 0.01;
     /** 每个玩家经验等级增加的概率 0.01% */
-    private final double perXpLevelChance = 0.0001;
+    private final double perXpLevelChance = 0.001;
     /** 致命一击伤害 */
     private final float damageAmount = 100000f;
 

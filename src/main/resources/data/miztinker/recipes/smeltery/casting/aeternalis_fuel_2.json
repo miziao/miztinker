@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_basin",
+  "cast": {
+     "tag": "tconstruct:casts/empty/basin" 
+  },
+  "cast_consumed": false,
+  "fluid": {
+    "name": "miztinker:molten_aeternalis_fuel",
+    "amount":810
+  },
+  "result": "projecte:aeternalis_fuel_block",
+  "cooling_time": 100
+}

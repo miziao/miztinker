@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " a ",
+    "bcd",
+    "efg"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:diamond_sword"
+    },
+    "b": {
+      "item": "minecraft:nether_star"
+    },
+    "c": {
+      "item": "minecraft:paper"
+    },
+    "d": {
+      "item": "minecraft:nether_wart_block"
+    },
+    "e": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "f": {
+      "item": "tconstruct:ichor_slime_crystal_block"
+    },
+    "g": {
+      "item": "tconstruct:blazing_bone"
+    }
+  },
+  "result": {
+    "item": "miztinker:7_1"
+  }
+}

@@ -51,7 +51,7 @@
       "type": "tconstruct:traits",
       "traits": [
         {
-          "name": "tconstruct:tasty",
+          "name": "miztinker:tasty",
           "level": 1
         }
       ]

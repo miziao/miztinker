@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "jzyy:ardite_ingot"
+    "jzyy:ardite_ingot",
+    "tinkers_thinking:ardite_ingot"
   ]
 }

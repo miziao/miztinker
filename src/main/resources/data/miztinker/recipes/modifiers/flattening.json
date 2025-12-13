@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "jerotesvillage:bulge_rod"
+    },
+    {
+      "item": "avaritia:diamond_lattice_block"
+    },
+    {
+      "item": "jerotesvillage:botanize_rod"
+    },
+    {
+      "item": "jerotesvillage:meror_metal_stick"
+    },
+    {
+      "item": "irons_spellbooks:frosted_helve"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:flattening",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/loot_capable_tool"
+  }
+}

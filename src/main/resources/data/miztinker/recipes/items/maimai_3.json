@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " a ",
+    "aba",
+    " a "
+  ],
+  "key": {
+    "a": {
+      "item": "tconstruct:clear_glass_pane"
+    },
+    "b": {
+      "item": "tconstruct:clear_glass"
+    }
+  },
+  "result": {
+    "item": "miztinker:maimai_3"
+  }
+}

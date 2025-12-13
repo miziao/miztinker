@@ -1,0 +1,13 @@
+{
+  "type":"tconstruct:melting",
+  "ingredient":{
+    "item":"craziness_awakened:ultimate_ingot"
+  },
+  "temperature": 3500,
+  "time": 100,
+  "result":
+  {
+    "fluid": "miztinker:molten_ultimate",
+    "amount": 90
+  }
+}

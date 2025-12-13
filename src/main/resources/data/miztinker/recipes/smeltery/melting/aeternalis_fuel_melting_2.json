@@ -1,0 +1,13 @@
+{
+  "type":"tconstruct:melting",
+  "ingredient":{
+    "item":"projecte:aeternalis_fuel_block"
+  },
+  "temperature": 1500,
+  "time": 100,
+  "result":
+  {
+    "fluid": "miztinker:molten_aeternalis_fuel",
+    "amount": 810
+  }
+}

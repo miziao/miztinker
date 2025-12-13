@@ -1,5 +1,6 @@
 package com.mizi.miztinker.modifier.modifiers;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -58,7 +59,7 @@ public class Death_eye extends NoLevelsModifier implements SlotStackModifierHook
 
         if (!(holder instanceof Player player)) return;
 
-        boolean active = tool.getPersistentData().getBoolean(ResourceLocation.parse(GLOW_ACTIVE)); // <-- 修正这里
+        boolean active = tool.getPersistentData().getBoolean(ResourceLocation.parse(GLOW_ACTIVE));
         if (!active) return;
 
         if (!world.isClientSide) {
@@ -70,14 +71,17 @@ public class Death_eye extends NoLevelsModifier implements SlotStackModifierHook
                 e.addEffect(new MobEffectInstance(MobEffects.GLOWING, 40, 0, false, false));
             }
         } else {
+            // 客户端显示注册名
             AABB areaClient = player.getBoundingBox().inflate(RADIUS);
             List<LivingEntity> entitiesClient = world.getEntitiesOfClass(LivingEntity.class, areaClient,
                     e -> e != player && e.isAlive());
 
             for (LivingEntity e : entitiesClient) {
-                e.setCustomName(Component.literal("§4❤ " + (int) e.getMaxHealth()));
+                // 获取生物注册名
+                ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(e.getType());
+                e.setCustomName(Component.literal(id.toString()));
                 e.setCustomNameVisible(true);
+            }
             }
         }
     }
-}

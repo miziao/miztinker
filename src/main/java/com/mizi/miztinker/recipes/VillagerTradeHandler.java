@@ -2,60 +2,95 @@ package com.mizi.miztinker.recipes;
 
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.village.VillagerTradesEvent;
-
-
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+
+import java.util.ArrayList;
 import java.util.List;
 
-
 public class VillagerTradeHandler {
-
 
     public VillagerTradeHandler() {
         MinecraftForge.EVENT_BUS.addListener(this::onAddCustomTrades);
     }
 
-
-    /**
-     * 农夫大师级新增交易：从 4 个物品中随机抽 1 个，以 1 绿宝石块出售
-     */
     private void onAddCustomTrades(VillagerTradesEvent event) {
 
-
-// 只对农夫职业添加交易
-        if (event.getType() != VillagerProfession.FARMER) return;
-
-
+        VillagerProfession type = event.getType();
         Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
-        int villagerLevel = 5; // 大师级
+        int level = 5; // 大师级
+
+        // -------------------------------------------------------------------------------------
+        // 原本已有的农夫逻辑保持不动
+        // -------------------------------------------------------------------------------------
+        if (type == VillagerProfession.FARMER) {
+            trades.computeIfAbsent(level, k -> new ArrayList<>());
+            List<VillagerTrades.ItemListing> levelTrades = trades.get(level);
+
+            while (levelTrades.size() < 2) {
+                levelTrades.add((trader, rand) -> new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 1),
+                        new ItemStack(Items.CARROT),
+                        12, 5, 0.05f
+                ));
+            }
+
+            ItemStack[] pool = new ItemStack[]{
+                    new ItemStack(Items.COCOA_BEANS),
+                    new ItemStack(Items.PITCHER_POD),
+                    new ItemStack(Items.SEA_PICKLE),
+                    new ItemStack(Items.POISONOUS_POTATO)
+            };
+
+            levelTrades.add((trader, rand) -> {
+                ItemStack selected = pool[rand.nextInt(pool.length)];
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD_BLOCK, 1),
+                        selected,
+                        1,
+                        0,
+                        0.1f
+                );
+            });
+        }
+
+        if (type == VillagerProfession.ARMORER ||
+                type == VillagerProfession.WEAPONSMITH ||
+                type == VillagerProfession.TOOLSMITH) {
+
+            trades.computeIfAbsent(level, k -> new ArrayList<>());
+            List<VillagerTrades.ItemListing> levelTrades = trades.get(level);
+
+            levelTrades.add((trader, rand) -> {
+
+                // 75% 概率生成交易
+                if (rand.nextFloat() > 0.75f) {
+                    return null;
+                }
+
+                return new MerchantOffer(
+                        new ItemStack(Items.EMERALD_BLOCK, 2),     // 玩家支付
+                        new ItemStack(getGoldCoinItem(), 1),        // 商人出售
+                        10,                                         // maxUses
+                        5,                                         // xp
+                        0.05f
+                );
+            });
+        }
 
 
-// 四个等概率物品池
-        ItemStack[] pool = new ItemStack[] {
-                new ItemStack(Items.COCOA_BEANS),
-                new ItemStack(Items.PITCHER_POD),
-                new ItemStack(Items.SEA_PICKLE),
-                new ItemStack(Items.POISONOUS_POTATO)
-        };
+            }
 
 
-        trades.get(villagerLevel).add((trader, rand) -> {
-// 随机选择一个物品
-            ItemStack selected = pool[rand.nextInt(pool.length)];
-
-
-            return new MerchantOffer(
-                    new ItemStack(Items.EMERALD_BLOCK, 1), // 售价：1 绿宝石块
-                    selected, // 随机物品
-                    1, // maxUses
-                    0, // xp
-                    0.1f // priceMultiplier
-            );
-        });
+    /** 获取金币物品实例 */
+    private Item getGoldCoinItem() {
+        return net.minecraftforge.registries.ForgeRegistries.ITEMS
+                .getValue(new net.minecraft.resources.ResourceLocation("miztinker", "gold_coin"));
     }
+
 }

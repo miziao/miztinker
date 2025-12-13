@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "miztinker:gold_coin" }
+  ],
+  "result": {
+    "item": "miztinker:iron_coin",
+    "count": 9
+  }
+}

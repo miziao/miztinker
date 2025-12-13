@@ -1,0 +1,27 @@
+{
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:rarity",
+      "rarity": "rare"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "flat": 20.0,
+      "operation": "add",
+      "stat": "tconstruct:attack_damage"
+    },
+    {
+      "type": "tconstruct:set_stat",
+      "stat": "tconstruct:harvest_tier",
+      "value": "minecraft:iron"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "flat": 20.0,
+      "operation": "add",
+      "stat": "tconstruct:projectile_damage"
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -6,6 +6,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
+import net.minecraft.resources.ResourceLocation;
+
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
@@ -13,69 +15,91 @@ import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.helper.ToolDamageUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
+import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 
 public class WizardFlight extends NoLevelsModifier implements InventoryTickModifierHook {
 
-    /** 每 2 秒（40 tick）消耗 1 点耐久 */
-    private static final int DURABILITY_INTERVAL = 20;
-    private static final int DURABILITY_LOSS = 1;
+
+    // 飞行中每 2 秒消耗
+    private static final int FLYING_DAMAGE = 1;
+    private static final int FLYING_DAMAGE_INTERVAL = 40; // 40 tick = 2 秒
+
+    private static final ResourceLocation FLIGHT_GRANTED =
+            new ResourceLocation("miztinker", "wizard_flight_granted");
+    private static final ResourceLocation WAS_FLYING =
+            new ResourceLocation("miztinker", "wizard_was_flying");
 
     @Override
     public void onInventoryTick(IToolStackView tool, ModifierEntry entry, Level level,
                                 LivingEntity holder, int itemSlot, boolean isSelected,
                                 boolean isCorrectSlot, ItemStack stack) {
-        if (level.isClientSide || !(holder instanceof Player player)) return;
 
-        boolean active = isSelected && itemSlot == player.getInventory().selected;
+        if (level.isClientSide || !(holder instanceof ServerPlayer player)) return;
 
-        // 工具损坏时，直接关闭飞行并退出
-        if (tool.isBroken()) {
-            disableFlight(player);
+        ModDataNBT data = tool.getPersistentData();
+
+        // ✅ 主手或副手持有才生效
+        boolean inMainHand = stack == player.getMainHandItem();
+        boolean inOffHand  = stack == player.getOffhandItem();
+
+        if (!inMainHand && !inOffHand) {
+            revokeIfGranted(player, data);
             return;
         }
 
-        if (active) {
-            // ✅ 启用飞行
-            enableFlight(player);
-
-            // ✅ 每 1 秒扣 1 点耐久
-            if (level.getGameTime() % DURABILITY_INTERVAL == 0) {
-                ToolDamageUtil.damage(tool, DURABILITY_LOSS, player, stack);
-
-                // 若刚好在本次消耗中被打断（损坏）
-                if (tool.isBroken()) {
-                    disableFlight(player);
-                }
-            }
-        } else {
-            // ❌ 不在主手则禁飞
-            disableFlight(player);
+        // ✅ 不覆盖创造 / 旁观
+        GameType gm = player.gameMode.getGameModeForPlayer();
+        if (gm == GameType.CREATIVE || gm == GameType.SPECTATOR) {
+            revokeIfGranted(player, data);
+            return;
         }
-    }
 
-    /** 启用飞行（区分服务端与客户端） */
-    private void enableFlight(Player player) {
-        if (player instanceof ServerPlayer sp) {
-            sp.getAbilities().mayfly = true;
-            sp.onUpdateAbilities();
-        } else {
+        // ✅ 工具损坏禁止飞行
+        if (tool.isBroken()) {
+            revokeIfGranted(player, data);
+            return;
+        }
+
+        // ✅ 授予 mayfly（不强制 flying）
+        if (!player.getAbilities().mayfly) {
             player.getAbilities().mayfly = true;
+            player.onUpdateAbilities();
+            data.putBoolean(FLIGHT_GRANTED, true);
         }
+
+        // -----------------------------
+        // ✅ 飞行耐久消耗逻辑
+        // -----------------------------
+        boolean flying = player.getAbilities().flying;
+
+
+        // ✨ 飞行中每 2 秒消耗
+        if (flying) {
+            if (level.getGameTime() % FLYING_DAMAGE_INTERVAL == 0) {
+                ToolDamageUtil.damage(tool, FLYING_DAMAGE, player, stack);
+            }
+        }
+
+        data.putBoolean(WAS_FLYING, flying);
     }
 
-    /** 禁用飞行（保留创造/旁观玩家） */
-    private void disableFlight(Player player) {
-        if (player instanceof ServerPlayer sp) {
-            GameType gm = sp.gameMode.getGameModeForPlayer();
-            if (gm != GameType.CREATIVE && gm != GameType.SPECTATOR) {
-                sp.getAbilities().mayfly = false;
-                sp.getAbilities().flying = false;
-                sp.onUpdateAbilities();
-            }
-        } else if (!player.isCreative() && !player.isSpectator()) {
-            player.getAbilities().mayfly = false;
-            player.getAbilities().flying = false;
-        }
+    /**
+     * ✅ 只撤销本 modifier 授予的飞行，不影响其他来源
+     */
+    private void revokeIfGranted(ServerPlayer player, ModDataNBT data) {
+
+        data.remove(WAS_FLYING);
+
+        if (!data.getBoolean(FLIGHT_GRANTED)) return;
+
+        GameType gm = player.gameMode.getGameModeForPlayer();
+        if (gm == GameType.CREATIVE || gm == GameType.SPECTATOR) return;
+
+        player.getAbilities().mayfly = false;
+        player.getAbilities().flying = false;
+        player.onUpdateAbilities();
+
+        data.remove(FLIGHT_GRANTED);
     }
 
     @Override

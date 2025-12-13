@@ -7,6 +7,26 @@
     {
       "name": "miztinker:refill",
       "level": 1
+    },
+    {
+      "name": "miztinker:sever",
+      "level": 1
     }
-  ]
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "name": "miztinker:derakkuma",
+        "level": 1
+      },
+      {
+        "name": "miztinker:refill",
+        "level": 1
+      },
+      {
+        "name": "miztinker:all_perfect",
+        "level": 1
+      }
+    ]
+  }
 }

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aca",
+    "bdb",
+    "beb"
+  ],
+  "key": {
+    "a": { "item": "minecraft:cyan_concrete" },
+    "b": { "item": "tconstruct:steel_block" },
+    "c": { "item": "minecraft:orange_concrete" },
+    "d": { "item": "minecraft:note_block" },
+    "e": { "item": "minecraft:note_block" }
+  },
+  "result": {
+    "item": "miztinker:maimai_2"
+  }
+}

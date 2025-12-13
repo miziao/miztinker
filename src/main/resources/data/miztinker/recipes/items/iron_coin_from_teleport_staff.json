@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "tinkersinnovation:teleport_staff" }
+  ],
+  "result": {
+    "item": "miztinker:iron_coin"
+  }
+}

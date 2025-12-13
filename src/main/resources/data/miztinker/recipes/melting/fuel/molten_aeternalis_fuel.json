@@ -1,0 +1,10 @@
+{
+  "type": "tconstruct:melting_fuel",
+  "fluid": {
+    "name": "miztinker:molten_aeternalis_fuel",
+    "amount": 100
+  },
+  "duration": 500,
+  "rate": 20,
+  "temperature": 3500
+}

@@ -4,6 +4,7 @@ import com.mizi.miztinker.entity.MiztinkerEntityRegister;
 import com.mizi.miztinker.entity.boss.entity.MiziAo;
 import com.mizi.miztinker.entity.boss.render.MiziAoRenderer;
 import com.mizi.miztinker.item.tool.until.MiztinkerTools;
+import com.mizi.miztinker.modifier.diadema.ClientDiademaRegister;
 import com.mizi.miztinker.modifier.diadema.DiademaRegister;
 import com.mizi.miztinker.modifier.register.*;
 import com.mizi.miztinker.network.MiztinkerNetwork;
@@ -47,7 +48,7 @@ public class miztinker {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
+
     public static ModifierDeferredRegister MODIFIERS = ModifierDeferredRegister.create(MODID);
 
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
@@ -57,7 +58,6 @@ public class miztinker {
     public miztinker() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        CREATIVE_MODE_TABS.register(modBus);
         MiztinkerItems.ITEMS.register(modBus);
         MiztinkerModifiers.MODIFIERS.register(modBus);
         MiztinkerSounds.SOUND_EVENTS.register(modBus);
@@ -65,6 +65,9 @@ public class miztinker {
         MiztinkerEntityRegister.ENTITY.register(modBus);
         MiztinkerBlocks.BLOCKS.register(modBus);
         DiademaRegister.DIADEMA_TYPES.register(modBus);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+            ClientDiademaRegister.CLIENT_DIADEMA_TYPES.register(modBus);
+        });
         MiztinkerTab.CREATIVE_MODE_TABS.register(modBus);
         MiztinkerFluidRegister.FLUIDS.register(modBus);
         MiztinkerTools.initRegisters();

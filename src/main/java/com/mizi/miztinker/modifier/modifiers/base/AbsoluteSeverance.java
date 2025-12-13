@@ -24,9 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.mizi.miztinker.modifier.modifiers.AwakenDoomGuy.isDefender;
-import static com.mizi.miztinker.modifier.modifiers.AwakenDoomGuy.isFromDummmmmmyMod;
-import static com.mizi.miztinker.modifier.modifiers.base.LivingEntityUtil.isFromIceAndFire;
+
 
 @Mod.EventBusSubscriber(modid = miztinker.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AbsoluteSeverance extends NoLevelsModifier implements MeleeHitModifierHook {

@@ -97,7 +97,22 @@
     "sever": "#800080",
     "derakkuma": "#87CEFA",
     "ender_man_soul": "#4B0082",
-    "undead_soul": "#228B22"
+    "undead_soul": "#228B22",
+    "refill": "#FF69B4",
+    "dropfountain": "#00BFFF",
+    "futurediary": "#87CEEB",
+    "flattening": "#6495ED",
+    "overheal": "#C71585",
+    "entropystrike": "#9370DB",
+    "superlollipop": "#FF4500",
+    "tasty": "#FFE4E1",
+    "scepter_of_divine_society": "#FF6347",
+    "void_immunity": "#483D8B",
+    "ubbo_sathla": "#DEB887",
+    "pickaxe_strike": "#A9A9A9",
+    "all_perfect": "#FF8C00",
+    "death_note": "#1A1A1A",
+    "mercy": "#FDF5E6"
   },
   "material.miztinker": {
     "ten_thousand_souls": "#CD853F",

@@ -1,0 +1,28 @@
+{
+  "default": [
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "miztinker:fly"
+      },
+      {
+        "name": "tconstruct:melee_protection",
+        "level": 4
+    },
+    {
+        "name": "tconstruct:fire_protection",
+        "level": 4
+    },
+    {
+        "name": "tconstruct:blast_protection",
+        "level": 4
+    },
+    {
+        "name": "tconstruct:projectile_protection",
+        "level": 4
+    }
+    ]
+  }
+}

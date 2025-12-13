@@ -13,4 +13,6 @@ public class MiztinkerEffect {
     public static final RegistryObject<MobEffect> WoundEffect = EFFECTS.register("woundeffect", com.mizi.miztinker.effect.WoundEffect::new);
 
     public static final RegistryObject<MobEffect> HorologiumNoAI = EFFECTS.register("horologiumnoai", com.mizi.miztinker.effect.HorologiumNoAI::new);
+
+    public static final RegistryObject<MobEffect> DropFountainEffect = EFFECTS.register("dropfountaineffect", com.mizi.miztinker.effect.DropFountainEffect::new);
 }

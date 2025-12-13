@@ -3,15 +3,12 @@
   "allow_crystal": true,
   "inputs": [
     {
-      "tag": "kubejs:skull"
+      "tag": "miztinker:skull"
     },
     {
-      "tag": "kubejs:skull"
+      "tag": "miztinker:skull"
     }
   ],
-  "level": {
-    "max": 100
-  },
   "result": "miztinker:souldrain",
   "slots": {
     "upgrades": 1

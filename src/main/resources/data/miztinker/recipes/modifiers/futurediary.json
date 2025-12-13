@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "avaritia:neutron_gear"
+    },
+    {
+      "item": "minecraft:writable_book"
+    },
+    {
+      "item": "the_cosmic_spokespersons:the_error"
+    },
+    {
+      "item": "the_cosmic_spokespersons:the_error"
+    },
+    {
+      "item": "the_cosmic_spokespersons:the_error"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:futurediary",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

@@ -33,5 +33,6 @@ public class MiztinkerSyncing {
                 PlaySoundPacket::handle,
                 Optional.of(NetworkDirection.PLAY_TO_CLIENT) // 明确指定方向
         );
+
     }
 }

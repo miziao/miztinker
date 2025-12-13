@@ -1,0 +1,24 @@
+{
+    "default": [
+    ],
+    "perStat": {
+        "tconstruct:armor": [
+            {
+                "name": "tconstruct:melee_protection",
+                "level": 15
+            },
+            {
+                "name": "tconstruct:fire_protection",
+                "level": 15
+            },
+            {
+                "name": "tconstruct:blast_protection",
+                "level": 15
+            },
+            {
+                "name": "tconstruct:projectile_protection",
+                "level": 15
+            }
+        ]
+    }
+}

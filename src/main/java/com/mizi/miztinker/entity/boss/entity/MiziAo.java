@@ -1,6 +1,5 @@
 package com.mizi.miztinker.entity.boss.entity;
 
-import com.mizi.miztinker.effect.WoundEffect;
 import com.mizi.miztinker.modifier.diadema.DiademaRegister;
 import com.mizi.miztinker.entity.boss.BossEntity;
 import com.mizi.miztinker.entity.boss.ai.mizi.MiziDrinkGoal;
@@ -30,6 +29,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -49,15 +49,14 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import static com.mizi.miztinker.modifier.register.MiztinkerEffect.WoundEffect;
 
 public class MiziAo extends BossEntity implements GeoEntity {
 
-    private static Diadema musicGame;
+    private static Diadema MUSICGAME;
 
     private int drinkingTicks;
     public static final int RATING = 15417;
-    public static final int PERFECT = 101;
+    public static final int PERFECT = 1010;
     private boolean isEnraging = false;
     private boolean lastChujingState;
 
@@ -128,7 +127,7 @@ public class MiziAo extends BossEntity implements GeoEntity {
                 BossEvent.BossBarColor.PURPLE, // 血条颜色
                 BossEvent.BossBarOverlay.PROGRESS); // 血条样式
         if (level.isClientSide) return;
-        musicGame = DiademaRegister.MUSICGAME.get().CreateInstance(new FollowDiademaMovement(this));
+        MUSICGAME = DiademaRegister.MUSICGAME.get().CreateInstance(new FollowDiademaMovement(this));
     }
 
 
@@ -236,23 +235,29 @@ public class MiziAo extends BossEntity implements GeoEntity {
 
     @Override
     public boolean hurt(@NotNull DamageSource source, float amount) {
+
+        // --- 保险机制：禁止任何超过 1010 的单次伤害 ---
+        if (amount > 1010F) {
+            amount = 1010F;
+        }
+
         float actualDamage = Math.min(amount, PERFECT);
         if (source.getDirectEntity() instanceof Player player) {
 
             boolean isCritical = player.fallDistance > 0.0F && !player.onGround() && !player.isSwimming() &&
-                    !player.isPassenger() && !player.hasEffect(MobEffects.BLINDNESS) && // 加上原版暴击需要的“非失明”条件
+                    !player.isPassenger() && !player.hasEffect(MobEffects.BLINDNESS) &&
                     player.getAttackStrengthScale(0.5F) > 0.9F;
 
             if (isCritical && !this.isChujing() && !this.isEnraging) {
-                // 设置“正在激怒中”的标志位，防止重复触发
                 this.isEnraging = true;
-
                 this.startDrinkingSequence();
             }
         }
 
         return super.hurt(source, actualDamage);
     }
+
+
 
     // --- AI ---
     @Override
@@ -374,9 +379,14 @@ public class MiziAo extends BossEntity implements GeoEntity {
     public SoundEvent getBossMusic() { return MiztinkerSounds.UMIYURI_KAITEITAN.get(); }
 
     @Override
-    public void die(@NotNull DamageSource pSource) {
-        if (isDeadOrDying()) {
-            super.die(pSource);
+    public void die(@NotNull DamageSource source) {
+        super.die(source); // 保留原有死亡逻辑
+
+        if (!this.level().isClientSide) {
+            // 创建掉落物：miztinker:dx
+            ItemStack dxStack = new ItemStack(com.mizi.miztinker.modifier.register.MiztinkerItems.DX.get());
+            // spawnAtLocation 会在实体当前位置生成物品实体
+            this.spawnAtLocation(dxStack, 0.0F);
         }
     }
 

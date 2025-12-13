@@ -1,8 +1,15 @@
 package com.mizi.miztinker.modifier.modifiers.base;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
+import com.momosensei.momotinker.util.PenetratingDamage;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import org.apache.commons.lang3.ObjectUtils;
 import net.minecraft.CrashReport;
 import net.minecraft.CrashReportCategory;
@@ -231,6 +238,7 @@ public class ForceHurtUtil {
         forceHurt(target, source, damage);
     }
 
+
     /*
      * 从禁疗中回复正常
      */
@@ -248,4 +256,107 @@ public class ForceHurtUtil {
             }
         }
     }
+
+    public static void tryModifyHealth(LivingEntity entity, float newHealth) {
+        float health = entity.getHealth();
+        float testValue = health - 1;
+        for (Class<?> currentClass = entity.getClass(); currentClass != LivingEntity.class.getSuperclass(); currentClass = currentClass.getSuperclass()) {
+            for (var field : currentClass.getDeclaredFields()) {
+                if (!Modifier.isStatic(field.getModifiers())) {
+                    try {
+                        field.setAccessible(true);
+                        Object value = field.get(entity);
+                        Class<?> fieldType = field.getType();
+                        if (fieldType == float.class || fieldType == Float.class) {
+                            field.set(entity, testValue);
+                        } else if (fieldType == double.class || fieldType == Double.class) {
+                            field.set(entity, (double) testValue);
+                        } else if (fieldType == int.class || fieldType == Integer.class) {
+                            field.set(entity, (int) testValue);
+                        } else if (fieldType == long.class || fieldType == Long.class) {
+                            field.set(entity, (long) testValue);
+                        } else if (fieldType == short.class || fieldType == Short.class) {
+                            field.set(entity, (short) testValue);
+                        } else if (fieldType == String.class) {
+                            field.set(entity, Float.toString(testValue));
+                        }
+                        if (entity.getHealth() == testValue) {
+                            if (fieldType == float.class || fieldType == Float.class) {
+                                field.set(entity, newHealth);
+                            } else if (fieldType == double.class || fieldType == Double.class) {
+                                field.set(entity, (double) newHealth);
+                            } else if (fieldType == int.class || fieldType == Integer.class) {
+                                field.set(entity, (int) newHealth);
+                            } else if (fieldType == long.class || fieldType == Long.class) {
+                                field.set(entity, (long) newHealth);
+                            } else if (fieldType == short.class || fieldType == Short.class) {
+                                field.set(entity, (short) newHealth);
+                            } else if (fieldType == String.class) {
+                                field.set(entity, Float.toString(newHealth));
+                            }
+                        } else {
+                            field.set(entity, value);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        for (var key : entity.getEntityData().itemsById.keySet()) {
+            @SuppressWarnings("unchecked")
+            SynchedEntityData.DataItem<Object> item = (SynchedEntityData.DataItem<Object>) entity.getEntityData().itemsById.get(key.intValue());
+            var value = item.getValue();
+            Class<?> fieldType = value != null ? value.getClass() : null;
+            if (fieldType == float.class || fieldType == Float.class) {
+                item.setValue(testValue);
+            } else if (fieldType == double.class || fieldType == Double.class) {
+                item.setValue((double) testValue);
+            } else if (fieldType == int.class || fieldType == Integer.class) {
+                item.setValue((int) testValue);
+            } else if (fieldType == long.class || fieldType == Long.class) {
+                item.setValue((long) testValue);
+            } else if (fieldType == short.class || fieldType == Short.class) {
+                item.setValue((short) testValue);
+            } else if (fieldType == String.class) {
+                item.setValue(Float.toString(testValue));
+            }
+            if (entity.getHealth() == testValue) {
+                if (fieldType == float.class || fieldType == Float.class) {
+                    item.setValue(newHealth);
+                } else if (fieldType == double.class || fieldType == Double.class) {
+                    item.setValue((double) newHealth);
+                } else if (fieldType == int.class || fieldType == Integer.class) {
+                    item.setValue((int) newHealth);
+                } else if (fieldType == long.class || fieldType == Long.class) {
+                    item.setValue((long) newHealth);
+                } else if (fieldType == short.class || fieldType == Short.class) {
+                    item.setValue((short) newHealth);
+                } else if (fieldType == String.class) {
+                    item.setValue(Float.toString(newHealth));
+                }
+            } else {
+                item.setValue(value);
+            }
+        }
+    }
+
+    public static void executeall(LevelAccessor world, double x, double y, double z, LivingEntity damager) {
+        if (damager instanceof Player player) {
+            if (!damager.getCommandSenderWorld().isClientSide) {
+                Vec3 vec3 = new Vec3(x, y, z);
+                List<LivingEntity> list = world.getEntitiesOfClass(LivingEntity.class, (new AABB(vec3, vec3)).inflate(200F), (e) -> true).stream().sorted(Comparator.comparingDouble((_entcnd) -> _entcnd.distanceToSqr(vec3))).toList();
+                for (LivingEntity entity : list) {
+                    PenetratingDamage.reflectionPenetratingDamage(entity,player, entity.getMaxHealth());
+                    entity.onRemovedFromWorld();
+                    entity.remove(Entity.RemovalReason.KILLED);
+                    entity.setPos(Double.NaN, Double.NaN, Double.NaN);
+                }
+            }
+        }
+    }
+
+
+
+
 }
