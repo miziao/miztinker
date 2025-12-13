@@ -15,6 +15,8 @@ import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
+import static com.mizi.miztinker.miztinker.getResource;
+
 public class VexSummoner extends NoLevelsModifier implements MeleeHitModifierHook {
 
     private static final String COUNTER_KEY = "vex_summon_count";
@@ -25,13 +27,13 @@ public class VexSummoner extends NoLevelsModifier implements MeleeHitModifierHoo
         if (!(context.getAttacker() instanceof Player player)) return;
 
         // 从工具NBT取计数
-        int count = tool.getPersistentData().getInt(ResourceLocation.parse(COUNTER_KEY));
+        int count = tool.getPersistentData().getInt(getResource(COUNTER_KEY));
         count++;
         if (count >= 5) {
             count = 0;
             summonAllyVex((ServerLevel) player.level(), player);
         }
-        tool.getPersistentData().putInt(ResourceLocation.parse(COUNTER_KEY), count);
+        tool.getPersistentData().putInt(getResource(COUNTER_KEY), count);
     }
 
     @SuppressWarnings("unchecked")

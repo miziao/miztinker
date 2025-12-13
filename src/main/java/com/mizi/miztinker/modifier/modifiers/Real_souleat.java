@@ -21,6 +21,7 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import javax.annotation.Nullable;
 
+import static com.mizi.miztinker.miztinker.getResource;
 import static com.mizi.miztinker.modifier.modifiers.SoulEat.TAG_SOUL_BONUS;
 
 public class Real_souleat extends RealFormBaseModifier implements SlotStackModifierHook {
@@ -72,7 +73,7 @@ public class Real_souleat extends RealFormBaseModifier implements SlotStackModif
 
         String baseKey = MiztinkerModifiers.SOUL_EAT.getId().toString();
         float soulBonus = data.getFloat(
-                ResourceLocation.parse(baseKey + "." + TAG_SOUL_BONUS)
+                getResource(baseKey + "." + TAG_SOUL_BONUS)
         );
 
         if (soulBonus < REQUIRED_SOUL) {

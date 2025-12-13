@@ -23,6 +23,8 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 
 import java.util.List;
 
+import static com.mizi.miztinker.miztinker.getResource;
+
 public class Death_eye extends NoLevelsModifier implements SlotStackModifierHook, InventoryTickModifierHook {
 
     private static final String GLOW_ACTIVE = "glow_active";
@@ -39,8 +41,8 @@ public class Death_eye extends NoLevelsModifier implements SlotStackModifierHook
     public boolean overrideOtherStackedOnMe(IToolStackView tool, ModifierEntry entry,
                                             ItemStack held, Slot slot, Player player, SlotAccess access) {
         ModDataNBT data = tool.getPersistentData();
-        boolean nowActive = !data.getBoolean(ResourceLocation.parse(GLOW_ACTIVE));
-        data.putBoolean(ResourceLocation.parse(GLOW_ACTIVE), nowActive);
+        boolean nowActive = !data.getBoolean(getResource(GLOW_ACTIVE));
+        data.putBoolean(getResource(GLOW_ACTIVE), nowActive);
 
         if (nowActive) {
             player.displayClientMessage(Component.literal("§u死神之眼已开启！"), true);
@@ -59,7 +61,7 @@ public class Death_eye extends NoLevelsModifier implements SlotStackModifierHook
 
         if (!(holder instanceof Player player)) return;
 
-        boolean active = tool.getPersistentData().getBoolean(ResourceLocation.parse(GLOW_ACTIVE));
+        boolean active = tool.getPersistentData().getBoolean(getResource(GLOW_ACTIVE));
         if (!active) return;
 
         if (!world.isClientSide) {

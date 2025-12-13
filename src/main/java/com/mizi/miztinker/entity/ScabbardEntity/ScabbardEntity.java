@@ -5,6 +5,7 @@ import com.mizi.miztinker.particle.register.MiztinkerParticlesRegister;
 import com.momosensei.momotinker.util.AttackUtil;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -63,6 +64,12 @@ public class ScabbardEntity extends Projectile {
         this.entityData.define(DATA_ROTATING, false);
         this.entityData.define(DATA_FORM, 0);
     }
+    @Override
+    public void readAdditionalSaveData(CompoundTag compound) {}
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound) {}
+
     public void setSpawnRotation(float yaw, float pitch) {
         this.entityData.set(DATA_SPAWN_YAW, yaw);
         this.entityData.set(DATA_SPAWN_PITCH, pitch);

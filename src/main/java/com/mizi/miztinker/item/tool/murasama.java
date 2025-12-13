@@ -207,8 +207,8 @@ public class murasama extends ModifiableItem {
             if (c.getFloat(ascending_cooldown)>0&&c.getFloat(ascending_cut)<60&&!CanCreateScabbard(player)&&player.getPersistentData().getFloat(murasam_slash_cooldown.toString())==0){
                 c.putFloat(ascending_cut,c.getFloat(ascending_cut)+d);
             }
-            if (isTrueNameB(ToolStack.from(player.getMainHandItem()))){
-                forceAddEffect(a,new MobEffectInstance(MiztinkerEffect.DestinedDeath.get(),100,0));
+            if (a instanceof LivingEntity living&&isTrueNameB(ToolStack.from(player.getMainHandItem()))){
+                forceAddEffect(living,new MobEffectInstance(MiztinkerEffect.DestinedDeath.get(),100,0));
             }
         }
         if (a instanceof Player player && b != null && player.getMainHandItem().is(MiztinkerTools.murasama.get())) {
