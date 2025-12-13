@@ -2,7 +2,11 @@ package com.mizi.miztinker.particle.register;
 
 
 import com.mizi.miztinker.miztinker;
+import com.mizi.miztinker.particle.AscendingCutParticle;
+import com.mizi.miztinker.particle.HugSmashDownBoomParticle;
 import com.mizi.miztinker.particle.MiziParticle;
+import com.mizi.miztinker.particle.SmashDownBoomParticle;
+import com.mizi.miztinker.renderer.other.UltimateSlashStrikeParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -19,13 +23,20 @@ public class MiztinkerParticlesRegister {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, miztinker.MODID);
 
     public static final RegistryObject<SimpleParticleType> MIZI_PARTICLE = PARTICLE_TYPES.register("mizi_particle", () -> new SimpleParticleType(false));
-
+    public static final RegistryObject<SimpleParticleType> smash_down_boom = PARTICLE_TYPES.register("smash_down_boom", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> hug_smash_down_boom = PARTICLE_TYPES.register("hug_smash_down_boom", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> ascending_cut = PARTICLE_TYPES.register("ascending_cut", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> ultimate_slash_strike = PARTICLE_TYPES.register("ultimate_slash_strike", () -> new SimpleParticleType(true));
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void onClientSetup(RegisterParticleProvidersEvent event) {
         // 注册粒子工厂
         Minecraft.getInstance().particleEngine.register(MiztinkerParticlesRegister.MIZI_PARTICLE.get(), MiziParticle.Provider::new);
+        Minecraft.getInstance().particleEngine.register(MiztinkerParticlesRegister.smash_down_boom.get(), SmashDownBoomParticle.Provider::new);
+        Minecraft.getInstance().particleEngine.register(MiztinkerParticlesRegister.hug_smash_down_boom.get(), HugSmashDownBoomParticle.Provider::new);
+        Minecraft.getInstance().particleEngine.register(MiztinkerParticlesRegister.ascending_cut.get(), AscendingCutParticle.Provider::new);
+        Minecraft.getInstance().particleEngine.register(MiztinkerParticlesRegister.ultimate_slash_strike.get(), UltimateSlashStrikeParticle.Provider::new);
 
     }
 }

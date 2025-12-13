@@ -1,6 +1,6 @@
 package com.mizi.miztinker.modifier.modifiers;
 
-import com.mizi.miztinker.network.MiztinkerSyncing;
+import com.mizi.miztinker.network.MiztinkerNetwork;
 import com.mizi.miztinker.network.packets.PlaySoundPacket;
 import com.mizi.miztinker.sounds.MiztinkerSounds;
 import net.minecraft.resources.ResourceLocation;
@@ -74,7 +74,7 @@ public class Plumber extends NoLevelsModifier implements InventoryTickModifierHo
         );
 
         for (ServerPlayer serverPlayer : players) {
-            MiztinkerSyncing.CHANNEL.send(
+            MiztinkerNetwork.INSTANCE.send(
                     PacketDistributor.PLAYER.with(() -> serverPlayer),
                     new PlaySoundPacket(
                             source.position(),   // ✔ 声音从事件中心发出

@@ -30,9 +30,41 @@
           },
           { "path": "miztinker:item/tool/broom/head",        "stat_type": "tconstruct:head" },
           { "path": "miztinker:item/tool/broom/head_broken", "stat_type": "tconstruct:head" },
-          { "path": "miztinker:item/tool/broom/handle",      "stat_type": "tconstruct:handle" }
+          { "path": "miztinker:item/tool/broom/handle",      "stat_type": "tconstruct:handle" },
 
+      {
+        "path": "miztinker:item/tool/murasama/part_1",
+        "stat_type": "tconstruct:binding"
+      },
+      {
+        "path": "miztinker:item/tool/murasama/part_2",
+        "stat_type": "tconstruct:binding"
+      },
+      {
+        "path": "miztinker:item/tool/murasama/part_3",
+        "stat_type": "tconstruct:binding"
+      },
 
+      {
+        "path": "miztinker:item/tool/murasama/large/part_1",
+        "stat_type": "tconstruct:binding"
+      },
+      {
+        "path": "miztinker:item/tool/murasama/large/part_2",
+        "stat_type": "tconstruct:binding"
+      },
+      {
+        "path": "miztinker:item/tool/murasama/large/part_3",
+        "stat_type": "tconstruct:binding"
+      },
+      {
+        "path": "miztinker:item/tool/murasama/large/part_4",
+        "stat_type": "tconstruct:binding"
+      },
+      {
+        "path": "miztinker:item/tool/murasama/large/part_5",
+        "stat_type": "tconstruct:binding"
+      }
     ],
     "replace": false
 }

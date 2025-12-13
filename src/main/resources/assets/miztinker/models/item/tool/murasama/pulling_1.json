@@ -1,0 +1,37 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "miztinker:item/base/murasama/pulling_1",
+  "textures": {
+    "part_1": "miztinker:item/tool/murasama/part_1",
+    "part_2": "miztinker:item/tool/murasama/part_2",
+    "part_3": "miztinker:item/tool/murasama/part_3",
+    "part_4": "miztinker:item/tool/murasama/part_4",
+    "part_5": "miztinker:item/tool/murasama/part_5",
+    "blade": "miztinker:item/tool/murasama/blade",
+    
+    "large_part_1": "miztinker:item/tool/murasama/part_1",
+    "large_part_2": "miztinker:item/tool/murasama/part_2",
+    "large_part_3": "miztinker:item/tool/murasama/part_3",
+    "large_part_4": "miztinker:item/tool/murasama/part_4",
+    "large_part_5": "miztinker:item/tool/murasama/part_5",
+    "large_blade": "miztinker:item/tool/murasama/blade"
+  },
+  "modifier_roots": {
+    "small": [
+      "miztinker:item/tool/murasama/modifiers/"
+    ],
+    "large": [
+      "miztinker:item/tool/murasama/modifiers/"
+    ]
+  },
+  "large": true,
+  "large_offset": [-1, -15],
+  "parts": [
+    {"name": "part_1", "index": 0},
+    {"name": "part_2", "index": 1},
+    {"name": "part_3", "index": 2},
+    {"name": "part_4", "index": 3},
+    {"name": "part_5", "index": 4},
+    {"name": "blade"}
+  ]
+}

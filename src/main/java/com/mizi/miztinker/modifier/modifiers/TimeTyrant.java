@@ -5,9 +5,6 @@ import com.mizi.miztinker.network.TimeChangePacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.inventory.Slot;
@@ -59,7 +56,7 @@ public class TimeTyrant extends NoLevelsModifier implements SlotStackModifierHoo
 
         // ✅ 客户端发送同步包给服务端
         if (player.level().isClientSide) {
-            MiztinkerNetwork.CHANNEL.send(PacketDistributor.SERVER.noArg(), new TimeChangePacket(next));
+            MiztinkerNetwork.INSTANCE.send(PacketDistributor.SERVER.noArg(), new TimeChangePacket(next));
         }
 
         // 客户端即时显示反馈

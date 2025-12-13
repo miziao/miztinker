@@ -9,4 +9,6 @@ public class ToolDefinitions {
 
     public static final ToolDefinition BROOM_TD = ToolDefinition.create(MiztinkerTools.broom);
 
+    public static final ToolDefinition MIRASAMA = ToolDefinition.create(MiztinkerTools.murasama);
+
 }

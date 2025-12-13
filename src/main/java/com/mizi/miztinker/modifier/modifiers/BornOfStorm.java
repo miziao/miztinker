@@ -5,7 +5,6 @@ import com.mizi.miztinker.network.WeatherChangePacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.inventory.Slot;
@@ -54,7 +53,7 @@ public class BornOfStorm extends NoLevelsModifier implements SlotStackModifierHo
 
         // ✅ 客户端发包同步到服务端
         if (player.level().isClientSide) {
-            MiztinkerNetwork.CHANNEL.send(PacketDistributor.SERVER.noArg(), new WeatherChangePacket(next));
+            MiztinkerNetwork.INSTANCE.send(PacketDistributor.SERVER.noArg(), new WeatherChangePacket(next));
         }
 
         // 客户端即时显示提示

@@ -1,13 +1,13 @@
 package com.mizi.miztinker.modifier.diadema.miziao;
 
 import com.mizi.miztinker.modifier.modifiers.base.EntityRemoveUtil;
+import com.mizi.miztinker.network.MiztinkerNetwork;
 import com.mizi.miztinker.network.packets.PlaySoundPacket;
 import com.csdy.tcondiadema.diadema.api.ranges.SphereDiademaRange;
 import com.csdy.tcondiadema.frames.diadema.Diadema;
 import com.csdy.tcondiadema.frames.diadema.DiademaType;
 import com.csdy.tcondiadema.frames.diadema.movement.DiademaMovement;
 import com.csdy.tcondiadema.frames.diadema.range.DiademaRange;
-import com.mizi.miztinker.network.MiztinkerSyncing;
 import com.mizi.miztinker.sounds.MiztinkerSounds;
 import lombok.NonNull;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,13 +18,10 @@ import net.minecraftforge.network.PacketDistributor;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 
 import static com.mizi.miztinker.modifier.modifiers.base.ForceHurtUtil.forceHurtWithNoHealable;
 import static com.mizi.miztinker.modifier.modifiers.base.LivingEntityUtil.forceSetAllCandidateHealth;
-
 
 public class MusicGameDiadema extends Diadema {
 
@@ -132,7 +129,7 @@ public class MusicGameDiadema extends Diadema {
 
         for (Entity entity : entitiesToNotify) {
             if (entity instanceof ServerPlayer serverPlayer) {
-                MiztinkerSyncing.CHANNEL.send(
+                MiztinkerNetwork.INSTANCE.send(
                         PacketDistributor.PLAYER.with(() -> serverPlayer),
                         new PlaySoundPacket(
                                 serverPlayer.getEyePosition(),
