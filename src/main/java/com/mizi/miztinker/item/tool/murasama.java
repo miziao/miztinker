@@ -426,10 +426,10 @@ public class murasama extends ModifiableItem {
         }
         if (isTrueNameB((ToolStack) tool)) {
             builder.add(Component.translatable("item.miztinker.tooltip.murasama9").withStyle(ChatFormatting.AQUA).withStyle(ChatFormatting.ITALIC));
+            builder.add(Component.translatable("item.miztinker.tooltip.murasama10").withStyle(ChatFormatting.DARK_RED).withStyle(ChatFormatting.ITALIC));
         } else {
             builder.add(Component.translatable("item.miztinker.tooltip.murasama7").withStyle(ChatFormatting.LIGHT_PURPLE).withStyle(ChatFormatting.ITALIC));
         }
-        builder.add(Component.translatable("item.miztinker.tooltip.murasama10").withStyle(ChatFormatting.DARK_RED).withStyle(ChatFormatting.ITALIC));
         builder.add(Component.translatable("item.miztinker.tooltip.murasama11").withStyle(ChatFormatting.AQUA).withStyle(ChatFormatting.ITALIC));
 
         builder.addAllFreeSlots();
