@@ -10,8 +10,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static com.mizi.miztinker.modifier.modifiers.base.LivingEntityUtil.DATA_HEALTH_ID;
-import static com.mizi.miztinker.modifier.modifiers.base.LivingEntityUtil.reflectionPenetratingDamage;
+import static com.mizi.miztinker.modifier.modifiers.base.LivingEntityUtil.*;
 
 
 public class DestinedDeath extends MobEffect {
@@ -33,16 +32,7 @@ public class DestinedDeath extends MobEffect {
     }
     @Override
     public void applyEffectTick(LivingEntity living, int amplifier) {
-        reflectionPenetratingDamage(living, living.getMaxHealth() * 0.002f + 1);
-    }
-
-    public static void reflectionPenetratingDamage(Entity target, float value) {
-        if (!(target instanceof LivingEntity living)) return;
-        if (DATA_HEALTH_ID == null) return;
-        float currentHealth = living.getEntityData().get(DATA_HEALTH_ID);
-        float newHealth = currentHealth-value;
-        if (newHealth<=0)newHealth=0;
-        living.getEntityData().set(DATA_HEALTH_ID, newHealth);
+        modifierAbsoluteSeverance(living,null,0,0);
     }
 
 }
