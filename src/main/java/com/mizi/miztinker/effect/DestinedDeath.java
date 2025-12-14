@@ -2,13 +2,15 @@ package com.mizi.miztinker.effect;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static com.mizi.miztinker.modifier.modifiers.base.LivingEntityUtil.reflectionPenetratingDamage;
+import static com.mizi.miztinker.modifier.modifiers.base.LivingEntityUtil.*;
 
 
 public class DestinedDeath extends MobEffect {
@@ -30,6 +32,9 @@ public class DestinedDeath extends MobEffect {
     }
     @Override
     public void applyEffectTick(LivingEntity living, int amplifier) {
-        reflectionPenetratingDamage(living, living, living.getMaxHealth() * 0.002f + 1);
+        if (living.tickCount%20==0) {
+            modifierAbsoluteSeverance(living, null, 0, 0);
+        }
     }
+
 }
