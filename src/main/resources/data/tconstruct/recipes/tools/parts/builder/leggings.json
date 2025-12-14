@@ -1,0 +1,16 @@
+{
+    "type": "tconstruct:part_builder",
+    "cost": 5,
+    "pattern": "tconstruct:leggings_plating",
+    "pattern_item": [
+      {
+        "tag": "tconstruct:patterns/default"
+      },
+      {
+        "item": "tconstruct:leggings_plating_cast"
+      }
+    ],
+    "result": {
+      "item": "tconstruct:leggings_plating"
+    }
+  }

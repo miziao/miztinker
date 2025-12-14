@@ -1,30 +1,37 @@
-package com.mizi.miztinker.modifier.modifiers;
+package com.mizi.miztinker.modifier.modifiers.base;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
-import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-public class Abyssal_Protection extends NoLevelsModifier implements AttributesModifierHook {
+public class BaseMaxHealthModifier extends Modifier implements AttributesModifierHook {
 
+    private final String name;
+    private final float healthAmount;
+
+    public BaseMaxHealthModifier(String name, float healthAmount) {
+        this.name = name;
+        this.healthAmount = healthAmount;
+    }
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry entry, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
         if (slot.getType() == EquipmentSlot.Type.ARMOR) {
-            UUID uuid = UUID.nameUUIDFromBytes(("tool_health_boost_" + slot.getName()).getBytes());
+            UUID uuid = UUID.nameUUIDFromBytes((name + slot.getName()).getBytes());
             AttributeModifier modifier = new AttributeModifier(
                     uuid,
-                    "harcadium_health_boost",
-                    25.0,
+                    name + "health_boost",
+                    healthAmount * entry.getLevel(),
                     AttributeModifier.Operation.ADDITION
             );
             consumer.accept(Attributes.MAX_HEALTH, modifier);
@@ -36,4 +43,3 @@ public class Abyssal_Protection extends NoLevelsModifier implements AttributesMo
         hookBuilder.addHook(this, ModifierHooks.ATTRIBUTES);
     }
 }
-

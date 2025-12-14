@@ -5,8 +5,7 @@ import com.csdy.tcondiadema.modifier.DiademaModifier;
 import com.mizi.miztinker.miztinker;
 import com.mizi.miztinker.modifier.diadema.DiademaRegister;
 import com.mizi.miztinker.modifier.modifiers.*;
-import com.mizi.miztinker.modifier.modifiers.base.BaseToolMusic;
-import com.mizi.miztinker.modifier.modifiers.base.DamageModifier;
+import com.mizi.miztinker.modifier.modifiers.base.*;
 import com.mizi.miztinker.sounds.MiztinkerSounds;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
@@ -53,8 +52,6 @@ public class MiztinkerModifiers {
 
 
     public static StaticModifier<?> XXKILLER = null;
-    //深渊保护
-    public static final StaticModifier<Abyssal_Protection> ABYSSAL_PROTECTION = MODIFIERS.register("abyssal_protection", Abyssal_Protection::new);
 
     //飞行
     public static final StaticModifier<Fly> FLY = MODIFIERS.register("fly", Fly::new);
@@ -187,7 +184,17 @@ public class MiztinkerModifiers {
 
     public static final StaticModifier<Plumber > PLUMBER_STATIC_MODIFIER = MODIFIERS.register("plumber", Plumber ::new);
 
-    public static final StaticModifier<Alloying> ALLOYING = MODIFIERS.register("alloying", Alloying::new);
+    public static final StaticModifier<DamageReductionModifier> ALLOYING =
+            MODIFIERS.register(
+                    "alloying",
+                    () -> new DamageReductionModifier(0.07f)
+            );
+
+    public static final StaticModifier<DamageReductionModifier> HARDENED =
+            MODIFIERS.register(
+                    "hardened",
+                    () -> new DamageReductionModifier(0.15f)
+            );
 
     public static final StaticModifier<Infinitum> INFINITUM_STATIC_MODIFIER = MODIFIERS.register("infinitum", Infinitum::new);
 
@@ -282,6 +289,32 @@ public class MiztinkerModifiers {
     public static final StaticModifier<All_Perfect> ALL_PERFECT_STATIC_MODIFIER = MODIFIERS.register("all_perfect", All_Perfect::new);
 
     public static final StaticModifier<Mercy> MERCY_STATIC_MODIFIER = MODIFIERS.register("mercy", Mercy::new);
+
+    public static final StaticModifier<AcidicBlood> ACIDIC_BLOOD_STATIC_MODIFIER = MODIFIERS.register("acidic_blood", AcidicBlood::new);
+
+    public static final StaticModifier<Infested> INFESTED_STATIC_MODIFIER = MODIFIERS.register("infested", Infested::new);
+
+    public static final StaticModifier<FireEater> FIRE_EATER_STATIC_MODIFIER = MODIFIERS.register("fire_eater", FireEater::new);
+
+    public static final StaticModifier<FirstBlood> FIRST_BLOOD_STATIC_MODIFIER = MODIFIERS.register("first_blood", FirstBlood::new);
+
+    public static final StaticModifier<Pulverize> PULVERIZE_STATIC_MODIFIER = MODIFIERS.register("pulverize", Pulverize::new);
+
+    public static final StaticModifier<ItsLive> ITS_LIVE_STATIC_MODIFIER = MODIFIERS.register("its_live", ItsLive::new);
+
+    public static final StaticModifier<Adaptation> ADAPTATION_STATIC_MODIFIER = MODIFIERS.register("adaptation", Adaptation::new);
+
+    public static final StaticModifier<BaseHealModifier> SRP_BASE_HEAL_MODIFIER_STATIC_MODIFIER = MODIFIERS.register("srp_heal",() -> new BaseHealModifier(2));
+
+    public static final StaticModifier<BaseMaxHealthModifier> BASE_MAX_HEALTH_MODIFIER_STATIC_MODIFIER = MODIFIERS.register("srp_max_health",() -> new BaseMaxHealthModifier("base_max_health1",10));
+
+    public static final StaticModifier<BaseMaxHealthModifier> ABYSSAL_PROTECTION = MODIFIERS.register("abyssal_protection",() -> new BaseMaxHealthModifier("base_max_health2",30));
+
+    public static final StaticModifier<MaliciouslySlandering> MALICIOUSLY_SLANDERING_STATIC_MODIFIER = MODIFIERS.register("maliciously_slandering", MaliciouslySlandering::new);
+
+    public static final StaticModifier<TemporalAmplifier> TEMPORAL_AMPLIFIER_STATIC_MODIFIER = MODIFIERS.register("temporal_amplifier", TemporalAmplifier::new);
+
+    public static final StaticModifier<WormAccumulation> WORM_ACCUMULATION_STATIC_MODIFIER = MODIFIERS.register("wormaccumulation", WormAccumulation::new);
 
     public static final StaticModifier<ScepterOfDivineSociety> SCEPTER_OF_DIVINE_SOCIETY_STATIC_MODIFIER = MODIFIERS.register("scepter_of_divine_society", ScepterOfDivineSociety::new);
 

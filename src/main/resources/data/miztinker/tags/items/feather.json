@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "minecraft:elytra",
-    "iceandfire:amphithere_feather",
-    "iceandfire:stymphalian_bird_feather"
+    { "id": "minecraft:elytra", "required": true },
+    { "id": "iceandfire:amphithere_feather", "required": false },
+    { "id": "iceandfire:stymphalian_bird_feather", "required": false }
   ]
 }

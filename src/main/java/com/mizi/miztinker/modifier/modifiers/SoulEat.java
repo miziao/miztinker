@@ -22,8 +22,6 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static com.mizi.miztinker.miztinker.getResource;
-
 public class SoulEat extends Modifier implements MeleeHitModifierHook, MeleeDamageModifierHook, TooltipModifierHook {
 
     static final String TAG_SOUL_BONUS = "soul_bonus";
@@ -49,16 +47,16 @@ public class SoulEat extends Modifier implements MeleeHitModifierHook, MeleeDama
         ModDataNBT data = tool.getPersistentData();
         String baseKey = getId().toString();
 
-        float bonus = data.getFloat(getResource(baseKey + "." + TAG_SOUL_BONUS));
-        int kills = data.getInt(getResource(baseKey + "." + TAG_SOUL_KILLS));
+        float bonus = data.getFloat(ResourceLocation.parse(baseKey + "." + TAG_SOUL_BONUS));
+        int kills = data.getInt(ResourceLocation.parse(baseKey + "." + TAG_SOUL_KILLS));
 
         float ratio = BASE_RATIO * modifier.getLevel();
         float gain = target.getMaxHealth() * ratio;
 
-        data.putFloat(getResource(baseKey + "." + TAG_SOUL_BONUS), bonus + gain);
+        data.putFloat(ResourceLocation.parse(baseKey + "." + TAG_SOUL_BONUS), bonus + gain);
         //if (Thread.currentThread().getName().contains("Server"))
         //Minecraft.getInstance().player.sendSystemMessage(Component.literal("On set : " + bonus + gain));
-        data.putInt(getResource(baseKey + "." + TAG_SOUL_KILLS), kills + 1);
+        data.putInt(ResourceLocation.parse(baseKey + "." + TAG_SOUL_KILLS), kills + 1);
 
 
         player.displayClientMessage(Component.literal(
@@ -70,7 +68,7 @@ public class SoulEat extends Modifier implements MeleeHitModifierHook, MeleeDama
     @Override
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         ModDataNBT data = tool.getPersistentData();
-        float bonus = data.getFloat(getResource(getId().toString() + "." + TAG_SOUL_BONUS));
+        float bonus = data.getFloat(ResourceLocation.parse(getId().toString() + "." + TAG_SOUL_BONUS));
         return damage + bonus;
     }
 
@@ -80,8 +78,8 @@ public class SoulEat extends Modifier implements MeleeHitModifierHook, MeleeDama
         ModDataNBT data = tool.getPersistentData();
         String baseKey = getId().toString();
 
-        float bonus = data.getFloat(getResource(baseKey + "." + TAG_SOUL_BONUS));
-        int kills = data.getInt(getResource(baseKey + "." + TAG_SOUL_KILLS));
+        float bonus = data.getFloat(ResourceLocation.parse(baseKey + "." + TAG_SOUL_BONUS));
+        int kills = data.getInt(ResourceLocation.parse(baseKey + "." + TAG_SOUL_KILLS));
 
         if (kills > 0) {
             tooltip.add(Component.literal("击杀数: " + kills).withStyle(ChatFormatting.DARK_PURPLE));

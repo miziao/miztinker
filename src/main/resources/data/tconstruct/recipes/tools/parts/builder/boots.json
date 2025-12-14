@@ -1,0 +1,16 @@
+{
+    "type": "tconstruct:part_builder",
+    "cost": 2,
+    "pattern": "tconstruct:boots_plating",
+    "pattern_item": [
+      {
+        "tag": "tconstruct:patterns/default"
+      },
+      {
+        "item": "tconstruct:boots_plating_cast"
+      }
+    ],
+    "result": {
+      "item": "tconstruct:boots_plating"
+    }
+  }

@@ -1,11 +1,10 @@
 {
   "replace": false,
   "values": [
-    "kubejs:undead_item", 
-    "irons_spellbooks:frozen_bone", 
-    "minecraft:bone",
-    "tconstruct:necrotic_bone",
-    "iceandfire:witherbone",
-    "minecraft:rotten_flesh"
+    { "id": "irons_spellbooks:frozen_bone", "required": false },
+    { "id": "minecraft:bone", "required": true },
+    { "id": "tconstruct:necrotic_bone", "required": false },
+    { "id": "iceandfire:witherbone", "required": false },
+    { "id": "minecraft:rotten_flesh", "required": true }
   ]
 }

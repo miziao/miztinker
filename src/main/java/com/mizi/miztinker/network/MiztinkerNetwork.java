@@ -17,7 +17,13 @@ import static com.mizi.miztinker.miztinker.MODID;
 public class MiztinkerNetwork {
     static int id = 0;
     private static int packetId=0;
-    public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(MODID, "packet"), () -> "1", "1"::equals, "1"::equals);
+    public static final SimpleChannel INSTANCE =
+            NetworkRegistry.newSimpleChannel(
+                    ResourceLocation.fromNamespaceAndPath(MODID, "packet"),
+                    () -> "1",
+                    "1"::equals,
+                    "1"::equals
+            );
 
     private static int id(){
         return packetId++;

@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "jzyy:ardite_ingot",
-    "tinkers_thinking:ardite_ingot"
+    { "id": "jzyy:ardite_ingot", "required": false },
+    { "id": "tinkers_thinking:ardite_ingot", "required": false }
   ]
 }

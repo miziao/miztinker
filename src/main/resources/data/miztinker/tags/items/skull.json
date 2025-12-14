@@ -1,21 +1,24 @@
 {
   "replace": false,
   "values": [
-    "mutantmonsters:mutant_skeleton_skull",
-    "block_factorys_bosses:dragon_skull",
-    "threateningly_mobs:earthloong_skull",
-    "jerotesvillage:second_rounder_skeleton_skull",
-    "goety:tall_skull",
-    "tconstruct:stray_head",
-    "minecraft:wither_skeleton_skull",
-    "#iceandfire:dragon_skulls",
-    "iceandfire:hydra_skull",
-    "iceandfire:seaserpent_skull",
-    "iceandfire:hippogryph_skull",
-    "iceandfire:cyclops_skull",
-    "iceandfire:cockatrice_skull",
-    "iceandfire:stymphalian_skull",
-    "iceandfire:troll_skull",
-    "iceandfire:amphithere_skull"
+    { "id": "mutantmonsters:mutant_skeleton_skull", "required": false },
+    { "id": "block_factorys_bosses:dragon_skull", "required": false },
+    { "id": "threateningly_mobs:earthloong_skull", "required": false },
+    { "id": "jerotesvillage:second_rounder_skeleton_skull", "required": false },
+    { "id": "goety:tall_skull", "required": false },
+    { "id": "tconstruct:stray_head", "required": false },
+
+    { "id": "minecraft:wither_skeleton_skull", "required": true },
+
+    { "id": "#iceandfire:dragon_skulls", "required": false },
+
+    { "id": "iceandfire:hydra_skull", "required": false },
+    { "id": "iceandfire:seaserpent_skull", "required": false },
+    { "id": "iceandfire:hippogryph_skull", "required": false },
+    { "id": "iceandfire:cyclops_skull", "required": false },
+    { "id": "iceandfire:cockatrice_skull", "required": false },
+    { "id": "iceandfire:stymphalian_skull", "required": false },
+    { "id": "iceandfire:troll_skull", "required": false },
+    { "id": "iceandfire:amphithere_skull", "required": false }
   ]
 }

@@ -1,0 +1,16 @@
+{
+    "type": "tconstruct:part_builder",
+    "cost": 3,
+    "pattern": "tconstruct:helmet_plating",
+    "pattern_item": [
+      {
+        "tag": "tconstruct:patterns/default"
+      },
+      {
+        "item": "tconstruct:helmet_plating_cast"
+      }
+    ],
+    "result": {
+      "item": "tconstruct:helmet_plating"
+    }
+  }

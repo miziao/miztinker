@@ -1,6 +1,7 @@
 package com.mizi.miztinker.modifier.register;
 
 
+import com.mizi.miztinker.item.DynamaxBandItem;
 import com.mizi.miztinker.item.Villager_business_card;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -74,13 +75,14 @@ public class MiztinkerItems {
                 }
             });
 
-    public static final RegistryObject<Item> DYNAMAX_BAND = ITEMS.register("dynamax_band",
-            () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)) {
-                @Override
-                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-                    tooltip.add(Component.translatable("tooltip.miztinker.dynamax_band"));
-                }
-            });
+    public static final RegistryObject<Item> DYNAMAX_BAND = ITEMS.register(
+            "dynamax_band",
+            () -> new DynamaxBandItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .rarity(Rarity.EPIC)
+            )
+    );
 
 
 
@@ -351,6 +353,22 @@ public class MiztinkerItems {
                 public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
                     tooltip.add(Component.translatable("tooltip.miztinker.death_note"));
                 }
+            });
+
+    public static final RegistryObject<Item> PARASITIC_IRON_ITEM = ITEMS.register("parasitic_iron_item",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON)) {
+            });
+
+    public static final RegistryObject<Item> TOOTH_STEEL_ITEM = ITEMS.register("tooth_steel_item",
+            () -> new Item(new Item.Properties()stacksTo(64).rarity(Rarity.COMMON)) {
+            });
+
+    public static final RegistryObject<Item> MEET_POLYMER_ITEM = ITEMS.register("meet_polymer_item",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON)) {
+            });
+
+    public static final RegistryObject<Item> ALPHA_POLYMER_ITEM = ITEMS.register("alpha_polymer_item",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.EPIC)) {
             });
 
 

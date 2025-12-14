@@ -1,9 +1,9 @@
 {
-    "replace": false,
-    "values": [
-      "jerotesvillage:hag_eye",
-      "fadg:holyeye",
-      "iceandfire:cyclops_eye",
-      "iceandfire:cockatrice_eye"
-    ]
-  }
+  "replace": false,
+  "values": [
+    { "id": "jerotesvillage:hag_eye", "required": false },
+    { "id": "fadg:holyeye", "required": false },
+    { "id": "iceandfire:cyclops_eye", "required": false },
+    { "id": "iceandfire:cockatrice_eye", "required": false }
+  ]
+}

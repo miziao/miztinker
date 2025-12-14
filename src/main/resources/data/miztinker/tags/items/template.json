@@ -1,23 +1,23 @@
 {
-    "replace": false,
-    "values": [
-      "deeperdarker:warden_upgrade_smithing_template",
-      "eeeabsmobs:ghost_warrior_upgrade_smithing_template",
-      "goety:crypt_armor_trim_smithing_template",
-      "jerotesvillage:carved_leader_upgrade_smithing_template",
-      "jerotesvillage:ancient_second_rounder_noble_upgrade_smithing_template",
-      "jerotesvillage:explorer_upgrade_smithing_template",
-      "jerotesvillage:slavery_supervisor_upgrade_smithing_template",
-      "jerotesvillage:scaly_bear_upgrade_smithing_template",
-      "jerotesvillage:magicka_scale_upgrade_smithing_template",
-      "jerotesvillage:serpon_powerhouse_upgrade_smithing_template",
-      "jerotesvillage:meror_standard_upgrade_smithing_template",
-      "nautilium_spirits:nautilium_upgrade_smithing_template",
-      "voidscape:voidic_template",
-      "galosphere:preserved_template",
-      "galosphere:silver_upgrade_smithing_template",
-      "minecraft:netherite_upgrade_smithing_template",
-      "makit_better:abyss_prismarine_upgrade_smithing_template",
-      "makit_better:bio_titanium_upgrade_smithing_template"
-    ]
-  }
+  "replace": false,
+  "values": [
+    { "id": "deeperdarker:warden_upgrade_smithing_template", "required": false },
+    { "id": "eeeabsmobs:ghost_warrior_upgrade_smithing_template", "required": false },
+    { "id": "goety:crypt_armor_trim_smithing_template", "required": false },
+    { "id": "jerotesvillage:carved_leader_upgrade_smithing_template", "required": false },
+    { "id": "jerotesvillage:ancient_second_rounder_noble_upgrade_smithing_template", "required": false },
+    { "id": "jerotesvillage:explorer_upgrade_smithing_template", "required": false },
+    { "id": "jerotesvillage:slavery_supervisor_upgrade_smithing_template", "required": false },
+    { "id": "jerotesvillage:scaly_bear_upgrade_smithing_template", "required": false },
+    { "id": "jerotesvillage:magicka_scale_upgrade_smithing_template", "required": false },
+    { "id": "jerotesvillage:serpon_powerhouse_upgrade_smithing_template", "required": false },
+    { "id": "jerotesvillage:meror_standard_upgrade_smithing_template", "required": false },
+    { "id": "nautilium_spirits:nautilium_upgrade_smithing_template", "required": false },
+    { "id": "voidscape:voidic_template", "required": false },
+    { "id": "galosphere:preserved_template", "required": false },
+    { "id": "galosphere:silver_upgrade_smithing_template", "required": false },
+    { "id": "minecraft:netherite_upgrade_smithing_template", "required": true },
+    { "id": "makit_better:abyss_prismarine_upgrade_smithing_template", "required": false },
+    { "id": "makit_better:bio_titanium_upgrade_smithing_template", "required": false }
+  ]
+}

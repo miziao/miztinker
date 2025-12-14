@@ -447,6 +447,60 @@
   "modifier.miztinker.mercy.flavor":"慈爱的战士 Cosmos!",
   "modifier.miztinker.mercy.description":"你的攻击不会击杀生物",
 
+  "modifier.miztinker.wormaccumulation": "蠕虫堆积",
+  "modifier.miztinker.wormaccumulation.flavor":"间...",
+  "modifier.miztinker.wormaccumulation.description":"每次击杀生物,该生物的血量的1%会转化为蠕虫堆积在你的盔甲上面,增厚你的盔甲",
+
+  "modifier.miztinker.hardened": "硬化",
+  "modifier.miztinker.hardened.flavor":"通常出现在生物质甲壳上",
+  "modifier.miztinker.hardened.description":"获得15%减伤率",
+
+  "modifier.miztinker.temporal_amplifier": "异形",
+  "modifier.miztinker.temporal_amplifier.flavor":"在缓慢的转变",
+  "modifier.miztinker.temporal_amplifier.description":"随着时间推移提升你的属性",
+
+  "modifier.miztinker.acidic_blood": "酸性血液",
+  "modifier.miztinker.acidic_blood.flavor":"它们的血会腐蚀舱门！",
+  "modifier.miztinker.acidic_blood.description":"受到伤害后对攻击者造成相应的「绝对切断」",
+
+  "modifier.miztinker.infested": "Infested",
+  "modifier.miztinker.infested.flavor": "你为什么要摧毁我们？我们是你的血肉",
+  "modifier.miztinker.infested.description": "近战时，你的工具会撕咬目标的血肉造成额外伤害，回复你的血量，饱食度和工具耐久",
+
+  "modifier.miztinker.fire_eater": "食火者",
+  "modifier.miztinker.fire_eater.flavor": "你的工具会吞噬你身上的火焰为自己增加耐久",
+  "modifier.miztinker.fire_eater.description": "我于荒漠中等待、于废墟中燃烧——金铁为水——土石化蜡——肉身成烟——来入我内，不复续存。",
+
+  "modifier.miztinker.first_blood": "第一滴血",
+  "modifier.miztinker.first_blood.flavor":"初见杀也是游戏的一部分",
+  "modifier.miztinker.first_blood.description":"对满血目标造成5倍伤害",
+
+  "modifier.miztinker.pulverize": "淘汰弱者",
+  "modifier.miztinker.pulverize.flavor": "碾压",
+  "modifier.miztinker.pulverize.description": "近战时处决生命值低于你最大生命值的敌人",
+
+  "modifier.miztinker.maliciously_slandering": "恶意中伤",
+  "modifier.miztinker.maliciously_slandering.flavor":"为什么他们都叫我恶魔\n因为你杀人啦\n可是我分明救人了\n因为他们没有看见啊\n为什么他们都叫你天使\n因为我救人啦\n可是你分明杀人了\n呵呵，因为他们没有看见啊",
+  "modifier.miztinker.maliciously_slandering.description":"造成伤害后让附近的生物攻击目标",
+
+  "modifier.miztinker.its_live": "它是活的！！！",
+  "modifier.miztinker.its_live.flavor": "如果这副盔甲没有吃饱，下一个就轮到我了",
+  "modifier.miztinker.its_live.description": "你的护甲会汲取你的血量回复自己的耐久",
+
+  "modifier.miztinker.srp_max_health": "坚韧",
+  "modifier.miztinker.srp_max_health.flavor": "这个厚度....已经不能称之为普通生物了",
+  "modifier.miztinker.srp_max_health.description": "提供10点最大生命,随等级提升",
+
+  "modifier.miztinker.adaptation": "适应",
+  "modifier.miztinker.adaptation.flavor":"虫子从来没有被真正消灭过",
+  "modifier.miztinker.adaptation.description":"你不会受到小于上次伤害的伤害",
+
+  "modifier.miztinker.srp_heal": "再生",
+  "modifier.miztinker.srp_heal.flavor": "即便烂的不成样子也还在蠕动的肉块",
+  "modifier.miztinker.srp_heal.description": "未着火状态每秒回复2点生命,随等级提升",
+
+
+
 
   "modifier.miztinker.sever": "雷切-RAIKIRI-",
   "modifier.miztinker.sever.flavor": "来自更高维度的攻击",
@@ -461,6 +515,7 @@
   "effect.miztinker.woundeffect": "致命创伤PLUS",
   "effect.miztinker.horologiumnoai": "时停中",
   "effect.miztinker.destineddeath": "命定之死",
+  "effect.miztinker.dropfountain": "掉落物喷泉中",
 
 
   "stat.tconstruct.slot.display.music": "音乐",
@@ -551,6 +606,10 @@
   "material.miztinker.diabolium.flavor": "来自尼希莫斯",
   "material.miztinker.diabolium.encyclopedia": "来自恶魔的力量使你可以超越极限,使你承受近乎无限多的治疗量",
 
+  "material.miztinker.parasitic_iron": "寄生铁",
+  "material.miztinker.parasitic_iron.flavor": "你感到一阵滑溜的虫子",
+  "material.miztinker.parasitic_iron.encyclopedia": "攻击会吸收对方的血液来增生虫子提升你的防御力",
+
   "material.miztinker.ultimate": "终极",
   "material.miztinker.ultimate.flavor": "多种稀有金属制成",
   "material.miztinker.ultimate.encyclopedia": "极限之力!",
@@ -563,6 +622,22 @@
 
   "material.miztinker.mothzela": "摩斯拉鳞片",
   "material.miztinker.mothzela.flavor": "使用强力生物的鳞片",
+
+  "material.miztinker.meet_polymer": "血肉聚合物",
+  "material.miztinker.meet_polymer.flavor": "由大片寄生虫的血肉聚合而成",
+
+  
+  "material.miztinker.alpha_polymer": "始祖聚合物",
+  "material.miztinker.alpha_polymer.flavor": "由更高级的寄生虫组织聚会合成",
+  "material.miztinker.alpha_polymer.encyclopedia": "拥有控制生物情绪的能力",
+
+  "material.miztinker.tooth_steel": "牙钢",
+  "material.miztinker.tooth_steel.flavor": "当把寄生虫坚硬的牙齿镶嵌到钢铁上",
+  "material.miztinker.tooth_steel.encyclopedia": "锋利而坚硬的牙齿为你带来强力的攻击与防御",
+
+  "material.miztinker.great_eater_caparace": "始祖甲壳",
+  "material.miztinker.great_eater_caparace.flavor": "寄生虫古老而高级的部分",
+  "material.miztinker.great_eater_caparace.encyclopedia": "会渗出一种类似'异形'的酸液",
 
 
 
@@ -582,6 +657,14 @@
   "tooltip.miztinker.mega_manyullyn_booster_energy": "§b使你的玛玉灵超级进化！",
 
   "item.miztinker.mega_big_iron_ingot": "超级极巨化铁锭",
+
+  "item.miztinker.parasitic_iron_item": "寄生铁锭",
+
+  "item.miztinker.alpha_polymer_item": "始祖聚合物",
+
+  "item.miztinker.meet_polymer_item": "血肉聚合物",
+
+  "item.miztinker.tooth_steel_item": "牙钢",
 
   "item.miztinker.dx": "舞萌核心",
   "tooltip.miztinker.dx": "§b蕴含着音乐的力量,击杀mizi掉落",

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+  "item":"miztinker:parasitic_iron_item"
+  },
+  "value": 1,
+  "needed": 1,
+  "material": "miztinker:parasitic_iron"
+}

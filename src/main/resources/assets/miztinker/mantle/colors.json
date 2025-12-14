@@ -112,7 +112,19 @@
     "pickaxe_strike": "#A9A9A9",
     "all_perfect": "#FF8C00",
     "death_note": "#1A1A1A",
-    "mercy": "#FDF5E6"
+    "mercy": "#FDF5E6",
+    "wormaccumulation": "#FFA07A",
+    "temporal_amplifier": "#00CED1",
+    "acidic_blood": "#7CFC00",
+    "infested": "#569a72",
+    "its_live": "#569a72",
+    "srp_max_health": "#569a72",
+    "srp_heal": "#569a72",
+    "fire_eater": "#FF8C00",
+    "first_blood": "#DC143C",
+    "pulverize": "#432221",
+    "maliciously_slandering": "#9370DB",
+    "adaptation": "#32CD32"
   },
   "material.miztinker": {
     "ten_thousand_souls": "#CD853F",
