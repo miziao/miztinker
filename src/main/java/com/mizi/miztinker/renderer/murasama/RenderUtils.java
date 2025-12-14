@@ -1,7 +1,6 @@
-package com.mizi.miztinker.renderer.other;
+package com.mizi.miztinker.renderer.murasama;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.momosensei.momotinker.Momotinker;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;

@@ -1,4 +1,4 @@
-package com.mizi.miztinker.renderer.other;
+package com.mizi.miztinker.renderer.murasama;
 
 
 import com.google.common.collect.Maps;

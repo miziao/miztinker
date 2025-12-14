@@ -6,12 +6,14 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "miztinker.refmap.json",
   "mixins": [
-    "LivingEntityTickMixin",
     "LivingEntitySetHealthMixin",
-     "ToolTableScreenMixin"
+    "LivingEntityTickMixin",
+    "ToolTableScreenMixin"
   ],
   "client": [
-    "TestMixin" 
+    "GameRendererMixin",
+    "MixinLevelRenderer",
+    "TestMixin"
   ],
   "server": [
   ],

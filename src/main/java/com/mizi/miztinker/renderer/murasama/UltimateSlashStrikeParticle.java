@@ -1,4 +1,4 @@
-package com.mizi.miztinker.renderer.other;
+package com.mizi.miztinker.renderer.murasama;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;

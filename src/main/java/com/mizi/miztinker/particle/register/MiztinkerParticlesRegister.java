@@ -6,7 +6,7 @@ import com.mizi.miztinker.particle.AscendingCutParticle;
 import com.mizi.miztinker.particle.HugSmashDownBoomParticle;
 import com.mizi.miztinker.particle.MiziParticle;
 import com.mizi.miztinker.particle.SmashDownBoomParticle;
-import com.mizi.miztinker.renderer.other.UltimateSlashStrikeParticle;
+import com.mizi.miztinker.renderer.murasama.UltimateSlashStrikeParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
 @Mod.EventBusSubscriber(modid = miztinker.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class MiztinkerParticlesRegister {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, miztinker.MODID);

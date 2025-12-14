@@ -28,7 +28,11 @@ public class UltimateSlashEntity extends Projectile {
     @Override
     public void defineSynchedData() {
     }
+    @Override
+    public void readAdditionalSaveData(CompoundTag compound) {}
 
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound) {}
     @Override
     public void tick() {
         super.tick();
@@ -49,12 +53,6 @@ public class UltimateSlashEntity extends Projectile {
             }
         }
     }
-
-    @Override
-    public void readAdditionalSaveData(CompoundTag compound) {}
-
-    @Override
-    public void addAdditionalSaveData(CompoundTag compound) {}
 
     @Override
     public boolean ignoreExplosion() {

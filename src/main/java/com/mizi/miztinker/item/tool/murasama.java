@@ -104,7 +104,7 @@ public class murasama extends ModifiableItem {
             if (player.getMainHandItem().getItem() instanceof murasama) {
                 ToolStack tool = ToolStack.from(player.getMainHandItem());
                 if (isTrueNameB(tool)){
-                    event.setAmount(event.getAmount() * 0.01f);
+                    event.setAmount(event.getAmount() * 0.0001f);
                 }
             }
         }
@@ -164,7 +164,7 @@ public class murasama extends ModifiableItem {
         ToolDamageUtil.damageAnimated(tool, 1, player, InteractionHand.MAIN_HAND);
     }
     public static void createDimensionSlash(ServerPlayer player) {
-        if (!(ToolStack.from(player.getMainHandItem()).getItem() instanceof murasama) || player.getAttackStrengthScale(0) != 1) {
+        if (!(ToolStack.from(player.getMainHandItem()).getItem() instanceof murasama)) {
             return;
         }
         ToolStack tool = ToolStack.from(player.getMainHandItem());

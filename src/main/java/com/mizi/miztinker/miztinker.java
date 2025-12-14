@@ -10,6 +10,7 @@ import com.mizi.miztinker.modifier.diadema.DiademaRegister;
 import com.mizi.miztinker.modifier.register.*;
 import com.mizi.miztinker.network.MiztinkerNetwork;
 import com.mizi.miztinker.particle.register.MiztinkerParticlesRegister;
+import com.mizi.miztinker.renderer.murasama.PostPasses;
 import com.mizi.miztinker.sounds.MiztinkerSounds;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -26,6 +27,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import slimeknights.tconstruct.library.client.model.TinkerItemProperties;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
 
@@ -62,8 +64,10 @@ public class miztinker {
 
         modBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
+        if(FMLEnvironment.dist == Dist.CLIENT){
+            modBus.addListener(PostPasses::register);
+        }
 
-        // ⭐⭐⭐ 在这里实例化你的村民交易事件处理类
         new com.mizi.miztinker.recipes.VillagerTradeHandler();
     }
     public static void initOptionalModifiers() {

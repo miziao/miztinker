@@ -369,20 +369,20 @@ public class ScabbardEntity extends Projectile {
                 target.fallDistance = 0;
             }
         }
-        if (tool.getPersistentData().getFloat(ascending_points)==10){
+        if (tool.getPersistentData().getFloat(ascending_points)==1){
             if (player.getPersistentData().getFloat(murasam_slash_cooldown.toString())==0
                     &&(tool.getPersistentData().getBoolean(tool_murasama_lock_b)||isTrueNameA(tool)||isTrueNameB(tool))){
                 if (player instanceof ServerPlayer player1) {
                     createDimensionSlash(player1);
                 }
                 Vec3 pos = player.position();
-                if (player.level instanceof ServerLevel level0){
+                if (player.level() instanceof ServerLevel level0){
                     level0.sendParticles(MiztinkerParticlesRegister.ultimate_slash_strike.get() ,pos.x,pos.y,pos.z,1,0,0,0,1);
                 }
                 tool.getPersistentData().putFloat(ascending_points,0);
                 player.getPersistentData().putFloat(murasam_slash_cooldown.toString(),20);
             }
-        }else if (tool.getPersistentData().getFloat(ascending_points) < 10) {
+        }else if (tool.getPersistentData().getFloat(ascending_points) < 1) {
             tool.getPersistentData().putFloat(
                     ascending_points,
                     tool.getPersistentData().getFloat(ascending_points) + 1

@@ -1,4 +1,4 @@
-package com.mizi.miztinker.renderer.other;
+package com.mizi.miztinker.renderer.murasama;
 
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
@@ -22,7 +22,6 @@ import static net.minecraft.client.Minecraft.ON_OSX;
 public abstract class PostParticleRenderType implements ParticleRenderType {
     protected final ResourceLocation renderTypeID;
     protected final ResourceLocation texture;
-    public int priority = 0;
 
     public PostParticleRenderType(ResourceLocation renderTypeID, ResourceLocation texture){
         this.renderTypeID = renderTypeID;
@@ -51,7 +50,6 @@ public abstract class PostParticleRenderType implements ParticleRenderType {
     public void callPipeline(){
         getPipeline().call();
     }
-
     @Override
     public void end(Tesselator tesselator) {
         tesselator.getBuilder().setQuadSorting(ORTHOGRAPHIC_Z);

@@ -1,4 +1,4 @@
-package com.mizi.miztinker.renderer.other;
+package com.mizi.miztinker.renderer.murasama;
 
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -6,6 +6,8 @@ import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.server.packs.resources.ResourceManager;
 
 import java.io.IOException;
+
+import static com.mizi.miztinker.renderer.murasama.PostEffectPipelines.shaderOrthoMatrix;
 
 
 public class UnityComposite extends PostPassBase {
@@ -24,6 +26,7 @@ public class UnityComposite extends PostPassBase {
         RenderSystem.viewport(0, 0, outTarget.width, outTarget.height);
         this.effect.setSampler("DiffuseSampler", inTarget::getColorTextureId);
 
+        this.effect.safeGetUniform("ProjMat").set(shaderOrthoMatrix);
         this.effect.safeGetUniform("OutSize").set((float) outTarget.width, (float) outTarget.height);
         //this.effect.safeGetUniform("InSize").set((float) inTarget.width, (float) inTarget.height);
         effect.setSampler("DownTexture", downTexture::getColorTextureId);

@@ -1,4 +1,4 @@
-package com.mizi.miztinker.renderer.other;
+package com.mizi.miztinker.renderer.murasama;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Camera;
@@ -40,22 +40,22 @@ public class UltimateSlashTrail extends SingleQuadParticle {
         return false;
     }
     @Override
-    public float getU0() {
+    protected float getU0() {
         return 0;
     }
 
     @Override
-    public float getU1() {
+    protected float getU1() {
         return 0;
     }
 
     @Override
-    public float getV0() {
+    protected float getV0() {
         return 0;
     }
 
     @Override
-    public float getV1() {
+    protected float getV1() {
         return 0;
     }
 

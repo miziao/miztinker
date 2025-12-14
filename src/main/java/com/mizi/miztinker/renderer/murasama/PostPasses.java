@@ -1,4 +1,4 @@
-package com.mizi.miztinker.renderer.other;
+package com.mizi.miztinker.renderer.murasama;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -21,11 +21,11 @@ public class PostPasses {
             System.out.println("Load Shader");
             ResourceManager rm = Minecraft.getInstance().getResourceManager();
             blit = new PostPassBase("miztinker:blit",rm);
-
+           
             downSampler = new DownSampling("miztinker:down_sampling",rm);
             upSampler = new UpSampling("miztinker:up_sampling",rm);
             unity_composite = new UnityComposite("miztinker:unity_composite",rm);
-
+            
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

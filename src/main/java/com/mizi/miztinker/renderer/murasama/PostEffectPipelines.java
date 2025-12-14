@@ -1,22 +1,66 @@
-package com.mizi.miztinker.renderer.other;
+package com.mizi.miztinker.renderer.murasama;
 
 import com.google.common.collect.Queues;
 import com.mojang.blaze3d.pipeline.RenderTarget;
+import com.mojang.blaze3d.systems.RenderSystem;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import org.joml.Matrix4f;
 
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 import static net.minecraft.client.Minecraft.ON_OSX;
 
 public class PostEffectPipelines {
     public static final Queue<Pipeline> PostEffectQueue = Queues.newConcurrentLinkedQueue();
+    public static final PriorityQueue<Pipeline> PostEffectQueueInternal = Queues.newPriorityQueue();
 
+    static ResourceLocation depth_target = OjangUtils.newRL("miztinker:depth_target");
+    public static RenderTarget depth;
+
+    public static void RenderPost(){
+        if(!PostEffectQueue.isEmpty()){
+            RenderSystem.enableBlend();
+
+            depth = TargetManager.getTarget(depth_target);
+            depth.copyDepthFrom(Minecraft.getInstance().getMainRenderTarget());
+            depth.unbindWrite();
+            //
+            //RenderSystem.disableDepthTest();
+            Pipeline renderType;
+
+            PostEffectQueue.removeIf((ppl) -> {
+                PostEffectQueueInternal.add(ppl);
+                return true;
+            });
+
+            updateOrthoMatrix();
+            while (!PostEffectQueueInternal.isEmpty()){
+                renderType = PostEffectQueueInternal.poll();
+                renderType.HandlePostEffect();
+            }
+            Minecraft.getInstance().getMainRenderTarget().copyDepthFrom(depth);
+            Minecraft.getInstance().getMainRenderTarget().bindWrite(false);
+        }
+
+        close();
+        TargetManager.ReleaseAll();
+    }
+
+    public static Matrix4f shaderOrthoMatrix;
+    static void updateOrthoMatrix() {
+        var mainTarget = Minecraft.getInstance().getMainRenderTarget();
+        shaderOrthoMatrix = (new Matrix4f()).setOrtho(0.0F, (float)mainTarget.width, 0.0F, (float)mainTarget.height, 0.1F, 1000.0F);
+    }
+
+    //for fucking oculus
     @Getter
     private static boolean Active = false;
 
     public static void active(){
+        //System.out.println("frame");
         Active = true;
     }
 
