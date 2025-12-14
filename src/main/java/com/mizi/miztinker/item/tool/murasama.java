@@ -324,7 +324,7 @@ public class murasama extends ModifiableItem {
         }
     }
     private final static String TRUE_NAME_A = "Jetstream_Sam";
-    private final static String TRUE_NAME_B = "Lost_In_Tianyi";
+    private final static String TRUE_NAME_B = "狩猎神祇大剑";
     public static boolean isTrueNameA(ToolStack toolStack) {
         Component nameComponent = toolStack.createStack().getHoverName();
         String toolName = nameComponent.getString();
