@@ -32,7 +32,9 @@ public class DestinedDeath extends MobEffect {
     }
     @Override
     public void applyEffectTick(LivingEntity living, int amplifier) {
-        modifierAbsoluteSeverance(living,null,0,0);
+        if (living.tickCount%20==0) {
+            modifierAbsoluteSeverance(living, null, 0, 0);
+        }
     }
 
 }
