@@ -369,7 +369,7 @@ public class ScabbardEntity extends Projectile {
                 target.fallDistance = 0;
             }
         }
-        if (tool.getPersistentData().getFloat(ascending_points)==1){
+        if (tool.getPersistentData().getFloat(ascending_points)==10){
             if (player.getPersistentData().getFloat(murasam_slash_cooldown.toString())==0
                     &&(tool.getPersistentData().getBoolean(tool_murasama_lock_b)||isTrueNameA(tool)||isTrueNameB(tool))){
                 if (player instanceof ServerPlayer player1) {
@@ -382,7 +382,7 @@ public class ScabbardEntity extends Projectile {
                 tool.getPersistentData().putFloat(ascending_points,0);
                 player.getPersistentData().putFloat(murasam_slash_cooldown.toString(),20);
             }
-        }else if (tool.getPersistentData().getFloat(ascending_points) < 1) {
+        }else if (tool.getPersistentData().getFloat(ascending_points) < 10) {
             tool.getPersistentData().putFloat(
                     ascending_points,
                     tool.getPersistentData().getFloat(ascending_points) + 1
