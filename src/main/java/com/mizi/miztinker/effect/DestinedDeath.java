@@ -1,22 +1,22 @@
 package com.mizi.miztinker.effect;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 
+import static com.mizi.miztinker.modifier.modifiers.base.AbsoluteSeverance.*;
 import static com.mizi.miztinker.modifier.modifiers.base.LivingEntityUtil.*;
 
 
 public class DestinedDeath extends MobEffect {
     public DestinedDeath() {
         super(MobEffectCategory.HARMFUL, 16769263);
-        super.addAttributeModifier(Attributes.MAX_HEALTH, "F5D8D627-2788-AF4C-2DA5-FBA1650E264D", -0.15, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        super.addAttributeModifier(Attributes.MAX_HEALTH, "8790CFC6-C6A2-522E-F429-C219017E870A", -0.15, AttributeModifier.Operation.MULTIPLY_TOTAL);
     }
     public @NotNull String getDescriptionId () {
         return "effect.miztinker.destineddeath";
@@ -32,9 +32,25 @@ public class DestinedDeath extends MobEffect {
     }
     @Override
     public void applyEffectTick(LivingEntity living, int amplifier) {
-        if (living.tickCount%20==0) {
-            modifierAbsoluteSeverance(living, null, 0, 0);
+        modifierAbsoluteSeverance(living);
+    }
+    public static void modifierAbsoluteSeverance(LivingEntity target){
+        if (target.getHealth() <= 0) return;
+        float reHealth = target.getHealth() - target.getMaxHealth() * 0.001f;
+        setAbsoluteSeveranceHealth(target, reHealth);
+        forceSetAllCandidateHealth(target,reHealth);
+        if (isFromOmniMod(target)) {
+            CompoundTag tag = new CompoundTag();
+            tag.putFloat("Health", reHealth);
+            try {
+                target.readAdditionalSaveData(tag);
+            } catch (Exception ignored) {
+            }
+        }
+        if (reHealth <= 0 || target.getHealth() <= 0){
+            forceSetAllCandidateHealth(target, 0);
+            setAbsoluteSeveranceHealth(target, 0);
+            setEntityDead(target);
         }
     }
-
 }
