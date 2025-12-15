@@ -1,0 +1,26 @@
+{
+    "default": [
+    ],
+    "perStat": {
+        "tconstruct:armor": [
+            {
+                "name": "miztinker:srp_heal",
+                "level": 1
+            },
+            {
+                "name": "miztinker:srp_max_health",
+                "level": 1
+            },
+            {
+                "name": "miztinker:its_live",
+                "level": 1
+            },
+            {
+                "name": "miztinker:whispering",
+                "level": 1
+            }
+        ]
+
+    }
+    
+}

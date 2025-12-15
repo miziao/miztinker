@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aab",
+    "abc",
+    "bcc"
+  ],
+  "key": {
+    "a": {
+      "item": "miztinker:meet_polymer_item"
+    },
+    "b": {
+      "item": "miztinker:tooth_steel_item"
+    },
+    "c": {
+      "item": "miztinker:alpha_polymer_item"
+    }
+  },
+  "result": {
+    "item": "abominations_infection:flugzeug_core"
+  }
+}

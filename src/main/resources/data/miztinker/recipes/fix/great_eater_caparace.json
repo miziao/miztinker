@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+  "item":"abominations_infection:great_eater_caparace"
+  },
+  "value": 1,
+  "needed": 1,
+  "material": "miztinker:great_eater_caparace"
+}

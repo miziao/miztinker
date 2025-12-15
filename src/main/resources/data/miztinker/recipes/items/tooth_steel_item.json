@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "abominations_infection:tooth"
+    },
+    "b": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "miztinker:tooth_steel_item"
+  }
+}

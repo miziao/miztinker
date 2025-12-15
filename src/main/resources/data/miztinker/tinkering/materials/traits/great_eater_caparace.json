@@ -1,0 +1,24 @@
+{
+    "default": [
+    ],
+    "perStat": {
+        "tconstruct:armor": [
+            {
+                "name": "miztinker:temporal_amplifier",
+                "level": 1
+            },
+            {
+                "name": "miztinker:acidic_blood",
+                "level": 1
+            },
+            {
+                "name": "miztinker:hardened",
+                "level": 1
+            },
+            {
+                "name": "miztinker:whispering",
+                "level": 1
+            }
+        ]
+    }
+}

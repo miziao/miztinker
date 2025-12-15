@@ -1,0 +1,41 @@
+{
+    "default": [
+        {
+            "name": "miztinker:infested",
+            "level": 2
+        },
+        {
+            "name": "miztinker:pulverize",
+            "level": 1
+        },
+        {
+            "name": "miztinker:maliciously_slandering",
+            "level": 1
+        },
+        {
+            "name": "miztinker:whispering",
+            "level": 1
+        }
+    ],
+    "perStat": {
+        "tconstruct:armor": [
+            {
+                "name": "miztinker:its_live",
+                "level": 2
+            },
+            {
+                "name": "miztinker:srp_max_health",
+                "level": 2
+            },
+            {
+                "name": "miztinker:adaptation",
+                "level": 1
+            },
+            {
+                "name": "miztinker:whispering",
+                "level": 1
+            }
+        ]
+    }
+    
+}

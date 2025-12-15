@@ -1,0 +1,51 @@
+{
+    "default": [
+        {
+            "name": "miztinker:infested",
+            "level": 1
+        },
+        {
+            "name": "miztinker:fire_eater",
+            "level": 1
+        },
+        {
+            "name": "miztinker:whispering",
+            "level": 1
+        }
+    ],
+    "perStat": {
+        "tconstruct:armor": [
+            {
+                "name": "miztinker:its_live",
+                "level": 1
+            },
+            {
+                "name": "miztinker:fire_eater",
+                "level": 1
+            },
+            {
+                "name": "miztinker:hardened",
+                "level": 1
+            },
+            {
+                "name": "miztinker:whispering",
+                "level": 1
+            }
+        ],
+        "tconstruct:head": [
+            {
+                "name": "miztinker:infested",
+                "level": 1
+            },
+            {
+                "name": "miztinker:fire_eater",
+                "level": 1
+            },
+            {
+                "name": "miztinker:first_blood",
+                "level": 1
+            }
+        ]
+    }
+    
+}

@@ -22,7 +22,7 @@ public class WoundEffectAttack extends Modifier implements MeleeHitModifierHook 
         LivingEntity target = context.getLivingTarget();
         if (target != null && target.isAlive()) {
             int level = modifier.getLevel();
-            int duration = 100 + level * 40; // 基础5秒，每级+2秒
+            int duration = 180 + level * 40; // 基础5秒，每级+2秒
             // 这里使用注册好的 WoundEffect
             target.addEffect(new MobEffectInstance(WoundEffect.get(), duration, 0, false, true, true));
         }

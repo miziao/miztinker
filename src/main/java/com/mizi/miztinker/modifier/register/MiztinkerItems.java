@@ -360,7 +360,7 @@ public class MiztinkerItems {
             });
 
     public static final RegistryObject<Item> TOOTH_STEEL_ITEM = ITEMS.register("tooth_steel_item",
-            () -> new Item(new Item.Properties()stacksTo(64).rarity(Rarity.COMMON)) {
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON)) {
             });
 
     public static final RegistryObject<Item> MEET_POLYMER_ITEM = ITEMS.register("meet_polymer_item",

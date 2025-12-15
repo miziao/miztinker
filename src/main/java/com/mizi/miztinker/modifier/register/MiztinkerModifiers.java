@@ -304,6 +304,8 @@ public class MiztinkerModifiers {
 
     public static final StaticModifier<Adaptation> ADAPTATION_STATIC_MODIFIER = MODIFIERS.register("adaptation", Adaptation::new);
 
+    public static final StaticModifier<Real_souleat_realform> REAL_SOULEAT_REALFORM_STATIC_MODIFIER = MODIFIERS.register("real_souleat_realform", Real_souleat_realform::new);
+
     public static final StaticModifier<BaseHealModifier> SRP_BASE_HEAL_MODIFIER_STATIC_MODIFIER = MODIFIERS.register("srp_heal",() -> new BaseHealModifier(2));
 
     public static final StaticModifier<BaseMaxHealthModifier> BASE_MAX_HEALTH_MODIFIER_STATIC_MODIFIER = MODIFIERS.register("srp_max_health",() -> new BaseMaxHealthModifier("base_max_health1",10));

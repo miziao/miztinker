@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+  "item":"miztinker:tooth_steel_item"
+  },
+  "value": 1,
+  "needed": 1,
+  "material": "miztinker:tooth_steel"
+}

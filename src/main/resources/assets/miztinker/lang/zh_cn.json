@@ -111,6 +111,10 @@
   "modifier.miztinker.real_souleat.flavor": "需要更多的灵魂量,一万不够,十万不够,百万不够...",
   "modifier.miztinker.real_souleat.description": "揭示它的真实形态！",
 
+  "modifier.miztinker.real_souleat_realform": "轻抚",
+  "modifier.miztinker.real_souleat_realform.flavor": "在牠完成时轻抚牠,牠会进化到一个新的层次",
+  "modifier.miztinker.real_souleat_realform.description": "揭示它的真实形态！",
+
   "modifier.miztinker.sb_cancel": "后摇取消",
   "modifier.miztinker.sb_cancel.flavor": "吓哭了",
   "modifier.miztinker.sb_cancel.description": "副手盾牌举盾后放下会迅速减少主手武器攻击冷却",
@@ -515,7 +519,7 @@
   "effect.miztinker.woundeffect": "致命创伤PLUS",
   "effect.miztinker.horologiumnoai": "时停中",
   "effect.miztinker.destineddeath": "命定之死",
-  "effect.miztinker.dropfountain": "掉落物喷泉中",
+  "effect.miztinker.dropfountaineffect": "掉落物喷泉中",
 
 
   "stat.tconstruct.slot.display.music": "音乐",

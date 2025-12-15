@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "abominations_infection:putrid_meat"
+    },
+    "b": {
+      "item": "abominations_infection:infected_putrid_flesh"
+    }
+  },
+  "result": {
+    "item": "miztinker:meet_polymer_item"
+  }
+}
