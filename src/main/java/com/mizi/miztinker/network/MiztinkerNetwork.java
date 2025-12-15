@@ -13,13 +13,14 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 import static com.mizi.miztinker.miztinker.MODID;
+import static com.mizi.miztinker.miztinker.getResource;
 
 public class MiztinkerNetwork {
     static int id = 0;
     private static int packetId=0;
     public static final SimpleChannel INSTANCE =
             NetworkRegistry.newSimpleChannel(
-                    ResourceLocation.fromNamespaceAndPath(MODID, "packet"),
+                    getResource("packet"),
                     () -> "1",
                     "1"::equals,
                     "1"::equals

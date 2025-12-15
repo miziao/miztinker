@@ -18,13 +18,13 @@ import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 
+import static com.mizi.miztinker.miztinker.getResource;
 import static com.mizi.miztinker.modifier.modifiers.SoulEat.TAG_SOUL_BONUS;
 
 public class Real_souleat_realform extends NoLevelsModifier
-        implements SlotStackModifierHook, InventoryTickModifierHook {
+        implements SlotStackModifierHook {
 
-    private static final ResourceLocation REAL_REVEALED =
-            new ResourceLocation("miztinker", "real_revealed");
+    public static final ResourceLocation REAL_REVEALED = getResource("real_revealed");
 
     private static final float REQUIRED_SOUL = 1f;
 
@@ -39,67 +39,30 @@ public class Real_souleat_realform extends NoLevelsModifier
             Player player,
             SlotAccess access
     ) {
-        // 和 Death_eye 一样：不关心 held
-        if (player.level().isClientSide) return true;
+//        if (player.level().isClientSide) return false;
 
         ModDataNBT data = tool.getPersistentData();
 
         // 读取噬魂
-        String baseKey = MiztinkerModifiers.SOUL_EAT.getId().toString();
-        float soulBonus = data.getFloat(
-                ResourceLocation.parse(baseKey + "." + TAG_SOUL_BONUS)
-        );
+        float soulBonus = data.getFloat(TAG_SOUL_BONUS);
 
         if (soulBonus < REQUIRED_SOUL) {
-            player.displayClientMessage(
-                    Component.literal("§8牠还没感到满足。"),
-                    true
-            );
+            player.displayClientMessage(Component.literal("§8牠还没感到满足。"), true);
             return true;
         }
-
-        boolean nowActive = !data.getBoolean(REAL_REVEALED);
-        data.putBoolean(REAL_REVEALED, nowActive);
-
-        if (nowActive) {
-            player.displayClientMessage(
-                    Component.literal("§6牠开始显露真实的形态……"),
-                    true
-            );
+        boolean a = !data.getBoolean(REAL_REVEALED);
+        data.putBoolean(REAL_REVEALED, a);
+        if (a){
+            player.displayClientMessage(Component.literal("§6牠开始显露真实的形态……"), true);
         } else {
-            player.displayClientMessage(
-                    Component.literal("§7真实形态被重新封印。"),
-                    true
-            );
+            player.displayClientMessage(Component.literal("§7真实形态被重新封印。"), true);
         }
 
         return true; // ⭐ 和 Death_eye 一样，必须 true
     }
 
-    /* ---------------- InventoryTick：真正生效 ---------------- */
-
-    @Override
-    public void onInventoryTick(
-            IToolStackView tool,
-            ModifierEntry entry,
-            Level world,
-            LivingEntity holder,
-            int itemSlot,
-            boolean isSelected,
-            boolean isCorrectSlot,
-            ItemStack stack
-    ) {
-        if (world.isClientSide) return;
-        if (!(holder instanceof Player player)) return;
-
-        ModDataNBT data = tool.getPersistentData();
-        if (!data.getBoolean(REAL_REVEALED)) return;
-
-    }
-
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.SLOT_STACK);
-        hookBuilder.addHook(this, ModifierHooks.INVENTORY_TICK);
     }
 }

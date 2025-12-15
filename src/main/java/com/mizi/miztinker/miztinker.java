@@ -95,7 +95,7 @@ public class miztinker {
     }
 
     public static ResourceLocation getResource(String id) {
-        return new ResourceLocation(MODID, id);
+        return ResourceLocation.fromNamespaceAndPath(MODID, id);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
