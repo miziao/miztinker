@@ -4,6 +4,7 @@ package com.mizi.miztinker.entity;
 import com.mizi.miztinker.entity.ScabbardEntity.ScabbardEntity;
 import com.mizi.miztinker.entity.ScabbardEntity.UltimateSlashEntity;
 import com.mizi.miztinker.entity.boss.entity.MiziAo;
+import com.mizi.miztinker.entity.boss.entity.TitanWarden;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -30,6 +31,15 @@ public class MiztinkerEntityRegister {
                             .sized(1.2f, 2.55f)
                             .clientTrackingRange(14)
                             .build("miztinker:mizi_ao"));
+
+    public static final RegistryObject<EntityType<TitanWarden>> TITAN_WARDEN =
+            ENTITY.register("titan_warden",
+                    () -> EntityType.Builder.of(
+                                    TitanWarden::new, MobCategory.MONSTER)
+                            //.sized(0.9F, 2.9F)
+                            .sized(5.4F, 87F)
+                            .clientTrackingRange(120)
+                            .build("miztinker:titan_warden"));
 
     public static final RegistryObject<EntityType<ScabbardEntity>> scabbard_entity = registerScabbardEntity("scabbard_entity", MiztinkerEntityRegister.scabbard_entity);
     public static final RegistryObject<EntityType<UltimateSlashEntity>> ultimate_slash = ENTITIES.register("ultimate_slash", () -> EntityType.Builder.<UltimateSlashEntity>of(UltimateSlashEntity::new, MobCategory.MISC).sized(1F, 1F).setTrackingRange(4).setUpdateInterval(1).setCustomClientFactory((spawnEntity, world) -> new UltimateSlashEntity(MiztinkerEntityRegister.ultimate_slash.get(), world)).setShouldReceiveVelocityUpdates(true));

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "dcd",
+    "aba"
+  ],
+  "key": {
+    "a": { "item": "minecraft:sculk_catalyst" },
+    "b": { "item": "minecraft:echo_shard" },
+    "c": { "item": "minecraft:sculk_shrieker" },
+    "d": { "item": "minecraft:sculk_sensor" }
+  },
+  "result": { "item": "miztinker:sculk_mixture", "count": 1 }
+}

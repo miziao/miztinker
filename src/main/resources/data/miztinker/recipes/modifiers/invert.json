@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "miztinker:uno_card"
+    }
+  ],
+  "result": "miztinker:invert",
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

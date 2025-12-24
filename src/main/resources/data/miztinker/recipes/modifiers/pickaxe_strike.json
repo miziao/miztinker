@@ -15,7 +15,7 @@
   "level": 1,
   "result": "miztinker:pickaxe_strike",
   "slots": {
-    "upgrades": 1
+    "upgrades": 3
   },
   "tools": {
     "tag": "tconstruct:modifiable/loot_capable_tool"

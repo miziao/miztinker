@@ -31,17 +31,6 @@ public class MiztinkerOptionalModifiers  {
             LOGGER.info("etstlib and SlashBlade not found, some modifier will not be registered");
         }
 
-        if (OptionalDependencyHandler.isClassPresent("com.yellowbrossproductions.yellowbrossextras.entities.DefenderEntity")) {
-            try {
-                yellowbrossproductionsIntegration.registerModifiers();
-                LOGGER.info("Successfully initialized yellowbrossproductions integration");
-            } catch (Exception e) {
-                LOGGER.error("Failed to initialize yellowbrossproductions integration: {}", e.getMessage());
-            }
-        } else {
-            LOGGER.info("yellowbrossproductions not found, some modifier will not be registered");
-
-        }
 
         if (OptionalDependencyHandler.isClassPresent("virtuoel.pehkui.api.ScaleData")) {
             try {
@@ -113,6 +102,18 @@ public class MiztinkerOptionalModifiers  {
             }
         } else {
             LOGGER.info("projecte not found, some modifier will not be registered");
+
+        }
+
+        if (OptionalDependencyHandler.isClassPresent("pyre.tinkerslevellingaddon.util.ToolLevellingUtil")) {
+            try {
+                tlevelingIntegration.registerModifiers();
+                LOGGER.info("Successfully initialized tleveling integration");
+            } catch (Exception e) {
+                LOGGER.error("Failed to initialize tleveling integration: {}", e.getMessage());
+            }
+        } else {
+            LOGGER.info("tleveling not found, some modifier will not be registered");
 
         }
 

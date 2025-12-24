@@ -2,10 +2,7 @@ package com.mizi.miztinker.particle.register;
 
 
 import com.mizi.miztinker.miztinker;
-import com.mizi.miztinker.particle.AscendingCutParticle;
-import com.mizi.miztinker.particle.HugSmashDownBoomParticle;
-import com.mizi.miztinker.particle.MiziParticle;
-import com.mizi.miztinker.particle.SmashDownBoomParticle;
+import com.mizi.miztinker.particle.*;
 import com.mizi.miztinker.renderer.murasama.UltimateSlashStrikeParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleType;
@@ -28,6 +25,7 @@ public class MiztinkerParticlesRegister {
     public static final RegistryObject<SimpleParticleType> hug_smash_down_boom = PARTICLE_TYPES.register("hug_smash_down_boom", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> ascending_cut = PARTICLE_TYPES.register("ascending_cut", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> ultimate_slash_strike = PARTICLE_TYPES.register("ultimate_slash_strike", () -> new SimpleParticleType(true));
+    public static final RegistryObject<SimpleParticleType> BIG_SONIC_BOOM = PARTICLE_TYPES.register("big_sonic_boom", () -> new SimpleParticleType(false));
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
@@ -38,6 +36,7 @@ public class MiztinkerParticlesRegister {
         Minecraft.getInstance().particleEngine.register(MiztinkerParticlesRegister.hug_smash_down_boom.get(), HugSmashDownBoomParticle.Provider::new);
         Minecraft.getInstance().particleEngine.register(MiztinkerParticlesRegister.ascending_cut.get(), AscendingCutParticle.Provider::new);
         Minecraft.getInstance().particleEngine.register(MiztinkerParticlesRegister.ultimate_slash_strike.get(), UltimateSlashStrikeParticle.Provider::new);
+        Minecraft.getInstance().particleEngine.register(MiztinkerParticlesRegister.BIG_SONIC_BOOM.get(), BigSonicBoomParticle.Provider::new);
 
     }
 }

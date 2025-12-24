@@ -1,6 +1,5 @@
 package com.mizi.miztinker.modifier.modifiers.base;
 
-import com.yellowbrossproductions.yellowbrossextras.entities.DefenderEntity;
 import net.minecraft.nbt.*;
 import net.minecraft.network.protocol.game.ClientboundRemoveMobEffectPacket;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
@@ -8,7 +7,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -18,10 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.GameRules;
-import net.minecraftforge.common.ForgeHooks;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -29,7 +24,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import static com.mizi.miztinker.modifier.modifiers.AwakenDoomGuy.isFromOmniMod;
 import static com.mizi.miztinker.modifier.modifiers.base.AbsoluteSeverance.*;
 
 
@@ -687,6 +681,16 @@ public class LivingEntityUtil {
                 entity.getEntityData().set(accessor, (int) newHealth);
             } else if (currentValue instanceof Float) {
                 entity.getEntityData().set(accessor, newHealth);
+            } else if (currentValue instanceof Boolean) {
+                entity.getEntityData().set(accessor, (int) newHealth);
+            } else if (currentValue instanceof Double) {
+                entity.getEntityData().set(accessor, (double) newHealth);
+            } else if (currentValue instanceof Long) {
+                entity.getEntityData().set(accessor, (long) newHealth);
+            } else if (currentValue instanceof Byte) {
+                entity.getEntityData().set(accessor, (byte) newHealth);
+            } else if (currentValue instanceof Short) {
+                entity.getEntityData().set(accessor, (short) newHealth);
             }
         } finally {
             WriteFlag.endWrite();
@@ -740,17 +744,6 @@ public class LivingEntityUtil {
         return entity.getClass().getName().contains("dummmmmmy");
     }
 
-    public static boolean isDefender(Entity entity) {
-        if (entity == null) {
-            return false;
-        }
-
-        if (entity instanceof DefenderEntity defender){
-//            System.out.println("防御者状态为"+defender.getPhase());
-            return defender.getPhase() == 0;
-        }
-        return false;
-    }
 
 
     public static boolean isFromOmniMod(Entity entity) {

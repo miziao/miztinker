@@ -1,12 +1,5 @@
 package com.mizi.miztinker.modifier.modifiers;
 
-import com.c2h6s.etstlib.register.EtSTLibHooks;
-import com.c2h6s.etstlib.tool.hooks.ArrowDamageModifierHook;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -14,10 +7,8 @@ import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifier
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
-import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
-import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
-public class XXkiller extends Modifier implements MeleeDamageModifierHook, ArrowDamageModifierHook {
+public class XXkiller extends Modifier implements MeleeDamageModifierHook {
 
 
 
@@ -32,16 +23,9 @@ public class XXkiller extends Modifier implements MeleeDamageModifierHook, Arrow
         return damage * getMultiplier(entry.getLevel());
     }
 
-    @Override
-    public float getArrowDamage(ModDataNBT nbt, ModifierEntry entry, ModifierNBT modifierNBT,
-                                AbstractArrow arrow, @Nullable LivingEntity attacker,
-                                @NotNull Entity target, float baseDamage, float damage) {
-        return damage * getMultiplier(entry.getLevel());
-    }
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE);
-        hookBuilder.addHook(this, EtSTLibHooks.ARROW_DAMAGE);
     }
 }

@@ -1,0 +1,21 @@
+{
+    "default": [
+        {
+            "name": "miztinker:old_spiky",
+            "level": 1
+        },
+        {
+            "name": "tconstruct:piercing",
+            "level": 2
+        }
+    ],
+        "perStat": {
+        "tconstruct:armor": [
+            {
+                "name": "miztinker:old_spiky",
+                "level": 1
+            }
+        ]
+        }
+    
+}

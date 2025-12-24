@@ -1,7 +1,9 @@
 package com.mizi.miztinker.modifier.register;
 
 
+
 import com.mizi.miztinker.item.DynamaxBandItem;
+import com.mizi.miztinker.item.MozhuaCapItem;
 import com.mizi.miztinker.item.Villager_business_card;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -16,6 +18,9 @@ import com.mizi.miztinker.miztinker;
 
 import javax.annotation.Nullable;
 import java.util.List;
+
+import static com.mizi.miztinker.modifier.register.MiztinkerBlocks.OLD_CACTUS;
+import static com.mizi.miztinker.modifier.register.MiztinkerBlocks.SMELTERY_INCREASE_PRODUCTION;
 
 public class MiztinkerItems {
 
@@ -53,6 +58,7 @@ public class MiztinkerItems {
                 @Override
                 public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
                     tooltip.add(Component.translatable("tooltip.miztinker.oni_miko_bow"));
+                    tooltip.add(Component.translatable("tooltip.miztinker.oni_miko_bow_2"));
                 }
             });
 
@@ -166,6 +172,14 @@ public class MiztinkerItems {
                 @Override
                 public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
                     tooltip.add(Component.translatable("tooltip.miztinker.primal_reversion_ruby"));
+                }
+            });
+
+    public static final RegistryObject<Item> PRIMAL_REVERSION_CACTUS = ITEMS.register("primal_reversion_cactus",
+            () -> new Item(new Item.Properties().stacksTo(8).rarity(Rarity.EPIC)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.primal_reversion_cactus"));
                 }
             });
 
@@ -284,9 +298,20 @@ public class MiztinkerItems {
                 }
             });
 
-    public static final RegistryObject<Item> MOZHUA_CAP= ITEMS.register("mozhua_cap",
-            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.RARE)) {
-            });
+    public static final RegistryObject<Item> MOZHUA_CAP = ITEMS.register(
+
+            "mozhua_cap",
+            () -> new MozhuaCapItem(
+                    new Item.Properties()
+                            .stacksTo(64)
+                            .rarity(Rarity.RARE)
+            ){
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.mozhua_cap"));
+                }
+            }
+    );
 
     public static final RegistryObject<Item> DX_INGOT= ITEMS.register("dx_ingot",
             () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.EPIC)) {
@@ -371,6 +396,13 @@ public class MiztinkerItems {
             () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.EPIC)) {
             });
 
+    public static final RegistryObject<Item> HARCADIUM = ITEMS.register(
+            "harcadium",
+            () -> new Item(new Item.Properties()
+                    .stacksTo(64)
+                    .rarity(Rarity.RARE)
+            )
+    );
 
 
     public static final RegistryObject<Item> NETHER_REACTOR = ITEMS.register(
@@ -380,5 +412,91 @@ public class MiztinkerItems {
                     new Item.Properties()
             )
     );
+
+    public static final RegistryObject<Item> HARCADIUM_ORE = ITEMS.register(
+            "harcadium_ore",
+            () -> new BlockItem(
+                    MiztinkerBlocks.HARCADIUM_ORE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> HARCADIUM_ORE_END_STONE = ITEMS.register(
+            "harcadium_ore_end_stone",
+            () -> new BlockItem(
+                    MiztinkerBlocks.HARCADIUM_ORE_END_STONE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> OLD_CACTUS_ITEM = ITEMS.register("old_cactus",
+            () -> new BlockItem(OLD_CACTUS.get(), new Item.Properties()
+                    .stacksTo(64)
+                    .rarity(Rarity.RARE)
+            )
+    );
+
+    public static final RegistryObject<Item> smelteryIncreaseProductionBlock = ITEMS.register("smeltery_increase_production",
+            () -> new BlockItem(SMELTERY_INCREASE_PRODUCTION.get(), new Item.Properties()
+                    .stacksTo(64)
+                    .rarity(Rarity.RARE)
+            )
+    );
+
+    public static final RegistryObject<Item> UNO_CARD= ITEMS.register("uno_card",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.uno_card"));
+                    tooltip.add(Component.translatable("tooltip.miztinker.uno_card_2"));
+                }
+            });
+
+    public static final RegistryObject<Item> SOUL_ESSENCE_FRAGMENTS= ITEMS.register("soul_essence_fragments",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.soul_essence_fragments"));
+                    tooltip.add(Component.translatable("tooltip.miztinker.soul_essence_fragments_2"));
+                }
+            });
+
+    public static final RegistryObject<Item> SOUL_ESSENCE= ITEMS.register("soul_essence",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.RARE)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.soul_essence"));
+                }
+            });
+
+    public static final RegistryObject<Item> SCULK_MIXTURE= ITEMS.register("sculk_mixture",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.RARE)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.sculk_mixture"));
+                }
+            });
+
+    public static final RegistryObject<Item> TITAN_CATALYST= ITEMS.register("titan_catalyst",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.EPIC)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.titan_catalyst"));
+                }
+                @Override
+                public boolean isFoil(ItemStack stack) {
+                    return true;
+                }
+            });
+
+    public static final RegistryObject<Item> EXP_SHARE= ITEMS.register("exp_share",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.RARE)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.exp_share"));
+                    tooltip.add(Component.translatable("tooltip.miztinker.exp_share_2"));
+                    tooltip.add(Component.translatable("tooltip.miztinker.exp_share_3"));
+                }
+            });
 
 }

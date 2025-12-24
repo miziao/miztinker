@@ -147,8 +147,8 @@
   "modifier.miztinker.atomslash.flavor": "アトミック斩!",
   "modifier.miztinker.atomslash.description": "你学会了原子斩,所以可以空挥释放合计25道的斩击,每击斩击造成击中生物当前生命值一半的伤害",
 
-  "modifier.miztinker.sleepinstant": "便携式睡袋",
-  "modifier.miztinker.sleepinstant.flavor": "为什么睡袋可以安装在匠魂工具上",
+  "modifier.miztinker.sleepinstant": "便携式床",
+  "modifier.miztinker.sleepinstant.flavor": "为什么床可以安装在匠魂工具上",
   "modifier.miztinker.sleepinstant.description": "手持时使用下蹲加右键即可进入梦乡",
 
   "modifier.miztinker.death_eye": "死神之眼",
@@ -233,7 +233,11 @@
 
   "modifier.miztinker.greymatter": "小奇兵",
   "modifier.miztinker.greymatter.flavor": "哦 烦馁,应该变四手霸王或者钻石战神的 ",
-  "modifier.miztinker.greymatter.description": "穿戴上时按下匠魂的头盔交互键变身,再次按下取消,变身后获得跳跃提升10,速度5,最大生命值变为5,体型会变得很小,但在你变身后周围3x3范围内的掉落物会每隔5分钟翻倍一次",
+  "modifier.miztinker.greymatter.description": "穿戴上时在物品上右键变身,再次按下取消,变身后获得跳跃提升10,速度5,最大生命值变为5,体型会变得很小,但在你变身后周围3x3范围内的掉落物会每隔5分钟翻倍一次",
+
+  "modifier.miztinker.ghostfreak": "鬼影",
+  "modifier.miztinker.ghostfreak.flavor": "你该不会害怕我这个老鬼影吧?",
+  "modifier.miztinker.ghostfreak.description": "穿戴上时在物品上右键变身,获得虚化的能力,但不能遇到任何流体,那会使你第二层皮肤上的隐形凝胶失效",
 
   "modifier.miztinker.souls": "灵魂共生",
   "modifier.miztinker.souls.flavor": "萨满巫术...",
@@ -503,6 +507,67 @@
   "modifier.miztinker.srp_heal.flavor": "即便烂的不成样子也还在蠕动的肉块",
   "modifier.miztinker.srp_heal.description": "未着火状态每秒回复2点生命,随等级提升",
 
+  "modifier.miztinker.lovestone": "爱石",
+  "modifier.miztinker.lovestone.flavor": "早餐吃石头",
+  "modifier.miztinker.lovestone.description": "左键石头(rock)类方块会强制挖掘，并不掉落物品",
+
+  "modifier.miztinker.harcadium_armor": "哈肯典姆护身",
+  "modifier.miztinker.harcadium_armor.flavor": "感觉很眼熟",
+  "modifier.miztinker.harcadium_armor.description":"获得60点最大生命值",
+
+  "modifier.miztinker.bed_armor": "床护身",
+  "modifier.miztinker.bed_armor.flavor": "bed rock",
+  "modifier.miztinker.bed_armor.description":"获得1点最大生命值",
+
+  "modifier.miztinker.structurescanner": "结构探测仪",
+  "modifier.miztinker.structurescanner.flavor": "探查结构名这本看不到的东西",
+  "modifier.miztinker.structurescanner.description":"下蹲右键查看当前所在位置的结构,并且输出的内容信息可以左键复制下来",
+
+  "modifier.miztinker.biomescanner": "群系探测仪",
+  "modifier.miztinker.biomescanner.flavor": "探查群系名这本看不到的东西",
+  "modifier.miztinker.biomescanner.description":"下蹲右键查看当前所在位置的群系,并且输出的内容信息可以左键复制下来",
+
+  "modifier.miztinker.learningdevice": "学习装置",
+  "modifier.miztinker.learningdevice.flavor": "甚至是第六世代的版本",
+  "modifier.miztinker.learningdevice.description":"拥有此特性的工具 武器获得经验时,全背包的其他可获得经验的工具 武器 防具会额外获得一次经验",
+
+  "modifier.miztinker.old_spiky": "原始回归-棘刺",
+  "modifier.miztinker.old_spiky.flavor": "400%冰冷的刺！",
+  "modifier.miztinker.old_spiky.description":"主动格挡造成的反伤等同于于玩家主手与副手工具的基础伤害，被动反伤将造成50%伤害,反伤伤害倍率受等级影响",
+
+  "modifier.miztinker.invert": "反转",
+  "modifier.miztinker.invert.flavor": "uno!",
+  "modifier.miztinker.invert.description":"强化后反转匠魂经验值",
+
+  "modifier.miztinker.double_evolution_pill": "究极进化药",
+  "modifier.miztinker.double_evolution_pill.flavor": "强制进化",
+  "modifier.miztinker.double_evolution_pill.description":"当匠魂经验等级升级到最高时强化的场合可以生效,随机获得10个槽位",
+"message.miztinker.ultimate_evolution.success_10": "§6§l进化成功！§f您已获得随机10个槽位",
+
+"modifier.miztinker.bedrock_destr0yer": "基岩破坏者",
+"modifier.miztinker.bedrock_destr0yer.flavor": "D0",
+"modifier.miztinker.bedrock_destr0yer.description":"你可以瞬间破坏基岩",
+
+"modifier.miztinker.randomizer_launcher": "异变之力",
+"modifier.miztinker.randomizer_launcher.flavor": "贤者之石残影",
+"modifier.miztinker.randomizer_launcher.description":"右键发射异变光球",
+
+"modifier.miztinker.loli_energy": "氪金萝莉-无限电量",
+"modifier.miztinker.loli_energy.flavor": "氪金萝莉的一点残影",
+"modifier.miztinker.loli_energy.description":"手持或者副手持有时每t尝试填满背包或者脚下的fe容器",
+
+
+"modifier.miztinker.arcana": "奥术",
+"modifier.miztinker.arcana.flavor": "掌握部分元素之力",
+"modifier.miztinker.arcana.description":"物品栏右键切换模式,手持右键发射对应元素光球",
+"modifier.miztinker.arcana.switch": "奥术核心切换至",
+"modifier.miztinker.arcana.mode.0": "§6烈焰形态",
+  "modifier.miztinker.arcana.mode.1": "§c爆破形态",
+  "modifier.miztinker.arcana.mode.2": "§b水源形态",
+  "modifier.miztinker.arcana.mode.3": "§4惩戒形态",
+  "modifier.miztinker.arcana.mode.4": "§e闪电形态",
+  
+
 
 
 
@@ -514,6 +579,8 @@
   "modifier.miztinker.onimiko": "No.§m01§r06 鬼巫女的[领域]",
   "modifier.miztinker.onimiko.flavor": "这难道不是博丽灵梦吗?!",
   "modifier.miztinker.onimiko.description": "使你拥有鬼巫女的防御能力",
+
+  "jei.miztinker.fuel_temperature": "匠魂燃料信息",
 
 
   "effect.miztinker.woundeffect": "致命创伤PLUS",
@@ -629,7 +696,6 @@
 
   "material.miztinker.meet_polymer": "血肉聚合物",
   "material.miztinker.meet_polymer.flavor": "由大片寄生虫的血肉聚合而成",
-
   
   "material.miztinker.alpha_polymer": "始祖聚合物",
   "material.miztinker.alpha_polymer.flavor": "由更高级的寄生虫组织聚会合成",
@@ -643,12 +709,38 @@
   "material.miztinker.great_eater_caparace.flavor": "寄生虫古老而高级的部分",
   "material.miztinker.great_eater_caparace.encyclopedia": "会渗出一种类似'异形'的酸液",
 
+  "material.miztinker.harcadium": "哈肯典姆",
+  "material.miztinker.harcadium.flavor": "感觉好眼熟？",
+  "material.miztinker.harcadium.encyclopedia": "末地力量的聚晶",
+
+  "material.miztinker.fake_bedrock": "床石",
+  "material.miztinker.fake_bedrock.flavor": "bed and rock",
+  "material.miztinker.fake_bedrock.encyclopedia": "没有泰坦诸神眷恋的小石头",
+
+  "material.miztinker.old_cactus": "原始回归-仙人掌",
+  "material.miztinker.old_cactus.flavor": "回到tic2状态的仙人掌",
+  "material.miztinker.old_cactus.encyclopedia": "这会是这个材料的巅峰吗?",
+
 
 
   "block.miztinker.nether_reactor": "下界反应核",
 
+  "block.miztinker.harcadium_ore": "哈肯典姆矿石",
+
+  "block.miztinker.harcadium_ore_end_stone": "末地哈肯典姆矿石",
+
+  "block.miztinker.old_cactus": "原始回归-仙人掌",
+
+  "block.miztinker.smeltery_increase_production": "冶炼炉倍矿器",
+
+  
+
   "entity.miztinker.mizi_ao": "「舞萌高手」米子山民",
   "entity.miztinker.mizi_ao.chujing": "「神碑的终结者」米子山民",
+
+  "entity.miztinker.titan_warden": "监守者泰坦（未锁敌）",
+  "entity.miztinker.titan_warden.lock": "监守者泰坦（已锁定）",
+  "chat.miztinker.titan_warden.warning": "§4监守者泰坦正在苏醒... 赶紧逃离这里！",
 
 
 
@@ -657,10 +749,34 @@
   "item.miztinker.oni_miko_bow": "鬼巫女的大蝴蝶结",
   "tooltip.miztinker.oni_miko_bow": "§b从鬼巫女身上掉下来的,还带着一点她的气味",
 
+  "item.miztinker.soul_essence_fragments": "灵魂精粹碎片",
+  "tooltip.miztinker.soul_essence_fragments": "§b任何生物都存在的灵魂精粹",
+  "tooltip.miztinker.soul_essence_fragments_2": "§b所以击杀任意生物都有低概率掉落",
+
+  "item.miztinker.soul_essence": "灵魂精粹",
+  "tooltip.miztinker.soul_essence": "§b可以用来赋予生物强大的灵魂",
+
+  "item.miztinker.titan_catalyst": "幽匿泰坦催化剂",
+  "tooltip.miztinker.titan_catalyst": "§b用于将监守者转化为对应泰坦",
+
+  "item.miztinker.sculk_mixture": "幽匿混合物",
+  "tooltip.miztinker.sculk_mixture": "§b混合了大量的幽匿物质",
+
+  "item.miztinker.uno_card": "乌诺卡-反转",
+  "tooltip.miztinker.uno_card": "§b村民之间非常流行的游戏",
+  "tooltip.miztinker.uno_card_2": "§4如果你发现这个物品无法进行强化 那么您可能需要安装 §atinkerslevellingaddon",
+
+  "item.miztinker.exp_share": "第六代学习装置",
+  "tooltip.miztinker.exp_share": "§b有传言称有人在海底废墟的地面上看到过",
+  "tooltip.miztinker.exp_share_2": "§4如果你发现这个物品无法进行强化 那么您可能需要安装 §atinkerslevellingaddon",
+  "tooltip.miztinker.exp_share_3": "§dfrom Pixelmon Reforged",
+
   "item.miztinker.mega_manyullyn_booster_energy": "超级玛玉灵驱劲能量",
   "tooltip.miztinker.mega_manyullyn_booster_energy": "§b使你的玛玉灵超级进化！",
 
   "item.miztinker.mega_big_iron_ingot": "超级极巨化铁锭",
+
+  "item.miztinker.smeltery_increase_production": "冶炼炉倍矿器",
 
   "item.miztinker.parasitic_iron_item": "寄生铁锭",
 
@@ -670,6 +786,8 @@
 
   "item.miztinker.tooth_steel_item": "牙钢",
 
+  "item.miztinker.old_cactus": "原始回归-仙人掌",
+
   "item.miztinker.dx": "舞萌核心",
   "tooltip.miztinker.dx": "§b蕴含着音乐的力量,击杀mizi掉落",
 
@@ -677,8 +795,11 @@
   "tooltip.miztinker.death_note": "§b书与笔从最高处的死神界坠落至最低处的人间界",
 
   "item.miztinker.mozhua_cap": "再来一瓶",
+  "tooltip.miztinker.mozhua_cap": "§b直接右键也可以兑换你的粉魔爪",
 
   "item.miztinker.ignister": "电子界到临者@伊格尼斯星",
+
+  "item.miztinker.harcadium": "哈肯典姆",
 
   "item.miztinker.ten_thousand_souls_item": "万魂锭",
 
@@ -779,6 +900,9 @@
   "item.miztinker.primal_reversion_emerald": "原始回归催化剂",
   "tooltip.miztinker.primal_reversion_emerald": "§b使你的材料回归到tic2的状态!",
 
+  "item.miztinker.primal_reversion_cactus": "原始回归催化剂",
+  "tooltip.miztinker.primal_reversion_cactus": "§b使你的材料回归到tic2的状态!",
+
   "item.miztinker.primal_reversion_lavium": "原始回归催化剂",
   "tooltip.miztinker.primal_reversion_lavium": "§b使你的材料回归到tic2的状态!",
 
@@ -819,10 +943,10 @@
   "item.miztinker.lollipop.description": "一种猪猪侠最爱的匠魂工具，可以吃哦",
 
   "item.miztinker.old_sword": "1.8剑",
-  "item.miztinker.old_sword.description": "来自1.8更加遥远的遗产,拥有很高的攻速,让你攻击不再有攻击冷却,还还原了1.8的右键格挡减伤极致",
+  "item.miztinker.old_sword.description": "来自1.8更加遥远的遗产,拥有很高的攻速,让你攻击不再有攻击冷却,还还原了1.8的右键格挡减伤机制",
 
   "item.miztinker.broom": "扫帚",
-  "item.miztinker.broom.description": "主副手时可以像巫师那样飞行,同时还可以当作铲子使用",
+  "item.miztinker.broom.description": "主副手持有时可以像巫师那样飞行,同时还可以当作铲子和刷子使用",
 
   "item.miztinker.tinker_loli_pickaxe": "普通萝莉",
   "item.miztinker.tinker_loli_pickaxe.description": "来自1.12的遥远遗产，可以同时作为镐子，铲子和斧头！\n右键对10 x 10 x 10的生物造成一次攻击\n“延展”强化会提供群体攻击范围和挖掘范围！ ",

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "miztinker:soul_essence_fragments" },
+    { "item": "miztinker:soul_essence_fragments" },
+    { "item": "miztinker:soul_essence_fragments" },
+    { "item": "miztinker:soul_essence_fragments" },
+    { "item": "miztinker:soul_essence_fragments" },
+    { "item": "miztinker:soul_essence_fragments" },
+    { "item": "miztinker:soul_essence_fragments" },
+    { "item": "miztinker:soul_essence_fragments" },
+    { "item": "miztinker:soul_essence_fragments" }
+  ],
+  "result": {
+    "item": "miztinker:soul_essence"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": { "tag": "miztinker:template" },
+  "base": { "item": "minecraft:cactus" },
+  "addition": { "item": "miztinker:primal_reversion_cactus" },
+  "result": { "item": "miztinker:old_cactus" }
+}

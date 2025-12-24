@@ -1,6 +1,8 @@
 {
   "stats": {
     "tconstruct:maille": {},
+    "tconstruct:repair_kit": {},
+    "tconstruct:shield_core": {},
     "tconstruct:plating_helmet": {
       "armor": 13,
       "durability": 3000,

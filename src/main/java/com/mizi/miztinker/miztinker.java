@@ -2,11 +2,14 @@ package com.mizi.miztinker;
 
 import com.mizi.miztinker.entity.MiztinkerEntityRegister;
 import com.mizi.miztinker.entity.boss.entity.MiziAo;
+import com.mizi.miztinker.entity.boss.entity.TitanWarden;
 import com.mizi.miztinker.entity.boss.render.MiziAoRenderer;
+import com.mizi.miztinker.entity.boss.render.TitanWardenRenderer;
 import com.mizi.miztinker.item.tool.until.MiztinkerTools;
 import com.mizi.miztinker.key.MiztinkerKey;
 import com.mizi.miztinker.modifier.diadema.ClientDiademaRegister;
 import com.mizi.miztinker.modifier.diadema.DiademaRegister;
+import com.mizi.miztinker.modifier.modifiers.base.ServerTickHandler;
 import com.mizi.miztinker.modifier.register.*;
 import com.mizi.miztinker.network.MiztinkerNetwork;
 import com.mizi.miztinker.particle.register.MiztinkerParticlesRegister;
@@ -35,6 +38,8 @@ import static com.mizi.miztinker.item.tool.until.MiztinkerTools.*;
 import static com.mizi.miztinker.miztinker.MODID;
 
 // The value here should match an entry in the META-INF/mods.toml file
+
+
 @Mod(MODID)
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class miztinker {
@@ -53,6 +58,7 @@ public class miztinker {
         MiztinkerEntityRegister.ENTITY.register(modBus);
         MiztinkerEntityRegister.ENTITIES.register(modBus);
         MiztinkerBlocks.BLOCKS.register(modBus);
+        MiztinkerBlocks.BLOCK_ENTITIES.register(modBus);
         DiademaRegister.DIADEMA_TYPES.register(modBus);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             ClientDiademaRegister.CLIENT_DIADEMA_TYPES.register(modBus);
@@ -61,13 +67,13 @@ public class miztinker {
         MiztinkerFluidRegister.FLUIDS.register(modBus);
         MiztinkerTools.initRegisters();
         MiztinkerParticlesRegister.PARTICLE_TYPES.register(modBus);
+        MinecraftForge.EVENT_BUS.register(new ServerTickHandler());
 
         modBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
         if(FMLEnvironment.dist == Dist.CLIENT){
             modBus.addListener(PostPasses::register);
         }
-
         new com.mizi.miztinker.recipes.VillagerTradeHandler();
     }
     public static void initOptionalModifiers() {
@@ -77,6 +83,8 @@ public class miztinker {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void addAttribute(EntityAttributeCreationEvent event) {
         event.put(MiztinkerEntityRegister.MIZI_AO.get(), MiziAo.createAttributes().build());
+
+        event.put(MiztinkerEntityRegister.TITAN_WARDEN.get(), TitanWarden.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -91,6 +99,10 @@ public class miztinker {
         event.registerEntityRenderer(
                 MiztinkerEntityRegister.MIZI_AO.get(),
                 MiziAoRenderer::new
+        );
+        event.registerEntityRenderer(
+                MiztinkerEntityRegister.TITAN_WARDEN.get(),
+                TitanWardenRenderer::new
         );
     }
 

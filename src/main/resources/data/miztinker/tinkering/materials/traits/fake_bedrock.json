@@ -1,0 +1,16 @@
+{
+  "default": [
+    {
+      "name": "miztinker:sleepinstant",
+      "level": 1
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor":[
+      {
+        "name": "miztinker:bed_armor",
+        "level": 1
+      }
+    ]
+  }
+}

@@ -1,14 +1,19 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "priority": 200,
+  "priority": 100,
   "package": "com.mizi.miztinker.mixins",
   "compatibilityLevel": "JAVA_17",
   "refmap": "miztinker.refmap.json",
   "mixins": [
     "LivingEntitySetHealthMixin",
     "LivingEntityTickMixin",
-    "ToolTableScreenMixin"
+    "ToolTableScreenMixin",
+    "BlockBehaviourMixin",
+    "EntityCollisionContextAccessor",
+    "EntityInvoker",
+    "EntityCollisionMixin",
+    "OreMeltingRecipeMixin"
   ],
   "client": [
     "GameRendererMixin",

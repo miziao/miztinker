@@ -9,12 +9,14 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +27,7 @@ import slimeknights.tconstruct.library.modifiers.hook.armor.EquipmentChangeModif
 import slimeknights.tconstruct.library.modifiers.hook.build.ValidateModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.RequirementsModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
-import slimeknights.tconstruct.library.modifiers.hook.interaction.KeybindInteractModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.SlotStackModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
@@ -37,7 +39,11 @@ import java.util.List;
 import java.util.UUID;
 
 public class GreyMatter extends NoLevelsModifier
-        implements KeybindInteractModifierHook, InventoryTickModifierHook,  RequirementsModifierHook, ValidateModifierHook, EquipmentChangeModifierHook {
+        implements SlotStackModifierHook,
+        InventoryTickModifierHook,
+        RequirementsModifierHook,
+        ValidateModifierHook,
+        EquipmentChangeModifierHook {
 
     private static final ResourceLocation SHRUNK_KEY = new ResourceLocation("miztinker", "grey_matter_shrunk");
     private static final UUID HEALTH_UUID = UUID.fromString("5f5e555d-aaaa-4f8e-b5aa-31c1e4a6a9cc");
@@ -48,9 +54,8 @@ public class GreyMatter extends NoLevelsModifier
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.SLOT_STACK);
         hookBuilder.addHook(this, ModifierHooks.INVENTORY_TICK);
-        // 匠魂使用 ARMOR_INTERACT 做头盔/护腿交互，这里注册 ARMOR_INTERACT（库内部映射到 KeybindInteractModifierHook）
-        hookBuilder.addHook(this, ModifierHooks.ARMOR_INTERACT);
     }
 
     @Override
@@ -59,21 +64,31 @@ public class GreyMatter extends NoLevelsModifier
         return null;
     }
 
-    /** Keybind 被触发（来自 InteractionHandler.startArmorInteract） */
     @Override
-    public boolean startInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot, TooltipKey key) {
-        // 仅对头盔生效
-        if (slot != EquipmentSlot.HEAD) return false;
+    public boolean overrideOtherStackedOnMe(
+            IToolStackView tool,
+            ModifierEntry entry,
+            ItemStack held,
+            Slot slot,
+            Player player,
+            SlotAccess access
+    ) {
+        // 必须空手
+        if (!held.isEmpty()) return false;
+
+        // 只在服务端处理
         if (player.level().isClientSide) return false;
 
         CompoundTag data = player.getPersistentData();
         boolean shrunk = data.getBoolean(SHRUNK_KEY.toString());
 
         if (!shrunk) {
-            enterShrunk(player);
+            enterShrunk(player); // 切换状态
         } else {
             exitShrunk(player);
         }
+
+        // 吞掉右键，避免原版逻辑
         return true;
     }
 

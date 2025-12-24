@@ -27,7 +27,7 @@ public class MusicGameDiadema extends Diadema {
 
     private static final double RADIUS = 16.0; // 效果范围
     private static final int SOUND_INTERVAL = 200; // 200 ticks = 10秒
-    private static final int DAMAGE_DELAY = 35; // 25 ticks = 1.25秒
+    private static final int DAMAGE_DELAY = 25; // 25 ticks = 1.25秒
 
     private int soundTickCounter = 0;
     private int damageTickCounter = -1; // -1 表示未激活

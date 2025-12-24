@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "miztinker:block/smeltery_increase_production" }
+  }
+}

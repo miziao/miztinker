@@ -45,7 +45,7 @@ public class BossEntity extends Monster {
 
 
     @Override
-    public void registerGoals() {
+    protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(2, new RandomStrollGoal(this, 1));
     }

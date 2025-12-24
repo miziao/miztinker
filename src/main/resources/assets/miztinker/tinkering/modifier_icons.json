@@ -1,3 +1,6 @@
 {
-  "miztinker:pickaxe_strike":  "minecraft:item/stone_pickaxe"
+  "miztinker:pickaxe_strike":  "minecraft:item/stone_pickaxe",
+   "miztinker:invert":  "miztinker:item/uno_card",
+   "miztinker:randomizer_launcher":  "projecte:entity/randomizer",
+   "miztinker:arcana":  "miztinker:item/arcana"
 }

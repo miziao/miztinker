@@ -38,7 +38,6 @@ public class DamageModifier extends NoLevelsModifier implements MeleeHitModifier
         if (target != null && player != null) {
             if (target.getHealth() <= 0) return knockback;
             if (isFromDummmmmmyMod(target)) return knockback;
-            if (isDefender(target)) return knockback;
             float toolDamage = tool.getStats().get(ToolStats.ATTACK_DAMAGE);
             modifierSeverance(target,player,toolDamage,this.value,this.baseDamage);
         }
@@ -53,7 +52,6 @@ public class DamageModifier extends NoLevelsModifier implements MeleeHitModifier
         if (target != null && player != null) {
             if (target.getHealth() <= 0) return;
             if (isFromDummmmmmyMod(target)) return;
-            if (isDefender(target)) return;
             float toolDamage = tool.getStats().get(ToolStats.ATTACK_DAMAGE);
             modifierSeverance(target,player,toolDamage,this.value,this.baseDamage);
         }

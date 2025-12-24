@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "miztinker:block/old_cactus",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "miztinker:old_cactus"
+        }
+      ]
+    }
+  ]
+}

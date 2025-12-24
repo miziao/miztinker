@@ -25,9 +25,6 @@ public class VillagerTradeHandler {
         Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
         int level = 5; // 大师级
 
-        // -------------------------------------------------------------------------------------
-        // 原本已有的农夫逻辑保持不动
-        // -------------------------------------------------------------------------------------
         if (type == VillagerProfession.FARMER) {
             trades.computeIfAbsent(level, k -> new ArrayList<>());
             List<VillagerTrades.ItemListing> levelTrades = trades.get(level);

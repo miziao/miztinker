@@ -7,8 +7,10 @@ import com.mizi.miztinker.modifier.diadema.DiademaRegister;
 import com.mizi.miztinker.modifier.modifiers.*;
 import com.mizi.miztinker.modifier.modifiers.base.*;
 import com.mizi.miztinker.sounds.MiztinkerSounds;
+import net.minecraftforge.fml.ModList;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
+import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
 import slimeknights.tconstruct.library.modifiers.util.StaticModifier;
 
@@ -31,7 +33,7 @@ public class MiztinkerModifiers {
     public static StaticModifier<?> ETERNALBOOLD  = null;
 
     //极巨化
-    public static StaticModifier<?> DYNAMAX = null;
+    public static StaticModifier<Dynamax> DYNAMAX = MODIFIERS.register("dynamax", Dynamax::new);
 
     //极巨化
     public static final StaticModifier<Dynamax_armor> DYNAMAX_ARMOR = MODIFIERS.register("dynamax_armor", Dynamax_armor::new);
@@ -51,7 +53,7 @@ public class MiztinkerModifiers {
     public static final StaticModifier<Sodium> SODIUM = MODIFIERS.register("sodium", Sodium::new);
 
 
-    public static StaticModifier<?> XXKILLER = null;
+    public static StaticModifier<XXkiller> XXKILLER = MODIFIERS.register("xxkiller", XXkiller::new);
 
     //飞行
     public static final StaticModifier<Fly> FLY = MODIFIERS.register("fly", Fly::new);
@@ -168,7 +170,7 @@ public class MiztinkerModifiers {
     public static final StaticModifier<BaseToolMusic> KNIGHT_OF_NIGHT =
             MODIFIERS.register("knight_of_night", () -> new BaseToolMusic(() -> MiztinkerSounds.KNIGHT_OF_NIGHT.get()));
 
-    public static StaticModifier<?> awakenDoomGuyStaticModifier = null;
+    public static StaticModifier<AwakenDoomGuy> awakenDoomGuyStaticModifier =MODIFIERS.register("awaken_doomguy", AwakenDoomGuy::new);
 
     public static final StaticModifier<AwakenUltraman> AWAKEN_ULTRAMAN_STATIC_MODIFIER = MODIFIERS.register("awaken_ultraman", AwakenUltraman::new);
 
@@ -244,6 +246,8 @@ public class MiztinkerModifiers {
 
     public static StaticModifier<?> TINKERSCROWN = null;
 
+    public static StaticModifier<?> LOVESTONE = null;
+
     public static final StaticModifier<DamageModifier> SEVER = MODIFIERS.register("sever", () -> new DamageModifier(0.5F, 0));
 
     public static final StaticModifier<Triple_Seven> TRIPLE_SEVEN_STATIC_MODIFIER = MODIFIERS.register("triple_seven", Triple_Seven::new);
@@ -304,6 +308,28 @@ public class MiztinkerModifiers {
 
     public static final StaticModifier<Adaptation> ADAPTATION_STATIC_MODIFIER = MODIFIERS.register("adaptation", Adaptation::new);
 
+    public static final StaticModifier<Ghostfreak> GHOSTFREAK = MODIFIERS.register("ghostfreak", Ghostfreak::new);
+
+    public static StaticModifier<?> LEARNINGDEVICE = null;
+
+    public static final StaticModifier<BiomeScanner> BIOME_SCANNER_STATIC_MODIFIER = MODIFIERS.register("biomescanner", BiomeScanner::new);
+
+    public static final StaticModifier<Old_Spiky> OLD_SPIKY_STATIC_MODIFIER = MODIFIERS.register("old_spiky", Old_Spiky::new);
+
+    public static final StaticModifier<Invert> INVERT_STATIC_MODIFIER = ModList.get().isLoaded("tinkerslevellingaddon") ? MODIFIERS.register("invert",Invert::new) : null;
+
+    public static final StaticModifier<Randomizer_Launcher> RANDOMIZER_LAUNCHER_STATIC_MODIFIER = ModList.get().isLoaded("projecte") ? MODIFIERS.register("randomizer_launcher",Randomizer_Launcher::new) : null;
+
+    public static final StaticModifier<Arcana> ARCANA_STATIC_MODIFIER = ModList.get().isLoaded("projecte") ? MODIFIERS.register("arcana",Arcana::new) : null;
+
+    public static final StaticModifier<Double_Evolution_Pill> DOUBLE_EVOLUTION_PILL_STATIC_MODIFIER = ModList.get().isLoaded("tinkerslevellingaddon") ? MODIFIERS.register("double_evolution_pill",Double_Evolution_Pill::new) : null;
+
+    public static final StaticModifier<StructureScanner> STRUCTURE_SCANNER_STATIC_MODIFIER = MODIFIERS.register("structurescanner", StructureScanner::new);
+
+    public static final StaticModifier<NoLevelsModifier> BEDROCK_DESTROYER = MODIFIERS.register("bedrock_destr0yer", NoLevelsModifier::new);
+
+    public static final StaticModifier<Loli_Energy> LOLI_ENERGY_STATIC_MODIFIER = MODIFIERS.register("loli_energy", Loli_Energy::new);
+
     public static final StaticModifier<Real_souleat_realform> REAL_SOULEAT_REALFORM_STATIC_MODIFIER = MODIFIERS.register("real_souleat_realform", Real_souleat_realform::new);
 
     public static final StaticModifier<BaseHealModifier> SRP_BASE_HEAL_MODIFIER_STATIC_MODIFIER = MODIFIERS.register("srp_heal",() -> new BaseHealModifier(2));
@@ -311,6 +337,10 @@ public class MiztinkerModifiers {
     public static final StaticModifier<BaseMaxHealthModifier> BASE_MAX_HEALTH_MODIFIER_STATIC_MODIFIER = MODIFIERS.register("srp_max_health",() -> new BaseMaxHealthModifier("base_max_health1",10));
 
     public static final StaticModifier<BaseMaxHealthModifier> ABYSSAL_PROTECTION = MODIFIERS.register("abyssal_protection",() -> new BaseMaxHealthModifier("base_max_health2",30));
+
+    public static final StaticModifier<BaseMaxHealthModifier> HARCADIUM_ARMOR = MODIFIERS.register("harcadium_armor",() -> new BaseMaxHealthModifier("base_max_health3",60));
+
+    public static final StaticModifier<BaseMaxHealthModifier> BED_ARMOR = MODIFIERS.register("bed_armor",() -> new BaseMaxHealthModifier("base_max_health4",1));
 
     public static final StaticModifier<MaliciouslySlandering> MALICIOUSLY_SLANDERING_STATIC_MODIFIER = MODIFIERS.register("maliciously_slandering", MaliciouslySlandering::new);
 

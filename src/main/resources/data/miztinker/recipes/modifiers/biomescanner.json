@@ -1,0 +1,31 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:grass_block"
+    },
+    {
+      "item": "minecraft:spyglass"
+    },
+    {
+      "item": "tconstruct:silky_cloth"
+    },
+    {
+      "item": "minecraft:cartography_table"
+    },
+    {
+      "item": "minecraft:stick"
+    }
+  ],
+  "result": "miztinker:biomescanner",
+  "slots": {
+    "upgrades": 1
+  },
+  "level": {
+    "max": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

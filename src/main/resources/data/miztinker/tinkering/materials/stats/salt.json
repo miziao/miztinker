@@ -1,6 +1,8 @@
 {
   "stats": {
     "tconstruct:binding": {},
+    "tconstruct:repair_kit": {},
+    "tconstruct:shield_core": {},
     "tconstruct:handle": {
       "durability": 0,
       "mining_speed": 0.1,

@@ -11,7 +11,7 @@
     "b": { "tag": "forge:gems/cinnabar" },
     "c": { "tag": "forge:gems/emerald" },
     "d": { "tag": "forge:gems/ruby" },
-    "e":{ "item": "projecte:catalytic_lens" },
+    "e":{ "tag": "miztinker:tcon_crystal" },
     "f": { "tag": "forge:gems/ocean_gemstone" },
     "g": { "tag": "forge:gems/sapphire" },
     "h": { "tag": "forge:gems/amethyst" },

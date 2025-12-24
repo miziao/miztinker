@@ -1,17 +1,13 @@
 package com.mizi.miztinker.modifier.modifiers;
 
-import com.mizi.miztinker.modifier.register.MiztinkerModifiers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
-import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.SlotStackModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -26,7 +22,7 @@ public class Real_souleat_realform extends NoLevelsModifier
 
     public static final ResourceLocation REAL_REVEALED = getResource("real_revealed");
 
-    private static final float REQUIRED_SOUL = 1f;
+    private static final float REQUIRED_SOUL = 10_000_000f;
 
     /* ---------------- SlotStack：只负责“开关” ---------------- */
 

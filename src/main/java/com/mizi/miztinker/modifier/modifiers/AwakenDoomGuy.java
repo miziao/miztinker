@@ -1,17 +1,12 @@
 package com.mizi.miztinker.modifier.modifiers;
 
-import com.mizi.miztinker.miztinker;
 import com.mizi.miztinker.modifier.modifiers.base.ForceHurtUtil;
+import com.mizi.miztinker.modifier.modifiers.base.LivingEntityUtil;
 import com.mizi.miztinker.modifier.register.MiztinkerModifiers;
-import com.yellowbrossproductions.yellowbrossextras.entities.DefenderEntity;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -90,20 +85,30 @@ public class AwakenDoomGuy extends NoLevelsModifier implements
         Player player = context.getPlayerAttacker();
 
         if (target == null || player == null) return knockback;
-        if (target.getHealth() <= 0 || isFromDummmmmmyMod(target) || isDefender(target)) return knockback;
+        if (target.getHealth() <= 0) return knockback;
 
-        float halfMax = target.getMaxHealth() / 2f;
+        // ===== 计算：最大生命值的一半 =====
+        float maxHp = target.getMaxHealth();
+        float halfMaxHp = maxHp * 0.5f;
 
+        // 防止过量（例如残血）
+        float realDamage = Math.min(halfMaxHp, target.getHealth());
+
+        // ===== ① 不可回血的强制伤害 =====
         ForceHurtUtil.forceHurtWithNoHealable(
                 target,
                 player.damageSources().playerAttack(player),
-                halfMax
+                realDamage
         );
+
+        // ===== ② 强制同步血量（防止被事件修正）=====
+        float remain = target.getHealth() - realDamage;
+        if (remain < 0) remain = 0;
+
+        LivingEntityUtil.forceSetAllCandidateHealth(target, remain);
 
         return knockback;
     }
-
-
 
 
     /* ===== 持续药水效果 ===== */
@@ -121,27 +126,6 @@ public class AwakenDoomGuy extends NoLevelsModifier implements
         player.addEffect(new MobEffectInstance(MobEffects.JUMP, EFFECT_DURATION, 1, true, false, false));
     }
 
-    /* ===== 半血伤害方法 ===== */
 
-
-    /* ===== 工具方法 ===== */
-    public static boolean isFromDummmmmmyMod(Entity entity) {
-        if (entity == null) return false;
-        ResourceLocation entityId = EntityType.getKey(entity.getType());
-        if (entityId != null && entityId.getNamespace().equals("dummmmmmy")) return true;
-        return entity.getClass().getName().contains("dummmmmmy");
-    }
-
-    public static boolean isDefender(Entity entity) {
-        if (entity instanceof DefenderEntity defender) {
-            return defender.getPhase() == 0;
-        }
-        return false;
-    }
-
-    public static boolean isFromOmniMod(Entity entity) {
-        if (entity == null) return false;
-        return entity.getClass().getName().contains("omnimobs");
-    }
 
 }

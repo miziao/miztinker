@@ -109,6 +109,8 @@ dependencies {
 
     implementation fg.deobf("curse.maven:etst-lib-1206379:7044917")
 
+    implementation fg.deobf("curse.maven:tinkers-levelling-addon-709416:6627099")
+
     //血族工匠
     implementation fg.deobf("curse.maven:vampirism-tinker-1314650:6814093")
 //领域

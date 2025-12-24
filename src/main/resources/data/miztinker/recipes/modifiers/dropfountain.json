@@ -3,8 +3,8 @@
   "allow_crystal": true,
   "inputs": [
     {
-      "amount_needed": 64,
-      "item": "jzyy:marisa_ingot"
+      "amount_needed": 8,
+      "item": "miztinker:netherite_coin"
     },
     {
       "item": "minecraft:conduit"

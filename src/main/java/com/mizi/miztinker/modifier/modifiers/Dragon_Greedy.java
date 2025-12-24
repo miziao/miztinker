@@ -80,7 +80,7 @@ public class Dragon_Greedy extends NoLevelsModifier implements ProcessLootModifi
             case "deathworm" -> item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("iceandfire", "deathworm_tongue"));
             case "hydra" -> item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("iceandfire", "hydra_heart"));
             case "sea_serpent" -> item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("iceandfire", "sea_serpent_fang"));
-            case "wraith" -> item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("goety", "ghost_ingot"));
+            case "wraith" -> item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("iceandfire", "ghost_ingot"));
         }
         return item != null ? new ItemStack(item) : ItemStack.EMPTY;
     }

@@ -1,0 +1,31 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "projecte:evertide_amulet"
+    },
+    {
+      "item": "projecte:archangel_smite"
+    },
+    {
+      "item": "projecte:swiftwolf_rending_gale"
+    },
+    {
+      "item": "projecte:catalytic_lens"
+    },
+    {
+      "item": "projecte:volcanite_amulet"
+    }
+  ],
+  "result": "miztinker:arcana",
+  "slots": {
+    "upgrades": 1
+  },
+  "level": {
+    "max": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/interactable/right"
+  }
+}

@@ -124,7 +124,22 @@
     "first_blood": "#DC143C",
     "pulverize": "#432221",
     "maliciously_slandering": "#9370DB",
-    "adaptation": "#32CD32"
+    "adaptation": "#32CD32",
+    "real_souleat_realform": "#FFE4E1",
+    "lovestone": "#FF00FF",
+    "harcadium_armor": "#FF00FF",
+    "bed_armor":"#1c1c1c",
+    "structurescanner":"#F5FFFA",
+    "biomescanner":"#F5FFFA",
+    "learningdevice":"#ADFF2F",
+    "old_spiky":"#228B22",
+    "invert":"#FF0000",
+    "double_evolution_pill":"#C71585",
+    "bedrock_destr0yer": "#696969",
+    "loli_energy": "#00FFFF",
+    "randomizer_launcher": "#FF4500",
+    "arcana": "#808000"
+
   },
   "material.miztinker": {
     "ten_thousand_souls": "#CD853F",

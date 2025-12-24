@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:potion"
+    },
+    {
+      "item": "minecraft:beacon"
+    },
+    {
+      "item": "tconstruct:hepatizon_ingot"
+    }
+  ],
+  "result": "miztinker:double_evolution_pill",
+  "level": {
+    "max": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

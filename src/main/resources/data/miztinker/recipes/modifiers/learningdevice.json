@@ -1,0 +1,17 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "miztinker:exp_share"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:learningdevice",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/interactable/right"
+  }
+}

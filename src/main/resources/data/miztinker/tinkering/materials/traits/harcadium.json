@@ -1,0 +1,26 @@
+{
+  "default": [
+    {
+      "name": "miztinker:lovestone",
+      "level": 1
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor":[
+      {
+        "name": "miztinker:harcadium_armor",
+        "level": 1
+      }
+    ],
+    "tconstruct:head":[
+      {
+        "name": "miztinker:lovestone",
+        "level": 1
+      },
+      {
+        "name": "miztinker:bedrock_destr0yer",
+        "level": 1
+      }
+    ]
+  }
+}
