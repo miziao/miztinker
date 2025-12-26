@@ -5,7 +5,6 @@ import com.mizi.miztinker.entity.MiztinkerEntityRegister;
 import com.mizi.miztinker.entity.ScabbardEntity.ScabbardEntity;
 import com.mizi.miztinker.entity.ScabbardEntity.UltimateSlashEntity;
 import com.mizi.miztinker.item.tool.until.MiztinkerTools;
-import com.mizi.miztinker.miztinker;
 import com.mizi.miztinker.modifier.register.MiztinkerEffect;
 import com.mizi.miztinker.network.MiztinkerNetwork;
 import com.mizi.miztinker.network.packets.HudCharge.MurasamaEnergyPointCharge;
@@ -25,7 +24,6 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
@@ -62,11 +60,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.DoubleSupplier;
 
 import static com.mizi.miztinker.item.tool.until.ToolDefinitions.MIRASAMA;
 import static com.mizi.miztinker.miztinker.getResource;
 import static com.mizi.miztinker.modifier.modifiers.base.LivingEntityUtil.forceAddEffect;
-import static com.momosensei.momotinker.util.AttackUtil.getCooldownFunctionFloat;
 import static slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook.KEY_DRAWTIME;
 
 public class murasama extends ModifiableItem {
@@ -216,7 +214,13 @@ public class murasama extends ModifiableItem {
             c.putFloat(ascending_cooldown, 12);
         }
     }
+    public static float getCooldownFunctionFloat(Player player, InteractionHand hand) {
+        return (float)getCooldownFunction(player, hand).getAsDouble();
+    }
 
+    public static DoubleSupplier getCooldownFunction(Player player, InteractionHand hand) {
+        return () -> (double)player.getAttackStrengthScale(0.5F);
+    }
     public static boolean CanCreateScabbard(Entity owner) {
         String s = cannot_create_scabbard.toString();
         return owner.getPersistentData().getBoolean(s);
