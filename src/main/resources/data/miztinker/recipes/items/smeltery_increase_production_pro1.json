@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "cbc",
+    "bab",
+    "cbc"
+  ],
+  "key": {
+    "a": { "tag":"forge:nether_stars" },
+    "b": { "tag":"forge:ingots/netherite" },
+    "c": { "item":"miztinker:smeltery_increase_production" }
+  },
+  "result": { "item": "miztinker:smeltery_increase_production_pro1", "count": 1 }
+}

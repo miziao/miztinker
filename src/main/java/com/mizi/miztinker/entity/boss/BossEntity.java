@@ -140,7 +140,13 @@ public class BossEntity extends Monster {
 
     @Override
     public void setHealth(float pHealth) {
-        if (pHealth < getHealth() - getMaxDamageHurt()) pHealth = getHealth() - getMaxDamageHurt();
+        float damage = this.getHealth() - pHealth;
+        float maxDamage = this.getMaxDamageHurt();
+
+        if (damage > maxDamage) {
+            pHealth = this.getHealth() - maxDamage;
+        }
+
         super.setHealth(pHealth);
     }
 

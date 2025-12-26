@@ -19,8 +19,7 @@ import com.mizi.miztinker.miztinker;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static com.mizi.miztinker.modifier.register.MiztinkerBlocks.OLD_CACTUS;
-import static com.mizi.miztinker.modifier.register.MiztinkerBlocks.SMELTERY_INCREASE_PRODUCTION;
+import static com.mizi.miztinker.modifier.register.MiztinkerBlocks.*;
 
 public class MiztinkerItems {
 
@@ -439,8 +438,37 @@ public class MiztinkerItems {
     public static final RegistryObject<Item> smelteryIncreaseProductionBlock = ITEMS.register("smeltery_increase_production",
             () -> new BlockItem(SMELTERY_INCREASE_PRODUCTION.get(), new Item.Properties()
                     .stacksTo(64)
+                    .rarity(Rarity.UNCOMMON)
+            ){
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.smeltery_increase_production"));
+                }
+            }
+    );
+
+    public static final RegistryObject<Item> smelteryIncreaseProductionBlock_Pro1 = ITEMS.register("smeltery_increase_production_pro1",
+            () -> new BlockItem(SMELTERY_INCREASE_PRODUCTION_PRO1.get(), new Item.Properties()
+                    .stacksTo(64)
                     .rarity(Rarity.RARE)
-            )
+            ){
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.smeltery_increase_production_pro1"));
+                }
+            }
+    );
+
+    public static final RegistryObject<Item> smelteryIncreaseProductionBlock_Pro2 = ITEMS.register("smeltery_increase_production_pro2",
+            () -> new BlockItem(SMELTERY_INCREASE_PRODUCTION_PRO2.get(), new Item.Properties()
+                    .stacksTo(64)
+                    .rarity(Rarity.EPIC)
+            ){
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.smeltery_increase_production_pro2"));
+                }
+            }
     );
 
     public static final RegistryObject<Item> UNO_CARD= ITEMS.register("uno_card",

@@ -121,7 +121,6 @@ public class BlackItemSummonHandler {
                 }
             }
 
-            // --- 120 秒召唤怪物 ---
             if (elapsed >= 2400) {
 
                 for (Player p : players) {

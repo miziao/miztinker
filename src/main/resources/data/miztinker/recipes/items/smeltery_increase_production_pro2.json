@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "cbc",
+    "cac",
+    "cbc"
+  ],
+  "key": {
+    "a": { "tag": "forge:elytra" },
+    "b": { "item": "minecraft:chorus_flower" },
+    "c": { "item": "miztinker:smeltery_increase_production_pro1" }
+  },
+  "result": { "item": "miztinker:smeltery_increase_production_pro2", "count": 1 }
+}

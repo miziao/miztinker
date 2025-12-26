@@ -733,6 +733,10 @@
 
   "block.miztinker.smeltery_increase_production": "冶炼炉倍矿器",
 
+  "block.miztinker.smeltery_increase_production_pro1": "一重冶炼炉倍矿器",
+
+  "block.miztinker.smeltery_increase_production_pro2": "二重冶炼炉倍矿器",
+
   
 
   "entity.miztinker.mizi_ao": "「舞萌高手」米子山民",
@@ -777,6 +781,14 @@
   "item.miztinker.mega_big_iron_ingot": "超级极巨化铁锭",
 
   "item.miztinker.smeltery_increase_production": "冶炼炉倍矿器",
+  "tooltip.miztinker.smeltery_increase_production": "§b冶炼得到的矿物倍率x2,每个冶炼炉仅生效一次",
+
+  "item.miztinker.smeltery_increase_production_pro1": "压缩冶炼炉倍矿器",
+  "tooltip.miztinker.smeltery_increase_production_pro1": "§b冶炼得到的矿物倍率x4,每个冶炼炉仅生效一次",
+
+  "item.miztinker.smeltery_increase_production_pro2": "二重压缩冶炼炉倍矿器",
+  "tooltip.miztinker.smeltery_increase_production_pro2": "§b冶炼得到的矿物倍率+8",
+
 
   "item.miztinker.parasitic_iron_item": "寄生铁锭",
 

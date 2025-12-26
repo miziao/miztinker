@@ -9,6 +9,8 @@
     "tconstruct:seared_drain",
     "tconstruct:seared_chute",
     "tconstruct:seared_duct",
-    "miztinker:smeltery_increase_production"
+    "miztinker:smeltery_increase_production",
+    "miztinker:smeltery_increase_production_pro1",
+    "miztinker:smeltery_increase_production_pro2"
   ]
 }

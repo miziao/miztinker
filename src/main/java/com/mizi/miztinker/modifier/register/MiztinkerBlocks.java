@@ -49,10 +49,60 @@ public class MiztinkerBlocks {
                         BlockEntityType<SmelteryIncreaseProductionBlock.SmelteryIncreaseProductionBlockEntity> type =
                                 BlockEntityType.Builder.of(
                                         SmelteryIncreaseProductionBlock.SmelteryIncreaseProductionBlockEntity::new,
-                                        SMELTERY_INCREASE_PRODUCTION.get() // 你的方块注册对象
+                                        SMELTERY_INCREASE_PRODUCTION.get()
                                 ).build(null);
 
                         SmelteryIncreaseProductionBlock.BLOCK_ENTITY_TYPE = type;
+
+                        return type;
+                    });
+
+    public static final RegistryObject<Block> SMELTERY_INCREASE_PRODUCTION_PRO1 = BLOCKS.register(
+            "smeltery_increase_production_pro1",
+            () -> new SmelteryIncreaseProductionBlock_Pro1(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.METAL)
+                            .strength(3.0F)
+                            .sound(SoundType.METAL)
+                            .requiresCorrectToolForDrops()
+            )
+    );
+
+    public static final RegistryObject<BlockEntityType<SmelteryIncreaseProductionBlock_Pro1.SmelteryIncreaseProductionBlockEntity>> SMELTERY_INCREASE_PRODUCTION_PRO1_ENTITY =
+            BLOCK_ENTITIES.register("smeltery_increase_production_pro1_entity",
+                    () -> {
+                        BlockEntityType<SmelteryIncreaseProductionBlock_Pro1.SmelteryIncreaseProductionBlockEntity> type =
+                                BlockEntityType.Builder.of(
+                                        SmelteryIncreaseProductionBlock_Pro1.SmelteryIncreaseProductionBlockEntity::new,
+                                        SMELTERY_INCREASE_PRODUCTION.get()
+                                ).build(null);
+
+                        SmelteryIncreaseProductionBlock_Pro1.BLOCK_ENTITY_TYPE = type;
+
+                        return type;
+                    });
+
+    public static final RegistryObject<Block> SMELTERY_INCREASE_PRODUCTION_PRO2 = BLOCKS.register(
+            "smeltery_increase_production_pro2",
+            () -> new SmelteryIncreaseProductionBlock_Pro2(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.METAL)
+                            .strength(3.0F)
+                            .sound(SoundType.METAL)
+                            .requiresCorrectToolForDrops()
+            )
+    );
+
+    public static final RegistryObject<BlockEntityType<SmelteryIncreaseProductionBlock_Pro2.SmelteryIncreaseProductionBlockEntity>> SMELTERY_INCREASE_PRODUCTION_PRO2_ENTITY =
+            BLOCK_ENTITIES.register("smeltery_increase_production_pro2_entity",
+                    () -> {
+                        BlockEntityType<SmelteryIncreaseProductionBlock_Pro2.SmelteryIncreaseProductionBlockEntity> type =
+                                BlockEntityType.Builder.of(
+                                        SmelteryIncreaseProductionBlock_Pro2.SmelteryIncreaseProductionBlockEntity::new,
+                                        SMELTERY_INCREASE_PRODUCTION.get()
+                                ).build(null);
+
+                        SmelteryIncreaseProductionBlock_Pro2.BLOCK_ENTITY_TYPE = type;
 
                         return type;
                     });

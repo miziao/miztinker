@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "bbb",
+    "bab",
+    "bbb"
+  ],
+  "key": {
+    "a": { "tag": "forge:storage_blocks/emerald" },
+    "b": { "tag": "tconstruct:seared_blocks" }
+  },
+  "result": { "item": "miztinker:smeltery_increase_production", "count": 1 }
+}
