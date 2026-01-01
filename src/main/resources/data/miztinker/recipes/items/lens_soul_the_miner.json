@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "abc",
+    "edf",
+    "ghi"
+  ],
+  "key": {
+    "a": { "tag": "forge:gems/diamond" },
+    "b": { "tag": "forge:ingots/gold" },
+    "c": { "tag": "forge:ingots/iron" },
+    "d": { "item": "tconstruct:scorched_soul_glass_pane" },
+    "e": { "tag": "minecraft:coals" },
+    "f": { "tag": "forge:ingots/netherite_scrap" },
+    "g": { "tag": "forge:gems/quartz" },
+    "h": { "tag": "forge:gems/lapis" },
+    "i": { "tag": "forge:gems/emerald" }
+  },
+  "result": { "item": "miztinker:lens_soul_the_miner", "count": 1 }
+}

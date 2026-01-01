@@ -435,6 +435,18 @@ public class MiztinkerItems {
             )
     );
 
+    public static final RegistryObject<Item> Tinker_lantern = ITEMS.register("tinker_lantern",
+            () -> new BlockItem(TINKER_LANTERN.get(), new Item.Properties()
+                    .stacksTo(64)
+                    .rarity(Rarity.RARE)
+            ){
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.tinker_lantern"));
+                }
+            }
+    );
+
     public static final RegistryObject<Item> smelteryIncreaseProductionBlock = ITEMS.register("smeltery_increase_production",
             () -> new BlockItem(SMELTERY_INCREASE_PRODUCTION.get(), new Item.Properties()
                     .stacksTo(64)
@@ -526,5 +538,35 @@ public class MiztinkerItems {
                     tooltip.add(Component.translatable("tooltip.miztinker.exp_share_3"));
                 }
             });
+
+    public static final RegistryObject<Item> LENS_SOUL_THE_MINER= ITEMS.register("lens_soul_the_miner",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.RARE)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.lens_soul_the_miner"));
+                }
+            });
+
+    public static final RegistryObject<Item> DRAGONBONE_TIBETAN = ITEMS.register("dragonbone_tibetan",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.RARE)) {
+            });
+
+    public static final RegistryObject<Item> MIRAI_NIKKI= ITEMS.register("mirai_nikki",
+            () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.mirai_nikki"));
+                }
+            });
+
+    public static final RegistryObject<Item> MAYBE_PRECISION_MECHANISM= ITEMS.register("maybe_precision_mechanism",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.maybe_precision_mechanism"));
+                }
+            });
+
+
 
 }

@@ -566,6 +566,34 @@
   "modifier.miztinker.arcana.mode.2": "§b水源形态",
   "modifier.miztinker.arcana.mode.3": "§4惩戒形态",
   "modifier.miztinker.arcana.mode.4": "§e闪电形态",
+
+  "modifier.miztinker.lens_miner": "矿工透镜",
+"modifier.miztinker.lens_miner.flavor": "源自aa 实用扩展,但你不再需要原子再构机",
+"modifier.miztinker.lens_miner.description":"挖掘方块后掉落一个任意矿石",
+
+"modifier.miztinker.nbt_microscope": "nbt显微镜",
+"modifier.miztinker.nbt_microscope.flavor": "牠最好用的地方是复制的时候不会有''",
+"modifier.miztinker.nbt_microscope.description":"手持下蹲右键开启,之后物品栏右键任意物品,手持右键生物,方块都会在聊天栏输出对应信息",
+
+"modifier.miztinker.undone": "undone",
+"modifier.miztinker.undone.flavor": "If you want to destroy my sweater…",
+"modifier.miztinker.undone.description":"攻击有30%的概率剥落对方的一件装备,概率随等级提升",
+
+"modifier.miztinker.digitization": "数据化",
+"modifier.miztinker.digitization.flavor": "like 吉尔巴里斯",
+"modifier.miztinker.digitization.description":"下蹲右键任意方块将该方块完整的存储在工具里,下次下蹲右键释放出来",
+
+"modifier.miztinker.energy_overdose": "能量超载",
+"modifier.miztinker.energy_overdose.flavor": "崩坏 热爱 包容 疯狂",
+"modifier.miztinker.energy_overdose.description":"每秒回复理论耐久值减实际耐久值的差值耐久",
+
+"modifier.miztinker.energy_absorption": "能量吸收",
+"modifier.miztinker.energy_absorption.flavor": "武器变得更加坚韧了...如果你不在意这如同尸体一般的覆盖层的话",
+"modifier.miztinker.energy_absorption.description":"击杀生物根据生物的最大生命值提升最大耐久,根据等级提升比例",
+
+"modifier.miztinker.happy_newyear": "新年快乐!",
+"modifier.miztinker.happy_newyear.flavor": "又过了一年呢,放点烟花庆祝一下吧",
+"modifier.miztinker.happy_newyear.description":"右键释放随机烟花",
   
 
 
@@ -579,9 +607,6 @@
   "modifier.miztinker.onimiko": "No.§m01§r06 鬼巫女的[领域]",
   "modifier.miztinker.onimiko.flavor": "这难道不是博丽灵梦吗?!",
   "modifier.miztinker.onimiko.description": "使你拥有鬼巫女的防御能力",
-
-  "jei.miztinker.fuel_temperature": "匠魂燃料信息",
-
 
   "effect.miztinker.woundeffect": "致命创伤PLUS",
   "effect.miztinker.horologiumnoai": "时停中",
@@ -721,6 +746,14 @@
   "material.miztinker.old_cactus.flavor": "回到tic2状态的仙人掌",
   "material.miztinker.old_cactus.encyclopedia": "这会是这个材料的巅峰吗?",
 
+  "material.miztinker.dragonbone_tibetan": "龙之骨-藏",
+  "material.miztinker.dragonbone_tibetan.flavor": "U·TA·GE",
+  "material.miztinker.dragonbone_tibetan.encyclopedia": "隐匿于龙巢的材料",
+
+  "material.miztinker.maybe_precision_mechanism": "精密构件?",
+  "material.miztinker.maybe_precision_mechanism.flavor": "一直散发着一股令人不安的能量",
+  "material.miztinker.maybe_precision_mechanism.encyclopedia": "这种能量拥有数据化任何方块的能力",
+
 
 
   "block.miztinker.nether_reactor": "下界反应核",
@@ -733,9 +766,11 @@
 
   "block.miztinker.smeltery_increase_production": "冶炼炉倍矿器",
 
-  "block.miztinker.smeltery_increase_production_pro1": "一重冶炼炉倍矿器",
+  "block.miztinker.smeltery_increase_production_pro1": "一重压缩冶炼炉倍矿器",
 
-  "block.miztinker.smeltery_increase_production_pro2": "二重冶炼炉倍矿器",
+  "block.miztinker.smeltery_increase_production_pro2": "二重压缩冶炼炉倍矿器",
+
+  "block.miztinker.tinker_lantern": "工匠灯笼",
 
   
 
@@ -750,8 +785,35 @@
 
   "item.miztinker.big_manyullyn_ingot": "超极巨化玛玉灵锭",
 
+  "item.miztinker.dragonbone_tibetan": "龙之骨(藏)",
+
   "item.miztinker.oni_miko_bow": "鬼巫女的大蝴蝶结",
   "tooltip.miztinker.oni_miko_bow": "§b从鬼巫女身上掉下来的,还带着一点她的气味",
+
+  "item.miztinker.lens_soul_the_miner": "矿工灵魂透镜",
+  "tooltip.miztinker.lens_soul_the_miner": "§b这无穷无尽的矿石仿佛是从亚空间挖掘而来",
+
+  "item.miztinker.maybe_precision_mechanism": "精密构件?",
+  "tooltip.miztinker.maybe_precision_mechanism": "§b这种本不可能构成的零件,以一种诡异的方式组装到一起了",
+
+  "item.miztinker.mirai_nikki": "未来日记",
+  "tooltip.miztinker.mirai_nikki": "§d躺在床上,如果你是被时空神Deus选中之人,则你的日记会被转化为未来日记 ",
+  "miztinker.diary.msg.1": "§c阿雪，我会保护你的...",
+  "miztinker.diary.msg.2": "§b就算改变三周目的世界,我也要救她!",
+  "miztinker.diary.msg.3": "§o[电磁杂音]DEAD END FLAG",
+  "miztinker.diary.msg.4": "§b就算下地狱，我也要和你一起去！",
+  "miztinker.diary.msg.5": "§b日向，秋濑同学，还有高坂，我要在这里向大家“介绍”…！她是我的“女朋友”，我妻由乃。",
+  "miztinker.diary.msg.6": "§c只要是为了阿雪你呀，我什么都肯做。",
+  "miztinker.diary.msg.7": "§c你们这样算什么阿雪的同学呀……根本不是同学！你们这群杀了阿雪的人，根本就不算是阿雪的同学！！！无论牺牲有多大…啊…啊…！我都要保护阿雪啊！！！……去死！！！去死！！！大家全都去死吧！！！你们这些害死阿雪的人！！！全都给我死了算啦！！！",
+  "miztinker.diary.msg.8": "§c我的“日记”是“雪辉日记”，能以十分钟为单位来掌握雪辉的未来。是我所爱的“未来日记”。因为阿雪你的“未来”呀，是属于由乃的嘛。",
+  "miztinker.diary.msg.9": "§b我绝对不放弃，因为……因为，我也喜欢由乃。",
+  "miztinker.diary.msg.10": "§c阿雪他夸奖我了…！他夸奖我了！他夸奖我了！他夸奖我了！他夸奖我了！他夸奖我了！阿雪他夸奖我了！阿雪他夸奖我了耶",
+  "miztinker.diary.msg.11": "§b我呀，真是个没用的人…哈哈…真是太可笑了。什么待在安全的地方当个“旁观者”就好…？",
+  "miztinker.diary.msg.12": "§b我爱你！由乃……！对你来说，也许我只是为数众多的“棋子”之一也说不定……不过！对我来说，你是我最珍惜独一无二的人……！由乃，我要拯救你！",
+  "miztinker.diary.msg.13": "§c我”不需要有两个。",
+  "miztinker.diary.msg.14": "§b我答应你，我会让一切“归零”，这也是为了要让由乃能幸福！",
+  "miztinker.diary.msg.15": "§5雪辉，身为你的教练，我要指出一个你的缺点……就是知道自己很弱而马上放弃的这一点。不断奋力抵抗，有时也会出现奇迹的。这是恐怖分子的教诲，好好记着吧。就算力量微弱也要试着去对抗看看……",
+  
 
   "item.miztinker.soul_essence_fragments": "灵魂精粹碎片",
   "tooltip.miztinker.soul_essence_fragments": "§b任何生物都存在的灵魂精粹",
@@ -783,11 +845,14 @@
   "item.miztinker.smeltery_increase_production": "冶炼炉倍矿器",
   "tooltip.miztinker.smeltery_increase_production": "§b冶炼得到的矿物倍率x2,每个冶炼炉仅生效一次",
 
-  "item.miztinker.smeltery_increase_production_pro1": "压缩冶炼炉倍矿器",
+  "item.miztinker.smeltery_increase_production_pro1": "一重压缩冶炼炉倍矿器",
   "tooltip.miztinker.smeltery_increase_production_pro1": "§b冶炼得到的矿物倍率x4,每个冶炼炉仅生效一次",
 
-  "item.miztinker.smeltery_increase_production_pro2": "二重压缩冶炼炉倍矿器",
+  "item.miztinker.smeltery_increase_production_pro2": "二重压缩压缩冶炼炉倍矿器",
   "tooltip.miztinker.smeltery_increase_production_pro2": "§b冶炼得到的矿物倍率+8",
+
+  "item.miztinker.tinker_lantern": "工匠灯笼",
+  "tooltip.miztinker.tinker_lantern": "§b加速周围的浇注口和铸件盆 台",
 
 
   "item.miztinker.parasitic_iron_item": "寄生铁锭",
@@ -949,6 +1014,7 @@
 
   "item.miztinker.dynamax_band": "极巨腕带",
   "tooltip.miztinker.dynamax_band": "§b使你的材料极巨化!",
+  "tooltip.miztinker.dynamax_band_2": "§9泰坦监守者的宝物",
 
   "miztinker.tool.tab": "米工匠-工具",
   "item.miztinker.lollipop": "棒棒糖",

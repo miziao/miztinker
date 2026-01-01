@@ -1,5 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "easy_villagers"
+    },
+    {
+      "type": "forge:item_exists",
+      "item": "easy_villagers:villager"
+    }
+  ],
   "pattern": [
     "ddd",
     "aba",

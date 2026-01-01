@@ -3,19 +3,7 @@
   "allow_crystal": true,
   "inputs": [
     {
-      "item": "avaritia:neutron_gear"
-    },
-    {
-      "item": "minecraft:writable_book"
-    },
-    {
-      "item": "the_cosmic_spokespersons:the_error"
-    },
-    {
-      "item": "the_cosmic_spokespersons:the_error"
-    },
-    {
-      "item": "the_cosmic_spokespersons:the_error"
+      "item": "miztinker:mirai_nikki"
     }
   ],
   "level": 1,

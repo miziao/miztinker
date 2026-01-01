@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ede",
+    "bab",
+    "cbc"
+  ],
+  "key": {
+    "a": { "item": "tconstruct:blazing_blood_bucket" },
+    "b": { "item": "tconstruct:seared_glass_pane" },
+    "c": { "item": "tconstruct:seared_brick" },
+    "d": { "item": "minecraft:chain" },
+    "e": { "item": "minecraft:clock" }
+  },
+  "result": { "item": "miztinker:tinker_lantern", "count": 1 }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "miztinker:block/tinker_lantern"
+    },
+    "hanging=true": {
+      "model": "miztinker:block/tinker_lantern_hanging"
+    }
+  }
+}

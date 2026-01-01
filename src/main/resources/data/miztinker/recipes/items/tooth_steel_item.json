@@ -1,5 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
+  "forge:conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "abominations_infection:tooth"
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:ingots/steel"
+      }
+    }
+  ],
   "pattern": [
     "aaa",
     "aba",

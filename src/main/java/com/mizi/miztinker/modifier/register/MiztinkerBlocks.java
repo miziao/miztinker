@@ -3,6 +3,7 @@ package com.mizi.miztinker.modifier.register;
 import com.mizi.miztinker.block.*;
 import com.mizi.miztinker.miztinker;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -106,6 +107,14 @@ public class MiztinkerBlocks {
 
                         return type;
                     });
+
+    public static final RegistryObject<Block> TINKER_LANTERN = BLOCKS.register("tinker_lantern",
+            () -> new TinkerLanternBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN).noOcclusion()));
+
+    // BlockEntity 注册
+    public static final RegistryObject<BlockEntityType<TinkerLanternBlockEntity>> TINKER_LANTERN_BE =
+            BLOCK_ENTITIES.register("tinker_lantern_be",
+                    () -> BlockEntityType.Builder.of(TinkerLanternBlockEntity::new, TINKER_LANTERN.get()).build(null));
 
     public static final RegistryObject<Block> OLD_CACTUS = BLOCKS.register("old_cactus",
             () -> new OldCactusBlock(BlockBehaviour.Properties.of()

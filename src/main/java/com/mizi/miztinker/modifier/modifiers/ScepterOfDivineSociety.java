@@ -60,7 +60,6 @@ public class ScepterOfDivineSociety extends NoLevelsModifier
         ModDataNBT data = tool.getPersistentData();
 
         if (!(be instanceof RandomizableContainerBlockEntity chest)) {
-            // 不是战利品箱 → 清空
             data.remove(SAVED_LOOT);
             player.displayClientMessage(Component.literal("§c已清除保存的战利品"), true);
             return InteractionResult.SUCCESS;

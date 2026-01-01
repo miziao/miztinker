@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+  "item":"miztinker:dragonbone_tibetan"
+  },
+  "value": 1,
+  "needed": 1,
+  "material": "miztinker:dragonbone_tibetan"
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " b ",
+    "bcb",
+    " b "
+  ],
+  "key": {
+    "b": { "item": "iceandfire:dragonbone" },
+    "c": { "item": "iceandfire:weezer_blue_album" }
+  },
+  "result": { "item": "miztinker:dragonbone_tibetan", "count": 4 }
+}

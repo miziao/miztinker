@@ -42,7 +42,6 @@ public class StructureScanner extends NoLevelsModifier
 
             ServerLevel level = (ServerLevel) player.level();
 
-            // 只检测脚底下
             BlockPos feetPos = player.blockPosition().below();
 
             var structures = level.structureManager()
@@ -52,14 +51,11 @@ public class StructureScanner extends NoLevelsModifier
 
             for (Structure structure : structures.keySet()) {
 
-                // 关键：通过 Structure 再拿 StructureStart
                 var start = level.structureManager()
                         .getStructureAt(feetPos, structure);
 
-                // 没生成 or 无效结构，直接跳过
                 if (!start.isValid()) continue;
 
-                // 是否真的踩在某个 piece 上
                 boolean onPiece = start.getPieces().stream()
                         .anyMatch(piece ->
                                 piece.getBoundingBox().isInside(feetPos)

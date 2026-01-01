@@ -37,7 +37,6 @@ public class SoulEat extends Modifier implements MeleeHitModifierHook, MeleeDama
         hookBuilder.addHook(this, ModifierHooks.TOOLTIP);
     }
 
-    /** 击杀检测：在近战命中后触发 */
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         LivingEntity target = context.getLivingTarget();
@@ -55,8 +54,6 @@ public class SoulEat extends Modifier implements MeleeHitModifierHook, MeleeDama
         float gain = target.getMaxHealth() * ratio;
 
         data.putFloat(TAG_SOUL_BONUS, bonus + gain);
-        //if (Thread.currentThread().getName().contains("Server"))
-        //Minecraft.getInstance().player.sendSystemMessage(Component.literal("On set : " + bonus + gain));
         data.putInt(TAG_SOUL_KILLS, kills + 1);
 
 
@@ -65,7 +62,6 @@ public class SoulEat extends Modifier implements MeleeHitModifierHook, MeleeDama
         ), true);
     }
 
-    /** 应用额外伤害 */
     @Override
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         ModDataNBT data = tool.getPersistentData();
@@ -73,7 +69,6 @@ public class SoulEat extends Modifier implements MeleeHitModifierHook, MeleeDama
         return damage + bonus;
     }
 
-    /** 显示提示信息 */
     @Override
     public void addTooltip(IToolStackView tool, ModifierEntry modifier, @Nullable Player player, List<Component> tooltip, TooltipKey key, TooltipFlag flag) {
         ModDataNBT data = tool.getPersistentData();

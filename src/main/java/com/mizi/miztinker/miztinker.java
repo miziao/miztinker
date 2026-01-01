@@ -15,6 +15,8 @@ import com.mizi.miztinker.network.MiztinkerNetwork;
 import com.mizi.miztinker.particle.register.MiztinkerParticlesRegister;
 import com.mizi.miztinker.renderer.murasama.PostPasses;
 import com.mizi.miztinker.sounds.MiztinkerSounds;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -106,6 +108,16 @@ public class miztinker {
         );
     }
 
+    public static class ClientSetup {
+
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            event.enqueueWork(() -> {
+                ItemBlockRenderTypes.setRenderLayer(MiztinkerBlocks.TINKER_LANTERN.get(), RenderType.cutout());
+            });
+        }
+    }
+
     public static ResourceLocation getResource(String id) {
         return ResourceLocation.fromNamespaceAndPath(MODID, id);
     }
@@ -116,12 +128,14 @@ public class miztinker {
         MiztinkerNetwork.init();
     }
 
-
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
+                // 设置渲染层为 Cutout 以解决材质黑边/透明失效问题
+                ItemBlockRenderTypes.setRenderLayer(MiztinkerBlocks.TINKER_LANTERN.get(), RenderType.cutout());
+
                 TinkerItemProperties.registerToolProperties(lollipop.get());
                 TinkerItemProperties.registerToolProperties(tinker_loli_pickaxe.get());
                 TinkerItemProperties.registerToolProperties(old_sword.get());

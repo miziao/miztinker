@@ -138,7 +138,14 @@
     "bedrock_destr0yer": "#696969",
     "loli_energy": "#00FFFF",
     "randomizer_launcher": "#FF4500",
-    "arcana": "#808000"
+    "arcana": "#808000",
+    "lens_miner": "#F0E68C",
+    "nbt_microscope": "#F5F5F5",
+    "undone": "#87CEFA",
+    "digitization": "#0000CD",
+    "energy_overdose": "#FF69B4",
+    "energy_absorption": "#800080",
+    "happy_newyear": "#FFD700"
 
   },
   "material.miztinker": {

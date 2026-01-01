@@ -1,0 +1,17 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "miztinker:lens_soul_the_miner"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:lens_miner",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/loot_capable_tool"
+  }
+}

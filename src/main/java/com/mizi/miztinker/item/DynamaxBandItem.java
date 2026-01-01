@@ -29,5 +29,6 @@ public class DynamaxBandItem extends Item {
     public void appendHoverText(ItemStack stack, @Nullable Level level,
                                 List<Component> tooltip, TooltipFlag flag) {
         tooltip.add(Component.translatable("tooltip.miztinker.dynamax_band"));
+        tooltip.add(Component.translatable("tooltip.miztinker.dynamax_band_2"));
     }
 }

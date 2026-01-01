@@ -314,7 +314,19 @@ public class MiztinkerModifiers {
 
     public static final StaticModifier<BiomeScanner> BIOME_SCANNER_STATIC_MODIFIER = MODIFIERS.register("biomescanner", BiomeScanner::new);
 
+    public static final StaticModifier<Energy_Overdose> ENERGY_OVERDOSE_STATIC_MODIFIER = MODIFIERS.register("energy_overdose", Energy_Overdose::new);
+
+    public static final StaticModifier<Energy_Absorption> ENERGY_ABSORPTION_STATIC_MODIFIER = MODIFIERS.register("energy_absorption", Energy_Absorption::new);
+
     public static final StaticModifier<Old_Spiky> OLD_SPIKY_STATIC_MODIFIER = MODIFIERS.register("old_spiky", Old_Spiky::new);
+
+    public static final StaticModifier<NBT_Microscope> NBT_MICROSCOPE_STATIC_MODIFIER = MODIFIERS.register("nbt_microscope", NBT_Microscope::new);
+
+    public static final StaticModifier<Undone> UNDONE_STATIC_MODIFIER = MODIFIERS.register("undone", Undone::new);
+
+    public static final StaticModifier<Digitization> DIGITIZATION_STATIC_MODIFIER = MODIFIERS.register("digitization", Digitization::new);
+
+    public static final StaticModifier<Happy_NewYear> HAPPY_NEW_YEAR_STATIC_MODIFIER = MODIFIERS.register("happy_newyear", Happy_NewYear::new);
 
     public static final StaticModifier<Invert> INVERT_STATIC_MODIFIER = ModList.get().isLoaded("tinkerslevellingaddon") ? MODIFIERS.register("invert",Invert::new) : null;
 
@@ -329,6 +341,8 @@ public class MiztinkerModifiers {
     public static final StaticModifier<NoLevelsModifier> BEDROCK_DESTROYER = MODIFIERS.register("bedrock_destr0yer", NoLevelsModifier::new);
 
     public static final StaticModifier<Loli_Energy> LOLI_ENERGY_STATIC_MODIFIER = MODIFIERS.register("loli_energy", Loli_Energy::new);
+
+    public static final StaticModifier<Lens_Miner> LENS_MINER_STATIC_MODIFIER= MODIFIERS.register("lens_miner", Lens_Miner::new);
 
     public static final StaticModifier<Real_souleat_realform> REAL_SOULEAT_REALFORM_STATIC_MODIFIER = MODIFIERS.register("real_souleat_realform", Real_souleat_realform::new);
 

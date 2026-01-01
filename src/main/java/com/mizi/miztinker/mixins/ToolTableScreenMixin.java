@@ -16,7 +16,6 @@ public abstract class ToolTableScreenMixin {
 
     @Inject(method = "init", at = @At("HEAD"))
     private void disableArmorStand(CallbackInfo ci) {
-        // 直接禁止生成 ArmorStand
         this.enableArmorStandPreview = false;
     }
 }

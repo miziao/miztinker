@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "bcb",
+    "aba"
+  ],
+  "key": {
+    "a": { "tag": "forge:ingots/iron" },
+    "b": { "item": "minecraft:lever" },
+    "c": { "item": "minecraft:redstone_block" }
+  },
+  "result": { "item": "miztinker:maybe_precision_mechanism", "count": 1 }
+}
