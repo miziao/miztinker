@@ -1,8 +1,8 @@
 package com.mizi.miztinker.entity.ScabbardEntity;
 
 
+import com.mizi.miztinker.entity.AttackUtil;
 import com.mizi.miztinker.particle.register.MiztinkerParticlesRegister;
-import com.momosensei.momotinker.util.AttackUtil;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;

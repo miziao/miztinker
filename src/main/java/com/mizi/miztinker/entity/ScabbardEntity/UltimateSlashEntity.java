@@ -1,6 +1,6 @@
 package com.mizi.miztinker.entity.ScabbardEntity;
 
-import com.momosensei.momotinker.util.AttackUtil;
+import com.mizi.miztinker.entity.AttackUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
