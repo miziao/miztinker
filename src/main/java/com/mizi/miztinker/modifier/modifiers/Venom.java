@@ -18,7 +18,7 @@ public class Venom extends NoLevelsModifier implements MeleeHitModifierHook {
 
         LivingEntity target = context.getLivingTarget();
         if (target != null && target.isAlive()) {
-            target.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 0)); // 10秒毒
+            target.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 0));
         }
     }
 

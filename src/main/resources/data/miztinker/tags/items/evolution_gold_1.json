@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    { "id": "momotinker:starry_mysterious_gold", "required": false },
+    { "id": "momotinker:stained_blood_gold", "required": false }
+  ]
+}

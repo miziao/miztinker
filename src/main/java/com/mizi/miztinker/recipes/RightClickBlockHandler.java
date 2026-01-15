@@ -34,7 +34,6 @@ public class RightClickBlockHandler {
 
     private static final Map<Integer, TimerData> timers = new ConcurrentHashMap<>();
 
-    /** 定时任务结构：延迟执行传送/效果 */
     static class TimerData {
         final WeakReference<Player> playerRef;
         final long startTick;
@@ -60,9 +59,6 @@ public class RightClickBlockHandler {
         ResourceLocation heldId = held.isEmpty() ? null :
                 level.registryAccess().registryOrThrow(Registries.ITEM).getKey(held.getItem());
 
-        /*---------------------------------
-         * ✅ 空手右键 Nether_Reactor 触发传送
-         *--------------------------------*/
         if (held.isEmpty() && new ResourceLocation("miztinker:nether_reactor").equals(blockId)) {
             event.setCanceled(true);
             event.setCancellationResult(InteractionResult.SUCCESS);
@@ -93,12 +89,10 @@ public class RightClickBlockHandler {
                     return;
                 }
 
-                // ✅ 在下界随机生成位置（±128格范围）
                 double randX = (nether.random.nextDouble() - 0.5) * 256.0;
                 double randZ = (nether.random.nextDouble() - 0.5) * 256.0;
                 double fixedY = 100.0; // ✅ 固定Y高度
 
-                // ✅ 执行传送（不继承主世界坐标）
                 player.changeDimension(nether, new ITeleporter() {
                     @Override
                     public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destWorld,
@@ -111,7 +105,6 @@ public class RightClickBlockHandler {
                     }
                 });
 
-                // ✅ 粒子 + 声音效果
                 for (int i = 0; i < 40; i++) {
                     double px = randX + (nether.random.nextDouble() - 0.5) * 2.0;
                     double py = fixedY + nether.random.nextDouble() * 1.5;
@@ -127,9 +120,6 @@ public class RightClickBlockHandler {
             }));
         }
 
-        /*---------------------------------
-         * ✅ 手持金锭右键书架 → 转化 Fumo 金锭
-         *--------------------------------*/
         if (blockId != null && heldId != null && heldId.equals(new ResourceLocation("minecraft:gold_ingot")) &&
                 blockId.equals(new ResourceLocation("minecraft:bookshelf"))) {
             event.setCanceled(true);
@@ -156,9 +146,49 @@ public class RightClickBlockHandler {
                 );
             }
         }
+
+        if (blockId != null && heldId != null &&
+                heldId.equals(new ResourceLocation("miztinker:moss")) &&
+                blockId.equals(new ResourceLocation("minecraft:bookshelf"))) {
+
+            event.setCanceled(true);
+            event.setCancellationResult(InteractionResult.SUCCESS);
+
+            if (player.experienceLevel < 10) {
+                if (!level.isClientSide) {
+                    player.playSound(SoundEvents.VILLAGER_NO, 1.0f, 1.0f);
+                }
+                return;
+            }
+
+            if (level instanceof ServerLevel serverLevel) {
+                player.giveExperienceLevels(-10);
+
+                ItemStack mendingMoss = new ItemStack(
+                        Objects.requireNonNull(serverLevel.registryAccess().registryOrThrow(Registries.ITEM)
+                                .get(new ResourceLocation("miztinker:mending_moss"))),
+                        1
+                );
+
+                held.shrink(1);
+
+                if (!player.getInventory().add(mendingMoss)) {
+                    serverLevel.addFreshEntity(new ItemEntity(serverLevel, player.getX(), player.getY(), player.getZ(), mendingMoss));
+                }
+
+                serverLevel.sendParticles(ParticleTypes.GLOW,
+                        pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5,
+                        20, 0.3, 0.3, 0.3, 0.05
+                );
+                serverLevel.sendParticles(ParticleTypes.SCRAPE,
+                        pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                        15, 0.4, 0.4, 0.4, 0.02
+                );
+                serverLevel.playSound(null, pos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1.0f, 0.8f);
+            }
+        }
     }
 
-    /** 定时器执行（2秒后触发） */
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase != TickEvent.Phase.START) return;
@@ -177,7 +207,7 @@ public class RightClickBlockHandler {
                 continue;
             }
 
-            if (gameTime - td.startTick >= 40L) { // 2秒后执行
+            if (gameTime - td.startTick >= 40L) {
                 td.effect.run();
                 it.remove();
             } else if ((gameTime - td.startTick) % 20 == 0) {

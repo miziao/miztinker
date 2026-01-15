@@ -1,0 +1,20 @@
+{
+  "default": [
+    {
+      "name": "miztinker:violent_blow",
+      "level": 1
+    },
+    {
+      "name": "miztinker:fine_steel",
+      "level": 1
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "name": "miztinker:fine_steel",
+        "level": 1
+      }
+    ]
+  }
+}

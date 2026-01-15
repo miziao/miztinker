@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "miztinker:reinforcement_old"
+    }
+  ],
+  "result": "miztinker:durable_old",
+  "slots": {
+    "upgrades": 1
+  },
+  "level": {
+    "max": 5
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

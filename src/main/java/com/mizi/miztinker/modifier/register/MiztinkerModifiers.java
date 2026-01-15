@@ -14,6 +14,8 @@ import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
 import slimeknights.tconstruct.library.modifiers.util.StaticModifier;
 
+import java.awt.*;
+
 
 public class MiztinkerModifiers {
     public static final ModifierDeferredRegister MODIFIERS = ModifierDeferredRegister.create(miztinker.MODID);
@@ -292,11 +294,13 @@ public class MiztinkerModifiers {
 
     public static final StaticModifier<All_Perfect> ALL_PERFECT_STATIC_MODIFIER = MODIFIERS.register("all_perfect", All_Perfect::new);
 
-    public static final StaticModifier<Mercy> MERCY_STATIC_MODIFIER = MODIFIERS.register("mercy", Mercy::new);
+    public static final StaticModifier<NoLevelsModifier> MERCY_STATIC_MODIFIER = MODIFIERS.register("mercy", NoLevelsModifier::new);
 
     public static final StaticModifier<AcidicBlood> ACIDIC_BLOOD_STATIC_MODIFIER = MODIFIERS.register("acidic_blood", AcidicBlood::new);
 
     public static final StaticModifier<Infested> INFESTED_STATIC_MODIFIER = MODIFIERS.register("infested", Infested::new);
+
+    public static final StaticModifier<BaseCuttingModifier> MEPHISTO = MODIFIERS.register("mephisto", () -> new BaseCuttingModifier(0F,12));
 
     public static final StaticModifier<FireEater> FIRE_EATER_STATIC_MODIFIER = MODIFIERS.register("fire_eater", FireEater::new);
 
@@ -309,6 +313,15 @@ public class MiztinkerModifiers {
     public static final StaticModifier<Adaptation> ADAPTATION_STATIC_MODIFIER = MODIFIERS.register("adaptation", Adaptation::new);
 
     public static final StaticModifier<Ghostfreak> GHOSTFREAK = MODIFIERS.register("ghostfreak", Ghostfreak::new);
+
+    public static final StaticModifier<Neptune> NEPTUNE_STATIC_MODIFIER = MODIFIERS.register("neptune", Neptune::new);
+
+    public static final StaticModifier<Death_Note_KingMode> DEATH_NOTE_KING_MODE_STATIC_MODIFIER = MODIFIERS.register("death_note_kingmode", Death_Note_KingMode::new);
+
+    public static final StaticModifier<ExperienceLeakBeta> EXPERIENCE_LEAK_BETA_STATIC_MODIFIER = MODIFIERS.register("experience_leak_beta", ExperienceLeakBeta::new);
+
+    public static final StaticModifier<ExperienceLeakGamma> EXPERIENCE_LEAK_GAMMA_STATIC_MODIFIER = MODIFIERS.register("experience_leak_gamma", ExperienceLeakGamma::new);
+
 
     public static StaticModifier<?> LEARNINGDEVICE = null;
 
@@ -324,9 +337,29 @@ public class MiztinkerModifiers {
 
     public static final StaticModifier<Undone> UNDONE_STATIC_MODIFIER = MODIFIERS.register("undone", Undone::new);
 
+    public static final StaticModifier<NotBelieve> NOT_BELIEVE_STATIC_MODIFIER = MODIFIERS.register("not_believe", NotBelieve::new);
+
+    public static final StaticModifier<ExtraterrestrialForcesTetra> EXTRATERRESTRIAL_FORCES_TETRA_STATIC_MODIFIER = MODIFIERS.register("extraterrestrial_forces_tetra", ExtraterrestrialForcesTetra::new);
+
     public static final StaticModifier<Digitization> DIGITIZATION_STATIC_MODIFIER = MODIFIERS.register("digitization", Digitization::new);
 
+    public static final StaticModifier<Command> COMMAND_STATIC_MODIFIER = MODIFIERS.register("command", Command::new);
+
     public static final StaticModifier<Happy_NewYear> HAPPY_NEW_YEAR_STATIC_MODIFIER = MODIFIERS.register("happy_newyear", Happy_NewYear::new);
+
+    public static final StaticModifier<Extraterrestrial_Forces_Create> EXTRATERRESTRIAL_FORCES_CREATE_STATIC_MODIFIER = MODIFIERS.register("extraterrestrial_forces_create", Extraterrestrial_Forces_Create::new);
+
+    public static final StaticModifier<NoLevelsModifier> ABYSS_MAW_STATIC_MODIFIER = MODIFIERS.register("abyss_maw", NoLevelsModifier::new);
+
+    public static final StaticModifier<GiantKiller> GIANT_KILLER_STATIC_MODIFIER = MODIFIERS.register("giant_killer", GiantKiller::new);
+
+    public static final StaticModifier<TrueMending> TRUE_MENDING_STATIC_MODIFIER = MODIFIERS.register("true_mending", TrueMending::new);
+
+    public static final StaticModifier<FineSteel> FINE_STEEL_STATIC_MODIFIER = MODIFIERS.register("fine_steel", FineSteel::new);
+
+    public static final StaticModifier<ViolentBlow> VIOLENT_BLOW_STATIC_MODIFIER = MODIFIERS.register("violent_blow", ViolentBlow::new);
+
+    public static final StaticModifier<Metalfoes_Fusion> METALFOES_FUSION_STATIC_MODIFIER = MODIFIERS.register("metalfoes_fusion", Metalfoes_Fusion::new);
 
     public static final StaticModifier<Invert> INVERT_STATIC_MODIFIER = ModList.get().isLoaded("tinkerslevellingaddon") ? MODIFIERS.register("invert",Invert::new) : null;
 
@@ -343,6 +376,24 @@ public class MiztinkerModifiers {
     public static final StaticModifier<Loli_Energy> LOLI_ENERGY_STATIC_MODIFIER = MODIFIERS.register("loli_energy", Loli_Energy::new);
 
     public static final StaticModifier<Lens_Miner> LENS_MINER_STATIC_MODIFIER= MODIFIERS.register("lens_miner", Lens_Miner::new);
+
+    public static final StaticModifier<DurableOld> DURABLE_OLD_STATIC_MODIFIER= MODIFIERS.register("durable_old", DurableOld::new);
+
+    public static final StaticModifier<FleshGrowth> FLESH_GROWTH_STATIC_MODIFIER= MODIFIERS.register("flesh_growth", FleshGrowth::new);
+
+    public static final StaticModifier<Mending> MENDING_STATIC_MODIFIER= MODIFIERS.register("mending", Mending::new);
+
+    public static final StaticModifier<ConvexLens> CONVEX_LENS_STATIC_MODIFIER= MODIFIERS.register("convex_lens", ConvexLens::new);
+
+    public static final StaticModifier<Soulization> SOULIZATION_STATIC_MODIFIER= MODIFIERS.register("soulization", Soulization::new);
+
+    public static final StaticModifier<ConcaveLens> CONCAVE_LENS_STATIC_MODIFIER= MODIFIERS.register("concave_lens", ConcaveLens::new);
+
+    public static final StaticModifier<WaterInjectedPork> WATER_INJECTED_PORK_STATIC_MODIFIER= MODIFIERS.register("water_injected_pork", WaterInjectedPork::new);
+
+    public static final StaticModifier<Level_promotion> LEVEL_PROMOTION_STATIC_MODIFIER= MODIFIERS.register("level_promotion", Level_promotion::new);
+
+    public static final StaticModifier<Extraterrestrial_Forces_Botania> EXTRATERRESTRIAL_FORCES_BOTANIA_STATIC_MODIFIER= MODIFIERS.register("extraterrestrial_forces_botania", Extraterrestrial_Forces_Botania::new);
 
     public static final StaticModifier<Real_souleat_realform> REAL_SOULEAT_REALFORM_STATIC_MODIFIER = MODIFIERS.register("real_souleat_realform", Real_souleat_realform::new);
 
@@ -377,6 +428,19 @@ public class MiztinkerModifiers {
                                     "default"
                             ),
                             "你的武器彻底吃饱了..."
+                    )
+            );
+
+    public static final StaticModifier<Death_Note_King_RealForm> DEATH_NOTE_KING_REVEAL =
+            MODIFIERS.register(
+                    "death_note_king_realform",
+                    () -> new Death_Note_King_RealForm(
+                            "death_book",
+                            MaterialVariantId.create(
+                                    new MaterialId("miztinker", "death_book_king"),
+                                    "default"
+                            ),
+                            "你已成功获得死神大王的力量..."
                     )
             );
 

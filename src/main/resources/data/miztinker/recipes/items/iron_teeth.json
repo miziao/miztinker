@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "bbb",
+    "bcb",
+    "   "
+  ],
+  "key": {
+    "b": { "tag": "forge:ingots/iron" },
+    "c": { "tag": "miztinker:tcon_bone" }
+  },
+  "result": { "item": "miztinker:iron_teeth", "count": 1 }
+}

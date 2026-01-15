@@ -5,6 +5,7 @@ import com.mizi.miztinker.item.tool.*;
 import com.mizi.miztinker.MiztinkerTab;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +13,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegistryObject;
 import slimeknights.mantle.registration.deferred.SynchronizedDeferredRegister;
+import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.common.registration.ItemDeferredRegisterExtension;
 import slimeknights.tconstruct.library.materials.RandomMaterial;
@@ -20,6 +22,7 @@ import slimeknights.tconstruct.library.tools.helper.ModifierLootingHandler;
 import slimeknights.tconstruct.library.tools.helper.ToolBuildHandler;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
+import slimeknights.tconstruct.library.tools.item.armor.ModifiableArmorItem;
 import slimeknights.tconstruct.library.utils.BlockSideHitListener;
 
 import java.util.function.Consumer;
@@ -60,6 +63,15 @@ public class MiztinkerTools extends MiztinkerTab {
     public static final ItemObject<ModifiableItem> old_sword = TINKER_ITEMS.register("old_sword",()->new old_sword(new Item.Properties().stacksTo(1)));
     public static final ItemObject<ModifiableItem> broom = TINKER_ITEMS.register("broom",()->new Broom(new Item.Properties().stacksTo(1)));
     public static final ItemObject<ModifiableItem> murasama = TINKER_ITEMS.register("murasama", () -> new murasama(new Item.Properties().stacksTo(1)));
+    public static final EnumObject<ArmorItem.Type, ModifiableArmorItem> soulization = TINKER_ITEMS.registerEnum(
+            ArmorItem.Type.values(),
+            "soulization",
+            type -> new ModifiableArmorItem(
+                    ToolDefinitions.SOULIZATION_AM,
+                    type,
+                    new Item.Properties().stacksTo(1)
+            )
+    );
 
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output tab) {
         Consumer<ItemStack> output = tab::accept;
@@ -68,5 +80,8 @@ public class MiztinkerTools extends MiztinkerTab {
         acceptTool(output, MiztinkerTools.old_sword);
         acceptTool(output, MiztinkerTools.broom);
         acceptTool(output, MiztinkerTools.murasama);
+        for (ArmorItem.Type type : ArmorItem.Type.values()) {
+            acceptTool(output, () -> MiztinkerTools.soulization.get(type));
+        }
     }
 }

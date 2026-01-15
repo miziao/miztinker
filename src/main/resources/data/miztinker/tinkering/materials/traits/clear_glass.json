@@ -1,0 +1,16 @@
+{
+  "default": [
+    {
+      "name": "miztinker:convex_lens",
+      "level": 1
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor":[
+      {
+        "name": "miztinker:concave_lens",
+        "level": 1
+      }
+    ]
+  }
+}

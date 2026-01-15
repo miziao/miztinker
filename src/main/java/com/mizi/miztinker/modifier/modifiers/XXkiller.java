@@ -12,7 +12,6 @@ public class XXkiller extends Modifier implements MeleeDamageModifierHook {
 
 
 
-    /** 计算倍率：基础200倍，然后随等级翻倍 */
     private float getMultiplier(int level) {
         return 1.75F * (float)Math.pow(2, level - 1);
     }

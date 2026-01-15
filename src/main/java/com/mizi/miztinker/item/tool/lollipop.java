@@ -3,17 +3,12 @@ package com.mizi.miztinker.item.tool;
 import com.mizi.miztinker.item.tool.until.ToolDefinitions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.Lazy;
@@ -31,12 +26,9 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.shared.TinkerCommons;
-import slimeknights.tconstruct.tools.modifiers.ability.interaction.BlockingModifier;
 
 import java.util.Iterator;
 import java.util.List;
-
-import static slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook.KEY_DRAWTIME;
 
 
 public class lollipop extends ModifiableItem {
@@ -63,12 +55,10 @@ public class lollipop extends ModifiableItem {
         if (entity instanceof Player player && player.canEat(false)) {
             Level world = entity.level();
             int a = 6;
-            //吃完加饱食度
             player.getFoodData().eat(a, a*0.5f);
             ModifierUtil.foodConsumer.onConsume(player, BACON_STACK.get(), a, 0.6F);
             world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.GENERIC_EAT, SoundSource.NEUTRAL, 1.0F, 1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.4F);
             world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_BURP, SoundSource.NEUTRAL, 0.5F, world.random.nextFloat() * 0.1F + 0.9F);
-            //扣耐久
             if (ToolDamageUtil.directDamage(tool, a*3 , player, player.getUseItem())) {
                 player.broadcastBreakEvent(player.getUsedItemHand());
             }
@@ -93,9 +83,7 @@ public class lollipop extends ModifiableItem {
             builder.add(ToolStats.MINING_SPEED);
         }
         builder.addAllFreeSlots();
-        Iterator var7 = tool.getModifierList().iterator();
-        while(var7.hasNext()) {
-            ModifierEntry entry = (ModifierEntry)var7.next();
+        for (ModifierEntry entry : tool.getModifierList()) {
             entry.getHook(ModifierHooks.TOOLTIP).addTooltip(tool, entry, player, tooltips, key, tooltipFlag);
         }
         return tooltips;

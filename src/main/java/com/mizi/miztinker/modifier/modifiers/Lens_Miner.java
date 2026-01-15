@@ -1,13 +1,13 @@
 package com.mizi.miztinker.modifier.modifiers;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -28,7 +28,6 @@ public class Lens_Miner extends NoLevelsModifier implements BlockBreakModifierHo
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
-        super.registerHooks(hookBuilder);
         hookBuilder.addHook(this, ModifierHooks.BLOCK_BREAK);
     }
 
@@ -36,7 +35,7 @@ public class Lens_Miner extends NoLevelsModifier implements BlockBreakModifierHo
     public void afterBlockBreak(IToolStackView tool, ModifierEntry modifier, ToolHarvestContext context) {
         Level world = context.getWorld();
 
-        if (!world.isClientSide && world instanceof ServerLevel serverLevel) {
+        if (!world.isClientSide && world instanceof ServerLevel) {
             BlockPos pos = context.getPos();
 
             if (ORE_CACHE == null) {
@@ -56,16 +55,17 @@ public class Lens_Miner extends NoLevelsModifier implements BlockBreakModifierHo
         }
     }
 
-    private void initializeOreCache() {
-        TagKey<Block> oreTag = ForgeRegistries.BLOCKS.tags().createTagKey(
-                new net.minecraft.resources.ResourceLocation("forge", "ores")
-        );
+    private synchronized void initializeOreCache() {
+        if (ORE_CACHE != null) return;
 
-        ORE_CACHE = ForgeRegistries.BLOCKS.getValues().stream()
-                .filter(block -> ForgeRegistries.BLOCKS.tags().getTag(oreTag).contains(block))
-                .map(Block::asItem)
-                .filter(item -> item != net.minecraft.world.item.Items.AIR) // 排除没有物品形态的方块
-                .distinct()
+        ORE_CACHE = ForgeRegistries.ITEMS.getValues().stream()
+                .filter(item -> {
+                    ResourceLocation name = ForgeRegistries.ITEMS.getKey(item);
+                    return name != null && name.getPath().toLowerCase().contains("ore");
+                })
+                .filter(item -> item != Items.AIR)
                 .collect(Collectors.toList());
+
+        // System.out.println("Lens Miner initialized: found " + ORE_CACHE.size() + " ore items.");
     }
 }

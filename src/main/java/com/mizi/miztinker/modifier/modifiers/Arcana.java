@@ -46,7 +46,6 @@ public class Arcana extends NoLevelsModifier implements SlotStackModifierHook, G
     private static final int LIGHTNING = 4;
 
     public Arcana() {
-        // 注册全局事件监听，处理闪电落地
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -57,16 +56,13 @@ public class Arcana extends NoLevelsModifier implements SlotStackModifierHook, G
         hookBuilder.addHook(this, ModifierHooks.GENERAL_INTERACT);
     }
 
-    // --- 核心修复：监听碰撞事件 ---
     @SubscribeEvent
     public void onProjectileImpact(ProjectileImpactEvent event) {
         Projectile projectile = event.getProjectile();
-        // 检查这个子弹是否带有我们的特殊标记
         if (projectile.getPersistentData().contains(TAG_FORCE_LIGHTNING)) {
             if (!projectile.level().isClientSide) {
                 BlockPos pos = BlockPos.containing(event.getRayTraceResult().getLocation());
 
-                // 召唤物理闪电
                 LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(projectile.level());
                 if (lightning != null) {
                     lightning.moveTo(Vec3.atBottomCenterOf(pos));
@@ -133,7 +129,6 @@ public class Arcana extends NoLevelsModifier implements SlotStackModifierHook, G
 
                 player.level().addFreshEntity(entity);
 
-                // 播放音效
                 net.minecraft.sounds.SoundEvent sound = switch (mode) {
                     case DISCIPLINE -> net.minecraft.sounds.SoundEvents.ARROW_SHOOT;
                     case LIGHTNING -> net.minecraft.sounds.SoundEvents.LIGHTNING_BOLT_THUNDER;
@@ -149,7 +144,6 @@ public class Arcana extends NoLevelsModifier implements SlotStackModifierHook, G
         return InteractionResult.PASS;
     }
 
-    // ... overrideOtherStackedOnMe 和 getPriority 保持不变 ...
     @Override
     public boolean overrideOtherStackedOnMe(IToolStackView tool, ModifierEntry entry,
                                             ItemStack held, Slot slot, Player player, SlotAccess access) {

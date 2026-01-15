@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "bbb",
+    "bcb",
+    "bbb"
+  ],
+  "key": {
+    "b": { "tag": "forge:obsidian" },
+    "c": { "tag": "tconstruct:casts/gold" }
+  },
+  "result": { "item": "miztinker:reinforcement_old", "count": 1 }
+}

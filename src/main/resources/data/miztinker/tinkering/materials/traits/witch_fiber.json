@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "name": "miztinker:metalfoes_fusion",
+      "level": 1
+    },
+    {
+      "name": "tconstruct:magic_protection",
+      "level": 2
+    }
+  ]
+}

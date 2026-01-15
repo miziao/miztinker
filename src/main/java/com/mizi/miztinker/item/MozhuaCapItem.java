@@ -20,7 +20,6 @@ public class MozhuaCapItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        // 只允许主手
         if (hand != InteractionHand.MAIN_HAND) {
             return InteractionResultHolder.pass(stack);
         }

@@ -1,0 +1,35 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 2,
+      "item": "miztinker:copper_teeth"
+    },
+    {
+      "item": "minecraft:rabbit_stew"
+    },
+    {
+      "amount_needed": 2,
+      "item": "miztinker:copper_teeth"
+    },
+    {
+      "amount_needed": 14,
+      "item": "miztinker:iron_teeth"
+    },
+    {
+      "amount_needed": 14,
+      "item": "miztinker:iron_teeth"
+    }
+  ],
+  "result": "miztinker:abyss_maw",
+  "slots": {
+    "abilities": 1
+  },
+  "level": {
+    "max": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor/helmets"
+  }
+}

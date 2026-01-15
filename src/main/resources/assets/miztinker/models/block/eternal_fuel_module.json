@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "miztinker:block/eternal_fuel_module"
+  }
+}

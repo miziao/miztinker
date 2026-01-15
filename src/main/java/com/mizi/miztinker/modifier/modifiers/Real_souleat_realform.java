@@ -24,7 +24,6 @@ public class Real_souleat_realform extends NoLevelsModifier
 
     private static final float REQUIRED_SOUL = 10_000_000f;
 
-    /* ---------------- SlotStack：只负责“开关” ---------------- */
 
     @Override
     public boolean overrideOtherStackedOnMe(
@@ -35,11 +34,9 @@ public class Real_souleat_realform extends NoLevelsModifier
             Player player,
             SlotAccess access
     ) {
-//        if (player.level().isClientSide) return false;
 
         ModDataNBT data = tool.getPersistentData();
 
-        // 读取噬魂
         float soulBonus = data.getFloat(TAG_SOUL_BONUS);
 
         if (soulBonus < REQUIRED_SOUL) {
@@ -54,7 +51,7 @@ public class Real_souleat_realform extends NoLevelsModifier
             player.displayClientMessage(Component.literal("§7真实形态被重新封印。"), true);
         }
 
-        return true; // ⭐ 和 Death_eye 一样，必须 true
+        return true;
     }
 
     @Override

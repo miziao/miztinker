@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    { "id": "threateningly_mobs:steel_tusk", "required": false },
+    { "id": "threateningly_mobs:riptooth_teeth", "required": false },
+    { "id": "threateningly_mobs:furious_incisors", "required": false },
+    { "id": "iceandfire:sea_serpent_fang", "required": false },
+    { "id": "the_starved_stalker:starved_tooth", "required": false },
+    { "id": "craziness_awakened:platypus_tooth", "required": false },
+    { "id": "craziness_awakened:worm_tooth", "required": false },
+    { "id": "craziness_awakened:kraken_tooth", "required": false },
+    { "id": "craziness_awakened:trex_tooth", "required": false },
+    { "id": "craziness_awakened:alosaurus_tooth", "required": false },
+    { "id": "jerotesvillage:arc_fang", "required": false },
+    { "id": "iceandfire:hydra_fang", "required": false },
+    { "id": "goety:venomous_fang", "required": false },
+    { "id": "goety:savage_tooth", "required": false },
+    { "id": "miztinker:iron_teeth", "required": false },
+    { "id": "miztinker:copper_teeth", "required": false },
+    { "id": "abominations_infection:tooth", "required": false }
+  ]
+}

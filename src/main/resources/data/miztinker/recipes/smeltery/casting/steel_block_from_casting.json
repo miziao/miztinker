@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "forge:storage_blocks/coal"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "name": "tconstruct:molten_iron",
+    "amount": 1620
+  },
+  "result": "tconstruct:steel_block",
+  "cooling_time": 1620
+}

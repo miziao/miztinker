@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "miztinker:item/experience_steel_alpha"
+  }
+}

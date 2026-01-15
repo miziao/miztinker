@@ -108,10 +108,14 @@ public class MiztinkerBlocks {
                         return type;
                     });
 
+    public static final RegistryObject<Block> DYNAMAX_SAPLING = BLOCKS.register(
+            "dynamax_sapling",
+            BlockDynamaxSapling::new
+    );
+
     public static final RegistryObject<Block> TINKER_LANTERN = BLOCKS.register("tinker_lantern",
             () -> new TinkerLanternBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN).noOcclusion()));
 
-    // BlockEntity 注册
     public static final RegistryObject<BlockEntityType<TinkerLanternBlockEntity>> TINKER_LANTERN_BE =
             BLOCK_ENTITIES.register("tinker_lantern_be",
                     () -> BlockEntityType.Builder.of(TinkerLanternBlockEntity::new, TINKER_LANTERN.get()).build(null));
@@ -124,5 +128,29 @@ public class MiztinkerBlocks {
                     .randomTicks()
             )
     );
+
+    public static final RegistryObject<Block> ETERNAL_FUEL = BLOCKS.register(
+            "eternal_fuel_module",
+            () -> new EternalFuelBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.METAL)
+                            .strength(3.0F)
+                            .sound(SoundType.METAL)
+                            .requiresCorrectToolForDrops()
+            )
+    );
+
+    public static final RegistryObject<BlockEntityType<EternalFuelBlock.EternalFuelBlockEntity>> ETERNAL_FUEL_ENTITY =
+            BLOCK_ENTITIES.register("eternal_fuel_entity",
+                    () -> {
+                        BlockEntityType<EternalFuelBlock.EternalFuelBlockEntity> type =
+                                BlockEntityType.Builder.of(
+                                        EternalFuelBlock.EternalFuelBlockEntity::new,
+                                        ETERNAL_FUEL.get()
+                                ).build(null);
+
+                        EternalFuelBlock.BLOCK_ENTITY_TYPE = type;
+                        return type;
+                    });
 
 }

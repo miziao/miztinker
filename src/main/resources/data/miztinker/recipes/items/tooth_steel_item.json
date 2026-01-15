@@ -2,8 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "forge:conditions": [
     {
-      "type": "forge:item_exists",
-      "item": "abominations_infection:tooth"
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "miztinker:teeth"
+      }
     },
     {
       "type": "forge:not",
@@ -20,7 +23,7 @@
   ],
   "key": {
     "a": {
-      "item": "abominations_infection:tooth"
+      "tag": "miztinker:teeth"
     },
     "b": {
       "tag": "forge:ingots/steel"

@@ -24,9 +24,6 @@ public class Broom extends ModifiableItem {
         super(properties, ToolDefinitions.BROOM_TD);
     }
 
-    /* =======================
-       ① 右键方块：开始使用
-       ======================= */
     @Override
     public @NotNull InteractionResult useOn(UseOnContext context) {
         Player player = context.getPlayer();
@@ -44,39 +41,27 @@ public class Broom extends ModifiableItem {
         return super.useOn(context);
     }
 
-    /* =======================
-       ② 每 tick 刷洗（核心）
-       ======================= */
     @Override
     public void onUseTick(Level level, LivingEntity living, ItemStack stack, int remainingUseDuration) {
 
-        // 只允许玩家刷
         if (!(living instanceof Player player)) {
             return;
         }
 
-        // 把逻辑交给原版刷子
         BrushItem brushItem = (BrushItem) Items.BRUSH;
         brushItem.onUseTick(level, living, stack, remainingUseDuration);
 
-        // 服务端掉耐久（匠魂方式）
         if (!level.isClientSide && remainingUseDuration % 10 == 0) {
             ToolStack tool = ToolStack.from(stack);
             ToolDamageUtil.damage(tool, 1, player, stack);
         }
     }
 
-    /* =======================
-       ③ 使用时长（必须）
-       ======================= */
     @Override
     public int getUseDuration(ItemStack stack) {
         return Items.BRUSH.getUseDuration(stack);
     }
 
-    /* =======================
-       ④ 使用动画（必须）
-       ======================= */
     @Override
     public @NotNull UseAnim getUseAnimation(ItemStack stack) {
         return UseAnim.BRUSH;

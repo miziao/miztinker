@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    { "id": "tconstruct:venombone", "required": false },
+    { "id": "tconstruct:blazing_bone", "required": false },
+    { "id": "tconstruct:necronium_bone", "required": false },
+    { "id": "tconstruct:necrotic_bone", "required": false }
+  ]
+}

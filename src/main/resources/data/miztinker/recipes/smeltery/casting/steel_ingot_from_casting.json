@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "minecraft:coals"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "name": "tconstruct:molten_iron",
+    "amount": 180
+  },
+  "result": "tconstruct:steel_ingot",
+  "cooling_time": 360
+}

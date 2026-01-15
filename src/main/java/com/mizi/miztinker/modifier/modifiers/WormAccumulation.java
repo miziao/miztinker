@@ -6,14 +6,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -21,7 +17,6 @@ import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
-import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -35,18 +30,15 @@ public class WormAccumulation extends Modifier
         implements MeleeHitModifierHook,
         AttributesModifierHook, TooltipModifierHook {
 
-    /* ---------- 常量 ---------- */
     private static final String TAG_ARMOR = "worm_armor";
     private static final float ABSORB_RATIO = 0.01f; // 固定 1%
     private static final float ARMOR_PER_LEVEL = 100f;
     private static final UUID ARMOR_UUID = UUID.fromString("7a4a8b0f-2bfa-4a66-8d99-cc1a5d22c777");
 
-    // ResourceLocation 常量，避免重复创建
     private ResourceLocation getArmorKey() {
         return new ResourceLocation(getId().getNamespace(), getId().getPath() + "." + TAG_ARMOR);
     }
 
-    /* ---------- Hook 注册 ---------- */
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this,
@@ -80,7 +72,6 @@ public class WormAccumulation extends Modifier
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier,
                               EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        // Only apply when held in main hand or off hand
         if (slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND) {
             ModDataNBT data = tool.getPersistentData();
             ResourceLocation key = getArmorKey();
@@ -98,7 +89,6 @@ public class WormAccumulation extends Modifier
     }
 
 
-    /* ---------- 工具提示 ---------- */
     @Override
     public void addTooltip(IToolStackView tool, ModifierEntry modifier,
                            Player player, List<Component> tooltip,

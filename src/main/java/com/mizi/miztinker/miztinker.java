@@ -18,6 +18,9 @@ import com.mizi.miztinker.sounds.MiztinkerSounds;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
@@ -60,6 +63,7 @@ public class miztinker {
         MiztinkerEntityRegister.ENTITY.register(modBus);
         MiztinkerEntityRegister.ENTITIES.register(modBus);
         MiztinkerBlocks.BLOCKS.register(modBus);
+        MiztinkerPotions.POTIONS.register(modBus);
         MiztinkerBlocks.BLOCK_ENTITIES.register(modBus);
         DiademaRegister.DIADEMA_TYPES.register(modBus);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
@@ -70,6 +74,8 @@ public class miztinker {
         MiztinkerTools.initRegisters();
         MiztinkerParticlesRegister.PARTICLE_TYPES.register(modBus);
         MinecraftForge.EVENT_BUS.register(new ServerTickHandler());
+
+        MiztinkerRegistry.RECIPE_SERIALIZERS.register(modBus);
 
         modBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
@@ -123,18 +129,26 @@ public class miztinker {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        // Some common setup code
-        initOptionalModifiers();
-        MiztinkerNetwork.init();
+        event.enqueueWork(() -> {
+            initOptionalModifiers();
+            MiztinkerNetwork.init();
+
+            PotionBrewing.addMix(Potions.MUNDANE, Items.BLAZE_POWDER, MiztinkerPotions.STRENGTH_OLD_POTION.get());
+
+            PotionBrewing.addMix(MiztinkerPotions.STRENGTH_OLD_POTION.get(), Items.REDSTONE, MiztinkerPotions.STRENGTH_OLD_POTION_LONG.get());
+
+            PotionBrewing.addMix(MiztinkerPotions.STRENGTH_OLD_POTION.get(), Items.GLOWSTONE_DUST, MiztinkerPotions.STRENGTH_OLD_POTION_STRONG.get());
+        });
     }
+
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
-                // 设置渲染层为 Cutout 以解决材质黑边/透明失效问题
                 ItemBlockRenderTypes.setRenderLayer(MiztinkerBlocks.TINKER_LANTERN.get(), RenderType.cutout());
+                ItemBlockRenderTypes.setRenderLayer(MiztinkerBlocks.DYNAMAX_SAPLING.get(), RenderType.cutout());
 
                 TinkerItemProperties.registerToolProperties(lollipop.get());
                 TinkerItemProperties.registerToolProperties(tinker_loli_pickaxe.get());
@@ -147,6 +161,11 @@ public class miztinker {
                 TinkerItemProperties.registerBrokenProperty(old_sword.get());
                 TinkerItemProperties.registerBrokenProperty(broom.get());
                 TinkerItemProperties.registerBrokenProperty(murasama.get());
+
+                soulization.forEach(armor -> {
+                    TinkerItemProperties.registerToolProperties(armor);
+                    TinkerItemProperties.registerBrokenProperty(armor);
+                });
             });
 
             com.mizi.miztinker.MusicSlots.init();

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    { "id": "momotinker:living_platinum", "required": false },
+    { "id": "momotinker:crystallized_platinum", "required": false },
+    { "id": "momotinker:stellar_core_platinum", "required": false },
+    { "id": "momotinker:hadal_platinum", "required": false }
+  ]
+}

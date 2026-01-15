@@ -13,7 +13,11 @@
     "EntityCollisionContextAccessor",
     "EntityInvoker",
     "EntityCollisionMixin",
-    "OreMeltingRecipeMixin"
+    "OreMeltingRecipeMixin",
+    "LazyModifierMixin",
+    "MixinGameMasterBlockItem",
+    "MixinPlayerPermission",
+    "FuelModuleMixin"
   ],
   "client": [
     "GameRendererMixin",

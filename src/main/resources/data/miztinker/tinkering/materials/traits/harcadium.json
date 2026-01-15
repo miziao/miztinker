@@ -3,6 +3,10 @@
     {
       "name": "miztinker:lovestone",
       "level": 1
+    },
+    {
+      "name": "miztinker:giant_killer",
+      "level": 1
     }
   ],
   "perStat": {
@@ -19,6 +23,10 @@
       },
       {
         "name": "miztinker:bedrock_destr0yer",
+        "level": 1
+      },
+      {
+        "name": "miztinker:giant_killer",
         "level": 1
       }
     ]

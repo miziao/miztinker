@@ -1,6 +1,5 @@
 package com.mizi.miztinker.entity.boss.entity;
 
-import com.c2h6s.etstlib.entity.specialDamageSources.LegacyDamageSource;
 import com.mizi.miztinker.entity.boss.BossEntity;
 import com.mizi.miztinker.entity.boss.ai.TitanWarden.RayTraceHelper;
 import com.mizi.miztinker.entity.boss.ai.TitanWarden.TitanWardenAttackGoal;
@@ -160,18 +159,20 @@ public class TitanWarden extends BossEntity implements GeoEntity {
             LivingEntity target = this.getTarget();
             if (this.remotingTicks == 68 && this.isRemote() && target != null) {
                 float a = (float) this.position().subtract(target.position()).length();
-                RayTraceHelper.TraceResult result = RayTraceHelper.trace(this,this.getTarget(), a+attackReachSqr*2f,w);
+                RayTraceHelper.TraceResult result = RayTraceHelper.trace(this, this.getTarget(), a + attackReachSqr * 2f, w);
 
-                for (BlockPos pos:result.blocks){
-                    if (this.level() instanceof ServerLevel serverLevel){
-                        serverLevel.sendParticles(MiztinkerParticlesRegister.BIG_SONIC_BOOM.get(), pos.getX(),pos.getY(),pos.getZ(), 0, 0, 0, 0, 1);
+                for (BlockPos pos : result.blocks) {
+                    if (this.level() instanceof ServerLevel serverLevel) {
+                        serverLevel.sendParticles(MiztinkerParticlesRegister.BIG_SONIC_BOOM.get(), pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0, 0, 1);
                     }
                 }
-                for (LivingEntity living:result.entities) {
-                    if (living != null &&living!=this) {
+
+                for (LivingEntity living : result.entities) {
+                    if (living != null && living != this) {
                         if (this.isLock()) {
-                            living.hurt(LegacyDamageSource.mobAttack(this).setBypassArmor().setBypassMagic().setBypassEnchantment().setBypassInvul().setBypassInvulnerableTime().setBypassShield(), b*0.01f*a);
+                            living.hurt(this.level().damageSources().magic(), b * 0.01f * a);
                         }
+
                         if (this.level() instanceof ServerLevel serverLevel) {
                             serverLevel.playSound(null, living.getX(), living.getY(), living.getZ(),
                                     SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS,

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "tag": "forge:cobblestone/mossy" },
+    { "tag": "forge:cobblestone/mossy" },
+    { "tag": "forge:cobblestone/mossy" },
+    { "tag": "forge:cobblestone/mossy" },
+    { "tag": "forge:cobblestone/mossy" },
+    { "tag": "forge:cobblestone/mossy" },
+    { "tag": "forge:cobblestone/mossy" },
+    { "tag": "forge:cobblestone/mossy" },
+    { "tag": "forge:cobblestone/mossy" }
+  ],
+  "result": {
+    "item": "miztinker:moss",
+    "count": 1
+  }
+}

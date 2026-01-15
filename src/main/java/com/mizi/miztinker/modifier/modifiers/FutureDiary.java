@@ -36,7 +36,6 @@ public class FutureDiary extends NoLevelsModifier implements DamageBlockModifier
         hookBuilder.addHook(this, ModifierHooks.INVENTORY_TICK);
     }
 
-    /** Tick 处理损坏 → 死亡 */
     @Override
     public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level level,
                                 LivingEntity holder, int itemSlot, boolean isSelected,

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:mossy_stone_bricks" },
+    { "item": "minecraft:mossy_stone_bricks" },
+    { "item": "minecraft:mossy_stone_bricks" },
+    { "item": "minecraft:mossy_stone_bricks" },
+    { "item": "minecraft:mossy_stone_bricks" },
+    { "item": "minecraft:mossy_stone_bricks" },
+    { "item": "minecraft:mossy_stone_bricks" },
+    { "item": "minecraft:mossy_stone_bricks" },
+    { "item": "minecraft:mossy_stone_bricks" }
+  ],
+  "result": {
+    "item": "miztinker:moss",
+    "count": 1
+  }
+}

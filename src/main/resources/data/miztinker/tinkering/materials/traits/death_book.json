@@ -3,6 +3,14 @@
     {
       "name": "miztinker:death_note",
       "level": 1
+    },
+    {
+      "name": "miztinker:level_promotion",
+      "level": 1
+    },
+    {
+      "name": "miztinker:death_note_king_realform",
+      "level": 1
     }
   ]
 }

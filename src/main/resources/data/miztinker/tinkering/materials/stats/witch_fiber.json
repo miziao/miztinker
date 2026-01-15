@@ -1,0 +1,29 @@
+{
+  "stats": {
+    "tconstruct:maille": {},
+    "tconstruct:plating_boots": {
+      "armor": 2.0,
+      "durability": 250,
+      "knockback_resistance":0,
+      "toughness": 0
+    },
+    "tconstruct:plating_chestplate": {
+      "armor": 4.0,
+      "durability": 400,
+      "knockback_resistance": 0,
+      "toughness": 0
+    },
+    "tconstruct:plating_helmet": {
+      "armor": 2.5,
+      "durability": 350,
+      "knockback_resistance": 0,
+      "toughness": 0
+    },
+    "tconstruct:plating_leggings": {
+      "armor": 3.5,
+      "durability": 200,
+      "knockback_resistance":0,
+      "toughness": 0
+    }
+  }
+}

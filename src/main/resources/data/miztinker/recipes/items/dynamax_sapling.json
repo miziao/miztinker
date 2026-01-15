@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "miztinker:dynamax_band" },
+    { "tag": "minecraft:saplings" }
+  ],
+  "result": {
+    "item": "miztinker:dynamax_sapling",
+    "count": 1
+  }
+}

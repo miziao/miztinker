@@ -1,0 +1,27 @@
+{
+  "type": "miztinker:soulization_recipe",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "tconstruct:seared_channel"
+    },
+    {
+      "item": "minecraft:porkchop"
+    }
+  ],
+  "soul_inputs": [
+    {
+      "tag": "tconstruct:parts"
+    }
+  ],
+  "result": "miztinker:soulization",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

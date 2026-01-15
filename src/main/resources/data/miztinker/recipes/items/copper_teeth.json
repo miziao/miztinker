@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "bbb",
+    "bcb",
+    " b "
+  ],
+  "key": {
+    "b": { "tag": "forge:ingots/copper" },
+    "c": { "tag": "miztinker:tcon_bone" }
+  },
+  "result": { "item": "miztinker:copper_teeth", "count": 1 }
+}

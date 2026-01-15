@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    { "id": "momotinker:timetrace_purple_gold", "required": false },
+    { "id": "momotinker:reversetime_purple_gold", "required": false }
+  ]
+}

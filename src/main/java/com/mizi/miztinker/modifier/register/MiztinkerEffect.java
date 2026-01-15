@@ -9,8 +9,12 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class MiztinkerEffect {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, miztinker.MODID);
-    //以下是药水效果
+
     public static final RegistryObject<MobEffect> WoundEffect = EFFECTS.register("woundeffect", com.mizi.miztinker.effect.WoundEffect::new);
+
+    public static final RegistryObject<MobEffect> BoneFractureEffect = EFFECTS.register("bone_fracture", com.mizi.miztinker.effect.BoneFractureEffect::new);
+
+    public static final RegistryObject<MobEffect> StrengthOldEffect = EFFECTS.register("strength_old", com.mizi.miztinker.effect.StrengthOldEffect::new);
 
     public static final RegistryObject<MobEffect> HorologiumNoAI = EFFECTS.register("horologiumnoai", com.mizi.miztinker.effect.HorologiumNoAI::new);
 

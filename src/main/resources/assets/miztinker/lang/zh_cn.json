@@ -289,7 +289,7 @@
 
   "modifier.miztinker.elemental": "原始回归·本源",
   "modifier.miztinker.elemental.flavor": "我把你带回来了...",
-  "modifier.miztinker.elemental.description": "在玩家使用该工具攻击成功时，随机给予玩家两个正面效果,持续三秒",
+  "modifier.miztinker.elemental.description": "在玩家使用该工具攻击成功时，随机给予玩家两个正面效果,持续三秒,持续时间和效果数量受等级影响",
 
   "modifier.miztinker.terrafirma": "原始回归·坚实基础",
   "modifier.miztinker.terrafirma.flavor": "我把你带回来了...",
@@ -447,6 +447,18 @@
   "modifier.miztinker.death_note.flavor":"基拉就是你吧?",
   "modifier.miztinker.death_note.description":"下蹲右键秒杀全图和你对应工具'名字'相同的生物(如果你不知道他们的'名字'是什么,可以获得死神之眼再来查看)",
 
+  "modifier.miztinker.death_note_kingmode": "死亡笔记-死神大王模式",
+  "modifier.miztinker.death_note_kingmode.flavor":"拥有死神大王的力量,胜利是必然的",
+  "modifier.miztinker.death_note_kingmode.description":"下蹲右键秒杀全图和你对应背包中书与笔内写进'名字'相同的生物(一行只能写一个名字)",
+
+  "modifier.miztinker.level_promotion": "咨询",
+  "modifier.miztinker.level_promotion.flavor":"尝试通过自己的努力来获得死神大王的赏识吧",
+  "modifier.miztinker.level_promotion.description":"物品栏右键来询问死神大王你是否达标",
+
+  "modifier.miztinker.death_note_king_realform": "等级晋升",
+  "modifier.miztinker.death_note_king_realform.flavor":"仍有上升空间,只需要你完成目标",
+  "modifier.miztinker.death_note_king_realform.description":"揭示它的真实形态！",
+
   "modifier.miztinker.all_perfect": "All Perfect Plus!",
   "modifier.miztinker.all_perfect.flavor":"还有理论值",
   "modifier.miztinker.all_perfect.description":"不会受到大于101的伤害",
@@ -569,7 +581,7 @@
 
   "modifier.miztinker.lens_miner": "矿工透镜",
 "modifier.miztinker.lens_miner.flavor": "源自aa 实用扩展,但你不再需要原子再构机",
-"modifier.miztinker.lens_miner.description":"挖掘方块后掉落一个任意矿石",
+"modifier.miztinker.lens_miner.description":"挖掘方块后掉落一个任意'ore'(矿石)",
 
 "modifier.miztinker.nbt_microscope": "nbt显微镜",
 "modifier.miztinker.nbt_microscope.flavor": "牠最好用的地方是复制的时候不会有''",
@@ -594,6 +606,96 @@
 "modifier.miztinker.happy_newyear": "新年快乐!",
 "modifier.miztinker.happy_newyear.flavor": "又过了一年呢,放点烟花庆祝一下吧",
 "modifier.miztinker.happy_newyear.description":"右键释放随机烟花",
+
+"modifier.miztinker.abyss_maw": "深渊巨口",
+"modifier.miztinker.abyss_maw.flavor": "拥有快速消化以及进食的巨口",
+"modifier.miztinker.abyss_maw.description":"使你吃喝的速度超级加倍",
+
+"modifier.miztinker.metalfoes_fusion": "炼装融合",
+"modifier.miztinker.metalfoes_fusion.flavor": "炼金术分支之一,药剂学的巅峰之作",
+"modifier.miztinker.metalfoes_fusion.description":"手持药水物品栏右键盔甲,使盔甲吸收药水的效果,并且还可以使用空瓶右键已有效果的盔甲使盔甲的效果全部转移到空瓶里",
+
+"modifier.miztinker.mephisto": "墨菲斯托",
+"modifier.miztinker.mephisto.flavor": "地狱之主",
+"modifier.miztinker.mephisto.description":"额外造成炼狱伤害",
+
+"modifier.miztinker.experience_leak_beta": "经验泄露β",
+"modifier.miztinker.experience_leak_beta.flavor": "一直在泄露经验,但同时也获得了更强的力量",
+"modifier.miztinker.experience_leak_beta.description":"每t损失特性等级点经验,同时根据玩家经验值位数 x 特性等级获得倍数增伤",
+
+"modifier.miztinker.experience_leak_gamma": "经验泄露γ",
+"modifier.miztinker.experience_leak_gamma.flavor": "一直在泄露经验,但同时也获得了更强的力量",
+"modifier.miztinker.experience_leak_gamma.description":"每t损失特性等级点经验,同时免疫玩家等级 x 全身特性等级数值的伤害",
+
+"modifier.miztinker.giant_killer": "巨人杀手",
+"modifier.miztinker.giant_killer.flavor": "比车轮高的人都杀,但是车轮横过来放",
+"modifier.miztinker.giant_killer.description":"对巨人额外造成750点伤害,但是比你高的生物对你来讲都算巨人",
+
+"modifier.miztinker.true_mending": "真-经验修补",
+"modifier.miztinker.true_mending.flavor": "修复大部分耐久槽",
+"modifier.miztinker.true_mending.description":"在背包中时,吸取经验修复一切'耐久槽'",
+
+"modifier.miztinker.fine_steel": "精钢",
+"modifier.miztinker.fine_steel.bonus": "精炼加成: +%d%%",
+"modifier.miztinker.fine_steel.flavor": "铁的意志与钢的强韧",
+"modifier.miztinker.fine_steel.description":"每次修复工具,额外增加10%伤害和最大耐久,最多增加100%",
+
+"modifier.miztinker.violent_blow": "暴力击打",
+"modifier.miztinker.violent_blow.flavor": "过分的暴力",
+"modifier.miztinker.violent_blow.description":"每次攻击都会敲断敌人的骨头,使他们额外承受25%的伤害",
+
+"modifier.miztinker.not_believe": "非信",
+"modifier.miztinker.not_believe.flavor": "什么?我才不相信我的背后有一只怪物呢,你休想骗我",
+"modifier.miztinker.not_believe.description":"你仅会受到你看见的生物的攻击伤害",
+
+"modifier.miztinker.extraterrestrial_forces_tetra": "界外之力-tetra",
+"modifier.miztinker.extraterrestrial_forces_tetra.flavor": "tetra一大特色之 副手拐",
+"modifier.miztinker.extraterrestrial_forces_tetra.description":"当含有这个特性的工具放置在副手时,你主手的攻击会附加10%切割伤害",
+
+"modifier.miztinker.extraterrestrial_forces_botania": "界外之力-植物魔法",
+"modifier.miztinker.extraterrestrial_forces_botania.flavor": "植物魔法一大特色之 强制给匠魂工具附魔的魔力附魔台",
+"modifier.miztinker.extraterrestrial_forces_botania.description":"你可以通过物品栏右键强制将附魔给予匠魂工具,也可以将普通书将给予的附魔提取出来",
+
+"modifier.miztinker.extraterrestrial_forces_create": "界外之力-机械动力",
+"modifier.miztinker.extraterrestrial_forces_create.flavor": "机械动力三大特色之 盾构机 机械手 无消耗烧东西",
+"modifier.miztinker.extraterrestrial_forces_create.description":"物品栏右键在盾构机模式,机械手模式(站立下蹲切换左右键),火焰鼓风机模式中循环",
+
+"modifier.miztinker.durable_old": "原始回归-耐久",
+"modifier.miztinker.durable_old.flavor": "已超越巅峰",
+"modifier.miztinker.durable_old.description":"每级减少20%消耗耐久的概率",
+"modifier.miztinker.unbreakable":"原始回归-不毁",
+
+"modifier.miztinker.flesh_growth": "血肉生长",
+"modifier.miztinker.flesh_growth.flavor": "汲取血肉,快速生长",
+"modifier.miztinker.flesh_growth.description":"每击杀1个生物增加0.5的触及距离和攻击距离",
+
+"modifier.miztinker.command": "命令",
+"modifier.miztinker.command.flavor": "技术来源于Ivor",
+"modifier.miztinker.command.description":"当你装备上时,你将获得权限以及打开命令方块的能力",
+
+"modifier.miztinker.neptune": "海王",
+"modifier.miztinker.neptune.flavor": "雪花飘飘~~北风啸啸~~我去!_ _",
+"modifier.miztinker.neptune.description":"攻击生物时会额外产出一次钓鱼战利品",
+
+"modifier.miztinker.mending": "修复苔藓",
+"modifier.miztinker.mending.flavor": "最喜欢的一集",
+"modifier.miztinker.mending.description":"下蹲时吸取经验来修复你的工具",
+
+"modifier.miztinker.convex_lens": "凸透镜",
+"modifier.miztinker.convex_lens.flavor": "聚焦效果",
+"modifier.miztinker.convex_lens.description":"攻击生物后会随机挑选它身上的一个debuff,将该debuff的等级加上这个特性的等级",
+
+"modifier.miztinker.concave_lens": "凹透镜",
+"modifier.miztinker.concave_lens.flavor": "分散效果",
+"modifier.miztinker.concave_lens.description":"装备在盔甲栏位时将自己身上的debuff转移到其他生物身上",
+
+"modifier.miztinker.water_injected_pork": "注水猪肉",
+"modifier.miztinker.water_injected_pork.flavor": "做事要讲良心!讲良心啊!",
+"modifier.miztinker.water_injected_pork.description":"站在储罐上时,每秒消耗1%手持工具储罐里的水,将等量值'注水'进脚下储罐",
+
+"modifier.miztinker.soulization": "魂化",
+"modifier.miztinker.soulization.flavor": "灵魂簇拥",
+"modifier.miztinker.soulization.description":"为你的盔甲添加任意部件的特性",
   
 
 
@@ -612,6 +714,8 @@
   "effect.miztinker.horologiumnoai": "时停中",
   "effect.miztinker.destineddeath": "命定之死",
   "effect.miztinker.dropfountaineffect": "掉落物喷泉中",
+  "effect.miztinker.bone_fracture": "骨折",
+  "effect.miztinker.strength_old": "力量-原始回归",
 
 
   "stat.tconstruct.slot.display.music": "音乐",
@@ -641,6 +745,10 @@
   "material.miztinker.death_book": "死亡笔记",
   "material.miztinker.death_book.flavor": "你就是L吧?",
   "material.miztinker.death_book.encyclopedia": "秒杀所有和你工具'同名'的生物",
+
+  "material.miztinker.death_book_king": "死亡笔记-死神大王版",
+  "material.miztinker.death_book_king.flavor": "我就是掌管所有死神的王",
+  "material.miztinker.death_book_king.encyclopedia": "你现在可以把秒杀对象写进成书里面了",
 
   "material.miztinker.fumo_gold": "fumo金",
   "material.miztinker.fumo_gold.flavor": "FUNKY⭐",
@@ -754,6 +862,32 @@
   "material.miztinker.maybe_precision_mechanism.flavor": "一直散发着一股令人不安的能量",
   "material.miztinker.maybe_precision_mechanism.encyclopedia": "这种能量拥有数据化任何方块的能力",
 
+  "material.miztinker.witch_fiber": "女巫纤维",
+  "material.miztinker.witch_fiber.flavor": "女巫袍子的组成材料",
+  "material.miztinker.witch_fiber.encyclopedia": "女巫袍子的力量女巫自身发挥不到百分之一,女巫只把它当作一件能减免魔法伤害的衣服穿",
+
+  "material.miztinker.nether_reactor": "下界反应核",
+  "material.miztinker.nether_reactor.flavor": "拥有沟通下界与现世的力量",
+  "material.miztinker.nether_reactor.encyclopedia": "下界反应核经检验,检测出了墨菲斯托的魔力",
+
+  "material.miztinker.experience_steel_alpha": "经验钢-α变体",
+  "material.miztinker.experience_steel_alpha.flavor": "粗暴的融合而产生的经验钢",
+  "material.miztinker.experience_steel_alpha.encyclopedia": "时刻在泄露经验,但也获得了更为强力的特性",
+
+  "material.miztinker.steel_dragon_bone": "钢化龙骨",
+  "material.miztinker.steel_dragon_bone.flavor": "钢铁的硬度混合龙骨的韧性",
+
+  "material.miztinker.flesh_vine": "血肉藤蔓",
+  "material.miztinker.flesh_vine.flavor": "在大量血肉的作用下混合而成",
+  "material.miztinker.flesh_vine.encyclopedia": "藤蔓品尝到了血肉的滋味,现在他想要更多",
+
+  "material.miztinker.command_block": "命令方块",
+  "material.miztinker.command_block.flavor": "你已掌握整个游戏",
+  "material.miztinker.command_block.encyclopedia": "你现在可以随意使用指令了",
+
+  "material.miztinker.clear_glass": "通透玻璃",
+  "material.miztinker.clear_glass.flavor": "药水效果也许也是一种光粒子?",
+  "material.miztinker.clear_glass.encyclopedia": "拥有最高的折射率",
 
 
   "block.miztinker.nether_reactor": "下界反应核",
@@ -772,6 +906,12 @@
 
   "block.miztinker.tinker_lantern": "工匠灯笼",
 
+  "block.miztinker.dynamax_sapling": "极巨化树苗",
+  "tooltip.miztinker.dynamax_sapling":"§b也可以于神庙的箱子中概率发现",
+
+  "block.miztinker.eternal_fuel_module": "永恒燃料模块",
+  "tooltip.miztinker.eternal_fuel_module":"§b用于搭建结构时,使你的冶炼炉和熔铸炉不再消耗燃料",
+
   
 
   "entity.miztinker.mizi_ao": "「舞萌高手」米子山民",
@@ -781,11 +921,51 @@
   "entity.miztinker.titan_warden.lock": "监守者泰坦（已锁定）",
   "chat.miztinker.titan_warden.warning": "§4监守者泰坦正在苏醒... 赶紧逃离这里！",
 
+  "item.minecraft.potion.effect.strength_old_potion": "原始回归-力量药水",
+  "item.minecraft.potion.effect.strength_old_potion_long": "原始回归-力量药水 (延长)",
+  "item.minecraft.potion.effect.strength_old_potion_strong": "原始回归-力量药水 II",
+  "item.minecraft.splash_potion.effect.strength_old_potion": "喷溅型原始回归-力量药水",
+  "item.minecraft.splash_potion.effect.strength_old_potion_long": "喷溅型原始回归-力量药水 (延长)",
+  "item.minecraft.splash_potion.effect.strength_old_potion_strong": "喷溅型原始回归-力量药水 II",
+  "item.minecraft.lingering_potion.effect.strength_old_potion": "滞留型原始回归-力量药水",
+  "item.minecraft.lingering_potion.effect.strength_old_potion_long": "滞留型原始回归-力量药水 (延长)",
+  "item.minecraft.lingering_potion.effect.strength_old_potion_strong": "滞留型原始回归-力量药水 Ⅱ",
+  "item.minecraft.tipped_arrow.effect.strength_old_potion": "原始回归-力量之箭",
+  "item.minecraft.tipped_arrow.effect.strength_old_potion_long": "原始回归-力量之箭 (延长)",
+  "item.minecraft.tipped_arrow.effect.strength_old_potion_strong": "原始回归-力量之箭 Ⅱ",
+
 
 
   "item.miztinker.big_manyullyn_ingot": "超极巨化玛玉灵锭",
 
+  "item.miztinker.bot_book": "植物魔法辞典?",
+  "tooltip.miztinker.bot_book.right_click":"这并不是正品,请前往官网获取植物魔法",
+  "tooltip.miztinker.bot_book.desc":"由一本书和一组煤炭块丢在一起转化",
+
+  "item.miztinker.flesh_vine": "血肉藤蔓",
+
+  "item.miztinker.steel_dragon_bone": "钢化龙骨",
+
   "item.miztinker.dragonbone_tibetan": "龙之骨(藏)",
+
+  "item.miztinker.experience_steel_alpha": "经验钢-α变体",
+
+  "item.miztinker.iron_teeth": "铁齿",
+
+  "item.miztinker.copper_teeth": "铜牙",
+
+  "item.miztinker.reinforcement_old": "原始回归-耐久强化大板",
+
+  "item.miztinker.fake_forging_hammer": "锻造锤?",
+  "tooltip.miztinker.fake_forging_hammer.desc":"§b在雪原非村庄的唯一一个箱子才能寻找到这个来自异世界的道具",
+
+  "item.miztinker.exp_moss": "经验苔藓",
+  "tooltip.miztinker.exp_moss":"§b由特殊合金制成,所以拥有比普通修复苔藓更强大的力量",
+
+  "item.miztinker.moss": "苔藓球",
+
+  "item.miztinker.mending_moss": "修复苔藓",
+  "tooltip.miztinker.mending_moss":"§b将苔藓球右键书架转化",
 
   "item.miztinker.oni_miko_bow": "鬼巫女的大蝴蝶结",
   "tooltip.miztinker.oni_miko_bow": "§b从鬼巫女身上掉下来的,还带着一点她的气味",
@@ -873,6 +1053,9 @@
 
   "item.miztinker.mozhua_cap": "再来一瓶",
   "tooltip.miztinker.mozhua_cap": "§b直接右键也可以兑换你的粉魔爪",
+
+  "item.miztinker.witch_fiber": "女巫纤维",
+  "tooltip.miztinker.witch_fiber": "§5据说这种纤维能在火烧下依旧存在",
 
   "item.miztinker.ignister": "电子界到临者@伊格尼斯星",
 
@@ -1028,6 +1211,13 @@
 
   "item.miztinker.tinker_loli_pickaxe": "普通萝莉",
   "item.miztinker.tinker_loli_pickaxe.description": "来自1.12的遥远遗产，可以同时作为镐子，铲子和斧头！\n右键对10 x 10 x 10的生物造成一次攻击\n“延展”强化会提供群体攻击范围和挖掘范围！ ",
+
+  "item.miztinker.soulization_helmet": "§3魂化头盔",
+  "item.miztinker.soulization_chestplate": "§3魂化胸甲",
+  "item.miztinker.soulization_leggings": "§3魂化护腿",
+  "item.miztinker.soulization_boots": "§3魂化靴子",
+  "gui.miztinker.soulization": "§3魂化盔甲",
+  "gui.miztinker.soulization.description": "仿佛一个真正的灵魂附着在你身上,几乎没有防御力,但相对的你可以近乎无限的在灵魂上增加承载之物",
 
   "item.miztinker.murasama": "鬼妖村正",
   "item.miztinker.murasama.description": "一把高频剑，即使是最强大的敌人也能被干净利落地切碎！\n§1击杀末影龙和凋灵以证实你的价值！§r\n§4鲜血四溅！§r\n§b§o赞助者武器 Lost In Tianyi§r",

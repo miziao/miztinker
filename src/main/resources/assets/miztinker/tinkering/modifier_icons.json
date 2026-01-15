@@ -1,6 +1,12 @@
 {
-  "miztinker:pickaxe_strike":  "minecraft:item/stone_pickaxe",
-   "miztinker:invert":  "miztinker:item/uno_card",
-   "miztinker:randomizer_launcher":  "projecte:entity/randomizer",
-   "miztinker:arcana":  "miztinker:item/arcana"
+  "miztinker:pickaxe_strike": "minecraft:item/stone_pickaxe",
+  "miztinker:invert": "miztinker:item/uno_card",
+  "miztinker:durable_old": "miztinker:item/reinforcement_old",
+  "miztinker:randomizer_launcher": "projecte:entity/randomizer",
+  "miztinker:arcana": "miztinker:gui/modifiers/arcana",
+  "miztinker:eternalsunscreen": "miztinker:gui/modifiers/eternalsunscreen",
+  "miztinker:scorchedbone": "miztinker:gui/modifiers/scorchedbone",
+  "miztinker:bloodshield": "miztinker:gui/modifiers/bloodshield",
+  "miztinker:extraterrestrial_forces_tetra": "miztinker:gui/modifiers/tetra",
+  "miztinker:extraterrestrial_forces_botania": "miztinker:item/bot_book"
 }

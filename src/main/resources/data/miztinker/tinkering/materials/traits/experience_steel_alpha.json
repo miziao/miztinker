@@ -1,0 +1,16 @@
+{
+  "default": [
+    {
+      "name": "miztinker:experience_leak_beta",
+      "level": 1
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor":[
+      {
+        "name": "miztinker:experience_leak_gamma",
+        "level": 1
+      }
+    ]
+  }
+}

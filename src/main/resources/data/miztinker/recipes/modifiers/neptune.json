@@ -1,0 +1,32 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "tag": "forge:tools/fishing_rods"
+    },
+    {
+      "amount_needed": 16,
+      "item": "minecraft:sea_lantern"
+    },
+    {
+      "tag": "forge:tools/tridents"
+    },
+    {
+      "item": "minecraft:golden_chestplate"
+    },
+    {
+      "item": "minecraft:golden_leggings"
+    }
+  ],
+  "result": "miztinker:neptune",
+  "slots": {
+    "abilities": 1
+  },
+  "level": {
+    "max": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}
