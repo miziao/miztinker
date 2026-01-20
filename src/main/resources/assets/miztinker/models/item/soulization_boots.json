@@ -6,12 +6,7 @@
     "maille":  "miztinker:item/tool/armor/soulization/boots/maille",
     "maille_2": "miztinker:item/tool/armor/soulization/boots/maille_2"
   },
-  "modifier_roots": [
-    { }
-  ],
-  "first_modifiers": [
-    "tconstruct:trim"
-  ],
+  "modifier_roots": [ "miztinker:item/tool/armor/soulization/leggings/modifiers/" ],
   "parts": [
     { "name": "plating", "index": 0 },
     { "name": "maille",  "index": 1 },
