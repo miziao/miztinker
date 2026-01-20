@@ -1,0 +1,20 @@
+{
+  "name": "minecraft:chests/igloo_chest",
+  "pools": [
+    {
+      "name": "miztinker_igloo_extra",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "miztinker:fake_forging_hammer",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

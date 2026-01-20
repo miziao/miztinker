@@ -1,6 +1,5 @@
 package com.mizi.miztinker.item.tool.until;
 
-
 import com.mizi.miztinker.item.tool.*;
 import com.mizi.miztinker.MiztinkerTab;
 import net.minecraft.core.registries.Registries;
@@ -31,19 +30,22 @@ import java.util.function.Supplier;
 import static com.mizi.miztinker.miztinker.MODID;
 
 public class MiztinkerTools extends MiztinkerTab {
+
+    public static final ItemDeferredRegisterExtension TINKER_ITEMS = new ItemDeferredRegisterExtension(MODID);
+    public static final SynchronizedDeferredRegister<CreativeModeTab> CREATIVE_TABS = SynchronizedDeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
+
     public MiztinkerTools() {
         SlotType.init();
         BlockSideHitListener.init();
         ModifierLootingHandler.init();
         RandomMaterial.init();
     }
+
     public static void initRegisters() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         TINKER_ITEMS.register(bus);
         CREATIVE_TABS.register(bus);
     }
-    public static final ItemDeferredRegisterExtension TINKER_ITEMS = new ItemDeferredRegisterExtension(MODID);
-    public static final SynchronizedDeferredRegister<CreativeModeTab> CREATIVE_TABS = SynchronizedDeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     public static final RegistryObject<CreativeModeTab> tabTools = CREATIVE_TABS.register(
             "tools", () -> CreativeModeTab.builder()
@@ -58,30 +60,28 @@ public class MiztinkerTools extends MiztinkerTab {
         ToolBuildHandler.addVariants(output, tool.get(), "");
     }
 
-    public static final ItemObject<ModifiableItem> lollipop = TINKER_ITEMS.register("lollipop",()->new lollipop(new Item.Properties().stacksTo(1)));
-    public static final ItemObject<ModifiableItem> tinker_loli_pickaxe = TINKER_ITEMS.register("tinker_loli_pickaxe",()->new tinker_loli_pickaxe(new Item.Properties().stacksTo(1)));
-    public static final ItemObject<ModifiableItem> old_sword = TINKER_ITEMS.register("old_sword",()->new old_sword(new Item.Properties().stacksTo(1)));
-    public static final ItemObject<ModifiableItem> broom = TINKER_ITEMS.register("broom",()->new Broom(new Item.Properties().stacksTo(1)));
+    public static final ItemObject<ModifiableItem> lollipop = TINKER_ITEMS.register("lollipop", () -> new lollipop(new Item.Properties().stacksTo(1)));
+    public static final ItemObject<ModifiableItem> tinker_loli_pickaxe = TINKER_ITEMS.register("tinker_loli_pickaxe", () -> new tinker_loli_pickaxe(new Item.Properties().stacksTo(1)));
+    public static final ItemObject<ModifiableItem> old_sword = TINKER_ITEMS.register("old_sword", () -> new old_sword(new Item.Properties().stacksTo(1)));
+    public static final ItemObject<ModifiableItem> broom = TINKER_ITEMS.register("broom", () -> new Broom(new Item.Properties().stacksTo(1)));
     public static final ItemObject<ModifiableItem> murasama = TINKER_ITEMS.register("murasama", () -> new murasama(new Item.Properties().stacksTo(1)));
-    public static final EnumObject<ArmorItem.Type, ModifiableArmorItem> soulization = TINKER_ITEMS.registerEnum(
-            ArmorItem.Type.values(),
-            "soulization",
-            type -> new ModifiableArmorItem(
-                    ToolDefinitions.SOULIZATION_AM,
-                    type,
-                    new Item.Properties().stacksTo(1)
-            )
-    );
+
+    public static final EnumObject<ArmorItem.Type, ModifiableArmorItem> soulization = new EnumObject.Builder<ArmorItem.Type, ModifiableArmorItem>(ArmorItem.Type.class)
+            .put(ArmorItem.Type.HELMET, TINKER_ITEMS.register("soulization_helmet", () -> new ModifiableArmorItem(ToolDefinitions.SOULIZATION_AM, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1))))
+            .put(ArmorItem.Type.CHESTPLATE, TINKER_ITEMS.register("soulization_chestplate", () -> new ModifiableArmorItem(ToolDefinitions.SOULIZATION_AM, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1))))
+            .put(ArmorItem.Type.LEGGINGS, TINKER_ITEMS.register("soulization_leggings", () -> new ModifiableArmorItem(ToolDefinitions.SOULIZATION_AM, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1))))
+            .put(ArmorItem.Type.BOOTS, TINKER_ITEMS.register("soulization_boots", () -> new ModifiableArmorItem(ToolDefinitions.SOULIZATION_AM, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1))))
+            .build();
 
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output tab) {
         Consumer<ItemStack> output = tab::accept;
-        acceptTool(output, MiztinkerTools.lollipop);
-        acceptTool(output, MiztinkerTools.tinker_loli_pickaxe);
-        acceptTool(output, MiztinkerTools.old_sword);
-        acceptTool(output, MiztinkerTools.broom);
-        acceptTool(output, MiztinkerTools.murasama);
-        for (ArmorItem.Type type : ArmorItem.Type.values()) {
-            acceptTool(output, () -> MiztinkerTools.soulization.get(type));
-        }
+
+        acceptTool(output, lollipop);
+        acceptTool(output, tinker_loli_pickaxe);
+        acceptTool(output, old_sword);
+        acceptTool(output, broom);
+        acceptTool(output, murasama);
+
+        soulization.forEach(armor -> acceptTool(output, () -> armor));
     }
 }

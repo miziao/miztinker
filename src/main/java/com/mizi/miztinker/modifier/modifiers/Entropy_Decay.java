@@ -1,6 +1,5 @@
 package com.mizi.miztinker.modifier.modifiers;
 
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -26,7 +25,8 @@ public class Entropy_Decay extends NoLevelsModifier implements MeleeHitModifierH
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.TOOL_STATS);
+        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT);
+        hookBuilder.addHook(this, ModifierHooks.TOOL_STATS);
     }
 
     @Override
@@ -42,24 +42,20 @@ public class Entropy_Decay extends NoLevelsModifier implements MeleeHitModifierH
         ModDataNBT data = tool.getPersistentData();
         float currentDamage = data.getFloat(DAMAGE_KEY);
 
-        // 初始值取自工具面板
         if (currentDamage <= 0f || Float.isNaN(currentDamage)) {
             currentDamage = tool.getStats().get(ToolStats.ATTACK_DAMAGE);
         }
 
-        // 每次击杀降低攻击力 0.1%
         float reduction = target.getMaxHealth() * 0.01f;
         currentDamage -= reduction;
 
-        // 若降至 0 以下，则进入熵崩坏态（无穷大）
         if (currentDamage <= 0f) {
             currentDamage = Float.POSITIVE_INFINITY;
         }
 
         data.putFloat(DAMAGE_KEY, currentDamage);
 
-        // 强制 rebuild stats
-        ItemStack stack = player.getMainHandItem(); // 攻击者主手
+        ItemStack stack = player.getMainHandItem();
         ToolStack.from(stack).rebuildStats();
     }
 
@@ -68,8 +64,6 @@ public class Entropy_Decay extends NoLevelsModifier implements MeleeHitModifierH
         ModDataNBT data = (ModDataNBT) context.getPersistentData();
         if (data.contains(DAMAGE_KEY)) {
             float value = data.getFloat(DAMAGE_KEY);
-
-            // 无限攻击力显示为 1/0
             ToolStats.ATTACK_DAMAGE.update(builder, Float.isInfinite(value) ? 1f / 0f : value);
         }
     }

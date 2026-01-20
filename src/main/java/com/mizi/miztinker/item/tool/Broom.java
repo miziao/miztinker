@@ -1,22 +1,29 @@
 package com.mizi.miztinker.item.tool;
 
 import com.mizi.miztinker.item.tool.until.ToolDefinitions;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BrushItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BrushableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
+import slimeknights.mantle.client.TooltipKey;
+import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.tools.helper.TooltipBuilder;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.helper.ToolDamageUtil;
+import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class Broom extends ModifiableItem {
 
@@ -32,7 +39,6 @@ public class Broom extends ModifiableItem {
         Level level = context.getLevel();
         BlockState state = level.getBlockState(context.getClickedPos());
 
-        // 只对可疑方块生效
         if (state.getBlock() instanceof BrushableBlock) {
             player.startUsingItem(context.getHand());
             return InteractionResult.CONSUME;
@@ -55,6 +61,20 @@ public class Broom extends ModifiableItem {
             ToolStack tool = ToolStack.from(stack);
             ToolDamageUtil.damage(tool, 1, player, stack);
         }
+    }
+
+    @Override
+    public List<Component> getStatInformation(IToolStackView tool, @Nullable Player player, List<Component> tooltips, TooltipKey key, TooltipFlag tooltipFlag) {
+        TooltipBuilder builder = new TooltipBuilder(tool, tooltips);
+        if (tool.hasTag(TinkerTags.Items.DURABILITY)) builder.add(ToolStats.DURABILITY);
+        if (tool.hasTag(TinkerTags.Items.HARVEST)) {
+            builder.add(ToolStats.HARVEST_TIER);
+            builder.add(ToolStats.MINING_SPEED);
+        }
+        tooltips.add(Component.translatable("item.miztinker.broom.description").withStyle(ChatFormatting.AQUA));
+
+        builder.addAllFreeSlots();
+        return tooltips;
     }
 
     @Override

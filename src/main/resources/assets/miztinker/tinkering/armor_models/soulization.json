@@ -1,0 +1,20 @@
+{
+  "layers": [
+    {
+      "type": "tconstruct:material",
+      "index": 0,
+      "prefix": "miztinker:soulization/plating_"
+    },
+    {
+      "type": "tconstruct:material",
+      "index": 1,
+      "prefix": "miztinker:soulization/maille_"
+    },
+    {
+      "type": "tconstruct:material",
+      "index": 2,
+      "prefix": "miztinker:soulization/maille_"
+    },
+    "tconstruct:trim"
+  ]
+}

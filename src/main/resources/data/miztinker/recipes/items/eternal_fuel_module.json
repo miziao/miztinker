@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "bdc",
+    "eag",
+    "cfb"
+  ],
+  "key": {
+    "b": {
+      "tag": "tconstruct:scorched_blocks"
+    },
+    "c": {
+      "tag": "tconstruct:seared_blocks"
+    },
+    "a": {
+      "type": "forge:nbt",
+      "item": "minecraft:enchanted_book",
+      "count": 1,
+      "nbt": "{StoredEnchantments:[{id:\"minecraft:infinity\",lvl:1s}]}"
+    },
+    "d": {
+      "item": "tconstruct:cinderslime_ingot"
+    },
+    "e": {
+      "item": "tconstruct:manyullyn_ingot"
+    },
+    "f": {
+      "item": "tconstruct:hepatizon_ingot"
+    },
+    "g": {
+      "item": "tconstruct:queens_slime_ingot"
+    }
+  },
+  "result": {
+    "item": "miztinker:eternal_fuel_module",
+    "count": 1
+  }
+}

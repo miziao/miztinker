@@ -1,7 +1,7 @@
 package com.mizi.miztinker.recipes;
 
 import com.mizi.miztinker.modifier.modifiers.base.EmbossmentModifierHook;
-import com.mizi.miztinker.modifier.modifiers.base.MiztinkerHooks;
+import com.mizi.miztinker.modifier.hook.MiztinkerHooks;
 import com.mizi.miztinker.modifier.register.MiztinkerRegistry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;

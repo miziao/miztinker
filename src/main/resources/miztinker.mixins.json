@@ -17,7 +17,8 @@
     "LazyModifierMixin",
     "MixinGameMasterBlockItem",
     "MixinPlayerPermission",
-    "FuelModuleMixin"
+    "FuelModuleMixin",
+    "PlayerMixin"
   ],
   "client": [
     "GameRendererMixin",

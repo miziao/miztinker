@@ -2,8 +2,8 @@ package com.mizi.miztinker.modifier.modifiers;
 
 import cn.mmf.slashblade_addon.entity.GaleSwordsEntity;
 import cn.mmf.slashblade_addon.registry.SBAEntitiesRegistry;
-import com.c2h6s.etstlib.register.EtSTLibHooks;
-import com.c2h6s.etstlib.tool.hooks.LeftClickModifierHook;
+import com.mizi.miztinker.modifier.hook.MiztinkerHooks;
+import com.mizi.miztinker.modifier.hook.LeftClickModifierHook;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -19,16 +19,13 @@ import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
-
 public class Gatling_Sword extends NoLevelsModifier implements LeftClickModifierHook {
 
-    private static final int SWORD_COUNT = 8; // 固定发射数量
+    private static final int SWORD_COUNT = 8;
     private static final float SWORD_SPEED = 1.8f;
     private static final boolean CRITICAL = true;
     private static final int SWORD_COLOR = 0xf7892d;
 
-
-    /** 左键空空点击 */
     @Override
     public void onLeftClickEmpty(@NotNull IToolStackView tool, @NotNull ModifierEntry entry,
                                  @NotNull Player player, @NotNull Level world,
@@ -48,7 +45,6 @@ public class Gatling_Sword extends NoLevelsModifier implements LeftClickModifier
         }
     }
 
-    /** 发射幻影剑逻辑（固定 8 发，伤害=匠魂攻击力） */
     private void createTriangleSwordArray(IToolStackView tool, ModifierEntry entry, Player player, Level world) {
         float baseDamage = tool.getStats().get(ToolStats.ATTACK_DAMAGE);
         double damage = baseDamage * 0.5;
@@ -81,6 +77,6 @@ public class Gatling_Sword extends NoLevelsModifier implements LeftClickModifier
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
-        hookBuilder.addHook(this, EtSTLibHooks.LEFT_CLICK);
+        hookBuilder.addHook(this, MiztinkerHooks.LEFT_CLICK);
     }
 }

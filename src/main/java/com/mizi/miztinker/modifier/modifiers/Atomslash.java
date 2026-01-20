@@ -1,7 +1,7 @@
 package com.mizi.miztinker.modifier.modifiers;
 
-import com.c2h6s.etstlib.tool.hooks.LeftClickModifierHook;
-import com.c2h6s.etstlib.register.EtSTLibHooks;
+import com.mizi.miztinker.modifier.hook.MiztinkerHooks;
+import com.mizi.miztinker.modifier.hook.LeftClickModifierHook;
 import mods.flammpfeil.slashblade.SlashBlade;
 import mods.flammpfeil.slashblade.entity.EntitySlashEffect;
 import net.minecraft.core.BlockPos;
@@ -30,19 +30,22 @@ public class Atomslash extends NoLevelsModifier implements LeftClickModifierHook
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
-        // 没有依赖类时直接不注册 Hook
-        hookBuilder.addHook(this, EtSTLibHooks.LEFT_CLICK);
+        hookBuilder.addHook(this, MiztinkerHooks.LEFT_CLICK);
     }
 
     @Override
     public void onLeftClickEmpty(IToolStackView tool, ModifierEntry entry, Player player, Level world, EquipmentSlot slot) {
-        spawnGridSwords(tool, entry, player, world);
+        if (!world.isClientSide) {
+            spawnGridSwords(tool, entry, player, world);
+        }
     }
 
     @Override
     public void onLeftClickBlock(IToolStackView tool, ModifierEntry entry, Player player, Level world,
                                  EquipmentSlot slot, BlockState state, BlockPos pos) {
-        spawnGridSwords(tool, entry, player, world);
+        if (!world.isClientSide) {
+            spawnGridSwords(tool, entry, player, world);
+        }
     }
 
     private void spawnGridSwords(IToolStackView tool, ModifierEntry entry, Player player, Level world) {
@@ -50,8 +53,8 @@ public class Atomslash extends NoLevelsModifier implements LeftClickModifierHook
 
         for (int i = 0; i < GRID_X; i++) {
             for (int j = 0; j < GRID_Y; j++) {
-                double xOffset = (i - GRID_X / 2) * GAP;
-                double yOffset = (j - GRID_Y / 2) * GAP;
+                double xOffset = (i - (double) GRID_X / 2) * GAP;
+                double yOffset = (j - (double) GRID_Y / 2) * GAP;
                 Vec3 spawnPos = center.add(xOffset, yOffset, 0);
 
                 EntitySlashEffect sword = new EntitySlashEffect(SlashBlade.RegistryEvents.SlashEffect, world);

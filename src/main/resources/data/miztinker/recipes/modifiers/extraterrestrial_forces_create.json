@@ -1,0 +1,40 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:mod_loaded",
+        "modid": "create"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "tag": "forge:ingots/constantan"
+    },
+    {
+      "tag": "forge:ingots/copper"
+    },
+    {
+      "tag": "forge:ingots/bronze"
+    },
+    {
+      "item": "minecraft:iron_bars"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    }
+  ],
+  "result": "miztinker:extraterrestrial_forces_create",
+  "slots": {
+    "abilities": 1
+  },
+  "level": {
+    "max": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

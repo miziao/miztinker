@@ -696,6 +696,34 @@
 "modifier.miztinker.soulization": "魂化",
 "modifier.miztinker.soulization.flavor": "灵魂簇拥",
 "modifier.miztinker.soulization.description":"为你的盔甲添加任意部件的特性",
+
+"modifier.miztinker.soulization_armor": "魂质",
+"modifier.miztinker.soulization_armor.flavor": "灵魂缠绕",
+"modifier.miztinker.soulization_armor.description":"每受击一定次数,获得一个灵魂槽",
+
+"modifier.miztinker.soul_energy_max": "灵魂充能MAX",
+"modifier.miztinker.soul_energy_max.flavor": "神之怒",
+"modifier.miztinker.soul_energy_max.description":"主手持有武器下蹲右键,献祭左右两边的匠魂工具,将攻击力提升至无限大一次",
+
+"modifier.miztinker.shoraidan": "召雷弹",
+"modifier.miztinker.shoraidan.flavor": "奥西里斯天空龙使用召雷弹!",
+"modifier.miztinker.shoraidan.description":"主副手持有时,击杀所有世界中新生成的小于等于200血的生物,对大于200血的生物造成200点伤害",
+
+"modifier.miztinker.sun_god_unification": "太阳神合一",
+"modifier.miztinker.sun_god_unification.flavor": "这就是拉的翼神龙第三个特殊能力!",
+"modifier.miztinker.sun_god_unification.description":"主手持有武器下蹲右键,将生命值支付到1,剩下的部分增加给武器面板,还可以在物品栏右键该武器,将武器销毁,最大生命值增加等同于武器面板的量",
+
+"modifier.miztinker.fear_thing": "恐惧事物",
+"modifier.miztinker.fear_thing.flavor": "allahu alkbar!",
+"modifier.miztinker.fear_thing.description":"持有时,引爆你周围的苦力怕",
+
+"modifier.miztinker.sandwich": "自定义三明治",
+"modifier.miztinker.sandwich.flavor": "Make a Sandwiches",
+"modifier.miztinker.sandwich.description":"你可以给你的三明治加料,然后吃下它",
+
+"modifier.miztinker.wireless_crafting_grid": "无线合成终端",
+"modifier.miztinker.wireless_crafting_grid.flavor": "自带区块加载和无限电量功能",
+"modifier.miztinker.wireless_crafting_grid.description":"下蹲右键绑定合成终端,然后就可以按右键打开它",
   
 
 
@@ -889,6 +917,10 @@
   "material.miztinker.clear_glass.flavor": "药水效果也许也是一种光粒子?",
   "material.miztinker.clear_glass.encyclopedia": "拥有最高的折射率",
 
+  "material.miztinker.bread": "面包",
+  "material.miztinker.bread.flavor": " 香香软软",
+  "material.miztinker.bread.encyclopedia": "你可以用这个面包来制作三明治",
+
 
   "block.miztinker.nether_reactor": "下界反应核",
 
@@ -961,6 +993,15 @@
 
   "item.miztinker.exp_moss": "经验苔藓",
   "tooltip.miztinker.exp_moss":"§b由特殊合金制成,所以拥有比普通修复苔藓更强大的力量",
+
+  "item.miztinker.ra_card": "拉之翼神龙-卡片",
+  "tooltip.miztinker.ra_card":"§b埋藏于沙漠的神殿",
+
+  "item.miztinker.obelisk_card": "欧贝利斯克之巨神兵-卡片",
+  "tooltip.miztinker.obelisk_card":"§b埋藏于沙漠的神殿",
+
+  "item.miztinker.osiris_card": "奥西里斯之天龙龙-卡片",
+  "tooltip.miztinker.osiris_card":"§b埋藏于沙漠的神殿",
 
   "item.miztinker.moss": "苔藓球",
 

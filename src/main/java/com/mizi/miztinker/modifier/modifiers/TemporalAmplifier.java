@@ -19,6 +19,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
@@ -28,12 +29,10 @@ public class TemporalAmplifier extends NoLevelsModifier implements AttributesMod
     private static final String ATTACK_MODIFIER_NAME = "temporal_attack";
     private static final String ARMOR_MODIFIER_NAME = "temporal_armor";
 
-    // 存储每个玩家的计时器、当前加成等级和装备slot
     private final Map<UUID, Long> equippedTimeMap = new HashMap<>();
     private final Map<UUID, Integer> currentBonusLevelMap = new HashMap<>();
     private final Map<UUID, EquipmentSlot> playerSlots = new HashMap<>();
 
-    // 配置参数
     private static final int MAX_BONUS_LEVEL = 100;
     private static final int SECONDS_PER_LEVEL = 300;
     private static final double SPEED_BONUS_PER_LEVEL = 0.05;
@@ -61,7 +60,6 @@ public class TemporalAmplifier extends NoLevelsModifier implements AttributesMod
         }
     }
 
-    // UUID生成辅助方法
     private UUID getSpeedUuid(EquipmentSlot slot) {
         return UUID.nameUUIDFromBytes((SPEED_MODIFIER_NAME + "_" + slot.getName()).getBytes());
     }
@@ -102,7 +100,6 @@ public class TemporalAmplifier extends NoLevelsModifier implements AttributesMod
         }
     }
 
-    // 使用PlayerTickEvent而不是ServerTickEvent
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.END &&
@@ -126,7 +123,6 @@ public class TemporalAmplifier extends NoLevelsModifier implements AttributesMod
         }
     }
 
-    // 添加玩家退出事件处理
     @SubscribeEvent
     public void onPlayerLoggedOut(net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent event) {
         var player = event.getEntity();
@@ -173,23 +169,23 @@ public class TemporalAmplifier extends NoLevelsModifier implements AttributesMod
 
         removeAllAttributes(player, slot);
 
-        player.getAttribute(Attributes.MOVEMENT_SPEED).addTransientModifier(new AttributeModifier(
+        Objects.requireNonNull(player.getAttribute(Attributes.MOVEMENT_SPEED)).addTransientModifier(new AttributeModifier(
                 getSpeedUuid(slot), SPEED_MODIFIER_NAME, speedBonus, AttributeModifier.Operation.MULTIPLY_BASE
         ));
 
-        player.getAttribute(Attributes.ATTACK_DAMAGE).addTransientModifier(new AttributeModifier(
+        Objects.requireNonNull(player.getAttribute(Attributes.ATTACK_DAMAGE)).addTransientModifier(new AttributeModifier(
                 getAttackUuid(slot), ATTACK_MODIFIER_NAME, attackBonus, AttributeModifier.Operation.ADDITION
         ));
 
-        player.getAttribute(Attributes.ARMOR).addTransientModifier(new AttributeModifier(
+        Objects.requireNonNull(player.getAttribute(Attributes.ARMOR)).addTransientModifier(new AttributeModifier(
                 getArmorUuid(slot), ARMOR_MODIFIER_NAME, armorBonus, AttributeModifier.Operation.ADDITION
         ));
     }
 
     private void removeAllAttributes(Player player, EquipmentSlot slot) {
-        player.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(getSpeedUuid(slot));
-        player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(getAttackUuid(slot));
-        player.getAttribute(Attributes.ARMOR).removeModifier(getArmorUuid(slot));
+        Objects.requireNonNull(player.getAttribute(Attributes.MOVEMENT_SPEED)).removeModifier(getSpeedUuid(slot));
+        Objects.requireNonNull(player.getAttribute(Attributes.ATTACK_DAMAGE)).removeModifier(getAttackUuid(slot));
+        Objects.requireNonNull(player.getAttribute(Attributes.ARMOR)).removeModifier(getArmorUuid(slot));
     }
 
     @Override

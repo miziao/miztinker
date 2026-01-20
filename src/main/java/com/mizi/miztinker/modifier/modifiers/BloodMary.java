@@ -1,7 +1,7 @@
 package com.mizi.miztinker.modifier.modifiers;
 
-import com.c2h6s.etstlib.register.EtSTLibHooks;
-import com.c2h6s.etstlib.tool.hooks.ArrowDamageModifierHook;
+import com.mizi.miztinker.modifier.hook.MiztinkerHooks;
+import com.mizi.miztinker.modifier.hook.ArrowDamageModifierHook;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -24,10 +24,11 @@ public class BloodMary extends NoLevelsModifier implements MeleeDamageModifierHo
     public float getMeleeDamage(IToolStackView tool, ModifierEntry entry, ToolAttackContext context, float baseDamage, float damage) {
         LivingEntity attacker = context.getAttacker();
         LivingEntity target = context.getLivingTarget();
-        if (target == null) return baseDamage;
+        if (target == null) return damage;
+
         if (attacker instanceof Player) {
-            var lossHp = target.getMaxHealth()-target.getHealth();
-            var damageBoost = (float) Math.pow(lossHp, 0.6);
+            float lossHp = target.getMaxHealth() - target.getHealth();
+            float damageBoost = (float) Math.pow(lossHp, 0.6);
             return damage + damageBoost;
         }
         return damage;
@@ -36,8 +37,8 @@ public class BloodMary extends NoLevelsModifier implements MeleeDamageModifierHo
     @Override
     public float getArrowDamage(ModDataNBT nbt, ModifierEntry entry, ModifierNBT modifierNBT, AbstractArrow arrow, @Nullable LivingEntity attacker, @NotNull Entity target, float basedamage, float damage) {
         if (attacker instanceof Player && target instanceof LivingEntity living) {
-            var lossHp = living.getMaxHealth()-living.getHealth();
-            var damageBoost = (float) Math.pow(lossHp, 0.6);
+            float lossHp = living.getMaxHealth() - living.getHealth();
+            float damageBoost = (float) Math.pow(lossHp, 0.6);
             return damage + damageBoost;
         }
         return damage;
@@ -46,7 +47,6 @@ public class BloodMary extends NoLevelsModifier implements MeleeDamageModifierHo
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE);
-        hookBuilder.addHook(this, EtSTLibHooks.ARROW_DAMAGE);
+        hookBuilder.addHook(this, MiztinkerHooks.ARROW_DAMAGE);
     }
-
 }

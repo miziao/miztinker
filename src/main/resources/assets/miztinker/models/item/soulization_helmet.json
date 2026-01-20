@@ -1,0 +1,26 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "forge:item/default",
+  "textures": {
+    "plating": "miztinker:item/tool/armor/plate/helmet/plating",
+    "maille":  "miztinker:item/tool/armor/plate/helmet/maille",
+    "maille_2": "miztinker:item/tool/armor/plate/helmet/maille_2"
+  },
+  "modifier_roots": [
+    { }
+  ],
+  "first_modifiers": [
+    "tconstruct:trim"
+  ],
+  "parts": [
+    { "name": "plating", "index": 0 },
+    { "name": "maille",  "index": 1 },
+    { "name": "maille_2",  "index": 2 }
+  ],
+  "overrides": [
+    {
+      "predicate": { "tconstruct:broken": 1 },
+      "model": "miztinker:item/armor/plate/helmet_broken"
+    }
+  ]
+}

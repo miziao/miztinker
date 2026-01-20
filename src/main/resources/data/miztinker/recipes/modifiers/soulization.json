@@ -3,13 +3,13 @@
   "allow_crystal": true,
   "inputs": [
     {
-      "item": "minecraft:water_bucket"
+      "item": "minecraft:nether_star"
     },
     {
-      "item": "tconstruct:seared_channel"
+      "item": "minecraft:dragon_egg"
     },
     {
-      "item": "minecraft:porkchop"
+      "item": "miztinker:ten_thousand_souls_item"
     }
   ],
   "soul_inputs": [
@@ -19,9 +19,9 @@
   ],
   "result": "miztinker:soulization",
   "slots": {
-    "abilities": 1
+    "souls": 1
   },
   "tools": {
-    "tag": "tconstruct:modifiable"
+    "tag": "miztinker:soulization"
   }
 }

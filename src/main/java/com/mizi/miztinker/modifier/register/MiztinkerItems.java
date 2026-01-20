@@ -642,6 +642,36 @@ public class MiztinkerItems {
             }
     );
 
+    public static final RegistryObject<Item> OSIRIS_CARD = ITEMS.register(
+            "osiris_card",
+            () -> new BlockItem(MiztinkerBlocks.DYNAMAX_SAPLING.get(), new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.osiris_card"));
+                }
+            }
+    );
+    public static final RegistryObject<Item> OBELISK_CARD = ITEMS.register(
+            "obelisk_card",
+            () -> new BlockItem(MiztinkerBlocks.DYNAMAX_SAPLING.get(), new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.obelisk_card"));
+                }
+            }
+    );
+
+    public static final RegistryObject<Item> RA_CARD = ITEMS.register(
+            "ra_card",
+            () -> new BlockItem(MiztinkerBlocks.DYNAMAX_SAPLING.get(), new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.ra_card"));
+                }
+            }
+    );
+
+
 
 
 

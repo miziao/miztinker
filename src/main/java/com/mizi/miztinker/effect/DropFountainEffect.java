@@ -60,7 +60,6 @@ public class DropFountainEffect extends MobEffect {
                     double motionZ = (RANDOM.nextDouble() - 0.5) * 0.6;
 
                     item.setDeltaMovement(motionX, motionY, motionZ);
-                    // 标记已被处理，防止重复赋予速度
                     item.hasImpulse = true;
                 }
             }

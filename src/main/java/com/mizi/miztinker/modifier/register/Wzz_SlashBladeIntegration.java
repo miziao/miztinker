@@ -1,11 +1,10 @@
 package com.mizi.miztinker.modifier.register;
 
-import com.mizi.miztinker.miztinker;
 import com.mizi.miztinker.modifier.modifiers.Stredgeuniverse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-public class Wzz_Etstlib_SlashBladeIntegration {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Wzz_Etstlib_SlashBladeIntegration.class);
+public class Wzz_SlashBladeIntegration {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Wzz_SlashBladeIntegration.class);
 
     public static void registerModifiers() {
         try {

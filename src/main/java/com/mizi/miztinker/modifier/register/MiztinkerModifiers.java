@@ -214,7 +214,7 @@ public class MiztinkerModifiers {
 
     public static final StaticModifier<Terrafirma> TERRAFIRMA_STATIC_MODIFIER = MODIFIERS.register("terrafirma", Terrafirma::new);
 
-    public static StaticModifier<?> BLOODMARY_STATIC_MODIFIER = null;
+    public static StaticModifier<BloodMary> BLOODMARY_STATIC_MODIFIER = MODIFIERS.register("bloodmary", BloodMary::new);
 
     public static final StaticModifier<LifeSteal> LIFE_STEAL_STATIC_MODIFIER = MODIFIERS.register("life_steal", LifeSteal::new);
 
@@ -248,7 +248,7 @@ public class MiztinkerModifiers {
 
     public static StaticModifier<?> TINKERSCROWN = null;
 
-    public static StaticModifier<?> LOVESTONE = null;
+    public static StaticModifier<LoveStone> LOVESTONE = MODIFIERS.register("lovestone", LoveStone::new);
 
     public static final StaticModifier<DamageModifier> SEVER = MODIFIERS.register("sever", () -> new DamageModifier(0.5F, 0));
 
@@ -388,6 +388,20 @@ public class MiztinkerModifiers {
     public static final StaticModifier<Soulization> SOULIZATION_STATIC_MODIFIER= MODIFIERS.register("soulization", Soulization::new);
 
     public static final StaticModifier<ConcaveLens> CONCAVE_LENS_STATIC_MODIFIER= MODIFIERS.register("concave_lens", ConcaveLens::new);
+
+    public static final StaticModifier<SoulEnergyMax> SOUL_ENERGY_MAX_STATIC_MODIFIER= MODIFIERS.register("soul_energy_max", SoulEnergyMax::new);
+
+    public static final StaticModifier<Shoraidan> SHORAIDAN_STATIC_MODIFIER= MODIFIERS.register("shoraidan", Shoraidan::new);
+
+    public static final StaticModifier<Soulization_Armor> SOULIZATION_ARMOR_STATIC_MODIFIER= MODIFIERS.register("soulization_armor", Soulization_Armor::new);
+
+    public static final StaticModifier<FearThing> FEAR_THING_STATIC_MODIFIER= MODIFIERS.register("fear_thing", FearThing::new);
+
+    public static final StaticModifier<Sandwich> SANDWICH_STATIC_MODIFIER= MODIFIERS.register("sandwich", Sandwich::new);
+
+    public static final StaticModifier<SunGodUnification> SUN_GOD_UNIFICATION_STATIC_MODIFIER= MODIFIERS.register("sun_god_unification", SunGodUnification::new);
+
+    public static final StaticModifier<WirelessCraftingGrid> WIRELESS_CRAFTING_GRID_STATIC_MODIFIER= ModList.get().isLoaded("refinedstorageaddons") ? MODIFIERS.register("wireless_crafting_grid",WirelessCraftingGrid::new) : null;
 
     public static final StaticModifier<WaterInjectedPork> WATER_INJECTED_PORK_STATIC_MODIFIER= MODIFIERS.register("water_injected_pork", WaterInjectedPork::new);
 

@@ -105,6 +105,11 @@
         "path": "miztinker:item/tool/armor/soulization/leggings/maille",
         "stat_type": "tconstruct:maille"
       },
+      {
+        "allow_animated": false,
+        "path": "miztinker:item/tool/armor/soulization/leggings/maille_2",
+        "stat_type": "tconstruct:maille"
+      },
   
       
       {

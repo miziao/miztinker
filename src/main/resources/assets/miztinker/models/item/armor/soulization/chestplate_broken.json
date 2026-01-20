@@ -1,0 +1,27 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "forge:item/default",
+  "textures": {
+    "plating": "miztinker:item/tool/armor/soulization/chestplate/plating_broken",
+    "maille": "miztinker:item/tool/armor/soulization/chestplate/maille_broken",
+    "maille_2": "miztinker:item/tool/armor/soulization/chestplate/maille_broken"
+  },
+  "modifier_roots": [
+  ],
+  "first_modifiers": [
+  ],
+  "parts": [
+    {
+      "name": "plating",
+      "index": 0
+    },
+    {
+      "name": "maille",
+      "index": 1
+    },
+    {
+      "name": "maille",
+      "index": 2
+    }
+  ]
+}

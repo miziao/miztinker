@@ -170,7 +170,14 @@
     "convex_lens": "#FFF5EE",
     "concave_lens": "#FFF5EE",
     "water_injected_pork": "#00BFFF",
-    "soulization": "#40E0D0"
+    "soulization": "#40E0D0",
+    "soulization_armor": "#40E0D0",
+    "soul_energy_max": "#4169E1",
+    "shoraidan": "#FFFF00",
+    "sun_god_unification": "#FFD700",
+    "fear_thing": "#008000",
+    "sandwich": "#CD853F",
+    "wireless_crafting_grid": "#87CEFA"
 
   },
   "material.miztinker": {

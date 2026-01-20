@@ -19,17 +19,15 @@ public class DropFountain extends NoLevelsModifier implements MeleeHitModifierHo
 
         LivingEntity target = context.getLivingTarget();
         if (target != null && target.isAlive()) {
-            int level = modifier.getLevel();
-            int duration = Integer.MAX_VALUE; // 无限时长
+            int duration = Integer.MAX_VALUE;
 
-            // 给生物添加 DropFountainEffect 药水效果，玩家不受影响
             target.addEffect(new MobEffectInstance(
                     DropFountainEffect.get(),
                     duration,
-                    0,      // 效果等级
-                    false,  // 不显示图标
-                    false,  // 不显示粒子
-                    true    // 仅客户端可见（选项，可按需求）
+                    0,
+                    false,
+                    false,
+                    true
             ));
         }
     }

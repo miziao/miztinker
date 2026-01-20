@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    { "id": "miztinker:soulization_helmet", "required": false },
+    { "id": "miztinker:soulization_chestplate", "required": false },
+    { "id": "miztinker:soulization_leggings", "required": false },
+    { "id": "miztinker:soulization_boots", "required": false }
+  ]
+}

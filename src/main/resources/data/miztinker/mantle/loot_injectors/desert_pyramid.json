@@ -1,0 +1,29 @@
+{
+  "name": "minecraft:chests/desert_pyramid",
+  "pools": [
+    {
+      "name": "miztinker_god_cards",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 11
+        },
+        {
+          "type": "minecraft:alternatives",
+          "weight": 1,
+          "children": [
+            {
+              "type": "minecraft:item",
+              "name": "miztinker:obelisk_card"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "miztinker:osiris_card"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

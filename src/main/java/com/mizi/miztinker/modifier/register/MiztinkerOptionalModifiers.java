@@ -6,29 +6,16 @@ import static com.mojang.text2speech.Narrator.LOGGER;
 public class MiztinkerOptionalModifiers  {
 
     public static void voidregisterOptionalModifiers() {
-        // 检测etstlib是否存在
-        if (OptionalDependencyHandler.isClassPresent("com.c2h6s.etstlib.tool.modifiers.base.EtSTBaseModifier")) {
+
+        if (OptionalDependencyHandler.isClassPresent("mods.flammpfeil.slashblade.SlashBlade")) {
             try {
-                EtstlibIntegration.registerModifiers();
-                LOGGER.info("Successfully initialized etstlib integration");
+                SlashBladeIntegration.registerModifiers();
+                LOGGER.info("Successfully initialized  SlashBlade integration");
             } catch (Exception e) {
-                LOGGER.error("Failed to initialize etstlib integration: {}", e.getMessage());
+                LOGGER.error("Failed to initialize  SlashBlade integration: {}", e.getMessage());
             }
         } else {
-            LOGGER.info("etstlib not found, some modifier will not be registered");
-
-        }
-
-        if (OptionalDependencyHandler.isClassPresent("mods.flammpfeil.slashblade.SlashBlade") &&
-                OptionalDependencyHandler.isClassPresent("com.c2h6s.etstlib.register.EtSTLibHooks")) {
-            try {
-                Etstlib_SlashBladeIntegration.registerModifiers();
-                LOGGER.info("Successfully initialized Etstlib and SlashBlade integration");
-            } catch (Exception e) {
-                LOGGER.error("Failed to initialize Etstlib and SlashBlade integration: {}", e.getMessage());
-            }
-        } else {
-            LOGGER.info("etstlib and SlashBlade not found, some modifier will not be registered");
+            LOGGER.info(" SlashBlade not found, some modifier will not be registered");
         }
 
 
@@ -57,16 +44,15 @@ public class MiztinkerOptionalModifiers  {
         }
 
         if (OptionalDependencyHandler.isClassPresent("mods.flammpfeil.slashblade.SlashBlade") &&
-                OptionalDependencyHandler.isClassPresent("com.c2h6s.etstlib.register.EtSTLibHooks")&&
                 OptionalDependencyHandler.isClassPresent("net.wzz.stredgeuniverse.entity.MeteoriteSwordEntity")) {
             try {
-                Wzz_Etstlib_SlashBladeIntegration.registerModifiers();
-                LOGGER.info("Successfully initialized Wzz and Etstlib and SlashBlade integration");
+                Wzz_SlashBladeIntegration.registerModifiers();
+                LOGGER.info("Successfully initialized Wzz and  SlashBlade integration");
             } catch (Exception e) {
-                LOGGER.error("Failed to initialize Wzz and Etstlib and SlashBlade integration: {}", e.getMessage());
+                LOGGER.error("Failed to initialize Wzz and  SlashBlade integration: {}", e.getMessage());
             }
         } else {
-            LOGGER.info("Wzz and Etstlib and SlashBlade not found, some modifier will not be registered");
+            LOGGER.info("Wzz and  SlashBlade not found, some modifier will not be registered");
         }
 
         if (OptionalDependencyHandler.isClassPresent("com.Polarice3.Goety.common.entities.ModEntityType")) {

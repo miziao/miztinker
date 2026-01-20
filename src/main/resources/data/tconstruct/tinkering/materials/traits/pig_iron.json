@@ -1,0 +1,34 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "tconstruct:tasty"
+    },
+    {
+      "level": 1,
+      "name": "miztinker:fear_thing"
+    }
+  ],
+  "perStat": {
+    "tconstruct:skull": [
+      {
+        "level": 1,
+        "name": "tconstruct:revenge"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:zombified_piglin_disguise"
+      }
+    ],
+    "tconstruct:head": [
+      {
+        "level": 1,
+        "name": "tconstruct:tasty"
+      },
+      {
+        "level": 1,
+        "name": "miztinker:fear_thing"
+      }
+    ]
+  }
+}

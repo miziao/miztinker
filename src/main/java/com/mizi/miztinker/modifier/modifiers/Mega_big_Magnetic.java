@@ -19,26 +19,19 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 public class Mega_big_Magnetic extends NoLevelsModifier implements InventoryTickModifierHook {
 
-    /** 每 tick 检查并执行 **/
     @Override
     public void onInventoryTick(IToolStackView tool, ModifierEntry entry, Level world,
                                 LivingEntity holder, int itemSlot, boolean isSelected,
                                 boolean isCorrectSlot, ItemStack stack) {
-        // 仅在服务器端执行
         if (world.isClientSide()) return;
         if (!(holder instanceof Player player)) return;
         if (!isCorrectSlot) return;
 
-        // 每秒执行一次
         if (player.tickCount % 20 == 0) {
             HaoranArua(player, 7.0);
         }
     }
 
-    /**
-     * 半径7格内所有生物流失最大生命值的20%，
-     * 玩家吸收并永久提升最大生命值。
-     */
     private static void HaoranArua(Player player, double range) {
         Level level = player.level();
         AABB area = new AABB(
@@ -51,17 +44,13 @@ public class Mega_big_Magnetic extends NoLevelsModifier implements InventoryTick
         for (LivingEntity living : level.getEntitiesOfClass(LivingEntity.class, area)) {
             if (living == player || !living.isAlive()) continue;
 
-            // 按最大生命值计算目标流失量
             float maxHp = living.getMaxHealth();
             float drainAmount = maxHp * 0.2F;
 
-            // 实际可造成的伤害不能超过当前血量
             float actualDrain = Math.min(drainAmount, living.getHealth());
 
-            // 扣血
             living.setHealth(living.getHealth() - actualDrain);
 
-            // 如果生命值太低则死亡
             if (living.getHealth() <= 0.5F) {
                 living.die(new DamageSource(
                         living.level().registryAccess()
@@ -72,11 +61,9 @@ public class Mega_big_Magnetic extends NoLevelsModifier implements InventoryTick
                 living.setHealth(0);
             }
 
-            // 累计真实吸收的生命值
             totalDrained += actualDrain;
         }
 
-        // 将吸取的生命值转化为最大生命值提升
         if (totalDrained > 0) {
             AttributeInstance maxHealthAttr = player.getAttribute(Attributes.MAX_HEALTH);
             if (maxHealthAttr != null) {

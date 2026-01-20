@@ -1,13 +1,12 @@
 package com.mizi.miztinker.modifier.register;
 
-import com.mizi.miztinker.miztinker;
 import com.mizi.miztinker.modifier.modifiers.Atomslash;
 import com.mizi.miztinker.modifier.modifiers.CircleSlash;
 import com.mizi.miztinker.modifier.modifiers.Gatling_Sword;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-public class Etstlib_SlashBladeIntegration {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Etstlib_SlashBladeIntegration.class);
+public class SlashBladeIntegration {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SlashBladeIntegration.class);
 
     public static void registerModifiers() {
         try {

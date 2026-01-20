@@ -1,7 +1,7 @@
 package com.mizi.miztinker.modifier.modifiers;
 
-import com.c2h6s.etstlib.register.EtSTLibHooks;
-import com.c2h6s.etstlib.tool.hooks.LeftClickModifierHook;
+import com.mizi.miztinker.modifier.hook.MiztinkerHooks;
+import com.mizi.miztinker.modifier.hook.LeftClickModifierHook;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -23,14 +23,13 @@ public class LoveStone extends NoLevelsModifier implements LeftClickModifierHook
     public void onLeftClickBlock(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, BlockState state, BlockPos pos) {
         Block block = state.getBlock();
 
-        // 特殊处理：基岩（Bedrock）强制掉落
         if (block == Blocks.BEDROCK) {
             level.destroyBlock(pos, false);
             if (!level.isClientSide) {
                 ItemStack bedrockStack = new ItemStack(Blocks.BEDROCK);
                 ItemEntity itemEntity = new ItemEntity(
                         level,
-                        pos.getX() + 0.5,  // 中心位置
+                        pos.getX() + 0.5,
                         pos.getY() + 0.5,
                         pos.getZ() + 0.5,
                         bedrockStack
@@ -47,12 +46,10 @@ public class LoveStone extends NoLevelsModifier implements LeftClickModifierHook
         ) {
             level.destroyBlock(pos, false);
         }
-
     }
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
-        hookBuilder.addHook(this, EtSTLibHooks.LEFT_CLICK);
+        hookBuilder.addHook(this, MiztinkerHooks.LEFT_CLICK);
     }
-
 }

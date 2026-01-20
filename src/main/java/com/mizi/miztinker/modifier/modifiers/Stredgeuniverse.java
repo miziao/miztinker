@@ -1,7 +1,7 @@
 package com.mizi.miztinker.modifier.modifiers;
 
-import com.c2h6s.etstlib.register.EtSTLibHooks;
-import com.c2h6s.etstlib.tool.hooks.LeftClickModifierHook;
+import com.mizi.miztinker.modifier.hook.MiztinkerHooks;
+import com.mizi.miztinker.modifier.hook.LeftClickModifierHook;
 import mods.flammpfeil.slashblade.SlashBlade;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -32,7 +32,8 @@ public class Stredgeuniverse extends NoLevelsModifier implements LeftClickModifi
     }
 
     public static void createTriangleSwordArray(Player player, Level world) {
-        // 生成位置改为比玩家眼睛高度低约 0.8 格，接近胸口或腰部高度
+        if (world.isClientSide) return;
+
         Vec3 playerPos = player.position().add(0.0, player.getBbHeight() * 0.5, 0.0);
 
         int[] rainbowColors = new int[]{0xFF0000, 0xFF8000, 0xFFFF00, 0x00FF00, 0x00FFFF, 0x0000FF, 0x8000FF, 0xFF0080};
@@ -44,14 +45,11 @@ public class Stredgeuniverse extends NoLevelsModifier implements LeftClickModifi
         for (int i = 0; i < swordCount; i++) {
             double angle = (2 * Math.PI / swordCount) * i;
 
-            // 生成环绕坐标（水平面上）
             double x = Math.cos(angle) * radius;
             double z = Math.sin(angle) * radius;
 
-            // ✅ 生成位置稍微降低 Y 高度（例如 -0.4）
             Vec3 spawnPos = playerPos.add(x, -0.4, z);
 
-            // 朝外发射
             Vec3 shootDir = new Vec3(x, 0.0, z).normalize();
 
             MeteoriteSwordEntity sword = new MeteoriteSwordEntity(SlashBlade.RegistryEvents.StormSwords, world);
@@ -69,6 +67,6 @@ public class Stredgeuniverse extends NoLevelsModifier implements LeftClickModifi
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
-        hookBuilder.addHook(this, EtSTLibHooks.LEFT_CLICK);
+        hookBuilder.addHook(this, MiztinkerHooks.LEFT_CLICK);
     }
 }

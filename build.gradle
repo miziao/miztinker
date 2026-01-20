@@ -120,6 +120,9 @@ dependencies {
 
     implementation fg.deobf("curse.maven:projecte-226410:4901949")
 
+    implementation fg.deobf("curse.maven:refined-storage-243076:4844585")
+    implementation fg.deobf("curse.maven:refined-storage-addons-272302:4626171")
+
 
     //tic
     implementation fg.deobf("curse.maven:mantle-74924:6819217")
