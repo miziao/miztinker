@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:alternatives",
+          "weight": 1,
+          "children": [
+            { "type": "minecraft:item", "name": "miztinker:obelisk_card" },
+            { "type": "minecraft:item", "name": "miztinker:osiris_card" },
+            { "type": "minecraft:item", "name": "miztinker:ra_card" }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "miztinker:chests/desert_pyramid"
+}

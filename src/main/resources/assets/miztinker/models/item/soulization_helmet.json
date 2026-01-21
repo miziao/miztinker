@@ -11,11 +11,5 @@
     { "name": "plating", "index": 0 },
     { "name": "maille",  "index": 1 },
     { "name": "maille_2",  "index": 2 }
-  ],
-  "overrides": [
-    {
-      "predicate": { "tconstruct:broken": 1 },
-      "model": "miztinker:item/armor/plate/helmet_broken"
-    }
   ]
 }

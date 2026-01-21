@@ -8,5 +8,6 @@
   "miztinker:scorchedbone": "miztinker:gui/modifiers/scorchedbone",
   "miztinker:bloodshield": "miztinker:gui/modifiers/bloodshield",
   "miztinker:extraterrestrial_forces_tetra": "miztinker:gui/modifiers/tetra",
+  "miztinker:old_king": "miztinker:gui/modifiers/old_king",
   "miztinker:extraterrestrial_forces_botania": "miztinker:item/bot_book"
 }

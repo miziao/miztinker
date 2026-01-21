@@ -724,6 +724,10 @@
 "modifier.miztinker.wireless_crafting_grid": "无线合成终端",
 "modifier.miztinker.wireless_crafting_grid.flavor": "自带区块加载和无限电量功能",
 "modifier.miztinker.wireless_crafting_grid.description":"下蹲右键绑定合成终端,然后就可以按右键打开它",
+
+"modifier.miztinker.old_king": "老国王",
+"modifier.miztinker.old_king.flavor": "嘿嘿嘿哈",
+"modifier.miztinker.old_king.description":"手持右键发出一道爽朗的笑声,将该区块所有生物的仇恨转移到你身上",
   
 
 
@@ -1000,7 +1004,7 @@
   "item.miztinker.obelisk_card": "欧贝利斯克之巨神兵-卡片",
   "tooltip.miztinker.obelisk_card":"§b埋藏于沙漠的神殿",
 
-  "item.miztinker.osiris_card": "奥西里斯之天龙龙-卡片",
+  "item.miztinker.osiris_card": "奥西里斯之天空龙-卡片",
   "tooltip.miztinker.osiris_card":"§b埋藏于沙漠的神殿",
 
   "item.miztinker.moss": "苔藓球",
@@ -1257,8 +1261,8 @@
   "item.miztinker.soulization_chestplate": "§3魂化胸甲",
   "item.miztinker.soulization_leggings": "§3魂化护腿",
   "item.miztinker.soulization_boots": "§3魂化靴子",
-  "gui.miztinker.soulization": "§3魂化盔甲",
-  "gui.miztinker.soulization.description": "仿佛一个真正的灵魂附着在你身上,几乎没有防御力,但相对的你可以近乎无限的在灵魂上增加承载之物",
+  "item.miztinker.soulization_armor": "§3魂化盔甲",
+  "item.miztinker.soulization_armor.description": "仿佛一个真正的灵魂附着在你身上,几乎没有防御力,但相对的你可以近乎无限的在灵魂上增加承载之物",
 
   "item.miztinker.murasama": "鬼妖村正",
   "item.miztinker.murasama.description": "一把高频剑，即使是最强大的敌人也能被干净利落地切碎！\n§1击杀末影龙和凋灵以证实你的价值！§r\n§4鲜血四溅！§r\n§b§o赞助者武器 Lost In Tianyi§r",

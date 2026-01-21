@@ -31,5 +31,8 @@ public class MiztinkerSounds {
 
     public static final RegistryObject<SoundEvent> UMIYURI_KAITEITAN = SOUND_EVENTS.register("umiyuri_kaiteitan",
             () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(miztinker.MODID, "umiyuri_kaiteitan")));
+
+    public static final RegistryObject<SoundEvent> HHHHA = SOUND_EVENTS.register("hhhha",
+            () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(miztinker.MODID, "hhhha")));
 }
 
