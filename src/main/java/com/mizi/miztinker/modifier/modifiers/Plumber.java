@@ -1,6 +1,6 @@
 package com.mizi.miztinker.modifier.modifiers;
 
-import net.minecraft.sounds.SoundEvents;
+import com.mizi.miztinker.sounds.MiztinkerSounds;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -33,11 +33,9 @@ public class Plumber extends NoLevelsModifier implements InventoryTickModifierHo
         if (!(holder instanceof Player player)) return;
 
         if (!isCorrectSlot) return;
-
         if (player.isFallFlying() || player.onGround()) return;
 
         Vec3 motion = player.getDeltaMovement();
-
         if (motion.y > -MIN_FALL_SPEED) return;
 
         List<LivingEntity> entities = world.getEntitiesOfClass(
@@ -55,7 +53,7 @@ public class Plumber extends NoLevelsModifier implements InventoryTickModifierHo
                     player.hurtMarked = true;
 
                     world.playSound(null, player.getX(), player.getY(), player.getZ(),
-                            SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 1.0f, 1.0f);
+                            MiztinkerSounds.MARIO.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
                 }
                 break;
             }

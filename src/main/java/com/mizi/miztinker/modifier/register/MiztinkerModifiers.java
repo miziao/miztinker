@@ -401,6 +401,8 @@ public class MiztinkerModifiers {
 
     public static final StaticModifier<SunGodUnification> SUN_GOD_UNIFICATION_STATIC_MODIFIER= MODIFIERS.register("sun_god_unification", SunGodUnification::new);
 
+    public static final StaticModifier<OldKing> OLD_KING_STATIC_MODIFIER= MODIFIERS.register("old_king", OldKing::new);
+
     public static final StaticModifier<WirelessCraftingGrid> WIRELESS_CRAFTING_GRID_STATIC_MODIFIER= ModList.get().isLoaded("refinedstorageaddons") ? MODIFIERS.register("wireless_crafting_grid",WirelessCraftingGrid::new) : null;
 
     public static final StaticModifier<WaterInjectedPork> WATER_INJECTED_PORK_STATIC_MODIFIER= MODIFIERS.register("water_injected_pork", WaterInjectedPork::new);

@@ -1,20 +1,20 @@
 {
-  "name": "minecraft:chests/jungle_temple",
+  "type": "minecraft:chest",
   "pools": [
     {
-      "name": "miztinker_jungle_extra",
-      "rolls": 1,
+      "rolls": 1.0,
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 9
+          "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "miztinker:dynamax_sapling",
+          "name": "miztinker:fake_forging_hammer",
           "weight": 1
         }
       ]
     }
-  ]
+  ],
+  "random_sequence": "miztinker:chests/igloo_chest"
 }

@@ -54,5 +54,13 @@
         "stream": true
       }
     ]
+  },
+  "hhhha": {
+    "sounds": [
+      {
+        "name":"miztinker:hhhha",
+        "stream": true
+      }
+    ]
   }
 }

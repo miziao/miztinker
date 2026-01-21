@@ -68,6 +68,7 @@ public class miztinker {
         MiztinkerBlocks.BLOCKS.register(modBus);
         MiztinkerPotions.POTIONS.register(modBus);
         MiztinkerBlocks.BLOCK_ENTITIES.register(modBus);
+        MiztinkerLootModifiers.LOOT_MODIFIER_SERIALIZERS.register(modBus);
         DiademaRegister.DIADEMA_TYPES.register(modBus);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             ClientDiademaRegister.CLIENT_DIADEMA_TYPES.register(modBus);
