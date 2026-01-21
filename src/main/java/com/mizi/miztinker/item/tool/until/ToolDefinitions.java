@@ -15,9 +15,6 @@ public class ToolDefinitions {
 
     public static final ToolDefinition MIRASAMA = ToolDefinition.create(MiztinkerTools.murasama);
 
-    public static final ModifiableArmorMaterial SOULIZATION_AM = ModifiableArmorMaterial.create(
-            getResource("soulization"),
-            SoundEvents.ARMOR_EQUIP_GENERIC
-    );
+
 
 }

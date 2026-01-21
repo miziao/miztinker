@@ -5,6 +5,7 @@ import com.mizi.miztinker.entity.boss.entity.MiziAo;
 import com.mizi.miztinker.entity.boss.entity.TitanWarden;
 import com.mizi.miztinker.entity.boss.render.MiziAoRenderer;
 import com.mizi.miztinker.entity.boss.render.TitanWardenRenderer;
+import com.mizi.miztinker.item.tool.until.MiZiTab;
 import com.mizi.miztinker.item.tool.until.MiztinkerTools;
 import com.mizi.miztinker.key.MiztinkerKey;
 import com.mizi.miztinker.modifier.diadema.ClientDiademaRegister;
@@ -52,7 +53,9 @@ public class miztinker {
     public static final String MODID = "miztinker";
 
     public static ModifierDeferredRegister MODIFIERS = ModifierDeferredRegister.create(MODID);
-
+    public static ResourceLocation location(String string) {
+        return new ResourceLocation(MODID, string);
+    }
     public miztinker() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -76,7 +79,7 @@ public class miztinker {
         MinecraftForge.EVENT_BUS.register(new ServerTickHandler());
 
         MiztinkerRegistry.RECIPE_SERIALIZERS.register(modBus);
-
+        MiZiTab.CREATIVE_MODE_TABS.register(modBus);
         modBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
         if(FMLEnvironment.dist == Dist.CLIENT){
@@ -147,25 +150,21 @@ public class miztinker {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
-                ItemBlockRenderTypes.setRenderLayer(MiztinkerBlocks.TINKER_LANTERN.get(), RenderType.cutout());
-                ItemBlockRenderTypes.setRenderLayer(MiztinkerBlocks.DYNAMAX_SAPLING.get(), RenderType.cutout());
+                        ItemBlockRenderTypes.setRenderLayer(MiztinkerBlocks.TINKER_LANTERN.get(), RenderType.cutout());
+                        ItemBlockRenderTypes.setRenderLayer(MiztinkerBlocks.DYNAMAX_SAPLING.get(), RenderType.cutout());
 
-                TinkerItemProperties.registerToolProperties(lollipop.get());
-                TinkerItemProperties.registerToolProperties(tinker_loli_pickaxe.get());
-                TinkerItemProperties.registerToolProperties(old_sword.get());
-                TinkerItemProperties.registerToolProperties(broom.get());
-                TinkerItemProperties.registerToolProperties(murasama.get());
+                        TinkerItemProperties.registerToolProperties(lollipop.get());
+                        TinkerItemProperties.registerToolProperties(tinker_loli_pickaxe.get());
+                        TinkerItemProperties.registerToolProperties(old_sword.get());
+                        TinkerItemProperties.registerToolProperties(broom.get());
+                        TinkerItemProperties.registerToolProperties(murasama.get());
 
-                TinkerItemProperties.registerBrokenProperty(lollipop.get());
-                TinkerItemProperties.registerBrokenProperty(tinker_loli_pickaxe.get());
-                TinkerItemProperties.registerBrokenProperty(old_sword.get());
-                TinkerItemProperties.registerBrokenProperty(broom.get());
-                TinkerItemProperties.registerBrokenProperty(murasama.get());
+                        TinkerItemProperties.registerBrokenProperty(lollipop.get());
+                        TinkerItemProperties.registerBrokenProperty(tinker_loli_pickaxe.get());
+                        TinkerItemProperties.registerBrokenProperty(old_sword.get());
+                        TinkerItemProperties.registerBrokenProperty(broom.get());
+                        TinkerItemProperties.registerBrokenProperty(murasama.get());
 
-                soulization.forEach(armor -> {
-                    TinkerItemProperties.registerToolProperties(armor);
-                    TinkerItemProperties.registerBrokenProperty(armor);
-                });
             });
 
             com.mizi.miztinker.MusicSlots.init();

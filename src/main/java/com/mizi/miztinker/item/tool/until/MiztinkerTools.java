@@ -22,6 +22,7 @@ import slimeknights.tconstruct.library.tools.helper.ToolBuildHandler;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.item.armor.ModifiableArmorItem;
+import slimeknights.tconstruct.library.tools.item.armor.MultilayerArmorItem;
 import slimeknights.tconstruct.library.utils.BlockSideHitListener;
 
 import java.util.function.Consumer;
@@ -65,13 +66,8 @@ public class MiztinkerTools extends MiztinkerTab {
     public static final ItemObject<ModifiableItem> old_sword = TINKER_ITEMS.register("old_sword", () -> new old_sword(new Item.Properties().stacksTo(1)));
     public static final ItemObject<ModifiableItem> broom = TINKER_ITEMS.register("broom", () -> new Broom(new Item.Properties().stacksTo(1)));
     public static final ItemObject<ModifiableItem> murasama = TINKER_ITEMS.register("murasama", () -> new murasama(new Item.Properties().stacksTo(1)));
-
-    public static final EnumObject<ArmorItem.Type, ModifiableArmorItem> soulization = new EnumObject.Builder<ArmorItem.Type, ModifiableArmorItem>(ArmorItem.Type.class)
-            .put(ArmorItem.Type.HELMET, TINKER_ITEMS.register("soulization_helmet", () -> new ModifiableArmorItem(ToolDefinitions.SOULIZATION_AM, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1))))
-            .put(ArmorItem.Type.CHESTPLATE, TINKER_ITEMS.register("soulization_chestplate", () -> new ModifiableArmorItem(ToolDefinitions.SOULIZATION_AM, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1))))
-            .put(ArmorItem.Type.LEGGINGS, TINKER_ITEMS.register("soulization_leggings", () -> new ModifiableArmorItem(ToolDefinitions.SOULIZATION_AM, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1))))
-            .put(ArmorItem.Type.BOOTS, TINKER_ITEMS.register("soulization_boots", () -> new ModifiableArmorItem(ToolDefinitions.SOULIZATION_AM, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1))))
-            .build();
+    public static final Item.Properties ToolItem = new Item.Properties().stacksTo(1);
+    public static final EnumObject<ArmorItem.Type, ModifiableArmorItem> soulizationdArmor = TINKER_ITEMS.registerEnum("soulization", ArmorItem.Type.values(), (type) -> new MultilayerArmorItem(MZArmorDefinitions.SOULIZATION, type, ToolItem));
 
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output tab) {
         Consumer<ItemStack> output = tab::accept;
@@ -82,6 +78,6 @@ public class MiztinkerTools extends MiztinkerTab {
         acceptTool(output, broom);
         acceptTool(output, murasama);
 
-        soulization.forEach(armor -> acceptTool(output, () -> armor));
+
     }
 }

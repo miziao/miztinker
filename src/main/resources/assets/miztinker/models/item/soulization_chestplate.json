@@ -2,20 +2,14 @@
   "loader": "tconstruct:tool",
   "parent": "forge:item/default",
   "textures": {
-    "plating": "miztinker:item/tool/armor/plate/chestplate/plating",
-    "maille":  "miztinker:item/tool/armor/plate/chestplate/maille",
-    "maille_2": "miztinker:item/tool/armor/plate/chestplate/maille_2"
+    "plating": "miztinker:item/tool/armor/soulization/chestplate/plating",
+    "maille":  "miztinker:item/tool/armor/soulization/chestplate/maille",
+    "embedding": "miztinker:item/tool/armor/soulization/chestplate/embedding"
   },
-  "modifier_roots": [ "miztinker:item/tool/armor/soulization/leggings/modifiers/" ],
+  "modifier_roots": [ "miztinker:item/tool/armor/soulization/chestplate/modifiers/" ],
   "parts": [
-    { "name": "plating", "index": 0 },
-    { "name": "maille",  "index": 1 },
-    { "name": "maille_2",  "index": 2 }
-  ],
-  "overrides": [
-    {
-      "predicate": { "tconstruct:broken": 1 },
-      "model": "miztinker:item/armor/plate/chestplate_broken"
-    }
+    { "name": "embedding", "index": 0 },
+    { "name": "plating",   "index": 1 },
+    { "name": "maille",    "index": 2 }
   ]
 }

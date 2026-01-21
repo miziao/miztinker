@@ -3,16 +3,21 @@
     {
       "type": "tconstruct:material",
       "index": 0,
-      "prefix": "miztinker:soulization/plating_"
+      "prefix": "miztinker:soulization/upper_"
     },
     {
       "type": "tconstruct:material",
       "index": 1,
-      "prefix": "miztinker:soulization/maille_"
+      "prefix": "miztinker:soulization/middle_"
     },
     {
       "type": "tconstruct:material",
       "index": 2,
+      "prefix": "miztinker:soulization/under_"
+    },
+    {
+      "type": "tconstruct:material",
+      "index": 3,
       "prefix": "miztinker:soulization/maille_"
     },
     "tconstruct:trim"

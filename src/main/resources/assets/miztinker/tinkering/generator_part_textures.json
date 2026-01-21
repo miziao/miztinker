@@ -67,46 +67,111 @@
       },
 
 
-
-
-
-
-      {
-        "path": "miztinker:item/tool/armor/soulization/helmet/plating",
-        "stat_type": "tconstruct:plating_helmet"
-      },
-      {
-        "path": "miztinker:item/tool/armor/soulization/helmet/maille",
-        "stat_type": "tconstruct:maille"
-      },
-      {
-        "path": "miztinker:item/tool/armor/soulization/chestplate/plating",
-        "stat_type": "tconstruct:plating_chestplate"
-      },
-      {
-        "path": "miztinker:item/tool/armor/soulization/chestplate/maille",
-        "stat_type": "tconstruct:maille"
-      },
-      {
-        "path": "miztinker:item/tool/armor/soulization/leggings/plating",
-        "stat_type": "tconstruct:plating_leggings"
-      },
-      {
-        "path": "miztinker:item/tool/armor/soulization/leggings/maille",
-        "stat_type": "tconstruct:maille"
-      },
-      {
-        "path": "miztinker:item/tool/armor/soulization/leggings/maille_2",
-        "stat_type": "tconstruct:maille"
-      },
-      {
-        "path": "miztinker:item/tool/armor/soulization/boots/plating",
-        "stat_type": "tconstruct:plating_boots"
-      },
-      {
-        "path": "miztinker:item/tool/armor/soulization/boots/maille",
-        "stat_type": "tconstruct:maille"
-      }
-    ],
-    "replace": false
+    {
+      "allow_animated": false,
+      "path": "miztinker:tinker_armor/soulization/soulization_armor",
+      "stat_type": "tconstruct:armor_plating"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:tinker_armor/soulization/soulization_leggings",
+      "stat_type": "tconstruct:armor_plating"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:tinker_armor/soulization/maille_armor",
+      "stat_type": "tconstruct:armor_maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:tinker_armor/soulization/maille_leggings",
+      "stat_type": "tconstruct:armor_maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:tinker_armor/soulization/maille_wings",
+      "stat_type": "tconstruct:armor_maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/helmet/plating",
+      "stat_type": "tconstruct:plating_helmet"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/helmet/plating_broken",
+      "stat_type": "tconstruct:plating_helmet"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/helmet/maille",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/helmet/maille_broken",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/chestplate/plating",
+      "stat_type": "tconstruct:plating_chestplate"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/chestplate/plating_broken",
+      "stat_type": "tconstruct:plating_chestplate"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/chestplate/maille",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/chestplate/maille_broken",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/leggings/plating",
+      "stat_type": "tconstruct:plating_leggings"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/leggings/plating_broken",
+      "stat_type": "tconstruct:plating_leggings"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/leggings/maille",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/leggings/maille_broken",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/boots/plating",
+      "stat_type": "tconstruct:plating_boots"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/boots/plating_broken",
+      "stat_type": "tconstruct:plating_boots"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/boots/maille",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "miztinker:item/tool/armor/soulization/boots/maille_broken",
+      "stat_type": "tconstruct:maille"
+    }
+  ],
+  "replace": false
 }

@@ -3,13 +3,13 @@
   "parent": "forge:item/default",
   "textures": {
     "plating": "miztinker:item/tool/armor/soulization/leggings/plating",
-    "maille": "miztinker:item/tool/armor/soulization/leggings/maille",
-    "maille_2": "miztinker:item/tool/armor/soulization/leggings/maille_2"
+    "maille":  "miztinker:item/tool/armor/soulization/leggings/maille",
+    "embedding": "miztinker:item/tool/armor/soulization/leggings/embedding"
   },
   "modifier_roots": [ "miztinker:item/tool/armor/soulization/leggings/modifiers/" ],
   "parts": [
-    { "name": "plating", "index": 0 },
-    { "name": "maille",  "index": 1 },
-    { "name": "maille",  "index": 2 }
+    { "name": "embedding", "index": 0 },
+    { "name": "plating",   "index": 1 },
+    { "name": "maille",    "index": 2 }
   ]
 }

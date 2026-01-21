@@ -3,25 +3,25 @@
   "parent": "forge:item/default",
   "textures": {
     "plating": "miztinker:item/tool/armor/soulization/helmet/plating_broken",
-    "maille": "miztinker:item/tool/armor/soulization/helmet/maille_broken",
-     "maille_2": "miztinker:item/tool/armor/soulization/helmet/maille_broken"
+    "embedding": "miztinker:item/tool/armor/soulization/leggings/embedding",
+    "maille": "miztinker:item/tool/armor/soulization/helmet/maille_broken"
   },
   "modifier_roots": [
-  ],
-  "first_modifiers": [
+    "miztinker:item/tool/armor/soulization/helmet/modifiers/broken/",
+    "miztinker:item/tool/armor/soulization/helmet/modifiers/"
   ],
   "parts": [
     {
       "name": "plating",
-      "index": 0
-    },
-    {
-      "name": "maille",
       "index": 1
     },
     {
       "name": "maille",
       "index": 2
+    },
+    {
+      "name": "embedding",
+      "index": 0
     }
   ]
 }
