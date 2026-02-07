@@ -2,8 +2,11 @@ package com.mizi.miztinker.modifier.register;
 
 import com.mizi.miztinker.item.tool.until.OptionalDependencyHandler;
 
-import static com.mojang.text2speech.Narrator.LOGGER;
+import com.mojang.logging.LogUtils;
+import org.slf4j.Logger;
+
 public class MiztinkerOptionalModifiers  {
+    private static final Logger LOGGER = LogUtils.getLogger();
 
     public static void voidregisterOptionalModifiers() {
 

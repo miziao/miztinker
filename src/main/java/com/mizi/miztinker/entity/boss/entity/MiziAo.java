@@ -126,8 +126,10 @@ public class MiziAo extends BossEntity implements GeoEntity {
                 this.getDisplayName(),
                 BossEvent.BossBarColor.PURPLE, // 血条颜色
                 BossEvent.BossBarOverlay.PROGRESS); // 血条样式
-        if (level.isClientSide) return;
-        MUSICGAME = DiademaRegister.MUSICGAME.get().CreateInstance(new FollowDiademaMovement(this));
+        // if (!level.isClientSide) return;
+        if (level.isClientSide) {
+            MUSICGAME = DiademaRegister.MUSICGAME.get().CreateInstance(new FollowDiademaMovement(this));
+        }
     }
 
 

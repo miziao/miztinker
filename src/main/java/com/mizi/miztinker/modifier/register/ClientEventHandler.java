@@ -1,6 +1,7 @@
 package com.mizi.miztinker.modifier.register;
 
 import com.mizi.miztinker.client.OniMikoBowRender;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -10,7 +11,7 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 
-@Mod.EventBusSubscriber(modid = miztinker.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = miztinker.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventHandler {
     public static void init(IEventBus bus) {
         bus.addListener(ClientEventHandler::onAddLayers);

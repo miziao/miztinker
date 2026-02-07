@@ -1,13 +1,13 @@
 package com.mizi.miztinker.entity.boss;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
+// import net.minecraft.client.Minecraft;
+// import net.minecraft.client.gui.Font;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
+// import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -26,12 +26,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
-
 public class BossEntity extends Monster {
     public final BossEvent bossEvent;
 
-    private transient BossMusic clientBossMusicInstance; // transient 防止序列化，客户端专用
-    private boolean musicStarted = false;
+    // private transient BossMusic clientBossMusicInstance; // transient 防止序列化，客户端专用
+    // private boolean musicStarted = false;
 
     public BossEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -41,8 +40,6 @@ public class BossEntity extends Monster {
                 BossEvent.BossBarOverlay.PROGRESS // 血条样式
         )).setDarkenScreen(true); // 是否使屏幕变暗
     }
-
-
 
     @Override
     protected void registerGoals() {
@@ -64,9 +61,9 @@ public class BossEntity extends Monster {
         return null;
     }
 
-    public Font getBossBarFont() {
-        return Minecraft.getInstance().font;
-    }
+    // public Font getBossBarFont() {
+    //     return Minecraft.getInstance().font;
+    // }
 
     @Nullable
     public SoundEvent getBossMusic() {
@@ -168,43 +165,51 @@ public class BossEntity extends Monster {
         }
 
         // 只在客户端处理音乐
+        // if (level().isClientSide()) {
+        //     handleBossMusic();
+        // }
+
+        // 只在客户端处理音乐 - 使用安全的方式调用
         if (level().isClientSide()) {
-            handleBossMusic();
+            net.minecraftforge.fml.DistExecutor.unsafeRunWhenOn(
+                net.minecraftforge.api.distmarker.Dist.CLIENT,
+                () -> () -> com.mizi.miztinker.client.ClientBossMusicHandler.tick(this)
+            );
         }
     }
 
     // 分离出的音乐处理逻辑（更清晰且符合@Nullable）
-    private void handleBossMusic() {
-        Minecraft mc = Minecraft.getInstance();
-        float musicVolume = mc.options.getSoundSourceVolume(SoundSource.MUSIC);
+    // private void handleBossMusic() {
+    //     Minecraft mc = Minecraft.getInstance();
+    //     float musicVolume = mc.options.getSoundSourceVolume(SoundSource.MUSIC);
 
-        // 条件1：Boss存活且音乐未静音
-        if (this.isAlive() && musicVolume > 0.0F) {
-            // 条件2：音乐未开始或需要重新创建实例
-            if (!musicStarted || clientBossMusicInstance == null || clientBossMusicInstance.isStopped()) {
-                clientBossMusicInstance = BossMusic.create(this); // 使用工厂方法（可能返回null）
-            }
+    //     // 条件1：Boss存活且音乐未静音
+    //     if (this.isAlive() && musicVolume > 0.0F) {
+    //         // 条件2：音乐未开始或需要重新创建实例
+    //         if (!musicStarted || clientBossMusicInstance == null || clientBossMusicInstance.isStopped()) {
+    //             clientBossMusicInstance = BossMusic.create(this); // 使用工厂方法（可能返回null）
+    //         }
 
-            // 安全播放检查（包括null检查）
-            if (clientBossMusicInstance != null && !mc.getSoundManager().isActive(clientBossMusicInstance)) {
-                mc.getSoundManager().play(clientBossMusicInstance);
-                musicStarted = true;
-            }
-        }
-        // Boss死亡或音乐静音时的清理逻辑
-        else if (musicStarted) {
-            stopBossMusic();
-        }
-    }
+    //         // 安全播放检查（包括null检查）
+    //         if (clientBossMusicInstance != null && !mc.getSoundManager().isActive(clientBossMusicInstance)) {
+    //             mc.getSoundManager().play(clientBossMusicInstance);
+    //             musicStarted = true;
+    //         }
+    //     }
+    //     // Boss死亡或音乐静音时的清理逻辑
+    //     else if (musicStarted) {
+    //         stopBossMusic();
+    //     }
+    // }
 
     // 安全的音乐停止方法
-    protected void stopBossMusic() {
-        if (clientBossMusicInstance != null) {
-            Minecraft.getInstance().getSoundManager().stop(clientBossMusicInstance);
-        }
-        musicStarted = false;
-        clientBossMusicInstance = null; // 显式置空
-    }
+    // protected void stopBossMusic() {
+    //     if (clientBossMusicInstance != null) {
+    //         Minecraft.getInstance().getSoundManager().stop(clientBossMusicInstance);
+    //     }
+    //     musicStarted = false;
+    //     clientBossMusicInstance = null; // 显式置空
+    // }
 
     @Override
     public void die(@NotNull DamageSource pSource) {
