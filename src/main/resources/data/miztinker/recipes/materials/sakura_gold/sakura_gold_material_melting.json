@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material_melting",
+    "input": "miztinker:sakura_gold",
+    "temperature": 550,
+    "result": {
+        "fluid": "miztinker:molten_sakura_gold",
+        "amount": 90
+    }
+}

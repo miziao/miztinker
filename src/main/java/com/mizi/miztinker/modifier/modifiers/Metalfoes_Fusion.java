@@ -30,7 +30,7 @@ import java.util.List;
 
 public class Metalfoes_Fusion extends NoLevelsModifier implements InventoryTickModifierHook, SlotStackModifierHook {
 
-    private static final ResourceLocation METALFOES_STORAGE = new ResourceLocation("miztinker", "metalfoes_fusion_data");
+    private static final ResourceLocation METALFOES_STORAGE = ResourceLocation.fromNamespaceAndPath("miztinker", "metalfoes_fusion_data");
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
@@ -48,7 +48,7 @@ public class Metalfoes_Fusion extends NoLevelsModifier implements InventoryTickM
             CompoundTag potionMap;
 
             if (data.contains(METALFOES_STORAGE, Tag.TAG_COMPOUND)) {
-                potionMap = data.get(METALFOES_STORAGE, (nbt, key) -> nbt.getCompound(key));
+                potionMap = data.get(METALFOES_STORAGE, CompoundTag::getCompound);
             } else {
                 potionMap = new CompoundTag();
             }
@@ -82,7 +82,7 @@ public class Metalfoes_Fusion extends NoLevelsModifier implements InventoryTickM
             ModDataNBT data = slotTool.getPersistentData();
 
             if (data.contains(METALFOES_STORAGE, Tag.TAG_COMPOUND)) {
-                CompoundTag potionMap = data.get(METALFOES_STORAGE, (nbt, key) -> nbt.getCompound(key));
+                CompoundTag potionMap = data.get(METALFOES_STORAGE, CompoundTag::getCompound);
 
                 ItemStack customPotion = new ItemStack(Items.POTION);
                 customPotion.setHoverName(Component.literal("§d重炼装融合液"));
@@ -90,7 +90,7 @@ public class Metalfoes_Fusion extends NoLevelsModifier implements InventoryTickM
                 List<MobEffectInstance> effectsToExport = new ArrayList<>();
 
                 for (String key : potionMap.getAllKeys()) {
-                    MobEffect effect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation(key));
+                    MobEffect effect = ForgeRegistries.MOB_EFFECTS.getValue(ResourceLocation.parse(key));
                     if (effect != null) {
                         int amp = potionMap.getInt(key);
                         effectsToExport.add(new MobEffectInstance(effect, 1200, amp));
@@ -132,10 +132,10 @@ public class Metalfoes_Fusion extends NoLevelsModifier implements InventoryTickM
             ModDataNBT data = tool.getPersistentData();
 
             if (data.contains(METALFOES_STORAGE, Tag.TAG_COMPOUND)) {
-                CompoundTag potionMap = data.get(METALFOES_STORAGE, (nbt, key) -> nbt.getCompound(key));
+                CompoundTag potionMap = data.get(METALFOES_STORAGE, CompoundTag::getCompound);
 
                 for (String key : potionMap.getAllKeys()) {
-                    MobEffect effect = ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation(key));
+                    MobEffect effect = ForgeRegistries.MOB_EFFECTS.getValue(ResourceLocation.parse(key));
 
                     if (effect != null) {
                         int amp = potionMap.getInt(key);

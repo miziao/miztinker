@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ccc",
+    "cac",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "tag": "forge:ingots/gold"
+    },
+    "a": {
+      "item": "miztinker:imitation_broken_halo"
+    }
+  },
+  "result": {
+    "item": "miztinker:imitation_apocalyptium",
+    "count": 1
+  }
+}

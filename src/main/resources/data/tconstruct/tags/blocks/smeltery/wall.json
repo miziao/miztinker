@@ -12,6 +12,10 @@
     "miztinker:smeltery_increase_production",
     "miztinker:smeltery_increase_production_pro1",
     "miztinker:smeltery_increase_production_pro2",
-    "miztinker:eternal_fuel_module"
+    "miztinker:eternal_fuel_module",
+    "miztinker:seared_alloy_retarder",
+    "miztinker:reinforced_seared_brick",
+    "miztinker:tinker_electricity_module",
+    "miztinker:nutrient_solution_module"
   ]
 }

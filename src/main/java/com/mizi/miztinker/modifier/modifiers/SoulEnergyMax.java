@@ -26,7 +26,7 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 public class SoulEnergyMax extends NoLevelsModifier implements GeneralInteractionModifierHook, MeleeHitModifierHook, ToolStatsModifierHook {
 
-    private static final ResourceLocation DAMAGE_KEY = new ResourceLocation("miztinker", "sacrifice_damage");
+    private static final ResourceLocation DAMAGE_KEY = ResourceLocation.fromNamespaceAndPath("miztinker", "sacrifice_damage");
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {

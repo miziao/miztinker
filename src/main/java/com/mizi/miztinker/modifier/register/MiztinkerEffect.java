@@ -1,6 +1,9 @@
 package com.mizi.miztinker.modifier.register;
 
 
+import com.mizi.miztinker.effect.HolyProtectionCooldown;
+import com.mizi.miztinker.effect.Pair_Kamui_effect;
+import com.mizi.miztinker.effect.RespectPlayEffect;
 import com.mizi.miztinker.miztinker;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,5 +24,11 @@ public class MiztinkerEffect {
     public static final RegistryObject<MobEffect> DropFountainEffect = EFFECTS.register("dropfountaineffect", com.mizi.miztinker.effect.DropFountainEffect::new);
 
     public static final RegistryObject<MobEffect> DestinedDeath = EFFECTS.register("destineddeath", com.mizi.miztinker.effect.DestinedDeath::new);
+
+    public static final RegistryObject<MobEffect> HOLY_PROTECTION_COOLDOWN = EFFECTS.register("holy_protection_cooldown", HolyProtectionCooldown::new);
+
+    public static final RegistryObject<MobEffect> KAMUI_PLUS = EFFECTS.register("pair_kamui", Pair_Kamui_effect::new);
+
+    public static final RegistryObject<MobEffect> RESPECTPLAY = EFFECTS.register("respect_play", RespectPlayEffect::new);
 
 }

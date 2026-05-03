@@ -54,6 +54,9 @@ public class MiziAo extends BossEntity implements GeoEntity {
 
     private static Diadema MUSICGAME;
 
+    private static final EntityDataAccessor<Integer> DATA_MUSIC_TYPE =
+            SynchedEntityData.defineId(MiziAo.class, EntityDataSerializers.INT);
+
     private int drinkingTicks;
     public static final int RATING = 15417;
     public static final int PERFECT = 1010;
@@ -135,10 +138,12 @@ public class MiziAo extends BossEntity implements GeoEntity {
     @Override
     public void defineSynchedData() {
         super.defineSynchedData();
-        // 注册同步数据并设置默认值
         this.entityData.define(DATA_IS_CHUJING, false);
         this.entityData.define(DATA_IS_ATTACKING, false);
         this.entityData.define(DATA_IS_DRINKING, false);
+
+        int musicRandom = this.random.nextInt(100);
+        this.entityData.define(DATA_MUSIC_TYPE, musicRandom < 80 ? 0 : 1);
     }
 
     @Override
@@ -154,6 +159,7 @@ public class MiziAo extends BossEntity implements GeoEntity {
     @Override
     public void tick() {
         super.tick();
+        com.mizi.miztinker.util.HealthSafetyManager.handleHealthProtection(this);
 
         updateDynamicName();
         manageSpeedModifier();
@@ -235,11 +241,6 @@ public class MiziAo extends BossEntity implements GeoEntity {
 
     @Override
     public boolean hurt(@NotNull DamageSource source, float amount) {
-
-        // --- 保险机制：禁止任何超过 1010 的单次伤害 ---
-        if (amount > 1010F) {
-            amount = 1010F;
-        }
 
         float actualDamage = Math.min(amount, PERFECT);
         if (source.getDirectEntity() instanceof Player player) {
@@ -376,7 +377,13 @@ public class MiziAo extends BossEntity implements GeoEntity {
     public AnimatableInstanceCache getAnimatableInstanceCache() { return this.geoCache; }
 
     @Override
-    public SoundEvent getBossMusic() { return MiztinkerSounds.UMIYURI_KAITEITAN.get(); }
+    public SoundEvent getBossMusic() {
+        // 检查同步数据
+        if (this.entityData.get(DATA_MUSIC_TYPE) == 1) {
+            return MiztinkerSounds.SIGMA.get(); // 20% 概率
+        }
+        return MiztinkerSounds.UMIYURI_KAITEITAN.get(); // 80% 概率
+    }
 
     @Override
     public void die(@NotNull DamageSource source) {

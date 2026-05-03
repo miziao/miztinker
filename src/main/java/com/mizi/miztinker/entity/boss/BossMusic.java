@@ -82,15 +82,15 @@ public class BossMusic extends AbstractTickableSoundInstance {
         return super.isStopped();
     }
 
-    public static void playMusic(BossMusic music, BossEntity bossEntity) {
-        if (Minecraft.getInstance().options.getSoundSourceVolume(SoundSource.MUSIC) <= 0.0f) {
-            music = null;
+    public static void playMusic(@Nullable BossMusic music, BossEntity bossEntity) {
+        Minecraft mc = Minecraft.getInstance();
+
+        if (mc.options.getSoundSourceVolume(SoundSource.MUSIC) <= 0.0f) {
+            return;
         }
-        if (music != null) {
-            music = new BossMusic(bossEntity);
-        }
+
         if (music != null && music.canPlayMusic()) {
-            Minecraft.getInstance().getSoundManager().play(music);
+            mc.getSoundManager().play(music);
         }
     }
 

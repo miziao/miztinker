@@ -21,15 +21,13 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 public class Eatstone extends NoLevelsModifier
         implements RemoveBlockModifierHook {
 
-    /* ---------- Forge 标签 ---------- */
 
     private static final TagKey<Block> FORGE_STONE =
-            TagKey.create(Registries.BLOCK, new ResourceLocation("forge", "stone"));
+            TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("forge", "stone"));
 
     private static final TagKey<Block> FORGE_ORES =
-            TagKey.create(Registries.BLOCK, new ResourceLocation("forge", "ores"));
+            TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("forge", "ores"));
 
-    /* ---------- 食物参数 ---------- */
 
     private static final int FOOD_STONE = 1;
     private static final float SAT_STONE = 0.1f;
@@ -37,7 +35,6 @@ public class Eatstone extends NoLevelsModifier
     private static final int FOOD_ORE = 3;
     private static final float SAT_ORE = 0.3f;
 
-    /* ---------- Hook 注册 ---------- */
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {

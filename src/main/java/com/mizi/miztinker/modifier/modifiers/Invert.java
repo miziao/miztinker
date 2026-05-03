@@ -15,7 +15,7 @@ import static pyre.tinkerslevellingaddon.ImprovableModifier.EXPERIENCE_KEY;
 public class Invert extends Modifier implements ValidateModifierHook {
 
     private static final ResourceLocation LAST_LEVEL_KEY =
-            new ResourceLocation("miztinker", "invert_last_level");
+            ResourceLocation.fromNamespaceAndPath("miztinker", "invert_last_level");
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {

@@ -20,7 +20,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 public class Ravenous extends NoLevelsModifier {
-    private static final ResourceLocation REVIVE_COUNT = new ResourceLocation("miztinker", "ravenous");
+    private static final ResourceLocation REVIVE_COUNT = ResourceLocation.fromNamespaceAndPath("miztinker", "ravenous");
 
     public Ravenous() {
         // 注册事件监听

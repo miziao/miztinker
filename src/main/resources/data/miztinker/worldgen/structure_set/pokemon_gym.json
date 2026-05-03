@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "miztinker:pokemon_gym",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 60,
+    "separation": 30,
+    "salt": 776251438  
+  }
+}

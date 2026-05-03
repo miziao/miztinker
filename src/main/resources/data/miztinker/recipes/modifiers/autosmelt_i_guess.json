@@ -1,0 +1,31 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "tag": "forge:raw_materials"
+    },
+    {
+      "item": "minecraft:blast_furnace"
+    },
+    {
+      "tag": "forge:ingots"
+    },
+    {
+      "item": "tconstruct:blazewood"
+    },
+    {
+      "item": "tconstruct:blazewood"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:autosmelt_i_guess",
+  "slots": {
+    "abilities": 6
+  },
+  "tools": [
+    {
+      "tag": "tconstruct:modifiable/interactable/right"
+    }
+  ]
+}

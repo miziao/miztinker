@@ -1,0 +1,34 @@
+{
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "miztinker:holy_protection"
+      }
+    ],
+    "tconstruct:ranged": [
+      {
+        "level": 1,
+        "name": "miztinker:divine_crossbow"
+      }
+    ],
+    "tconstruct:head": [
+      {
+        "level": 1,
+        "name": "miztinker:feral_claws"
+      }
+    ],
+    "tconstruct:handle": [
+      {
+        "level": 1,
+        "name": "miztinker:summoner_core"
+      }
+    ],
+    "tconstruct:binding": [
+      {
+        "level": 1,
+        "name": "miztinker:summoner_core"
+      }
+    ]
+  }
+}

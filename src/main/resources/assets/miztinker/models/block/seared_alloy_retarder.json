@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "miztinker:block/seared_alloy_retarder"
+  }
+}

@@ -14,7 +14,7 @@ public class MythicalPush extends Modifier implements BreakSpeedModifierHook {
 
     @Override
     public void onBreakSpeed(IToolStackView tool, ModifierEntry modifier, PlayerEvent.BreakSpeed event, Direction sideHit, boolean isEffective, float miningSpeedModifier) {
-        if(event.getEntity().level().dimension().location().equals(new ResourceLocation("minecraft:nether"))) {
+        if(event.getEntity().level().dimension().location().equals(ResourceLocation.parse("minecraft:nether"))) {
             event.setNewSpeed(event.getNewSpeed()+1.2f*modifier.getLevel());
         }
 

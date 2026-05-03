@@ -1,6 +1,12 @@
 {
+    "conditions": [
+      {
+        "type": "forge:item_exists",
+        "item": "miztinker:ten_thousand_souls_item"
+      }
+    ],
     "craftable": true,
-    "tier":1000,
+    "tier": 1000,
     "sortOrder": 1,
     "hidden": false
-}
+  }

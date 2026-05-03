@@ -38,7 +38,7 @@ import java.util.Objects;
 
 public class Sandwich extends NoLevelsModifier implements SlotStackModifierHook, GeneralInteractionModifierHook, TooltipModifierHook {
 
-    private static final ResourceLocation FOOD_STORAGE = new ResourceLocation("mizi", "sandwich_data");
+    private static final ResourceLocation FOOD_STORAGE = ResourceLocation.fromNamespaceAndPath("mizi", "sandwich_data");
     private static final String TAG_ABSORBED_LIST = "AbsorbedItems";
     private static final String TAG_HUNGER = "TotalHunger";
     private static final String TAG_SATURATION = "TotalSaturation";
@@ -108,7 +108,7 @@ public class Sandwich extends NoLevelsModifier implements SlotStackModifierHook,
 
             ListTag absorbedList = sandwichNBT.getList(TAG_ABSORBED_LIST, Tag.TAG_STRING);
             for (int i = 0; i < absorbedList.size(); i++) {
-                ResourceLocation id = new ResourceLocation(absorbedList.getString(i));
+                ResourceLocation id = ResourceLocation.parse(absorbedList.getString(i));
                 ItemStack dummyStack = new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(id)));
                 dummyStack.getItem().finishUsingItem(dummyStack, player.level(), player);
             }
@@ -127,7 +127,7 @@ public class Sandwich extends NoLevelsModifier implements SlotStackModifierHook,
 
     @Override
     public int getUseDuration(IToolStackView tool, ModifierEntry modifier) {
-        return 32; // 标准进食时长
+        return 32;
     }
 
     @Override
@@ -142,8 +142,8 @@ public class Sandwich extends NoLevelsModifier implements SlotStackModifierHook,
             tooltips.add(Component.literal("§e已吸收配料: §f" + list.size()));
             if (!list.isEmpty() && tooltipKey == TooltipKey.SHIFT) {
                 for (int i = 0; i < list.size(); i++) {
-                    ResourceLocation id = new ResourceLocation(list.getString(i));
-                    tooltips.add(Component.literal(" §7- " + ForgeRegistries.ITEMS.getValue(id).getDescription().getString()));
+                    ResourceLocation id = ResourceLocation.parse(list.getString(i));
+                    tooltips.add(Component.literal(" §7- " + Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(id)).getDescription().getString()));
                 }
             }
             tooltips.add(Component.literal("§7总回复: §6" + hunger + " 饥饿值 §e/ " + String.format("%.1f", sat) + " 饱和度"));

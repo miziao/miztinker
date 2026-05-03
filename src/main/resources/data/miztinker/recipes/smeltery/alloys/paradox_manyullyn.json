@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "amount": 180,
+      "name": "tconstruct:molten_cobalt"
+    },
+    {
+      "amount": 400,
+      "name": "tconstruct:ichor"
+    }
+  ],
+  "result": {
+    "amount": 360,
+    "fluid": "miztinker:molten_paradox_manyullyn"
+  },
+  "temperature": 1500
+}

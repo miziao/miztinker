@@ -1,0 +1,5 @@
+{
+  "color": "FFFFFFFF",
+  "flowing": "miztinker:block/fluid/molten_rainbow_material/flowing",
+  "still": "miztinker:block/fluid/molten_rainbow_material/still"
+}

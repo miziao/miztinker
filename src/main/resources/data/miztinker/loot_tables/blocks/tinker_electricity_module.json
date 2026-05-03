@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "miztinker:block/tinker_electricity_module",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "miztinker:tinker_electricity_module"
+        }
+      ]
+    }
+  ]
+}

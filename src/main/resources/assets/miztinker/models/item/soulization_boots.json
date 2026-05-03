@@ -4,12 +4,12 @@
   "textures": {
     "plating": "miztinker:item/tool/armor/soulization/boots/plating",
     "maille":  "miztinker:item/tool/armor/soulization/boots/maille",
-    "embedding": "miztinker:item/tool/armor/soulization/boots/embedding"
+    "soulization": "miztinker:item/tool/armor/soulization/boots/soulization"
   },
   "modifier_roots": [ "miztinker:item/tool/armor/soulization/boots/modifiers/" ],
   "parts": [
-    { "name": "embedding", "index": 0 },
-    { "name": "plating",   "index": 1 },
+    { "name": "soulization", "index":1 },
+    { "name": "plating",   "index": 0 },
     { "name": "maille",    "index": 2 }
   ]
 }

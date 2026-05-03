@@ -62,5 +62,29 @@
         "stream": true
       }
     ]
+  },
+  "kamui": {
+    "sounds": [
+      {
+        "name":"miztinker:kamui",
+        "stream": true
+      }
+    ]
+  },
+  "sigma": {
+    "sounds": [
+      {
+        "name":"miztinker:sigma",
+        "stream": true
+      }
+    ]
+  },
+  "all_justice": {
+    "sounds": [
+      {
+        "name":"miztinker:all_justice",
+        "stream": true
+      }
+    ]
   }
 }

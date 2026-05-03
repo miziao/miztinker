@@ -1,16 +1,17 @@
 package com.mizi.miztinker.modifier.modifiers;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.level.Level;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
@@ -25,8 +26,8 @@ import java.util.UUID;
 
 public class SuperLollipop extends NoLevelsModifier implements GeneralInteractionModifierHook {
 
-    // 用于标识生命值加成的 UUID
-    private static final UUID SUPER_LOLLIPOP_HEALTH_UUID = UUID.fromString("123e4567-e89b-12d3-a456-426614174000");
+    public static final UUID HP_UUID = UUID.fromString("123e4567-e89b-12d3-a456-426614174000");
+    public static final UUID ATK_UUID = UUID.fromString("123e4567-e89b-12d3-a456-426614174001");
 
     @Override
     protected void registerHooks(Builder hookBuilder) {
@@ -34,108 +35,62 @@ public class SuperLollipop extends NoLevelsModifier implements GeneralInteractio
     }
 
     @Override
-    public int getPriority() {
-        // 高于默认的美味优先级
-        return 100;
-    }
-
-    @Override
     public InteractionResult onToolUse(IToolStackView tool, ModifierEntry modifier, Player player, InteractionHand hand, InteractionSource source) {
-        // 工具已损坏或者当前耐久为0，无法使用
-        if (source != InteractionSource.RIGHT_CLICK || tool.isBroken() || tool.getCurrentDurability() <= 0) {
-            return InteractionResult.PASS;
-        }
-
+        if (source != InteractionSource.RIGHT_CLICK || tool.isBroken()) return InteractionResult.PASS;
         GeneralInteractionModifierHook.startUsing(tool, modifier.getId(), player, hand);
         return InteractionResult.CONSUME;
     }
 
     @Override
     public void onFinishUsing(IToolStackView tool, ModifierEntry modifier, LivingEntity entity) {
-        if (tool.isBroken() || !(entity instanceof Player)) return;
-
-        Player player = (Player) entity;
-        consumeTool(tool, modifier, player);
+        if (entity instanceof Player player && !tool.isBroken()) {
+            consumeTool(tool, player);
+        }
     }
 
-    /** 消耗最大耐久的十分之一，并从这部分耐久计算增加百分之一为最大生命值 */
-    public static void addHealth(Player player, double healthGain) {
-        AttributeInstance healthAttr = player.getAttribute(Attributes.MAX_HEALTH);
-        if (healthAttr == null) return;
+    private void consumeTool(IToolStackView tool, Player player) {
+        float maxDur = tool.getStats().get(ToolStats.DURABILITY);
+        int toDamage = Math.max(1, (int)maxDur / 10);
 
-        // 获取旧数值
-        double oldValue = 0;
-        AttributeModifier old = healthAttr.getModifier(SUPER_LOLLIPOP_HEALTH_UUID);
-
-        if (old != null) {
-            oldValue = old.getAmount();
-            healthAttr.removeModifier(old);
-        }
-
-        // 叠加
-        double newValue = oldValue + healthGain;
-
-        // 重加永久 modifier
-        healthAttr.addPermanentModifier(new AttributeModifier(
-                SUPER_LOLLIPOP_HEALTH_UUID,
-                "super_lollipop_health_boost",
-                newValue,
-                AttributeModifier.Operation.ADDITION
-        ));
-
-        // 立即更新血量
-        player.setHealth(player.getMaxHealth());
-    }
-
-
-
-    /** 消耗工具的耐久并转化为生命值 **/
-    private void consumeTool(IToolStackView tool, ModifierEntry modifier, Player player) {
-        Level world = player.level();
-
-        // 工具最大耐久
-        float maxDurabilityFloat = tool.getStats().get(ToolStats.DURABILITY);
-
-        if (Float.isInfinite(maxDurabilityFloat) || Float.isNaN(maxDurabilityFloat) || maxDurabilityFloat <= 0f) {
-            maxDurabilityFloat = tool.getCurrentDurability();
-        }
-
-        int maxDurability = Math.max(1, (int)Math.floor(maxDurabilityFloat));
-
-        // 消耗最大耐久的 10%
-        int durabilityToConsume = Math.max(1, maxDurability / 10);
-        int currentDur = tool.getCurrentDurability();
-
-        if (currentDur <= 0) return;
-        durabilityToConsume = Math.min(durabilityToConsume, currentDur);
-
-        if (durabilityToConsume <= 0) return;
-
-        // 造成耐久损伤
-        if (ToolDamageUtil.damageAnimated(tool, durabilityToConsume, player, player.getUsedItemHand())) {
+        if (ToolDamageUtil.damageAnimated(tool, toDamage, player, player.getUsedItemHand())) {
             player.broadcastBreakEvent(player.getUsedItemHand());
-            return;
         }
 
-        // 1% 的耐久转换为 HP
-        float healthGain = durabilityToConsume * 0.01f;
+        double gain = toDamage * 0.01;
+        CompoundTag persistentData = player.getPersistentData();
+        CompoundTag mizData = persistentData.getCompound(Player.PERSISTED_NBT_TAG); // 获取 Forge 自动保留的 NBT 槽位
 
-        // 增加永久生命
-        addHealth(player, healthGain);
+        double newHp = mizData.getDouble("miz_lp_hp") + gain;
+        double newAtk = mizData.getDouble("miz_lp_atk") + gain;
 
-        // 播放音效
-        world.playSound(null, player.getX(), player.getY(), player.getZ(),
-                SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS,
-                1.0f, 1.0f);
+        mizData.putDouble("miz_lp_hp", newHp);
+        mizData.putDouble("miz_lp_atk", newAtk);
+        persistentData.put(Player.PERSISTED_NBT_TAG, mizData);
+
+        applyPermanentAttributes(player);
+
+        player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 1.0f, 1.0f);
     }
 
-    @Override
-    public UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
-        return UseAnim.EAT;
+    public static void applyPermanentAttributes(Player player) {
+        CompoundTag mizData = player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG);
+
+        double hp = mizData.getDouble("miz_lp_hp");
+        double atk = mizData.getDouble("miz_lp_atk");
+
+        updateAttribute(player, Attributes.MAX_HEALTH, HP_UUID, "Lollipop HP", hp);
+        updateAttribute(player, Attributes.ATTACK_DAMAGE, ATK_UUID, "Lollipop ATK", atk);
     }
 
-    @Override
-    public int getUseDuration(IToolStackView tool, ModifierEntry modifier) {
-        return 8; // 使用持续时间（可以改短，但16和食物一致）
+    private static void updateAttribute(Player player, Attribute attr, UUID uuid, String name, double value) {
+        if (value <= 0) return;
+        AttributeInstance inst = player.getAttribute(attr);
+        if (inst != null) {
+            inst.removeModifier(uuid);
+            inst.addTransientModifier(new AttributeModifier(uuid, name, value, AttributeModifier.Operation.ADDITION));
+        }
     }
+
+    @Override public UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) { return UseAnim.EAT; }
+    @Override public int getUseDuration(IToolStackView tool, ModifierEntry modifier) { return 8; }
 }

@@ -29,7 +29,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static com.mizi.miztinker.miztinker.MODID;
-
+@SuppressWarnings("removal")
 public class MiztinkerTools extends MiztinkerTab {
 
     public static final ItemDeferredRegisterExtension TINKER_ITEMS = new ItemDeferredRegisterExtension(MODID);

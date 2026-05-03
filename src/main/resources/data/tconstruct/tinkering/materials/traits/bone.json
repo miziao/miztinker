@@ -1,0 +1,34 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "tconstruct:pierce"
+    },
+    {
+      "level": 1,
+      "name": "miztinker:jinkela"
+    }
+  ],
+  "perStat": {
+    "tconstruct:skull": [
+      {
+        "level": 1,
+        "name": "tconstruct:strong_bones"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:skeleton_disguise"
+      }
+    ],
+    "tconstruct:head": [
+      {
+        "level": 1,
+        "name": "tconstruct:pierce"
+      },
+      {
+        "level": 1,
+        "name": "miztinker:jinkela"
+      }
+    ]
+  }
+}

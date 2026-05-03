@@ -38,8 +38,8 @@ import java.util.Set;
  */
 public class IgnisterField extends NoLevelsModifier implements MeleeHitModifierHook, TooltipModifierHook {
 
-    private static final ResourceLocation TAG_ADV_COUNT = new ResourceLocation("miztinker", "ignister_advancements");
-    private static final ResourceLocation TAG_LAST_UPDATE = new ResourceLocation("miztinker", "ignister_last_update");
+    private static final ResourceLocation TAG_ADV_COUNT = ResourceLocation.fromNamespaceAndPath("miztinker", "ignister_advancements");
+    private static final ResourceLocation TAG_LAST_UPDATE = ResourceLocation.fromNamespaceAndPath("miztinker", "ignister_last_update");
     private static final int UPDATE_INTERVAL = 1200; // tick
     private static final Random RANDOM = new Random();
 

@@ -7,7 +7,7 @@
     "cbc"
   ],
   "key": {
-    "a": { "tag": "forge:elytra" },
+    "a": { "item": "minecraft:elytra" },
     "b": { "item": "minecraft:chorus_flower" },
     "c": { "item": "miztinker:smeltery_increase_production_pro1" }
   },

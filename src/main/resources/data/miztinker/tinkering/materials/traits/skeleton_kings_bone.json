@@ -1,0 +1,20 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "miztinker:grasp_heart"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 120,
+        "name": "constructs_casting:mana_upgrade"
+      },
+      {
+        "level": 1,
+        "name": "miztinker:wall_of_skeleton"
+      }
+    ]
+  }
+}

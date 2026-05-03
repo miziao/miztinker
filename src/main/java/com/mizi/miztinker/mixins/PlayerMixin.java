@@ -9,15 +9,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin {
-
     @Inject(method = "canEat", at = @At("HEAD"), cancellable = true)
     private void miztinker$canEatAlways(boolean ignoreHunger, CallbackInfoReturnable<Boolean> cir) {
         Player player = (Player) (Object) this;
-
-        if (!ignoreHunger) {
-            if (EnchantedGold.hasEnchantedGold(player)) {
-                cir.setReturnValue(true);
-            }
+        if (!ignoreHunger && EnchantedGold.hasEnchantedGold(player)) {
+            cir.setReturnValue(true);
         }
     }
 }

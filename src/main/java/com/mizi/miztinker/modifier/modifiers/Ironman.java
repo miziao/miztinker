@@ -23,12 +23,9 @@ public class Ironman extends NoLevelsModifier implements ModifyDamageModifierHoo
                                    boolean isDirectDamage) {
         LivingEntity entity = context.getEntity();
         if (entity != null) {
-            // 获取护甲值
             float armor = entity.getArmorValue();
-            // 计算减伤比例
-            float reductionRate = armor * 0.001f; // 每点护甲 0.1% -> 0.001
+            float reductionRate = armor * 0.001f;
             if (reductionRate > 0.8f) {
-                // 可选：设个上限，比如最多减少 80%
                 reductionRate = 0.95f;
             }
             return amount * (1 - reductionRate);

@@ -1,0 +1,31 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:lightning_rod"
+    },
+    {
+      "item": "simpleplanes:helicopter"
+    },
+    {
+      "item": "minecraft:lightning_rod"
+    },
+    {
+      "tag": "forge:slimeballs"
+    },
+    {
+      "tag": "forge:dyes/orange"
+    }
+  ],
+  "result": "miztinker:lightning_vortex_slash",
+  "slots": {
+    "upgrades": 1
+  },
+  "level": {
+    "max": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/interactable/right"
+  }
+}

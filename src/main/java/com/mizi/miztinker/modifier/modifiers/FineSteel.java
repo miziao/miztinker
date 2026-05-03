@@ -23,7 +23,7 @@ import java.util.List;
 
 public class FineSteel extends Modifier implements RepairFactorModifierHook, ToolStatsModifierHook, TooltipModifierHook {
 
-    private static final ResourceLocation REPAIR_COUNT_KEY = new ResourceLocation("miztinker", "fine_steel_count");
+    private static final ResourceLocation REPAIR_COUNT_KEY = ResourceLocation.fromNamespaceAndPath("miztinker", "fine_steel_count");
     private static final float BONUS_PER_REPAIR = 0.10f;
 
     @Override

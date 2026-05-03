@@ -1,0 +1,20 @@
+{
+  "default": [
+    {
+      "name": "miztinker:echoing_1",
+      "level": 1
+    },
+    {
+      "name": "miztinker:echoing_2",
+      "level": 1
+    },
+    {
+      "name": "miztinker:echoing_3",
+      "level": 1
+    },
+    {
+      "name": "miztinker:echoing_4",
+      "level": 1
+    }
+  ]
+}

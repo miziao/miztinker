@@ -39,7 +39,7 @@ import javax.annotation.Nullable;
 public class ScepterOfDivineSociety extends NoLevelsModifier
         implements BlockInteractionModifierHook, ProcessLootModifierHook, TooltipModifierHook {
 
-    private static final ResourceLocation SAVED_LOOT = new ResourceLocation("miztinker", "scepter_loot_table");
+    private static final ResourceLocation SAVED_LOOT = ResourceLocation.fromNamespaceAndPath("miztinker", "scepter_loot_table");
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder builder) {
@@ -68,13 +68,13 @@ public class ScepterOfDivineSociety extends NoLevelsModifier
         ResourceLocation loot = chest.lootTable;
 
         if (loot == null) {
-            // 已开过或手动设置无 loot table → 清除
+
             data.remove(SAVED_LOOT);
             player.displayClientMessage(Component.literal("§c箱子无战利品，已清除保存内容"), true);
             return InteractionResult.SUCCESS;
         }
 
-        // 正常保存（覆盖旧的）
+
         data.putString(SAVED_LOOT, loot.toString());
         player.displayClientMessage(Component.literal("§a已记录战利品：" + loot), true);
 
@@ -84,9 +84,6 @@ public class ScepterOfDivineSociety extends NoLevelsModifier
         return InteractionResult.SUCCESS;
     }
 
-    /*------------------------------------------------------------*/
-    /*  Tooltip 显示保存的 Loot Table                              */
-    /*------------------------------------------------------------*/
     @Override
     public void addTooltip(IToolStackView tool, ModifierEntry entry, @Nullable Player player,
                            List<Component> tooltip, TooltipKey key, TooltipFlag flag) {
@@ -100,12 +97,10 @@ public class ScepterOfDivineSociety extends NoLevelsModifier
         }
     }
 
-    /*------------------------------------------------------------*/
-    /*   击杀怪物——根据保存的 loot table 添加额外战利品            */
-    /*------------------------------------------------------------*/
+
     @Override
     public void processLoot(IToolStackView tool, ModifierEntry modifier, List<ItemStack> generatedLoot, LootContext context) {
-        // 必须有伤害源（表示是击杀掉落）
+
         if (!context.hasParam(LootContextParams.DAMAGE_SOURCE)) {
             return;
         }
@@ -114,24 +109,22 @@ public class ScepterOfDivineSociety extends NoLevelsModifier
         if (!data.contains(SAVED_LOOT)) return;
 
         String lootString = data.getString(SAVED_LOOT);
-        ResourceLocation lootID = new ResourceLocation(lootString);
+        ResourceLocation lootID = ResourceLocation.parse(lootString);
 
-        // 获取服务器和战利品表
         ServerLevel level = context.getLevel();
         if (level.isClientSide()) return;
 
         LootTable lootTable = level.getServer().getLootData().getLootTable(lootID);
 
-        // 获取目标实体位置
         Entity target = context.getParamOrNull(LootContextParams.THIS_ENTITY);
         if (target == null) return;
 
-        // 构建战利品上下文（使用 CHEST 参数集）
+
         var builder = new net.minecraft.world.level.storage.loot.LootParams.Builder(level)
                 .withParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.ORIGIN, target.position())
                 .withParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.THIS_ENTITY, target);
 
-        // 生成战利品并添加到掉落列表
+
         var drops = lootTable.getRandomItems(builder.create(net.minecraft.world.level.storage.loot.parameters.LootContextParamSets.CHEST));
         generatedLoot.addAll(drops);
     }

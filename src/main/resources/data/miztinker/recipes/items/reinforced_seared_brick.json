@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ccc",
+    "bab",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "tag": "tconstruct:scorched_blocks"
+    },
+    "a": {
+      "item": "minecraft:reinforced_deepslate"
+    },
+    "b": {
+      "tag": "tconstruct:seared_blocks"
+    }
+  },
+  "result": {
+    "item": "miztinker:reinforced_seared_brick",
+    "count": 1
+  }
+}

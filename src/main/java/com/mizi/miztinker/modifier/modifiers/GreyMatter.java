@@ -45,7 +45,7 @@ public class GreyMatter extends NoLevelsModifier
         ValidateModifierHook,
         EquipmentChangeModifierHook {
 
-    private static final ResourceLocation SHRUNK_KEY = new ResourceLocation("miztinker", "grey_matter_shrunk");
+    private static final ResourceLocation SHRUNK_KEY = ResourceLocation.fromNamespaceAndPath("miztinker", "grey_matter_shrunk");
     private static final UUID HEALTH_UUID = UUID.fromString("5f5e555d-aaaa-4f8e-b5aa-31c1e4a6a9cc");
     private static final float SHRINK_SCALE = 0.1f; // 0.1格
     private static final double SHRUNK_MAX_HEALTH = 5.0; // 最大生命值变为5点

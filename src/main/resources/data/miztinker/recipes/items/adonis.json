@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "bdb",
+    "dad",
+    "cdc"
+  ],
+  "key": {
+    "b": {
+      "item": "luckytntmod:flower_forest_tnt"
+    },
+    "d": {
+      "tag": "forge:ingots/netherite"
+    },
+    "c": {
+      "item": "luckytntmod:nether_grove_tnt"
+    },
+    "a": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "item": "miztinker:adonis",
+    "count": 1
+  }
+}

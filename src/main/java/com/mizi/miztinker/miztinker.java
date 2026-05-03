@@ -1,5 +1,7 @@
 package com.mizi.miztinker;
 
+import com.mizi.miztinker.client.MaimaiFullRenderer;
+import com.mizi.miztinker.config.MiztinkerConfig;
 import com.mizi.miztinker.entity.MiztinkerEntityRegister;
 import com.mizi.miztinker.entity.boss.entity.MiziAo;
 import com.mizi.miztinker.entity.boss.entity.TitanWarden;
@@ -16,6 +18,7 @@ import com.mizi.miztinker.network.MiztinkerNetwork;
 import com.mizi.miztinker.particle.register.MiztinkerParticlesRegister;
 import com.mizi.miztinker.renderer.murasama.PostPasses;
 import com.mizi.miztinker.sounds.MiztinkerSounds;
+import com.mizi.miztinker.util.MizTimeStopHandler;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
@@ -31,7 +34,9 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -45,7 +50,7 @@ import static com.mizi.miztinker.miztinker.MODID;
 
 // The value here should match an entry in the META-INF/mods.toml file
 
-
+@SuppressWarnings("removal")
 @Mod(MODID)
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class miztinker {
@@ -54,7 +59,7 @@ public class miztinker {
 
     public static ModifierDeferredRegister MODIFIERS = ModifierDeferredRegister.create(MODID);
     public static ResourceLocation location(String string) {
-        return new ResourceLocation(MODID, string);
+        return ResourceLocation.fromNamespaceAndPath(MODID, string);
     }
     public miztinker() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -74,10 +79,14 @@ public class miztinker {
             ClientDiademaRegister.CLIENT_DIADEMA_TYPES.register(modBus);
         });
         MiztinkerTab.CREATIVE_MODE_TABS.register(modBus);
+        MinecraftForge.EVENT_BUS.register(MizTimeStopHandler.class);
         MiztinkerFluidRegister.FLUIDS.register(modBus);
         MiztinkerTools.initRegisters();
         MiztinkerParticlesRegister.PARTICLE_TYPES.register(modBus);
         MinecraftForge.EVENT_BUS.register(new ServerTickHandler());
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MiztinkerConfig.SPEC);
+
 
         MiztinkerRegistry.RECIPE_SERIALIZERS.register(modBus);
         MiZiTab.CREATIVE_MODE_TABS.register(modBus);
@@ -105,18 +114,6 @@ public class miztinker {
         // 以下代码仅在客户端运行
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> MusicSlots::init);
     }
-    @SubscribeEvent
-    public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-        // 注册你的GeoEntity渲染器
-        event.registerEntityRenderer(
-                MiztinkerEntityRegister.MIZI_AO.get(),
-                MiziAoRenderer::new
-        );
-        event.registerEntityRenderer(
-                MiztinkerEntityRegister.TITAN_WARDEN.get(),
-                TitanWardenRenderer::new
-        );
-    }
 
     public static class ClientSetup {
 
@@ -127,6 +124,7 @@ public class miztinker {
             });
         }
     }
+
 
     public static ResourceLocation getResource(String id) {
         return ResourceLocation.fromNamespaceAndPath(MODID, id);
@@ -145,37 +143,17 @@ public class miztinker {
         });
     }
 
+    public static ResourceLocation loc(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
+    }
 
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            event.enqueueWork(() -> {
-                        ItemBlockRenderTypes.setRenderLayer(MiztinkerBlocks.TINKER_LANTERN.get(), RenderType.cutout());
-                        ItemBlockRenderTypes.setRenderLayer(MiztinkerBlocks.DYNAMAX_SAPLING.get(), RenderType.cutout());
 
-                        TinkerItemProperties.registerToolProperties(lollipop.get());
-                        TinkerItemProperties.registerToolProperties(tinker_loli_pickaxe.get());
-                        TinkerItemProperties.registerToolProperties(old_sword.get());
-                        TinkerItemProperties.registerToolProperties(broom.get());
-                        TinkerItemProperties.registerToolProperties(murasama.get());
-
-                        TinkerItemProperties.registerBrokenProperty(lollipop.get());
-                        TinkerItemProperties.registerBrokenProperty(tinker_loli_pickaxe.get());
-                        TinkerItemProperties.registerBrokenProperty(old_sword.get());
-                        TinkerItemProperties.registerBrokenProperty(broom.get());
-                        TinkerItemProperties.registerBrokenProperty(murasama.get());
-
-            });
-
-            com.mizi.miztinker.MusicSlots.init();
-        }
         @SubscribeEvent
         public static void onKeyRegister(RegisterKeyMappingsEvent event) {
             event.register(MiztinkerKey.KeyBinding.KEY);
         }
     }
-}
+
 
 
 

@@ -57,8 +57,8 @@ public class AwakenUltraman extends NoLevelsModifier implements
     private static final float MAX_SCALE = 7.0f;
     private static final int BEAM_DAMAGE = 35;
 
-    private static final ResourceLocation CHARGE_KEY = new ResourceLocation("miztinker", "ultraman_charge");
-    private static final ResourceLocation GIANT_KEY = new ResourceLocation("miztinker", "ultraman_giant");
+    private static final ResourceLocation CHARGE_KEY = ResourceLocation.fromNamespaceAndPath("miztinker", "ultraman_charge");
+    private static final ResourceLocation GIANT_KEY = ResourceLocation.fromNamespaceAndPath("miztinker", "ultraman_giant");
 
     private static final UUID HEALTH_UUID = UUID.fromString("12345678-1234-1234-1234-123456789abc");
 

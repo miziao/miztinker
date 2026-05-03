@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "miztinker:block/diamond_continent_portal_ns"
+    },
+    "axis=z": {
+      "model": "miztinker:block/diamond_continent_portal_ew"
+    }
+  }
+}

@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = "miztinker")
 public class VillagerUpgradeHandler {
 
-    private static final ResourceLocation TARGET_ITEM = new ResourceLocation("miztinker:villager_business_card");
+    private static final ResourceLocation TARGET_ITEM = ResourceLocation.parse("miztinker:villager_business_card");
 
     @SubscribeEvent
     public static void onRightClickVillager(PlayerInteractEvent.EntityInteract event) {

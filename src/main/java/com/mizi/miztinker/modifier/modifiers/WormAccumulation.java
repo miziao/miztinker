@@ -3,9 +3,8 @@ package com.mizi.miztinker.modifier.modifiers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -14,7 +13,6 @@ import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
-import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -24,30 +22,26 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.function.BiConsumer;
 
 public class WormAccumulation extends Modifier
-        implements MeleeHitModifierHook,
-        AttributesModifierHook, TooltipModifierHook {
+        implements MeleeHitModifierHook, TooltipModifierHook {
 
     private static final String TAG_ARMOR = "worm_armor";
     private static final float ABSORB_RATIO = 0.01f; // 固定 1%
     private static final float ARMOR_PER_LEVEL = 100f;
-    private static final UUID ARMOR_UUID = UUID.fromString("7a4a8b0f-2bfa-4a66-8d99-cc1a5d22c777");
+    private static final UUID WORM_ARMOR_UUID = UUID.fromString("7a4a8b0f-2bfa-4a66-8d99-cc1a5d22c777");
 
     private ResourceLocation getArmorKey() {
-        return new ResourceLocation(getId().getNamespace(), getId().getPath() + "." + TAG_ARMOR);
+        return ResourceLocation.fromNamespaceAndPath(getId().getNamespace(), getId().getPath() + "." + TAG_ARMOR);
     }
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this,
                 ModifierHooks.MELEE_HIT,
-                ModifierHooks.ATTRIBUTES,
                 ModifierHooks.TOOLTIP);
     }
 
-    /* ---------- 击杀吸收 ---------- */
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier,
                               ToolAttackContext context, float damageDealt) {
@@ -67,27 +61,25 @@ public class WormAccumulation extends Modifier
         float newValue = Math.min(current + gain, max);
 
         data.putFloat(key, newValue);
+
+        updatePlayerArmor(player, newValue);
     }
 
-    @Override
-    public void addAttributes(IToolStackView tool, ModifierEntry modifier,
-                              EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        if (slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND) {
-            ModDataNBT data = tool.getPersistentData();
-            ResourceLocation key = getArmorKey();
-            float storedArmor = data.getFloat(key);
+    private void updatePlayerArmor(Player player, float amount) {
+        AttributeInstance armorAttr = player.getAttribute(Attributes.ARMOR);
+        if (armorAttr == null) return;
 
-            if (storedArmor > 0) {
-                consumer.accept(Attributes.ARMOR, new AttributeModifier(
-                        ARMOR_UUID,
-                        "worm_accumulation_armor",
-                        storedArmor,
-                        AttributeModifier.Operation.ADDITION
-                ));
-            }
+        if (armorAttr.getModifier(WORM_ARMOR_UUID) != null) {
+            armorAttr.removeModifier(WORM_ARMOR_UUID);
         }
-    }
 
+        armorAttr.addPermanentModifier(new AttributeModifier(
+                WORM_ARMOR_UUID,
+                "worm_accumulation_permanent_armor",
+                amount,
+                AttributeModifier.Operation.ADDITION
+        ));
+    }
 
     @Override
     public void addTooltip(IToolStackView tool, ModifierEntry modifier,
@@ -99,15 +91,15 @@ public class WormAccumulation extends Modifier
         float armor = data.getFloat(nbtKey);
         float max = modifier.getLevel() * ARMOR_PER_LEVEL;
 
-        tooltip.add(Component.literal("蠕虫堆积")
+        tooltip.add(Component.translatable(getTranslationKey())
                 .withStyle(ChatFormatting.DARK_GREEN));
 
-        tooltip.add(Component.literal(
-                        String.format("蠕虫厚度: %.1f / %.0f", armor, max))
+        tooltip.add(Component.translatable(getTranslationKey() + ".thickness",
+                        String.format("%.1f", armor),
+                        String.format("%.0f", max))
                 .withStyle(ChatFormatting.GRAY));
 
-        tooltip.add(Component.literal(
-                        "击杀生物吸收其 1% 生命值堆积为蠕虫厚度")
+        tooltip.add(Component.translatable(getTranslationKey() + ".description")
                 .withStyle(ChatFormatting.DARK_GRAY));
     }
 }

@@ -7,6 +7,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
+import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.tools.helper.TooltipBuilder;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -28,10 +30,11 @@ public class old_sword extends ModifiableItem {
         builder.add(ToolStats.ATTACK_DAMAGE);
         builder.add(ToolStats.ATTACK_SPEED);
 
-        tooltips.add(Component.translatable("item.miztinker.old_sword.description").withStyle(ChatFormatting.YELLOW));
 
         builder.addAllFreeSlots();
-
+        for (ModifierEntry entry : tool.getModifierList()) {
+            entry.getHook(ModifierHooks.TOOLTIP).addTooltip(tool, entry, player, tooltips, key, tooltipFlag);
+        }
         return tooltips;
     }
 }

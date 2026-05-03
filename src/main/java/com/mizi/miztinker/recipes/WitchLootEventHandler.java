@@ -24,7 +24,7 @@ public class WitchLootEventHandler {
                     event.getSource().is(DamageTypes.HOT_FLOOR)) {
 
                 if (Math.random() < 1.0) {
-                    Item witchFiber = ForgeRegistries.ITEMS.getValue(new ResourceLocation("miztinker", "witch_fiber"));
+                    Item witchFiber = ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("miztinker", "witch_fiber"));
 
                     if (witchFiber != null) {
                         ItemStack dropStack = new ItemStack(witchFiber);

@@ -25,8 +25,8 @@ public class Mending extends NoLevelsModifier implements InventoryTickModifierHo
             EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.CHEST, EquipmentSlot.HEAD
     };
 
-    private static final ResourceLocation OVERSLIME_RL = new ResourceLocation("tconstruct", "overslime");
-    private static final ResourceLocation OVERSLIME_CAP_RL = new ResourceLocation("tconstruct", "overslime_cap");
+    private static final ResourceLocation OVERSLIME_RL = ResourceLocation.fromNamespaceAndPath("tconstruct", "overslime");
+    private static final ResourceLocation OVERSLIME_CAP_RL = ResourceLocation.fromNamespaceAndPath("tconstruct", "overslime_cap");
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {

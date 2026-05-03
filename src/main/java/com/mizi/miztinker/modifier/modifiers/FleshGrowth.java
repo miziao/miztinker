@@ -32,11 +32,17 @@ public class FleshGrowth extends NoLevelsModifier
     private static final String TAG_GROWTH = "flesh_growth_value";
     private static final float GAIN_PER_KILL = 0.5f;
 
-    private static final UUID REACH_UUID = UUID.fromString("b9c2a13e-3231-47cd-a150-e5b1eb9c7172");
-    private static final UUID ATTACK_UUID = UUID.fromString("d2a13eb9-3231-47cd-b150-e5b1eb9c7173");
+    private static final UUID MAIN_HAND_REACH = UUID.fromString("b9c2a13e-3231-47cd-a150-e5b1eb9c7172");
+    private static final UUID MAIN_HAND_ATTACK = UUID.fromString("d2a13eb9-3231-47cd-b150-e5b1eb9c7173");
+    private static final UUID OFF_HAND_REACH = UUID.fromString("c1d3b24f-4342-58de-b261-f6c2fc0d8284");
+    private static final UUID OFF_HAND_ATTACK = UUID.fromString("e3b24fc0-4342-58de-c261-f6c2fc0d8285");
+
+    private static final String KEY_NAME = "modifier.miztinker.flesh_growth";
+    private static final String KEY_STAT = "modifier.miztinker.flesh_growth.stat";
+    private static final String KEY_FLAVOR = "modifier.miztinker.flesh_growth.flavor";
 
     private ResourceLocation getGrowthKey() {
-        return new ResourceLocation("miztinker", TAG_GROWTH);
+        return ResourceLocation.fromNamespaceAndPath("miztinker", TAG_GROWTH);
     }
 
     @Override
@@ -57,31 +63,30 @@ public class FleshGrowth extends NoLevelsModifier
         if (player.level().isClientSide) return;
 
         ModDataNBT data = tool.getPersistentData();
-        ResourceLocation key = getGrowthKey();
-
-        float currentGrowth = data.getFloat(key);
-        data.putFloat(key, currentGrowth + GAIN_PER_KILL);
+        float currentGrowth = data.getFloat(getGrowthKey());
+        data.putFloat(getGrowthKey(), currentGrowth + GAIN_PER_KILL);
     }
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier,
                               EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
         if (slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND) {
-            ModDataNBT data = tool.getPersistentData();
-            float growth = data.getFloat(getGrowthKey());
+            float growth = tool.getPersistentData().getFloat(getGrowthKey());
 
             if (growth > 0) {
+                UUID reachUUID = (slot == EquipmentSlot.MAINHAND) ? MAIN_HAND_REACH : OFF_HAND_REACH;
+                UUID attackUUID = (slot == EquipmentSlot.MAINHAND) ? MAIN_HAND_ATTACK : OFF_HAND_ATTACK;
 
                 consumer.accept(ForgeMod.BLOCK_REACH.get(), new AttributeModifier(
-                        REACH_UUID,
-                        "Flesh Growth Reach",
+                        reachUUID,
+                        "Flesh Growth Reach " + slot.getName(),
                         growth,
                         AttributeModifier.Operation.ADDITION
                 ));
 
                 consumer.accept(ForgeMod.ENTITY_REACH.get(), new AttributeModifier(
-                        ATTACK_UUID,
-                        "Flesh Growth Attack",
+                        attackUUID,
+                        "Flesh Growth Attack " + slot.getName(),
                         growth,
                         AttributeModifier.Operation.ADDITION
                 ));
@@ -96,14 +101,14 @@ public class FleshGrowth extends NoLevelsModifier
 
         float growth = tool.getPersistentData().getFloat(getGrowthKey());
 
-        tooltip.add(Component.literal("血肉生长")
+        tooltip.add(Component.translatable(KEY_NAME)
                 .withStyle(ChatFormatting.RED));
 
-        tooltip.add(Component.literal(
-                        String.format("额外延伸: +%.1f", growth))
+        tooltip.add(Component.translatable(KEY_STAT, String.format("%.1f", growth))
                 .withStyle(ChatFormatting.GRAY));
 
-        tooltip.add(Component.literal("这株藤蔓已失去控制，它正通过掠夺生命无限延伸...")
-                .withStyle(ChatFormatting.DARK_RED, ChatFormatting.ITALIC));
+        tooltip.add(Component.translatable("modifier.miztinker.flesh_growth.description")
+                .withStyle(ChatFormatting.GOLD));
+
     }
 }

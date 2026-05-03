@@ -1,6 +1,6 @@
 {
   "type": "minecraft:block",
-  "random_sequence": "miztinker:block/tinker_lantern",
+  "random_sequence": "miztinker:block/eternal_fuel_module",
   "pools": [
     {
       "rolls": 1.0,

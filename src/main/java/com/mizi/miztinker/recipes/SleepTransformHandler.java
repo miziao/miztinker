@@ -62,7 +62,7 @@ public class SleepTransformHandler {
                             Objects.requireNonNull(
                                     level.registryAccess()
                                             .registryOrThrow(Registries.ITEM)
-                                            .get(new ResourceLocation("miztinker:mirai_nikki"))
+                                            .get(ResourceLocation.parse("miztinker:mirai_nikki"))
                             ),
                             stack.getCount()
                     );

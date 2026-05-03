@@ -92,7 +92,7 @@ public class Arcana extends NoLevelsModifier implements SlotStackModifierHook, G
             default -> "fire_projectile";
         };
 
-        EntityType<?> entityType = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("projecte", entityPath));
+        EntityType<?> entityType = ForgeRegistries.ENTITY_TYPES.getValue(ResourceLocation.fromNamespaceAndPath("projecte", entityPath));
 
         if (entityType != null) {
             Entity entity = null;

@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "efg",
+    "dah",
+    "cbc"
+  ],
+  "key": {
+    "b": {
+      "item": "minecraft:paper"
+    },
+    "c": {
+      "tag": "forge:ingots/netherite_scrap"
+    },
+    "a": {
+      "item": "minecraft:decorated_pot"
+    },
+    "d": {
+      "tag": "forge:storage_blocks/amethyst"
+    },
+    "e": {
+      "tag": "forge:storage_blocks/diamond"
+    },
+    "f": {
+      "tag": "forge:storage_blocks/gold"
+    },
+    "g": {
+      "tag": "forge:storage_blocks/emerald"
+    },
+    "h": {
+      "tag": "forge:storage_blocks/redstone"
+    }
+  },
+  "result": {
+    "item": "miztinker:pot_of_avarice",
+    "count": 1
+  }
+}

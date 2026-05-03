@@ -61,16 +61,13 @@ public class TinkerLanternBlock extends LanternBlock implements EntityBlock {
             boolean isHanging = state.getValue(BlockStateProperties.HANGING);
             boolean powered;
             if (isHanging) {
-                // 如果挂着，检测上方
                 powered = level.hasSignal(pos.above(), Direction.UP);
             } else {
-                // 如果在地，检测四周
                 powered = level.hasSignal(pos.north(), Direction.NORTH) ||
                         level.hasSignal(pos.south(), Direction.SOUTH) ||
                         level.hasSignal(pos.west(), Direction.WEST) ||
                         level.hasSignal(pos.east(), Direction.EAST);
             }
-            // 停用标志，这需要你在 BlockEntity 里加一个 boolean 变量
             lanternBE.setDisabledByRedstone(powered);
         }
     }

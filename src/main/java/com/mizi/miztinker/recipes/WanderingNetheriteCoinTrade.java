@@ -17,22 +17,22 @@ public enum WanderingNetheriteCoinTrade implements VillagerTrades.ItemListing {
     @Override
     public MerchantOffer getOffer(Entity trader, RandomSource random) {
 
-        // 70%（或你设的概率）出现
+
         if (random.nextFloat() > 1.0f) {
-            return null; // 不生成这个交易
+            return null;
         }
 
         Item coin = net.minecraftforge.registries.ForgeRegistries.ITEMS.getValue(
-                new net.minecraft.resources.ResourceLocation("miztinker", "netherite_coin")
+                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("miztinker", "netherite_coin")
         );
 
         if (coin == null) return null;
 
         return new MerchantOffer(
-                new ItemStack(Items.EMERALD_BLOCK, 10), // 玩家支付
-                new ItemStack(coin),                    // 下界合金币
-                3,                                      // maxUses
-                0,                                      // no XP
+                new ItemStack(Items.EMERALD_BLOCK, 10),
+                new ItemStack(coin),
+                3,
+                0,
                 0.05f
         );
     }

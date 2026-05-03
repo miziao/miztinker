@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:crying_obsidian" },
+    { "item": "minecraft:glass_bottle" }
+  ],
+  "result": {
+    "item": "miztinker:bottled_crying_obsidian",
+    "count": 1
+  }
+}

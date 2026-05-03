@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -33,6 +34,11 @@ public class Death_Note extends NoLevelsModifier implements GeneralInteractionMo
 
     public static final ResourceLocation TAG_DEATH_COUNT = getResource("death_count");
 
+    private static final String KEY_ANNOUNCE = "modifier.miztinker.death_note.announce";
+    private static final String KEY_SUMMARY = "modifier.miztinker.death_note.summary";
+    private static final String KEY_TOOLTIP_COUNT = "modifier.miztinker.death_note.tooltip_count";
+    private static final String KEY_TOOLTIP_EMPTY = "modifier.miztinker.death_note.tooltip_empty";
+
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.GENERAL_INTERACT);
@@ -47,32 +53,37 @@ public class Death_Note extends NoLevelsModifier implements GeneralInteractionMo
         if (!(player.level() instanceof ServerLevel level)) return InteractionResult.PASS;
 
         ItemStack stack = player.getItemInHand(hand);
-        String name = stack.getHoverName().getString();
-        ResourceLocation id = ResourceLocation.tryParse(name);
+        String nameStr = stack.getHoverName().getString();
+        ResourceLocation id = ResourceLocation.tryParse(nameStr);
         if (id == null) return InteractionResult.FAIL;
 
-        var targetType = BuiltInRegistries.ENTITY_TYPE.getOptional(id).orElse(null);
+        EntityType<?> targetType = BuiltInRegistries.ENTITY_TYPE.getOptional(id).orElse(null);
         if (targetType == null) return InteractionResult.FAIL;
 
         ModDataNBT data = tool.getPersistentData();
         int currentKills = data.getInt(TAG_DEATH_COUNT);
         int killedThisTime = 0;
 
-        for (LivingEntity living : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(512))) {
-            if (living.getType() != targetType || !living.isAlive()) continue;
+        Component targetDisplayName = targetType.getDescription();
 
-            forceHurtWithNoHealable(living, level.damageSources().generic(), living.getHealth());
-            forceSetAllCandidateHealth(living, 0F);
+        List<LivingEntity> targets = level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(512),
+                e -> e.getType() == targetType && e.isAlive());
 
-            killedThisTime++;
-        }
+        if (!targets.isEmpty()) {
+            player.displayClientMessage(Component.translatable(KEY_ANNOUNCE, targetDisplayName)
+                    .withStyle(ChatFormatting.DARK_RED, ChatFormatting.ITALIC), false);
 
-        if (killedThisTime > 0) {
-            data.putInt(TAG_DEATH_COUNT, currentKills + killedThisTime);
+            for (LivingEntity living : targets) {
+                forceHurtWithNoHealable(living, level.damageSources().generic(), living.getHealth());
+                forceSetAllCandidateHealth(living, 0F);
+                killedThisTime++;
+            }
 
-            player.displayClientMessage(Component.literal(
-                    String.format("§0死亡笔记已新增 §4%d §0个死亡名单 (累计: %d)", killedThisTime, currentKills + killedThisTime)
-            ), true);
+            int totalKills = currentKills + killedThisTime;
+            data.putInt(TAG_DEATH_COUNT, totalKills);
+
+            player.displayClientMessage(Component.translatable(KEY_SUMMARY, killedThisTime, totalKills)
+                    .withStyle(ChatFormatting.BLACK), true);
 
             return InteractionResult.SUCCESS;
         }
@@ -85,10 +96,11 @@ public class Death_Note extends NoLevelsModifier implements GeneralInteractionMo
         int kills = tool.getPersistentData().getInt(TAG_DEATH_COUNT);
 
         if (kills > 0) {
-            tooltip.add(Component.literal("笔记中已记录的名字: ").withStyle(ChatFormatting.DARK_RED)
-                    .append(Component.literal(String.valueOf(kills)).withStyle(ChatFormatting.RED)));
+            tooltip.add(Component.translatable(KEY_TOOLTIP_COUNT, kills)
+                    .withStyle(ChatFormatting.DARK_RED));
         } else {
-            tooltip.add(Component.literal("尚未记录任何灵魂...").withStyle(ChatFormatting.DARK_GRAY));
+            tooltip.add(Component.translatable(KEY_TOOLTIP_EMPTY)
+                    .withStyle(ChatFormatting.DARK_GRAY));
         }
     }
 }

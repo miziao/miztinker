@@ -1,0 +1,13 @@
+{
+    "type": "tconstruct:casting_table",
+    "cast": {
+        "tag": "tconstruct:casts/multi_use/ingot"
+    },
+    "cast_consumed": false,
+    "fluid": {
+        "name": "miztinker:molten_rainbow_material",
+        "amount": 90
+    },
+    "result": "miztinker:rainbow_material",
+    "cooling_time": 666
+}

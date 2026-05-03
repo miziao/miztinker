@@ -4,12 +4,12 @@
   "textures": {
     "plating": "miztinker:item/tool/armor/soulization/helmet/plating",
     "maille":  "miztinker:item/tool/armor/soulization/helmet/maille",
-    "embedding": "miztinker:item/tool/armor/soulization/helmet/embedding"
+    "soulization": "miztinker:item/tool/armor/soulization/helmet/soulization"
   },
   "modifier_roots": [ "tinkerarmourcs:item/tool/armor/soulization/helmet/modifiers/" ],
   "parts": [
-    { "name": "embedding", "index": 0 },
-    { "name": "plating",   "index": 1 },
+    { "name": "soulization", "index": 1 },
+    { "name": "plating",   "index": 0 },
     { "name": "maille",    "index": 2 }
   ]
 }

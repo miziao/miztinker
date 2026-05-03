@@ -31,9 +31,9 @@ import java.util.List;
 public class Ubbo_Sathla extends Modifier
         implements InventoryTickModifierHook, MeleeHitModifierHook, TooltipModifierHook {
 
-    private static final ResourceLocation SAVED_MOB = new ResourceLocation("miztinker", "ubbo_saved_mob");
-    private static final ResourceLocation SAVED_MOB_NBT = new ResourceLocation("miztinker", "ubbo_saved_mob_nbt");
-    private static final ResourceLocation TICK_COUNTER = new ResourceLocation("miztinker", "ubbo_tick_counter");
+    private static final ResourceLocation SAVED_MOB = ResourceLocation.fromNamespaceAndPath("miztinker", "ubbo_saved_mob");
+    private static final ResourceLocation SAVED_MOB_NBT = ResourceLocation.fromNamespaceAndPath("miztinker", "ubbo_saved_mob_nbt");
+    private static final ResourceLocation TICK_COUNTER = ResourceLocation.fromNamespaceAndPath("miztinker", "ubbo_tick_counter");
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
@@ -47,9 +47,6 @@ public class Ubbo_Sathla extends Modifier
         return 0;
     }
 
-    /* ============================================================
-       1) 战斗后记录生物
-       ============================================================ */
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier,
                               ToolAttackContext context, float damageDealt) {
@@ -62,15 +59,11 @@ public class Ubbo_Sathla extends Modifier
         ModDataNBT data = tool.getPersistentData();
 
         ResourceLocation mobId = EntityType.getKey(target.getType());
-        if (mobId == null) return;
 
         data.putString(SAVED_MOB, mobId.toString());
 
         int lvl = modifier.getLevel();
 
-        /* ============================================================
-           ★ 等级 ≥3：保存白名单 NBT
-           ============================================================ */
         if (lvl >= 3) {
             CompoundTag full = new CompoundTag();
             target.saveWithoutId(full);
@@ -99,9 +92,6 @@ public class Ubbo_Sathla extends Modifier
             );
         }
 
-        /* ============================================================
-           ★ 等级 <3：仅记录 ID
-           ============================================================ */
         else {
             data.remove(SAVED_MOB_NBT);
 
@@ -112,9 +102,6 @@ public class Ubbo_Sathla extends Modifier
         }
     }
 
-    /* ============================================================
-       2) Tick 触发生成
-       ============================================================ */
     @Override
     public void onInventoryTick(IToolStackView tool, ModifierEntry entry, Level level,
                                 LivingEntity holder, int itemSlot, boolean isSelected,
@@ -153,14 +140,11 @@ public class Ubbo_Sathla extends Modifier
         }
     }
 
-    /* ============================================================
-       3) 生成实体（含完整 NBT）
-       ============================================================ */
     private void spawnMob(Level level, Player player, ModDataNBT data) {
         if (!(level instanceof ServerLevel server)) return;
 
         String mobIdStr = data.getString(SAVED_MOB);
-        ResourceLocation id = new ResourceLocation(mobIdStr);
+        ResourceLocation id = ResourceLocation.parse(mobIdStr);
 
         EntityType<?> type = server.registryAccess()
                 .registryOrThrow(Registries.ENTITY_TYPE)

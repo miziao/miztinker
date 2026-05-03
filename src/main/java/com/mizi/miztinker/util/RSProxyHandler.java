@@ -33,7 +33,7 @@ public class RSProxyHandler {
         boolean changed = false;
         for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
             ItemStack stack = player.getInventory().getItem(i);
-            if (!stack.isEmpty() && stack.hasTag() && stack.getTag().getBoolean("is_tinker_proxy")) {
+            if (stack.getTag() != null && !stack.isEmpty() && stack.hasTag() && stack.getTag().getBoolean("is_tinker_proxy")) {
                 player.getInventory().setItem(i, convertBack(stack));
                 changed = true;
             }
@@ -46,7 +46,7 @@ public class RSProxyHandler {
     private static ItemStack convertBack(ItemStack proxyStack) {
         CompoundTag tag = proxyStack.getOrCreateTag();
         String originalId = tag.getString("original_tinker_id");
-        var originalItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(originalId));
+        var originalItem = ForgeRegistries.ITEMS.getValue(ResourceLocation.parse(originalId));
 
         ItemStack originalStack = new ItemStack(originalItem != null ? originalItem : proxyStack.getItem());
         CompoundTag newTag = tag.copy();

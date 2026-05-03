@@ -1,0 +1,13 @@
+{
+    "type": "tconstruct:casting_table",
+    "cast": {
+        "tag": "tconstruct:casts/multi_use/ingot"
+    },
+    "cast_consumed": false,
+    "fluid": {
+        "name": "miztinker:molten_paradox_manyullyn",
+        "amount": 90
+    },
+    "result": "miztinker:paradox_manyullyn",
+    "cooling_time": 40
+}

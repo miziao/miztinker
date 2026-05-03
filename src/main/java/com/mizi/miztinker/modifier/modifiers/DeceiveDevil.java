@@ -36,20 +36,19 @@ import net.minecraft.world.item.TooltipFlag;
 
 public class DeceiveDevil extends NoLevelsModifier implements GeneralInteractionModifierHook, TooltipModifierHook {
 
-    private static final ResourceLocation COORD_X = new ResourceLocation("modid", "deceive_devil_x");
-    private static final ResourceLocation COORD_Y = new ResourceLocation("modid", "deceive_devil_y");
-    private static final ResourceLocation COORD_Z = new ResourceLocation("modid", "deceive_devil_z");
-    private static final ResourceLocation DIMENSION = new ResourceLocation("modid", "deceive_devil_dim");
+    private static final ResourceLocation COORD_X = ResourceLocation.fromNamespaceAndPath("modid", "deceive_devil_x");
+    private static final ResourceLocation COORD_Y = ResourceLocation.fromNamespaceAndPath("modid", "deceive_devil_y");
+    private static final ResourceLocation COORD_Z = ResourceLocation.fromNamespaceAndPath("modid", "deceive_devil_z");
+    private static final ResourceLocation DIMENSION = ResourceLocation.fromNamespaceAndPath("modid", "deceive_devil_dim");
 
     public DeceiveDevil() {
-        // 注册死亡事件监听器
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     @Override
     public InteractionResult onToolUse(IToolStackView tool, ModifierEntry modifier, Player player,
                                        InteractionHand hand, InteractionSource source) {
-        if (player.level().isClientSide) return InteractionResult.PASS; // 只在服务器执行
+        if (player.level().isClientSide) return InteractionResult.PASS;
 
         if (source == InteractionSource.RIGHT_CLICK && player.isCrouching() && !tool.isBroken()) {
             ModDataNBT data = tool.getPersistentData();
@@ -86,18 +85,15 @@ public class DeceiveDevil extends NoLevelsModifier implements GeneralInteraction
             String dimString = data.getString(DIMENSION);
 
             if ((x != 0 || y != 0 || z != 0) && player.getInventory().countItem(Items.GOLD_INGOT) >= 66) {
-                // 阻止死亡流程
                 event.setCanceled(true);
 
-                // 保命 + 无敌几秒避免连环死
-                player.setHealth(player.getMaxHealth() * 0.2f);
-                player.invulnerableTime = 60; // 1.20.x 的字段名是 public invulnerableTime
 
-                // 清空最后攻击来源（避免再次触发死亡）
+                player.setHealth(player.getMaxHealth() * 0.2f);
+                player.invulnerableTime = 60;
+
                 player.setLastHurtByPlayer(null);
                 player.setLastHurtByMob(null);
 
-                // 消耗 66 个金锭
                 int remaining = 66;
                 for (int i = 0; i < player.getInventory().items.size() && remaining > 0; i++) {
                     ItemStack invStack = player.getInventory().items.get(i);
@@ -110,19 +106,15 @@ public class DeceiveDevil extends NoLevelsModifier implements GeneralInteraction
 
                 player.displayClientMessage(Component.literal("§c你已逃脱死神的魔爪，现在要收取费用了"), true);
 
-                // 获取目标维度
-                ResourceKey<Level> targetKey = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(dimString));
+                ResourceKey<Level> targetKey = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(dimString));
                 ServerLevel targetLevel = player.server.getLevel(targetKey);
 
                 if (targetLevel != null) {
-                    // ✅ Forge 1.20.x 的跨维传送正确写法
                     player.teleportTo(targetLevel, x, y, z, player.getYRot(), player.getXRot());
-                    // 传送特效
                     targetLevel.sendParticles(ParticleTypes.PORTAL, x, y + 1.0, z, 50, 0.5, 0.5, 0.5, 0.1);
                     targetLevel.playSound(null, x, y, z,
                             SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0f, 1.0f);
                 } else {
-                    // 若维度无效，回到主世界安全点
                     ServerLevel overworld = player.server.overworld();
                     player.teleportTo(overworld,
                             overworld.getSharedSpawnPos().getX() + 0.5,
@@ -132,7 +124,7 @@ public class DeceiveDevil extends NoLevelsModifier implements GeneralInteraction
                     player.displayClientMessage(Component.literal("§7契约破裂，你被抛回了主世界。"), true);
                 }
 
-                return; // 结束逻辑
+                return;
             }
         }
     }

@@ -24,10 +24,32 @@ public class ExperienceLeakBeta extends Modifier implements MeleeDamageModifierH
     }
 
     @Override
+    public int getPriority() {
+        return 100;
+    }
+
+    private int getRealTotalXP(Player player) {
+        int level = player.experienceLevel;
+        int totalXPFromLevels;
+
+        if (level <= 16) {
+            totalXPFromLevels = (level * level) + (6 * level);
+        } else if (level <= 31) {
+            totalXPFromLevels = (int) (2.5 * level * level - 40.5 * level + 360);
+        } else {
+            totalXPFromLevels = (int) (4.5 * level * level - 162.5 * level + 2220);
+        }
+
+        int currentLevelXP = Math.round(player.experienceProgress * player.getXpNeededForNextLevel());
+        return totalXPFromLevels + currentLevelXP;
+    }
+
+    @Override
     public void onInventoryTick(@NotNull IToolStackView tool, ModifierEntry entry, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
-        if (!world.isClientSide && holder instanceof Player player && !player.getAbilities().instabuild) {
+        if (!world.isClientSide && isSelected && holder instanceof Player player && !player.getAbilities().instabuild) {
             int modifierLevel = entry.getLevel();
-            if (player.totalExperience > 0) {
+
+            if (player.experienceLevel > 0 || player.experienceProgress > 0) {
                 player.giveExperiencePoints(-modifierLevel);
             }
         }
@@ -38,12 +60,12 @@ public class ExperienceLeakBeta extends Modifier implements MeleeDamageModifierH
         LivingEntity attacker = context.getAttacker();
 
         if (attacker instanceof Player player) {
-            int totalXP = player.totalExperience;
             int modifierLevel = entry.getLevel();
+            int realXP = getRealTotalXP(player);
 
-            int digitCount = (totalXP <= 0) ? 1 : (int) (Math.log10(totalXP) + 1);
+            int digitCount = (realXP <= 0) ? 0 : (int) (Math.log10(realXP) + 1);
 
-            float multiplier = (float) digitCount * modifierLevel;
+            float multiplier = (digitCount == 0) ? 1.0f : (float) digitCount * modifierLevel;
 
             return damage * Math.max(1.0f, multiplier);
         }

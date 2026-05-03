@@ -1,6 +1,7 @@
 package com.mizi.miztinker.modifier.modifiers;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -8,105 +9,105 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.level.block.Blocks;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
-import slimeknights.tconstruct.library.modifiers.hook.armor.EquipmentChangeModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
-import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.List;
 
 import static com.mizi.miztinker.modifier.modifiers.base.ForceHurtUtil.forceHurt;
 
-public class Agni extends NoLevelsModifier implements InventoryTickModifierHook, EquipmentChangeModifierHook {
+public class Agni extends NoLevelsModifier implements InventoryTickModifierHook {
 
-    /**
-     * 伤害冷却：每 10 tick 触发一次伤害（0.5 秒）
-     */
     private static final int DAMAGE_COOLDOWN_TICKS = 10;
-    /**
-     * 伤害数值
-     */
     private static final float SELF_DAMAGE = 10f;
     private static final float SPREAD_DAMAGE = 10f;
-    /**
-     * 火焰传播半径
-     */
     private static final double RADIUS = 1.5;
+
+    private static final String TAG_AGNI_BURN = "agni_eternal_burn";
+    private static final String TAG_COOLDOWN = "agni_damage_cooldown";
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.INVENTORY_TICK);
-        hookBuilder.addHook(this, ModifierHooks.EQUIPMENT_CHANGE);
     }
 
-    /* ===== 盔甲栏检测与激活 ===== */
-    @Override
-    public void onEquip(@NotNull IToolStackView tool, @NotNull ModifierEntry entry, EquipmentChangeContext context) {
-        // 无需额外处理
-    }
-
-    @Override
-    public void onUnequip(@NotNull IToolStackView tool, @NotNull ModifierEntry entry, EquipmentChangeContext context) {
-        // 无需做任何事（火会在 Tick 时被重新添加）
-    }
-
-    /* ===== 主逻辑：持续火焰、治疗、自伤、扩散、点火 ===== */
     @Override
     public void onInventoryTick(IToolStackView tool, ModifierEntry modifier,
                                 Level level, LivingEntity holder,
                                 int slot, boolean isSelected,
                                 boolean isCorrectSlot, ItemStack stack) {
 
-        if (!(holder instanceof ServerPlayer player)) return;
-        if (!isCorrectSlot) return;
-        if (level.isClientSide()) return;
+        if (!(holder instanceof ServerPlayer player) || !isCorrectSlot || level.isClientSide()) return;
 
         ServerLevel server = (ServerLevel) level;
+        CompoundTag persistentData = player.getPersistentData();
 
-        // 玩家持续治疗
         player.addEffect(new MobEffectInstance(MobEffects.HEAL, 1, 100, true, false, false));
 
-        // 玩家自伤逻辑（与着火无关）
-        String damageCooldownKey = "agniDamageCooldown";
-        int cooldown = player.getPersistentData().getInt(damageCooldownKey);
-
-        if (cooldown <= 0) {
-            forceHurt(player, player.damageSources().generic(), SELF_DAMAGE);
-            player.getPersistentData().putInt(damageCooldownKey, DAMAGE_COOLDOWN_TICKS);
-        } else {
-            player.getPersistentData().putInt(damageCooldownKey, cooldown - 1);
+        if (!player.isInWaterOrRain()) {
+            player.setSecondsOnFire(10);
         }
 
-        // 玩家持续燃烧（仅在非水中）
-        if (!player.isInWaterOrRain() && !player.isOnFire()) {
-            player.setSecondsOnFire(9999);
+        int cooldown = persistentData.getInt(TAG_COOLDOWN);
+        boolean isOwnerOnFire = player.isOnFire();
+
+        if (isOwnerOnFire) {
+            if (cooldown <= 0) {
+                forceHurt(player, player.damageSources().generic(), SELF_DAMAGE);
+
+                processNearbyEntities(server, player);
+
+                persistentData.putInt(TAG_COOLDOWN, DAMAGE_COOLDOWN_TICKS);
+            } else {
+                persistentData.putInt(TAG_COOLDOWN, cooldown - 1);
+            }
         }
 
-        // 周围生物持续燃烧
+        BlockPos pos = player.blockPosition();
+        if (server.isEmptyBlock(pos) && !player.isInWaterOrRain()) {
+            server.setBlock(pos, Blocks.FIRE.defaultBlockState(), 3);
+        }
+
+        handleEternalBurningEntities(server, player);
+    }
+
+    private void processNearbyEntities(ServerLevel server, ServerPlayer player) {
         List<LivingEntity> nearby = server.getEntitiesOfClass(
                 LivingEntity.class,
                 player.getBoundingBox().inflate(RADIUS),
                 e -> e != player && e.isAlive()
         );
+
         for (LivingEntity target : nearby) {
-            if (!target.isInWaterOrRain()) {
-                target.setSecondsOnFire(1);
+            if (!target.getPersistentData().contains(TAG_AGNI_BURN)) {
+                target.getPersistentData().putBoolean(TAG_AGNI_BURN, true);
             }
-            // 扩散伤害（每 DAMAGE_COOLDOWN_TICKS）
-            if (cooldown <= 0) {
+
+            forceHurt(target, player.damageSources().generic(), SPREAD_DAMAGE);
+        }
+    }
+
+    private void handleEternalBurningEntities(ServerLevel server, ServerPlayer player) {
+        List<LivingEntity> affected = server.getEntitiesOfClass(
+                LivingEntity.class,
+                player.getBoundingBox().inflate(16),
+                e -> e.getPersistentData().getBoolean(TAG_AGNI_BURN) && e.isAlive()
+        );
+
+        for (LivingEntity target : affected) {
+            if (!target.isOnFire()) {
+                target.setSecondsOnFire(5);
+            }
+
+            if (player.getPersistentData().getInt(TAG_COOLDOWN) == DAMAGE_COOLDOWN_TICKS) {
                 forceHurt(target, player.damageSources().generic(), SPREAD_DAMAGE);
             }
-        }
 
-        // 脚下点火
-        BlockPos pos = player.blockPosition();
-        if (server.isEmptyBlock(pos)) {
-            server.setBlock(pos, net.minecraft.world.level.block.Blocks.FIRE.defaultBlockState(), 3);
         }
     }
 }

@@ -19,8 +19,7 @@ public class HellFireArmor extends NoLevelsModifier implements ModifyDamageModif
                                    EquipmentSlot slot, DamageSource source, float amount, boolean isDirectDamage) {
 
         LivingEntity entity = context.getEntity();
-        if (entity != null && entity.level().dimension().location().equals(new ResourceLocation("minecraft:the_nether"))) {
-            // 在下界时，受到的伤害降低 20%
+        if (entity.level().dimension().location().equals(ResourceLocation.parse("minecraft:the_nether"))) {
             return amount * 0.8F;
         }
         return amount;

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "miztinker:block/tinker_electricity_module"
+  }
+}

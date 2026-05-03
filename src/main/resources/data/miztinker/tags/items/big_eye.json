@@ -4,6 +4,7 @@
     { "id": "jerotesvillage:hag_eye", "required": false },
     { "id": "fadg:holyeye", "required": false },
     { "id": "iceandfire:cyclops_eye", "required": false },
-    { "id": "iceandfire:cockatrice_eye", "required": false }
+    { "id": "iceandfire:cockatrice_eye", "required": false },
+    { "id": "minecraft:eye_armor_trim_smithing_template", "required": false }
   ]
 }

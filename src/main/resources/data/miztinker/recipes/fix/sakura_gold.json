@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+  "item":"miztinker:sakura_gold"
+  },
+  "value": 1,
+  "needed": 1,
+  "material": "miztinker:sakura_gold"
+}

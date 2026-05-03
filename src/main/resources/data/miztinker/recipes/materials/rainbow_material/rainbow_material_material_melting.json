@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material_melting",
+    "input": "miztinker:rainbow_material",
+    "temperature": 6666,
+    "result": {
+        "fluid": "miztinker:molten_rainbow_material",
+        "amount": 90
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "miztinker:block/reinforced_seared_brick_bottom",
+    "side": "miztinker:block/reinforced_seared_brick_side",
+    "top": "miztinker:block/reinforced_seared_brick_top"
+  }
+}

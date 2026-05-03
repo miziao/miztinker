@@ -13,11 +13,10 @@ public class MusicSlots {
 
     @OnlyIn(Dist.CLIENT)
     public static void init() {
-        // registers a custom slot texture for tools
         NBTKeyModel.registerExtraTexture(
-                new ResourceLocation("tconstruct:creative_slot"),
+                ResourceLocation.parse("tconstruct:creative_slot"),
                 MUSIC.getName(),
-                new ResourceLocation("miztinker:item/dx") // your texture path
+                ResourceLocation.parse("miztinker:item/dx")
         );
     }
 }

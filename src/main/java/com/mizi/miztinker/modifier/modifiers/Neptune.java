@@ -32,66 +32,73 @@ public class Neptune extends NoLevelsModifier implements MeleeHitModifierHook {
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        super.registerHooks(hookBuilder);
         hookBuilder.addHook(this, ModifierHooks.MELEE_HIT);
     }
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        if (!(context.getAttacker().level() instanceof ServerLevel world)) return;
+        if (!(context.getAttacker().level() instanceof ServerLevel world) || damageDealt <= 0) return;
 
         Entity attacker = context.getAttacker();
         Entity target = context.getTarget();
+        BlockPos pos = target.blockPosition();
 
-        boolean isAttackerInWater = hasWaterVertical(world, attacker.blockPosition());
-        boolean isTargetInWater = hasWaterVertical(world, target.blockPosition());
-
-        boolean canAccessTreasure = isAttackerInWater || isTargetInWater;
+        boolean isWetEnvironment = hasWaterVertical(world, attacker.blockPosition())
+                || hasWaterVertical(world, pos)
+                || world.isRainingAt(pos);
 
         ItemStack fakeRod = new ItemStack(Items.FISHING_ROD);
         int luckLevel = tool.getModifierLevel(LUCK_MODIFIER_ID);
+
         if (luckLevel > 0) {
             fakeRod.enchant(Enchantments.FISHING_LUCK, luckLevel);
         }
 
-        float totalLuck = (attacker instanceof Player p ? p.getLuck() : 0) + luckLevel;
+        float playerLuck = (attacker instanceof Player p) ? p.getLuck() : 0.0f;
+        float totalLuck = playerLuck + luckLevel;
 
         LootParams lootparams = new LootParams.Builder(world)
                 .withParameter(LootContextParams.ORIGIN, target.position())
                 .withParameter(LootContextParams.TOOL, fakeRod)
-                .withParameter(LootContextParams.THIS_ENTITY, attacker)
+                .withParameter(LootContextParams.THIS_ENTITY, target)
+                .withParameter(LootContextParams.KILLER_ENTITY, attacker)
                 .withLuck(totalLuck)
                 .create(LootContextParamSets.FISHING);
 
-        List<ItemStack> finalDrops = new ArrayList<>();
+        List<ItemStack> drops = new ArrayList<>();
 
-        if (canAccessTreasure) {
-            float treasureChance = 0.2f + (luckLevel * 0.1f);
+        if (isWetEnvironment) {
+            float treasureChance = 0.1f + (luckLevel * 0.05f);
             if (world.random.nextFloat() < treasureChance) {
                 LootTable treasureTable = world.getServer().getLootData().getLootTable(BuiltInLootTables.FISHING_TREASURE);
-                finalDrops.addAll(treasureTable.getRandomItems(lootparams));
+                drops.addAll(treasureTable.getRandomItems(lootparams));
             }
         }
 
-        if (finalDrops.isEmpty()) {
-            LootTable loottable = world.getServer().getLootData().getLootTable(BuiltInLootTables.FISHING);
-            finalDrops.addAll(loottable.getRandomItems(lootparams));
+        if (drops.isEmpty()) {
+            LootTable mainFishingTable = world.getServer().getLootData().getLootTable(BuiltInLootTables.FISHING);
+            drops.addAll(mainFishingTable.getRandomItems(lootparams));
         }
 
-        if (finalDrops.isEmpty()) {
-            finalDrops.addAll(world.getServer().getLootData().getLootTable(BuiltInLootTables.FISHING_FISH).getRandomItems(lootparams));
-        }
-
-        for (ItemStack drop : finalDrops) {
-            if (!drop.isEmpty()) {
-                ItemEntity itemEntity = new ItemEntity(world, target.getX(), target.getY() + 0.5D, target.getZ(), drop.copy());
-                itemEntity.setDeltaMovement(world.random.nextGaussian() * 0.05D, 0.3D, world.random.nextGaussian() * 0.05D);
+        for (ItemStack stack : drops) {
+            if (!stack.isEmpty()) {
+                ItemEntity itemEntity = new ItemEntity(world,
+                        target.getX(), target.getY() + 0.5D, target.getZ(),
+                        stack.copy()
+                );
+                itemEntity.setDeltaMovement(
+                        world.random.nextGaussian() * 0.02D,
+                        0.3D,
+                        world.random.nextGaussian() * 0.02D
+                );
                 world.addFreshEntity(itemEntity);
             }
         }
     }
 
     private boolean hasWaterVertical(ServerLevel world, BlockPos pos) {
-        for (int i = 0; i <= 3; i++) {
+        for (int i = -1; i <= 2; i++) {
             if (world.getFluidState(pos.above(i)).is(Fluids.WATER)) {
                 return true;
             }

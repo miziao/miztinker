@@ -1,0 +1,32 @@
+{  
+  "type": "tconstruct:modifier",  
+  "allow_crystal": true,  
+  "inputs": [  
+    {  
+      "item": "craziness_awakened:ender_pearl_block",
+      "amount_needed": 64
+    },  
+    {  
+      "item": "final_sword:max_final_sword"  
+    }, 
+    {  
+      "tag": "forge:tools/bows"
+    },
+    {  
+      "item": "easy_piglins:piglin"  
+    }, 
+    {  
+      "tag": "forge:tools/fishing_rods"  
+    }
+  ],  
+  "result": "miztinker:hunter_game",  
+  "slots": {  
+    "diadema": 1  
+  },  
+  "level": {  
+    "max": 1  
+  },  
+  "tools": {  
+    "tag": "tconstruct:modifiable/armor"  
+  }  
+}

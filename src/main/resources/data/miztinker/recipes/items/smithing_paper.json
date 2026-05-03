@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": { "tag": "miztinker:template" },
+  "base": { "item": "minecraft:paper" },
+  "addition": { "item": "miztinker:primal_reversion_paper" },
+  "result": { "item": "miztinker:paper_old" }
+}

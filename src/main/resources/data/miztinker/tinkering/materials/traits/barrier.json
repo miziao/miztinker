@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "miztinker:barrier_force"
+    },
+    {
+      "level": 1,
+      "name": "miztinker:infinitum"
+    }
+  ]
+}

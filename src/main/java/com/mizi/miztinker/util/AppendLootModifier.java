@@ -32,7 +32,7 @@ public class AppendLootModifier extends LootModifier {
     @NotNull
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-        ResourceLocation path = new ResourceLocation(this.resourceLocationKey);
+        ResourceLocation path = ResourceLocation.parse(this.resourceLocationKey);
 
         LootTable lootTable = context.getLevel().getServer().getLootData().getLootTable(path);
 

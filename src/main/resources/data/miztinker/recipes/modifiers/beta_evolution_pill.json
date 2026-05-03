@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:potion"
+    },
+    {
+      "item": "minecraft:sniffer_egg"
+    },
+    {
+      "item": "tconstruct:manyullyn_ingot"
+    }
+  ],
+  "result": "miztinker:beta_evolution_pill",
+  "slots": {
+    "upgrades": 5
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

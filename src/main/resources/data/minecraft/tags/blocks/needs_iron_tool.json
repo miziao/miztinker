@@ -4,6 +4,12 @@
     "miztinker:smeltery_increase_production_pro1",
     "miztinker:smeltery_increase_production_pro2",
     "miztinker:tinker_lantern",
-    "miztinker:nether_reactor"
+    "miztinker:nether_reactor",
+    "miztinker:eternal_fuel_module",
+    "miztinker:scorched_separator",
+    "miztinker:seared_alloy_retarder",
+    "miztinker:tinker_electricity_module",
+    "miztinker:nutrient_solution_module",
+    "miztinker:maimai_full"
   ]
 }

@@ -9,7 +9,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -21,11 +20,10 @@ public class LoveStone extends NoLevelsModifier implements LeftClickModifierHook
 
     @Override
     public void onLeftClickBlock(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, BlockState state, BlockPos pos) {
-        Block block = state.getBlock();
+        if (level.isClientSide) return;
 
-        if (block == Blocks.BEDROCK) {
-            level.destroyBlock(pos, false);
-            if (!level.isClientSide) {
+        if (state.is(Blocks.BEDROCK)) {
+            if (level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState())) {
                 ItemStack bedrockStack = new ItemStack(Blocks.BEDROCK);
                 ItemEntity itemEntity = new ItemEntity(
                         level,
@@ -34,15 +32,20 @@ public class LoveStone extends NoLevelsModifier implements LeftClickModifierHook
                         pos.getZ() + 0.5,
                         bedrockStack
                 );
+                itemEntity.setDefaultPickUpDelay();
                 level.addFreshEntity(itemEntity);
             }
+            return;
         }
 
         if (state.is(BlockTags.STONE_ORE_REPLACEABLES) ||
                 state.is(BlockTags.BASE_STONE_OVERWORLD) ||
                 state.is(BlockTags.BASE_STONE_NETHER) ||
                 state.is(Blocks.END_STONE) ||
-                state.is(Blocks.COBBLESTONE)
+                state.is(Blocks.COBBLESTONE) ||
+                state.is(Blocks.STONE) ||
+                state.is(Blocks.DEEPSLATE) ||
+                state.is(Blocks.TUFF)
         ) {
             level.destroyBlock(pos, false);
         }

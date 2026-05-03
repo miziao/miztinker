@@ -6,6 +6,7 @@ import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -25,6 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import static com.mizi.miztinker.modifier.modifiers.base.AbsoluteSeverance.*;
+
 
 
 public class LivingEntityUtil {
@@ -69,7 +71,6 @@ public class LivingEntityUtil {
 //        }
 //        return null;
 //    }
-
 
     ///反射设置生命值<br/>
     ///target 目标<br/>
@@ -185,34 +186,92 @@ public class LivingEntityUtil {
     }
 
     /**
-     * 强制清除负面效果实例（包括自定义效果）
+     * 强制移除所有负面效果
      * @param entity 目标生物
      */
     public static void forceRemoveAllNegativeEffects(LivingEntity entity) {
-        try {
-            ///混淆名 f_20945_
-            Field effectsField = LivingEntity.class.getDeclaredField("f_20945_");
-//            Field effectsField = LivingEntity.class.getDeclaredField("activeEffects");
-            effectsField.setAccessible(true);
 
-            @SuppressWarnings("unchecked")
-            Map<MobEffect, MobEffectInstance> effects = (Map<MobEffect, MobEffectInstance>) effectsField.get(entity);
+        if (entity == null || entity.isRemoved()) {
+            return;
+        }
 
-            Iterator<Map.Entry<MobEffect, MobEffectInstance>> iterator = effects.entrySet().iterator();
+        boolean isServer = !entity.level().isClientSide;
+        List<MobEffect> removedEffects = new ArrayList<>();
+        boolean reflectionSuccess = false;
+        for (String fieldName : new String[]{"activeEffects", "f_20945_"}) {
+            try {
+                Field effectsField = LivingEntity.class.getDeclaredField(fieldName);
+                effectsField.setAccessible(true);
+                @SuppressWarnings("unchecked")
+                Map<MobEffect, MobEffectInstance> effectsMap = (Map<MobEffect, MobEffectInstance>) effectsField.get(entity);
 
-            while (iterator.hasNext()) {
-                Map.Entry<MobEffect, MobEffectInstance> entry = iterator.next();
-                MobEffect effect = entry.getKey();
-                if (effect.getCategory() == MobEffectCategory.HARMFUL) {
-                    if (!entity.level().isClientSide && entity instanceof ServerPlayer player) {
-                        player.connection.send(new ClientboundRemoveMobEffectPacket(entity.getId(), effect));
+                List<MobEffect> harmfulEffects = new ArrayList<>();
+                for (MobEffect effect : effectsMap.keySet()) {
+                    if (effect.getCategory() == MobEffectCategory.HARMFUL) {
+                        harmfulEffects.add(effect);
                     }
-                    iterator.remove();
+                }
+
+                for (MobEffect effect : harmfulEffects) {
+                    MobEffectInstance instance = effectsMap.remove(effect);
+                    entity.removeEffect(effect);
+                    if (instance != null) {
+                        try {
+                            Method onEffectRemoved = LivingEntity.class.getDeclaredMethod("onEffectRemoved", MobEffectInstance.class);
+                            onEffectRemoved.setAccessible(true);
+                            onEffectRemoved.invoke(entity, instance);
+                            Method removeEffect = LivingEntity.class.getDeclaredMethod("removeEffect", MobEffect.class);
+                            removeEffect.setAccessible(true);
+                            removeEffect.invoke(entity, effect);
+
+                        } catch (Exception e) {
+
+                            try {
+                                effect.removeAttributeModifiers(entity, entity.getAttributes(), instance.getAmplifier());
+
+                            } catch (Exception ex) {
+
+                            }
+                        }
+
+                        removedEffects.add(effect);
+                    }
+                }
+
+                reflectionSuccess = true;
+                break;
+            } catch (Exception ex) {
+
+                continue;
+            }
+        }
+        if (!reflectionSuccess) {
+            for (MobEffectInstance effectInstance : new ArrayList<>(entity.getActiveEffects())) {
+                MobEffect effect = effectInstance.getEffect();
+                if (effect.getCategory() == MobEffectCategory.HARMFUL) {
+                    entity.removeEffect(effect);
+                    removedEffects.add(effect);
                 }
             }
+        }
+        if (isServer) {
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
+
+            if (entity instanceof ServerPlayer player) {
+                for (MobEffect effect : removedEffects) {
+                    player.connection.send(new ClientboundRemoveMobEffectPacket(entity.getId(), effect));
+
+                }
+            } else {
+                MinecraftServer server = entity.level().getServer();
+                if (server != null) {
+                    for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+                        for (MobEffect effect : removedEffects) {
+                            player.connection.send(new ClientboundRemoveMobEffectPacket(entity.getId(), effect));
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -293,8 +352,96 @@ public class LivingEntityUtil {
         living.getEntityData().set(DATA_HEALTH_ID, value);
     }
 
+    public static void SuperforceSetAllCandidateHealth(LivingEntity entity, float newHealth) {
+        if (entity == null || entity.isRemoved()) {
+            return;
+        }
+
+        try {
+
+            WriteFlag.beginWrite();
 
 
+            List<EntityDataAccessor<Number>> candidates = findCandidateHealthAccessors(entity);
+            for (EntityDataAccessor<Number> accessor : candidates) {
+                forceSetHealthByAccessor(entity, accessor, newHealth);
+            }
+
+            SuperforceSetCandidateNBTEnhanced(entity, newHealth, true);
+
+        } catch (Exception e) {
+            // 记录异常但继续执行
+            e.printStackTrace();
+        } finally {
+            // 确保结束内部写入标记
+            WriteFlag.endWrite();
+        }
+
+    }
+
+    public static void SuperforceSetCandidateNBTEnhanced(LivingEntity entity, float newHealth, boolean force) {
+
+        if (!force && System.currentTimeMillis() - lastNbtOperationTime < 50) {
+            return;
+        }
+
+        lastNbtOperationTime = System.currentTimeMillis();
+
+        try {
+            net.minecraft.nbt.CompoundTag tag = entity.saveWithoutId(new net.minecraft.nbt.CompoundTag());
+
+
+            boolean modified = SuperenhanceNbtHealthModification(tag, newHealth, 3);
+
+            if (modified) {
+
+                java.lang.reflect.Method readMethod = getCachedReadMethod();
+                if (readMethod != null) {
+                    readMethod.invoke(entity, tag);
+                }
+            }
+        } catch (Exception e) {
+            // 静默处理错误
+        }
+    }
+    private static boolean SuperenhanceNbtHealthModification(net.minecraft.nbt.CompoundTag tag, float newHealth, int maxDepth) {
+        if (maxDepth <= 0) return false;
+
+        boolean modified = false;
+        java.util.Set<String> keys = new java.util.HashSet<>(tag.getAllKeys());
+
+        for (String key : keys) {
+            net.minecraft.nbt.Tag value = tag.get(key);
+
+
+            if (value instanceof net.minecraft.nbt.CompoundTag compoundTag) {
+                modified |= SuperenhanceNbtHealthModification(compoundTag, newHealth, maxDepth - 1);
+            }
+            else if (value instanceof net.minecraft.nbt.ListTag listTag) {
+
+                for (int i = 0; i < listTag.size(); i++) {
+                    net.minecraft.nbt.Tag element = listTag.get(i);
+                    if (element instanceof net.minecraft.nbt.CompoundTag compoundTag) {
+                        modified |= SuperenhanceNbtHealthModification(compoundTag, newHealth, maxDepth - 1);
+                    }
+                }
+            }
+
+
+            if (isNumericTag(value)) {
+                setNumericTagValue(tag, key, value, newHealth);
+                modified = true;
+            }
+        }
+
+        return modified;
+    }
+
+    /**
+     * 覆盖实体所有候选生命值字段（包括 DataAccessor 和 NBT 方式），确保与预期生命值一致
+     * 同时也有Attribute修改
+     * 我称它为“绝对切断”（Absolute Severance）
+     */
     public static void forceSetAllCandidateHealth(LivingEntity entity, float newHealth) {
 
         if (entity.isDeadOrDying() || !entity.isAlive()) {
@@ -316,15 +463,14 @@ public class LivingEntityUtil {
         forceSetCandidateNBTEnhanced(entity, newHealth);
 
 
-        if (isFromWzzMod(entity)){
-            aggressivelyModifyAllHealthFields(entity,newHealth);
-        }
 
     }
 
 
+
+
     public static void forceSetCandidateNBTEnhanced(LivingEntity entity, float newHealth) {
-        // 添加频率限制：不要在短时间内重复调用
+
         if (System.currentTimeMillis() - lastNbtOperationTime < 50) { // 50ms冷却
             return;
         }
@@ -335,7 +481,7 @@ public class LivingEntityUtil {
             boolean modified = enhanceNbtHealthModification(tag, entity, newHealth);
 
             if (modified) {
-                // 使用缓存的方法查找来提高性能
+
                 Method readMethod = getCachedReadMethod();
                 if (readMethod != null) {
                     readMethod.invoke(entity, tag);
@@ -346,25 +492,6 @@ public class LivingEntityUtil {
         }
     }
 
-    private static Method cachedReadMethod = null;
-    private static long lastNbtOperationTime = 0;
-
-    private static Method getCachedReadMethod() {
-        if (cachedReadMethod == null) {
-            try {
-                cachedReadMethod = LivingEntity.class.getDeclaredMethod("readAdditionalSaveData", CompoundTag.class);
-                cachedReadMethod.setAccessible(true);
-            } catch (NoSuchMethodException e) {
-                try {
-                    cachedReadMethod = LivingEntity.class.getDeclaredMethod("m_7378_", CompoundTag.class);
-                    cachedReadMethod.setAccessible(true);
-                } catch (Exception ex) {
-                    return null;
-                }
-            }
-        }
-        return cachedReadMethod;
-    }
 
     /**
      * 增强的NBT健康字段修改逻辑 - 结合精确匹配和模糊匹配
@@ -390,6 +517,26 @@ public class LivingEntityUtil {
         }
 
         return modified;
+    }
+
+    private static Method cachedReadMethod = null;
+    private static long lastNbtOperationTime = 0;
+
+    private static Method getCachedReadMethod() {
+        if (cachedReadMethod == null) {
+            try {
+                cachedReadMethod = LivingEntity.class.getDeclaredMethod("readAdditionalSaveData", CompoundTag.class);
+                cachedReadMethod.setAccessible(true);
+            } catch (NoSuchMethodException e) {
+                try {
+                    cachedReadMethod = LivingEntity.class.getDeclaredMethod("m_7378_", CompoundTag.class);
+                    cachedReadMethod.setAccessible(true);
+                } catch (Exception ex) {
+                    return null;
+                }
+            }
+        }
+        return cachedReadMethod;
     }
 
     /**
@@ -492,7 +639,7 @@ public class LivingEntityUtil {
                 lowerKey.contains("vital") ||
                 lowerKey.contains("blood");
 
-        // 3. 数值匹配：与当前生命值接近或等于最大生命值
+
         boolean valueMatches = Math.abs(numericValue - currentHealth) < 1.0f ||
                 Math.abs(numericValue - maxHealth) < 0.1f;
 
@@ -599,33 +746,6 @@ public class LivingEntityUtil {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * 查找所有可能的生命值候选字段（DataAccessor），依据字段值与实体当前生命值的接近程度判断
      */
@@ -730,6 +850,75 @@ public class LivingEntityUtil {
         }
     }
 
+    public static void SupermodifierAbsoluteSeverance(LivingEntity target, Player player, float damage, float value){
+        if (target.getHealth() <= 0) return;
+        float reHealth = target.getHealth() - damage * value - target.getMaxHealth() * 0.01f;
+        var playerKill = target.level().damageSources.playerAttack(player);
+        target.hurt(playerKill,1);
+        setAbsoluteSeveranceHealth(target, reHealth);
+        SuperforceSetAllCandidateHealth(target,reHealth);
+
+        if (reHealth <= 0 || target.getHealth() <= 0){
+            SuperforceSetAllCandidateHealth(target,0);
+            setAbsoluteSeveranceHealth(target, 0);
+            setEntityDead(target);
+            target.dropAllDeathLoot(playerKill);
+            LootForceUtil.generateEntityLoot(target, player.getLuck(), true);
+            triggerKillAdvancement(target,playerKill);
+        }
+    }
+
+    public static void modifierAbsoluteSeverance(LivingEntity target, Player player, float damage, float value){
+        if (target.getHealth() <= 0) return;
+        float reHealth = target.getHealth() - damage * value - target.getMaxHealth() * 0.01f;
+        var playerKill = target.level().damageSources.playerAttack(player);
+        target.hurt(playerKill,1);
+        setAbsoluteSeveranceHealth(target, reHealth);
+        forceSetAllCandidateHealth(target,reHealth);
+
+        if (reHealth <= 0 || target.getHealth() <= 0){
+            forceSetAllCandidateHealth(target,0);
+            setAbsoluteSeveranceHealth(target, 0);
+            setEntityDead(target);
+            target.dropAllDeathLoot(playerKill);
+            LootForceUtil.generateEntityLoot(target, player.getLuck(), true);
+            triggerKillAdvancement(target,playerKill);
+        }
+    }
+
+    public static void modifierSeverance(LivingEntity target, Player player, float damage,float value,float baseDamage){
+        if (target.getHealth() <= 0) return;
+        var playerKill = target.level().damageSources.playerAttack(player);
+        target.hurt(playerKill,1);
+        float reHealth = target.getHealth() - damage * value - target.getMaxHealth() * 0.01f - baseDamage;
+        forceSetAllCandidateHealth(target,reHealth);
+
+        if (reHealth <= 0 || target.getHealth() <= 0){
+            forceSetAllCandidateHealth(target,0);
+            setEntityDead(target);
+            dropLoot(target,playerKill);
+            target.dropAllDeathLoot(playerKill);
+            LootForceUtil.generateEntityLoot(target, player.getLuck(), true);
+            triggerKillAdvancement(target,playerKill);
+
+        }
+    }
+
+    public static void modifierCutting(LivingEntity target, Player player, float damage,float value){
+        if (target.getHealth() <= 0) return;
+        var playerKill = target.level().damageSources.playerAttack(player);
+        target.hurt(playerKill,1);
+        float reHealth = target.getHealth() - damage * value - target.getMaxHealth() * 0.01f;
+        target.setHealth(reHealth);
+        if (reHealth <= 0 || target.getHealth() <= 0){
+            setEntityDead(target);
+            dropLoot(target,playerKill);
+            target.dropAllDeathLoot(playerKill);
+            LootForceUtil.generateEntityLoot(target, player.getLuck(), true);
+
+        }
+    }
+
     public static boolean isFromDummmmmmyMod(Entity entity) {
         if (entity == null) {
             return false;
@@ -743,92 +932,6 @@ public class LivingEntityUtil {
         // 方法2：检查实体的类路径（备用方案）
         return entity.getClass().getName().contains("dummmmmmy");
     }
-
-
-
-    public static boolean isFromOmniMod(Entity entity) {
-        if (entity == null) {
-            return false;
-        }
-        return entity.getClass().getName().contains("omnimobs");
-    }
-
-    public static boolean isFromWzzMod(Entity entity) {
-        if (entity == null) {
-            return false;
-        }
-        return entity.getClass().getName().contains("witherzilla");
-    }
-
-    public static boolean isFromIceAndFire(Entity entity) {
-        if (entity == null) {
-            return false;
-        }
-        return entity.getClass().getName().contains("iceandfire");
-    }
-
-    public static void modifierAbsoluteSeverance(LivingEntity target, Player player, float damage, float value){
-        if (target.getHealth() <= 0) return;
-        float reHealth = target.getHealth() - damage * value - target.getMaxHealth() * 0.01f;
-        var playerKill = target.level().damageSources.playerAttack(player);
-        target.hurt(playerKill,1);
-        setAbsoluteSeveranceHealth(target, reHealth);
-        forceSetAllCandidateHealth(target,reHealth);
-        if (isFromOmniMod(target)) {
-            CompoundTag tag = new CompoundTag();
-            tag.putFloat("Health", reHealth);
-            try {
-                target.readAdditionalSaveData(tag);
-            } catch (Exception ignored) {
-            }
-        }
-        if (reHealth <= 0 || target.getHealth() <= 0){
-//            System.out.println("绝对切断强制掉落");
-            forceSetAllCandidateHealth(target, 0);
-            setAbsoluteSeveranceHealth(target, 0);
-//            target.die(playerKill);
-            triggerKillAdvancement(target, playerKill);
-            setEntityDead(target);
-            dropLoot(target, playerKill);
-            target.dropAllDeathLoot(playerKill);
-        }
-    }
-
-    public static void modifierSeverance(LivingEntity target, Player player, float damage,float value,float baseDamage){
-        if (target.getHealth() <= 0) return;
-        var playerKill = target.level().damageSources.playerAttack(player);
-        target.hurt(playerKill,1);
-        float reHealth = target.getHealth() - damage * value - target.getMaxHealth() * 0.01f - baseDamage;
-        forceSetAllCandidateHealth(target,reHealth);
-        if (isFromOmniMod(target)) {
-            CompoundTag tag = new CompoundTag();
-            tag.putFloat("Health", reHealth);
-            try {
-                target.readAdditionalSaveData(tag);
-            } catch (Exception ignored) {
-            }
-        }
-        if (reHealth <= 0 || target.getHealth() <= 0){
-            forceSetAllCandidateHealth(target,0);
-            triggerKillAdvancement(target,playerKill);
-            setEntityDead(target);
-            dropLoot(target,playerKill);
-            target.dropAllDeathLoot(playerKill);
-        }
-    }
-
-    public static void modifierCutting(LivingEntity target, Player player, float damage,float value){
-        if (target.getHealth() <= 0) return;
-        var playerKill = target.level().damageSources.playerAttack(player);
-        target.hurt(playerKill,1);
-        float reHealth = target.getHealth() - damage * value - target.getMaxHealth() * 0.01f;
-        target.setHealth(reHealth);
-        if (reHealth <= 0 || target.getHealth() <= 0){
-            target.dropAllDeathLoot(playerKill);
-        }
-    }
-
-
 
 
 

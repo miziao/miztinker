@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material_melting",
+    "input": "miztinker:paradox_manyullyn",
+    "temperature": 1500,
+    "result": {
+        "fluid": "miztinker:molten_paradox_manyullyn",
+        "amount": 90
+    }
+}

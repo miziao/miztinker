@@ -9,6 +9,8 @@
     "tconstruct:scorched_drain",
     "tconstruct:scorched_chute",
     "tconstruct:scorched_duct",
-    "miztinker:eternal_fuel_module"
+    "miztinker:eternal_fuel_module",
+    "miztinker:scorched_separator",
+    "miztinker:reinforced_seared_brick"
   ]
 }

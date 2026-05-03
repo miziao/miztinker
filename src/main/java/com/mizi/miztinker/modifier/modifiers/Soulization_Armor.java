@@ -29,36 +29,42 @@ import java.util.List;
 
 import static com.mizi.miztinker.miztinker.getResource;
 
-
-public class Soulization_Armor extends NoLevelsModifier implements OnAttackedModifierHook, VolatileDataModifierHook, TooltipModifierHook {
+public class Soulization_Armor extends NoLevelsModifier implements OnAttackedModifierHook, TooltipModifierHook, VolatileDataModifierHook {
 
     public static final ResourceLocation ATTACK_COUNT = getResource("soul_attack_count");
-    public static final ResourceLocation EXTRA_SOULS = getResource("extra_souls");
+    public static final ResourceLocation EXTRA_SOUL_SLOTS = getResource("extra_soul_slots");
     public static final int THRESHOLD = 200;
+
+    private static final String KEY_AWAKEN = "modifier.miztinker.soulization_armor.awaken";
+    private static final String KEY_PROGRESS = "modifier.miztinker.soulization_armor.progress";
+    private static final String KEY_TOTAL_AWAKENED = "modifier.miztinker.soulization_armor.total_awakened";
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         super.registerHooks(hookBuilder);
         hookBuilder.addHook(this, ModifierHooks.ON_ATTACKED);
-        hookBuilder.addHook(this, ModifierHooks.VOLATILE_DATA);
         hookBuilder.addHook(this, ModifierHooks.TOOLTIP);
+        hookBuilder.addHook(this, ModifierHooks.VOLATILE_DATA);
     }
 
     @Override
     public void onAttacked(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {
         if (!context.getEntity().level().isClientSide && context.getEntity() instanceof ServerPlayer player) {
+            if (slotType.getType() != EquipmentSlot.Type.ARMOR) return;
 
             ModDataNBT data = tool.getPersistentData();
             int count = data.getInt(ATTACK_COUNT) + 1;
 
             if (count >= THRESHOLD) {
                 data.putInt(ATTACK_COUNT, 0);
-                int currentSouls = data.getInt(EXTRA_SOULS);
-                data.putInt(EXTRA_SOULS, currentSouls + 1);
+
+                int currentExtra = data.getInt(EXTRA_SOUL_SLOTS);
+                data.putInt(EXTRA_SOUL_SLOTS, currentExtra + 1);
 
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
                         SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 1.0F, 1.2F);
-                player.displayClientMessage(Component.literal("§b[魂质] 特性觉醒：额外灵魂槽 +1"), true);
+
+                player.displayClientMessage(Component.translatable(KEY_AWAKEN), true);
             } else {
                 data.putInt(ATTACK_COUNT, count);
             }
@@ -66,22 +72,22 @@ public class Soulization_Armor extends NoLevelsModifier implements OnAttackedMod
     }
 
     @Override
-    public void addVolatileData(IToolContext context, ModifierEntry modifier, ToolDataNBT nbt) {
-        ModDataNBT persistentData = (ModDataNBT) context.getPersistentData();
-        if (persistentData.contains(EXTRA_SOULS)) {
-            nbt.addSlots(SlotType.SOUL, persistentData.getInt(EXTRA_SOULS));
+    public void addVolatileData(IToolContext context, ModifierEntry modifier, ToolDataNBT volatileData) {
+        int extraSlots = context.getPersistentData().getInt(EXTRA_SOUL_SLOTS);
+        if (extraSlots > 0) {
+            volatileData.addSlots(SlotType.SOUL, extraSlots);
         }
     }
 
     @Override
     public void addTooltip(IToolStackView tool, ModifierEntry modifier, @Nullable Player player, List<Component> tooltips, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
-        ModDataNBT data = tool.getPersistentData();
-        int count = data.getInt(ATTACK_COUNT);
-        int souls = data.getInt(EXTRA_SOULS);
+        int count = tool.getPersistentData().getInt(ATTACK_COUNT);
+        int totalAwakened = tool.getPersistentData().getInt(EXTRA_SOUL_SLOTS);
 
-        if (souls > 0) {
-            tooltips.add(Component.literal("§7已获得额外灵魂槽: §b" + souls));
+        tooltips.add(Component.translatable(KEY_PROGRESS, count, THRESHOLD));
+
+        if (totalAwakened > 0) {
+            tooltips.add(Component.translatable(KEY_TOTAL_AWAKENED, totalAwakened));
         }
-        tooltips.add(Component.literal("§7魂质觉醒进度: §a" + count + " §7/ §e" + THRESHOLD));
     }
 }

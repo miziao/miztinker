@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "name": "miztinker:color",
+      "level": 1
+    },
+    {
+      "name": "miztinker:color1",
+      "level": 1
+    }
+  ]
+}

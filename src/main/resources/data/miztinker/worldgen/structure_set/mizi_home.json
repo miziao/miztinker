@@ -1,0 +1,15 @@
+{
+  "structures": [
+    {
+      "structure": "miztinker:mizi_home",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 80,       
+    "separation": 35,    
+    "salt": 776432143,
+    "spread_type": "linear"
+  }
+}

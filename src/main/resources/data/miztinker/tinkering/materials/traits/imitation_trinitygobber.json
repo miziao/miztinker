@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "name": "miztinker:makeconcertedefforts",
+      "level": 1
+    },
+    {
+      "name": "miztinker:trinity",
+      "level": 1
+    }
+  ]
+}

@@ -16,32 +16,27 @@ import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 
 public class EtherealMiner extends NoLevelsModifier implements BlockHarvestModifierHook {
 
-
-
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.BLOCK_HARVEST);
     }
 
+    @Override
     public void startHarvest(IToolStackView tool, ModifierEntry modifier, ToolHarvestContext context) {
+    }
+
+    @Override
+    public void finishHarvest(IToolStackView tool, ModifierEntry modifier, ToolHarvestContext context, int exp) {
         ServerLevel world = context.getWorld();
-        BlockPos pos = context.getPos();
-        BlockPos abovePos = pos.above();
+        BlockPos currentPos = context.getPos();
+        BlockPos abovePos = currentPos.above();
 
         BlockState aboveState = world.getBlockState(abovePos);
         Block aboveBlock = aboveState.getBlock();
 
         if (aboveBlock instanceof FallingBlock) {
-            Block soulGlass = TinkerSmeltery.scorchedSoulGlass.get(); // 正确引用
-            world.setBlock(abovePos, soulGlass.defaultBlockState(), 3); // 放置阻止重力方块掉落
-
-            // 放置 scorched_soul_glass 阻止掉落
-            world.setBlock(abovePos, soulGlass.defaultBlockState(), 3);
+            Block soulGlass = TinkerSmeltery.scorchedSoulGlass.get();
+            world.setBlock(currentPos, soulGlass.defaultBlockState(), 3);
         }
-    }
-
-    @Override
-    public void finishHarvest(IToolStackView iToolStackView, ModifierEntry modifierEntry, ToolHarvestContext toolHarvestContext, int i) {
-
     }
 }

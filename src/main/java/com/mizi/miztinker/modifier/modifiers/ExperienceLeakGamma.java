@@ -54,7 +54,6 @@ public class ExperienceLeakGamma extends Modifier implements DamageBlockModifier
                 ItemStack armorStack = player.getItemBySlot(armorSlot);
                 if (!armorStack.isEmpty()) {
                     try {
-                        // 使用 copyFrom 确保读取安全
                         ToolStack armorTool = ToolStack.copyFrom(armorStack);
                         totalModifierLevel += armorTool.getModifierLevel(this);
                     } catch (Exception ignored) {

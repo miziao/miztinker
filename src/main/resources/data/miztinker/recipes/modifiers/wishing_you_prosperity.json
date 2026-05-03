@@ -1,0 +1,27 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:paper",
+      "amount_needed": 6
+    },
+    {
+      "tag": "forge:dyes/red"
+    },
+    {
+      "item": "minecraft:paper",
+      "amount_needed": 6
+    }
+  ],
+  "result": "miztinker:wishing_you_prosperity",
+  "slots": {
+    "upgrades": 1
+  },
+  "level": {
+    "max": 10
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

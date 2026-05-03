@@ -30,8 +30,6 @@ import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
-import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
-import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.definition.module.weapon.MeleeHitToolHook;
 import slimeknights.tconstruct.library.tools.helper.ModifierLootingHandler;
@@ -128,10 +126,9 @@ public class AttackUtil {
         living.gameEvent(GameEvent.ENTITY_DAMAGE);
     }
 
-    private static final float DEGREE_TO_RADIANS = ((float)Math.PI / 180F);
     private static final AttributeModifier ANTI_KNOCKBACK_MODIFIER;
     static {
-        ANTI_KNOCKBACK_MODIFIER = new AttributeModifier("tconstruct.anti_knockback", (double)1.0F, AttributeModifier.Operation.ADDITION);
+        ANTI_KNOCKBACK_MODIFIER = new AttributeModifier("tconstruct.anti_knockback", 1.0D, AttributeModifier.Operation.ADDITION);
     }
     private static void disableKnockback(AttributeInstance instance) {
         instance.addTransientModifier(ANTI_KNOCKBACK_MODIFIER);
@@ -151,20 +148,32 @@ public class AttackUtil {
                 LivingEntity targetLiving = ToolAttackUtil.getLivingEntity(targetEntity);
                 Player attackerPlayer = null;
                 if (attackerLiving instanceof Player) {
-                    Player player = (Player)attackerLiving;
-                    attackerPlayer = player;
+                    attackerPlayer = (Player)attackerLiving;
                 }
 
-                float damage = SetDamage < 0.0F ? ToolAttackUtil.getAttributeAttackDamage(tool, attackerLiving, sourceSlot) : SetDamage;
+                float damage = SetDamage < 0.0F ? tool.getStats().get(ToolStats.ATTACK_DAMAGE) : SetDamage;
+
                 float cooldown = (float)cooldownFunction.getAsDouble();
                 boolean fullyCharged = cooldown > 0.9F;
                 boolean isCritical = !isExtraAttack && fullyCharged && attackerLiving.fallDistance > 0.0F && !attackerLiving.onGround() && !attackerLiving.onClimbable() && !attackerLiving.isInWater() && !attackerLiving.hasEffect(MobEffects.BLINDNESS) && !attackerLiving.isPassenger() && targetLiving != null && !attackerLiving.isSprinting() || SetCritical;
-                ToolAttackContext context = new ToolAttackContext(attackerLiving, attackerPlayer, hand, sourceSlot, targetEntity, targetLiving, isCritical, cooldown, isExtraAttack);
+
+                ToolAttackContext.Builder builder = ToolAttackContext.attacker(attackerLiving, attackerPlayer)
+                        .hand(hand)
+                        .target(targetEntity, targetLiving)
+                        .baseDamage(damage)
+                        .cooldown(cooldown);
+
+                if (isExtraAttack) {
+                    builder.extraAttack();
+                }
+
+                ToolAttackContext context = builder.build();
+
                 float baseDamage = damage;
                 List<ModifierEntry> modifiers = tool.getModifierList();
 
                 for(ModifierEntry entry : modifiers) {
-                    damage = ((MeleeDamageModifierHook)entry.getHook(ModifierHooks.MELEE_DAMAGE)).getMeleeDamage(tool, entry, context, baseDamage, damage);
+                    damage = entry.getHook(ModifierHooks.MELEE_DAMAGE).getMeleeDamage(tool, entry, context, baseDamage, damage);
                 }
 
                 if (damage <= 0.0F) {
@@ -187,7 +196,7 @@ public class AttackUtil {
 
                     float criticalModifier = isCritical ? 1.5F : 1.0F;
                     if (attackerPlayer != null) {
-                        CriticalHitEvent hitResult = ForgeHooks.getCriticalHit(attackerPlayer, targetEntity, isCritical, isCritical ? 1.5F : 1.0F);
+                        CriticalHitEvent hitResult = ForgeHooks.getCriticalHit(attackerPlayer, targetEntity, isCritical, criticalModifier);
                         isCritical = hitResult != null;
                         if (isCritical) {
                             criticalModifier = hitResult.getDamageModifier();
@@ -215,7 +224,7 @@ public class AttackUtil {
                     float baseKnockback = knockback;
 
                     for(ModifierEntry entry : modifiers) {
-                        knockback = ((MeleeHitModifierHook)entry.getHook(ModifierHooks.MELEE_HIT)).beforeMeleeHit(tool, entry, context, damage, baseKnockback, knockback);
+                        knockback = entry.getHook(ModifierHooks.MELEE_HIT).beforeMeleeHit(tool, entry, context, damage, baseKnockback, knockback);
                     }
 
                     ModifierLootingHandler.setLootingSlot(attackerLiving, sourceSlot);
@@ -230,7 +239,10 @@ public class AttackUtil {
 
                     boolean didHit;
                     if (isExtraAttack) {
-                        didHit = ToolAttackUtil.dealDefaultDamage(attackerLiving, targetEntity, damage);
+                        DamageSource source = attackerPlayer != null ?
+                                attackerLiving.damageSources().playerAttack(attackerPlayer) :
+                                attackerLiving.damageSources().mobAttack(attackerLiving);
+                        didHit = targetEntity.hurt(source, damage);
                     } else {
                         didHit = MeleeHitToolHook.dealDamage(tool, context, damage);
                     }
@@ -242,11 +254,11 @@ public class AttackUtil {
 
                     if (!didHit) {
                         if (!isExtraAttack) {
-                            attackerLiving.level().playSound((Player)null, attackerLiving.getX(), attackerLiving.getY(), attackerLiving.getZ(), SoundEvents.PLAYER_ATTACK_NODAMAGE, attackerLiving.getSoundSource(), 1.0F, 1.0F);
+                            attackerLiving.level().playSound(null, attackerLiving.getX(), attackerLiving.getY(), attackerLiving.getZ(), SoundEvents.PLAYER_ATTACK_NODAMAGE, attackerLiving.getSoundSource(), 1.0F, 1.0F);
                         }
 
                         for(ModifierEntry entry : modifiers) {
-                            ((MeleeHitModifierHook)entry.getHook(ModifierHooks.MELEE_HIT)).failedMeleeHit(tool, entry, context, damage);
+                            entry.getHook(ModifierHooks.MELEE_HIT).failedMeleeHit(tool, entry, context, damage);
                         }
 
                         return !isExtraAttack;
@@ -258,17 +270,16 @@ public class AttackUtil {
 
                         if (knockback > 0.0F) {
                             if (targetLiving != null) {
-                                targetLiving.knockback((double)knockback, (double) Mth.sin(attackerLiving.getYRot() * ((float)Math.PI / 180F)), (double)(-Mth.cos(attackerLiving.getYRot() * ((float)Math.PI / 180F))));
+                                targetLiving.knockback(knockback, Mth.sin(attackerLiving.getYRot() * ((float)Math.PI / 180F)), -Mth.cos(attackerLiving.getYRot() * ((float)Math.PI / 180F)));
                             } else {
-                                targetEntity.push((double)(-Mth.sin(attackerLiving.getYRot() * ((float)Math.PI / 180F)) * knockback), 0.1, (double)(Mth.cos(attackerLiving.getYRot() * ((float)Math.PI / 180F)) * knockback));
+                                targetEntity.push(-Mth.sin(attackerLiving.getYRot() * ((float)Math.PI / 180F)) * knockback, 0.1, Mth.cos(attackerLiving.getYRot() * ((float)Math.PI / 180F)) * knockback);
                             }
 
-                            attackerLiving.setDeltaMovement(attackerLiving.getDeltaMovement().multiply(0.6, (double)1.0F, 0.6));
+                            attackerLiving.setDeltaMovement(attackerLiving.getDeltaMovement().multiply(0.6, 1.0D, 0.6));
                             attackerLiving.setSprinting(false);
                         }
 
-                        if (targetEntity.hurtMarked && targetEntity instanceof ServerPlayer) {
-                            ServerPlayer serverPlayer = (ServerPlayer)targetEntity;
+                        if (targetEntity.hurtMarked && targetEntity instanceof ServerPlayer serverPlayer) {
                             serverPlayer.connection.send(new ClientboundSetEntityMotionPacket(targetEntity));
                             targetEntity.hurtMarked = false;
                         }
@@ -283,15 +294,14 @@ public class AttackUtil {
                                 attackerPlayer.magicCrit(targetEntity);
                             }
 
-                            attackerLiving.level().playSound((Player)null, attackerLiving.getX(), attackerLiving.getY(), attackerLiving.getZ(), sound, attackerLiving.getSoundSource(), 1.0F, 1.0F);
+                            attackerLiving.level().playSound(null, attackerLiving.getX(), attackerLiving.getY(), attackerLiving.getZ(), sound, attackerLiving.getSoundSource(), 1.0F, 1.0F);
                         }
 
                         if (damageDealt > 2.0F) {
-                            Level var33 = attackerLiving.level();
-                            if (var33 instanceof ServerLevel) {
-                                ServerLevel server = (ServerLevel)var33;
+                            Level level = attackerLiving.level();
+                            if (level instanceof ServerLevel server) {
                                 int particleCount = (int)(damageDealt * 0.5F);
-                                server.sendParticles(ParticleTypes.DAMAGE_INDICATOR, targetEntity.getX(), targetEntity.getY((double)0.5F), targetEntity.getZ(), particleCount, 0.1, (double)0.0F, 0.1, 0.2);
+                                server.sendParticles(ParticleTypes.DAMAGE_INDICATOR, targetEntity.getX(), targetEntity.getY(0.5D), targetEntity.getZ(), particleCount, 0.1, 0.0D, 0.1, 0.2);
                             }
                         }
 
@@ -301,13 +311,13 @@ public class AttackUtil {
                         }
 
                         for(ModifierEntry entry : modifiers) {
-                            ((MeleeHitModifierHook)entry.getHook(ModifierHooks.MELEE_HIT)).afterMeleeHit(tool, entry, context, damageDealt);
+                            entry.getHook(ModifierHooks.MELEE_HIT).afterMeleeHit(tool, entry, context, damageDealt);
                         }
 
                         if (removeInvTime) {
                             targetEntity.invulnerableTime = 0;
                         } else {
-                            float speed = (Float)tool.getStats().get(ToolStats.ATTACK_SPEED);
+                            float speed = tool.getStats().get(ToolStats.ATTACK_SPEED);
                             int time = Math.round(20.0F / speed);
                             if (time < targetEntity.invulnerableTime) {
                                 targetEntity.invulnerableTime = (targetEntity.invulnerableTime + time) / 2;
@@ -338,7 +348,7 @@ public class AttackUtil {
                                 durabilityLost *= 2;
                             }
 
-                            ToolDamageUtil.damageAnimated(tool, durabilityLost, attackerLiving);
+                            ToolDamageUtil.damageAnimated(tool, durabilityLost, attackerLiving, sourceSlot);
                         }
 
                         return true;

@@ -23,7 +23,7 @@ public class VillagerTradeHandler {
 
         VillagerProfession type = event.getType();
         Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
-        int level = 5; // 大师级
+        int level = 5;
 
         if (type == VillagerProfession.FARMER) {
             trades.computeIfAbsent(level, k -> new ArrayList<>());
@@ -65,16 +65,15 @@ public class VillagerTradeHandler {
 
             levelTrades.add((trader, rand) -> {
 
-                // 75% 概率生成交易
                 if (rand.nextFloat() > 0.75f) {
                     return null;
                 }
 
                 return new MerchantOffer(
-                        new ItemStack(Items.EMERALD_BLOCK, 2),     // 玩家支付
-                        new ItemStack(getGoldCoinItem(), 1),        // 商人出售
-                        10,                                         // maxUses
-                        5,                                         // xp
+                        new ItemStack(Items.EMERALD_BLOCK, 2),
+                        new ItemStack(getGoldCoinItem(), 1),
+                        10,
+                        5,
                         0.05f
                 );
             });
@@ -84,10 +83,9 @@ public class VillagerTradeHandler {
             }
 
 
-    /** 获取金币物品实例 */
     private Item getGoldCoinItem() {
         return net.minecraftforge.registries.ForgeRegistries.ITEMS
-                .getValue(new net.minecraft.resources.ResourceLocation("miztinker", "gold_coin"));
+                .getValue(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("miztinker", "gold_coin"));
     }
 
 }

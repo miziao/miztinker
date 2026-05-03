@@ -23,7 +23,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = "miztinker")
 public class WardenTransformHandler {
 
-    private static final ResourceLocation CATALYST_ITEM = new ResourceLocation("miztinker:titan_catalyst");
+    private static final ResourceLocation CATALYST_ITEM = ResourceLocation.parse("miztinker:titan_catalyst");
     private static final String TAG_TRANSFORM_TICKS = "miztinker_transform_timer";
 
     @SubscribeEvent

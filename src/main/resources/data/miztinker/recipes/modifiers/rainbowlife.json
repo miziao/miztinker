@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "craziness_awakened:prismatic_reaper"
+    },
+    {
+      "item": "scalinghealth:heart_crystal"
+    },
+    {
+      "item": "miztinker:rainbow_material"
+    },
+    {
+      "item": "miztinker:rainbow_material"
+    },
+    {
+      "item": "miztinker:rainbow_material"
+    }
+  ],
+  "level": 1,
+  "result": "miztinker:rainbowlife",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor"
+  }
+}

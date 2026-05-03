@@ -34,8 +34,7 @@ public class Villager_business_card extends Item {
     private boolean isInPlayerInventoryGUI() {
         Minecraft mc = Minecraft.getInstance();
         return mc.screen instanceof InventoryScreen
-//                && !(mc.screen instanceof CreativeModeInventoryScreen)
-                && !(mc.screen instanceof ContainerScreen); // 排除箱子等容器
+                && !(mc.screen instanceof ContainerScreen);
     }
 
     @OnlyIn(Dist.CLIENT)

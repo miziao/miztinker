@@ -4,7 +4,9 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -38,13 +40,12 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 
 import java.util.List;
-import java.util.Optional;
 
 import static com.mizi.miztinker.miztinker.getResource;
 
 public class Extraterrestrial_Forces_Create extends NoLevelsModifier implements SlotStackModifierHook, GeneralInteractionModifierHook, InventoryTickModifierHook {
 
-    private static final String MODE_KEY = "create_mode";
+    private static final ResourceLocation MODE_KEY = getResource("create_mode");
     private static final int DRILL = 0;
     private static final int DEPLOYER = 1;
     private static final int FAN = 2;
@@ -60,11 +61,12 @@ public class Extraterrestrial_Forces_Create extends NoLevelsModifier implements 
     public void onInventoryTick(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull Level world, @NotNull LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, @NotNull ItemStack stack) {
         if (world.isClientSide || !(holder instanceof Player player)) return;
 
-        boolean inMainHand = ItemStack.matches(stack, player.getMainHandItem());
-        boolean inOffHand = ItemStack.matches(stack, player.getOffhandItem());
+
+        boolean inMainHand = player.getMainHandItem() == stack;
+        boolean inOffHand = player.getOffhandItem() == stack;
 
         if (inMainHand || inOffHand) {
-            int mode = tool.getPersistentData().getInt(getResource(MODE_KEY));
+            int mode = tool.getPersistentData().getInt(MODE_KEY);
             InteractionHand toolHand = inMainHand ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
 
             if (mode == DEPLOYER) {
@@ -78,17 +80,24 @@ public class Extraterrestrial_Forces_Create extends NoLevelsModifier implements 
     @Override
     public boolean overrideOtherStackedOnMe(IToolStackView tool, ModifierEntry entry, ItemStack held, Slot slot, Player player, SlotAccess access) {
         ModDataNBT data = tool.getPersistentData();
-        int nextMode = (data.getInt(getResource(MODE_KEY)) + 1) % 3;
-        data.putInt(getResource(MODE_KEY), nextMode);
+        int nextMode = (data.getInt(MODE_KEY) + 1) % 3;
+        data.putInt(MODE_KEY, nextMode);
 
-        String modeName = switch (nextMode) {
-            case DRILL -> "盾构机";
-            case DEPLOYER -> "机械手";
-            case FAN -> "鼓风机";
-            default -> "未知";
+
+        String modeKey = switch (nextMode) {
+            case DRILL -> "miztinker.modifier.create_mode.drill";
+            case DEPLOYER -> "miztinker.modifier.create_mode.deployer";
+            case FAN -> "miztinker.modifier.create_mode.fan";
+            default -> "miztinker.modifier.create_mode.unknown";
         };
 
-        player.displayClientMessage(Component.literal("异界之力切换: ").withStyle(ChatFormatting.GOLD).append(modeName), true);
+        player.displayClientMessage(
+                Component.translatable("miztinker.modifier.create_mode.switch")
+                        .withStyle(ChatFormatting.GOLD)
+                        .append(Component.translatable(modeKey)),
+                true
+        );
+
         return true;
     }
 
@@ -96,33 +105,29 @@ public class Extraterrestrial_Forces_Create extends NoLevelsModifier implements 
     public InteractionResult onToolUse(IToolStackView tool, ModifierEntry modifier, Player player, InteractionHand hand, InteractionSource source) {
         if (player.level().isClientSide || source != InteractionSource.RIGHT_CLICK) return InteractionResult.PASS;
 
-        int mode = tool.getPersistentData().getInt(getResource(MODE_KEY));
+        int mode = tool.getPersistentData().getInt(MODE_KEY);
         if (mode != DRILL) return InteractionResult.PASS;
 
         Direction dir = player.getDirection();
         BlockPos origin = player.blockPosition();
-        int playerY = player.blockPosition().getY();
-
-        AABB box;
         float xRot = player.getXRot();
 
+        AABB box;
         if (xRot > 60) {
             box = new AABB(origin).inflate(4, 0, 4).expandTowards(0, -8, 0);
         } else if (xRot < -60) {
             box = new AABB(origin).inflate(4, 0, 4).expandTowards(0, 8, 0);
         } else {
             box = new AABB(origin).inflate(4, 4, 0).expandTowards(dir.getStepX() * 8, 0, dir.getStepZ() * 8);
-            if (box.minY < playerY) {
-                box = new AABB(box.minX, playerY, box.minZ, box.maxX, box.maxY, box.maxZ);
-            }
         }
 
-        for (BlockPos pos : BlockPos.betweenClosed((int)box.minX, (int)box.minY, (int)box.minZ, (int)box.maxX, (int)box.maxY, (int)box.maxZ)) {
+        BlockPos.betweenClosedStream(box).forEach(pos -> {
             BlockState state = player.level().getBlockState(pos);
             if (!state.isAir() && state.getDestroySpeed(player.level(), pos) >= 0) {
                 player.level().destroyBlock(pos, true, player);
             }
-        }
+        });
+
         return InteractionResult.SUCCESS;
     }
 
@@ -131,74 +136,73 @@ public class Extraterrestrial_Forces_Create extends NoLevelsModifier implements 
         double entityReach = player.getAttributeValue(net.minecraftforge.common.ForgeMod.ENTITY_REACH.get());
 
         HitResult hit = getCustomHitResult(player, world, blockReach, entityReach);
-
         InteractionHand actionHand = (toolHand == InteractionHand.OFF_HAND) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
         ItemStack actionStack = player.getItemInHand(actionHand);
 
-
         if (player.isShiftKeyDown()) {
             if (world.getGameTime() % 5 == 0) {
-
-                if (hit.getType() == HitResult.Type.ENTITY) {
-                    Entity target = ((EntityHitResult) hit).getEntity();
-                    if (target instanceof LivingEntity livingTarget && livingTarget.isAlive()) {
-                        if (player.distanceTo(target) <= entityReach) {
-                            player.attack(target);
-                            target.invulnerableTime = 0;
-                        }
-                    }
-                } else if (hit.getType() == HitResult.Type.BLOCK) {
-                    BlockHitResult blockHit = (BlockHitResult) hit;
+                if (hit instanceof EntityHitResult entityHit && entityHit.getEntity() instanceof LivingEntity living) {
+                    player.attack(living);
+                    living.invulnerableTime = 0;
+                } else if (hit instanceof BlockHitResult blockHit) {
                     BlockPos pos = blockHit.getBlockPos();
                     BlockState state = world.getBlockState(pos);
-
                     if (!state.isAir() && state.getDestroySpeed(world, pos) >= 0) {
-                        float progressPerTick = state.getDestroyProgress(player, world, pos);
+                        float progress = player.getPersistentData().getFloat("miz_break_progress");
+                        long lastPos = player.getPersistentData().getLong("miz_break_pos");
 
-                        float totalProgressThisStep = progressPerTick * 5;
+                        if (lastPos != pos.asLong()) progress = 0;
+                        progress += state.getDestroyProgress(player, world, pos) * 5;
 
-                        String PROGRESS_KEY = "miz_break_progress";
-                        String POS_KEY = "miz_break_pos";
-                        long lastPos = player.getPersistentData().getLong(POS_KEY);
-                        float currentProgress = (lastPos == pos.asLong()) ? player.getPersistentData().getFloat(PROGRESS_KEY) : 0.0f;
-
-                        currentProgress += totalProgressThisStep;
-
-                        if (currentProgress >= 1.0f) {
+                        if (progress >= 1.0f) {
                             world.destroyBlock(pos, true, player);
-                            player.getPersistentData().putFloat(PROGRESS_KEY, 0.0f);
+                            player.getPersistentData().putFloat("miz_break_progress", 0);
                         } else {
-                            player.getPersistentData().putLong(POS_KEY, pos.asLong());
-                            player.getPersistentData().putFloat(PROGRESS_KEY, currentProgress);
-
-                            world.destroyBlockProgress(player.getId(), pos, (int)(currentProgress * 10));
+                            player.getPersistentData().putLong("miz_break_pos", pos.asLong());
+                            player.getPersistentData().putFloat("miz_break_progress", progress);
+                            world.destroyBlockProgress(pos.hashCode(), pos, (int)(progress * 10));
                         }
                         player.swing(actionHand);
                     }
                 }
             }
-        } else {
-            if (world.getGameTime() % 20 == 0) {
-                if (hit.getType() == HitResult.Type.BLOCK) {
-                    BlockHitResult blockHit = (BlockHitResult) hit;
-                    InteractionResult result = world.getBlockState(blockHit.getBlockPos()).use(world, player, actionHand, blockHit);
-                    if (result != InteractionResult.SUCCESS && result != InteractionResult.CONSUME) {
-                        if (!actionStack.isEmpty()) {
-                            actionStack.useOn(new net.minecraft.world.item.context.UseOnContext(player, actionHand, blockHit));
-                        }
-                    }
-                    player.swing(actionHand);
-                } else if (hit.getType() == HitResult.Type.ENTITY) {
-                    Entity target = ((EntityHitResult) hit).getEntity();
-                    InteractionResult interactResult = InteractionResult.PASS;
-                    if (target instanceof LivingEntity livingTarget) {
-                        interactResult = actionStack.interactLivingEntity(player, livingTarget, actionHand);
-                    }
-                    if (interactResult != InteractionResult.SUCCESS && interactResult != InteractionResult.CONSUME) {
-                        target.interact(player, actionHand);
-                    }
-                    player.swing(actionHand);
-                }
+        } else if (world.getGameTime() % 20 == 0) {
+            player.swing(actionHand);
+        }
+    }
+
+    private void handleFan(Player player, ServerLevel world) {
+        Vec3 look = player.getLookAngle();
+        Vec3 start = player.getEyePosition();
+        AABB burnArea = player.getBoundingBox().expandTowards(look.scale(8)).inflate(1.0);
+
+        if (world.getGameTime() % 2 == 0) {
+            for (int i = 1; i <= 8; i += 2) {
+                world.sendParticles(ParticleTypes.FLAME, start.x + look.x * i, start.y - 0.2 + look.y * i, start.z + look.z * i, 1, 0.1, 0.1, 0.1, 0.02);
+            }
+        }
+
+        List<Entity> entities = world.getEntities(player, burnArea);
+        for (Entity entity : entities) {
+            if (entity == player) continue;
+
+            entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(0.1)));
+            entity.hurtMarked = true;
+
+            if (entity instanceof ItemEntity itemEntity) {
+                ItemStack itemStack = itemEntity.getItem();
+                world.getRecipeManager()
+                        .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(itemStack), world)
+                        .ifPresent(recipe -> {
+                            ItemStack result = recipe.getResultItem(world.registryAccess()).copy();
+                            result.setCount(itemStack.getCount());
+                            itemEntity.setItem(result);
+
+                            world.sendParticles(ParticleTypes.LAVA, entity.getX(), entity.getY(), entity.getZ(), 5, 0.1, 0.1, 0.1, 0.1);
+                            world.sendParticles(ParticleTypes.LARGE_SMOKE, entity.getX(), entity.getY(), entity.getZ(), 2, 0.05, 0.05, 0.05, 0);
+                        });
+            } else if (entity instanceof LivingEntity living && !living.fireImmune()) {
+                living.setSecondsOnFire(3);
             }
         }
     }
@@ -222,60 +226,4 @@ public class Extraterrestrial_Forces_Create extends NoLevelsModifier implements 
 
         return entityHit != null ? entityHit : blockHit;
     }
-
-    private void handleFan(Player player, ServerLevel world) {
-        Vec3 look = player.getLookAngle();
-        Vec3 start = player.getEyePosition();
-
-        AABB burnArea = player.getBoundingBox().expandTowards(look.x * 8, look.y * 8, look.z * 8).inflate(0.5);
-
-        if (world.getGameTime() % 2 == 0) {
-            for (int i = 1; i <= 8; i++) {
-                world.sendParticles(ParticleTypes.FLAME,
-                        start.x + look.x * i, start.y - 0.5 + look.y * i, start.z + look.z * i,
-                        1, 0.1, 0.1, 0.1, 0.02);
-            }
-        }
-
-        List<Entity> entities = world.getEntities(player, burnArea);
-        String COOK_TICK_KEY = "miztinker_cook_ticks";
-
-        for (Entity entity : entities) {
-            if (entity == player) continue;
-
-            entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(0.08)));
-            entity.hurtMarked = true;
-
-            if (!(entity instanceof ItemEntity)) {
-                if (!entity.isInWater() && !entity.fireImmune()) {
-                    entity.setSecondsOnFire(3);
-                }
-            }
-
-            if (entity instanceof ItemEntity itemEntity) {
-                ItemStack itemStack = itemEntity.getItem();
-                Optional<SmeltingRecipe> recipe = world.getRecipeManager()
-                        .getRecipeFor(RecipeType.SMELTING, new SimpleContainer(itemStack), world);
-
-                if (recipe.isPresent()) {
-                    int cookTicks = entity.getPersistentData().getInt(COOK_TICK_KEY);
-                    cookTicks++;
-
-                    if (cookTicks % 20 == 0) {
-                        world.sendParticles(ParticleTypes.LARGE_SMOKE, entity.getX(), entity.getY(), entity.getZ(), 1, 0, 0, 0, 0);
-                    }
-
-                    if (cookTicks >= 160) {
-                        ItemStack result = recipe.get().getResultItem(world.registryAccess()).copy();
-                        result.setCount(itemStack.getCount());
-                        itemEntity.setItem(result);
-                        world.sendParticles(ParticleTypes.LAVA, entity.getX(), entity.getY(), entity.getZ(), 8, 0.1, 0.1, 0.1, 0.1);
-                        entity.getPersistentData().remove(COOK_TICK_KEY);
-                    } else {
-                        entity.getPersistentData().putInt(COOK_TICK_KEY, cookTicks);
-                    }
-                }
-            }
-        }
-    }
-        }
+}

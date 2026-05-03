@@ -18,30 +18,30 @@ import java.util.List;
 import static com.mizi.miztinker.item.tool.until.MiztinkerTools.murasama;
 
 public class MurasamaHUD {
-    public static ResourceLocation energy_quantity0 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/1.png");
-    public static ResourceLocation energy_quantity1 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/11.png");
-    public static ResourceLocation energy_quantity2 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/12.png");
-    public static ResourceLocation energy_quantity3 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/13.png");
-    public static ResourceLocation energy_quantity4 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/14.png");
-    public static ResourceLocation energy_quantity5 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/15.png");
-    public static ResourceLocation energy_quantity6 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/16.png");
-    public static ResourceLocation energy_quantity7 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/17.png");
-    public static ResourceLocation energy_quantity8 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/18.png");
-    public static ResourceLocation energy_quantity9 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/19.png");
-    public static ResourceLocation energy_quantity10 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/110.png");
+    public static ResourceLocation energy_quantity0 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/1.png");
+    public static ResourceLocation energy_quantity1 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/11.png");
+    public static ResourceLocation energy_quantity2 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/12.png");
+    public static ResourceLocation energy_quantity3 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/13.png");
+    public static ResourceLocation energy_quantity4 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/14.png");
+    public static ResourceLocation energy_quantity5 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/15.png");
+    public static ResourceLocation energy_quantity6 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/16.png");
+    public static ResourceLocation energy_quantity7 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/17.png");
+    public static ResourceLocation energy_quantity8 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/18.png");
+    public static ResourceLocation energy_quantity9 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/19.png");
+    public static ResourceLocation energy_quantity10 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/110.png");
     public static List<ResourceLocation> energy_quantity = List.of(energy_quantity0,energy_quantity1,energy_quantity2,energy_quantity3,energy_quantity4,energy_quantity5,energy_quantity6,energy_quantity7,energy_quantity8,energy_quantity9,energy_quantity10);
 
-    public static ResourceLocation energy_point0 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/2.png");
-    public static ResourceLocation energy_point1 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/21.png");
-    public static ResourceLocation energy_point2 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/22.png");
-    public static ResourceLocation energy_point3 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/23.png");
-    public static ResourceLocation energy_point4 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/24.png");
-    public static ResourceLocation energy_point5 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/25.png");
-    public static ResourceLocation energy_point6 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/26.png");
-    public static ResourceLocation energy_point7 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/27.png");
-    public static ResourceLocation energy_point8 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/28.png");
-    public static ResourceLocation energy_point9 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/29.png");
-    public static ResourceLocation energy_point10 = new ResourceLocation(miztinker.MODID,"/textures/gui/overlay/murasama_time/210.png");
+    public static ResourceLocation energy_point0 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/2.png");
+    public static ResourceLocation energy_point1 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/21.png");
+    public static ResourceLocation energy_point2 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/22.png");
+    public static ResourceLocation energy_point3 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/23.png");
+    public static ResourceLocation energy_point4 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/24.png");
+    public static ResourceLocation energy_point5 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/25.png");
+    public static ResourceLocation energy_point6 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/26.png");
+    public static ResourceLocation energy_point7 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/27.png");
+    public static ResourceLocation energy_point8 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/28.png");
+    public static ResourceLocation energy_point9 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/29.png");
+    public static ResourceLocation energy_point10 = ResourceLocation.fromNamespaceAndPath(miztinker.MODID,"/textures/gui/overlay/murasama_time/210.png");
     public static List<ResourceLocation> energy_point = List.of(energy_point0,energy_point1,energy_point2,energy_point3,energy_point4,energy_point5,energy_point6,energy_point7,energy_point8,energy_point9,energy_point10);
 
 

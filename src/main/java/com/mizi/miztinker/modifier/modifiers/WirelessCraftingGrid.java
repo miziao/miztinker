@@ -86,7 +86,7 @@ public class WirelessCraftingGrid extends NoLevelsModifier implements
     }
 
     public static void openWirelessGrid(ServerPlayer player, ItemStack tinkerTool, int slotIndex) {
-        var creativeItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation("refinedstorageaddons", "creative_wireless_crafting_grid"));
+        var creativeItem = ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("refinedstorageaddons", "creative_wireless_crafting_grid"));
         if (creativeItem == null) return;
 
         ModDataNBT tinkerData = ToolStack.from(tinkerTool).getPersistentData();
@@ -123,7 +123,6 @@ public class WirelessCraftingGrid extends NoLevelsModifier implements
             proxyTag.putInt("Energy", 32000);
             proxyTag.putBoolean("RangeFull", true);
 
-            // 3. 匠魂代理元数据
             proxyTag.putBoolean("is_tinker_proxy", true);
             proxyTag.putString("original_tinker_id", Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(tinkerTool.getItem())).toString());
 

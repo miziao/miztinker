@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "name": "miztinker:air_solidify",
+      "level": 1
+    },
+    {
+      "name": "miztinker:sheep_headlong",
+      "level": 1
+    }
+  ]
+}

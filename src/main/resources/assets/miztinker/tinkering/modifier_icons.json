@@ -9,5 +9,7 @@
   "miztinker:bloodshield": "miztinker:gui/modifiers/bloodshield",
   "miztinker:extraterrestrial_forces_tetra": "miztinker:gui/modifiers/tetra",
   "miztinker:old_king": "miztinker:gui/modifiers/old_king",
-  "miztinker:extraterrestrial_forces_botania": "miztinker:item/bot_book"
+  "miztinker:extraterrestrial_forces_botania": "miztinker:item/bot_book",
+  "miztinker:tandem_paper_bomb": "miztinker:gui/modifiers/tandem_paper_bomb",
+  "miztinker:banshotenin": "miztinker:gui/modifiers/banshotenin"
 }

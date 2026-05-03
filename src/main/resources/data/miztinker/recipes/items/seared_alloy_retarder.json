@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ccc",
+    " a ",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "tag": "forge:ingots/copper"
+    },
+    "a": {
+      "tag": "tconstruct:seared_bricks"
+    }
+  },
+  "result": {
+    "item": "miztinker:seared_alloy_retarder",
+    "count": 1
+  }
+}

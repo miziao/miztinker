@@ -38,7 +38,7 @@ public class Berserk extends NoLevelsModifier
         implements SlotStackModifierHook, InventoryTickModifierHook, MeleeDamageModifierHook {
 
     // 数据键：用于存储是否处于狂暴模式
-    private static final ResourceLocation BERSERK_ACTIVE = new ResourceLocation("miztinker", "berserk_active");
+    private static final ResourceLocation BERSERK_ACTIVE = ResourceLocation.fromNamespaceAndPath("miztinker", "berserk_active");
     private static final int DURABILITY_LOSS_PER_SECOND = 1;
 
     @Override

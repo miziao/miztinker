@@ -26,15 +26,15 @@ public class Dragon_Greedy extends NoLevelsModifier implements ProcessLootModifi
     private static final List<ResourceLocation> ICE_AND_FIRE_MOBS = new ArrayList<>();
 
     static {
-        ICE_AND_FIRE_MOBS.add(new ResourceLocation("iceandfire", "hippocampus"));
-        ICE_AND_FIRE_MOBS.add(new ResourceLocation("iceandfire", "hippogryph"));
-        ICE_AND_FIRE_MOBS.add(new ResourceLocation("iceandfire", "cockatrice"));
-        ICE_AND_FIRE_MOBS.add(new ResourceLocation("iceandfire", "siren"));
-        ICE_AND_FIRE_MOBS.add(new ResourceLocation("iceandfire", "pixie"));
-        ICE_AND_FIRE_MOBS.add(new ResourceLocation("iceandfire", "deathworm"));
-        ICE_AND_FIRE_MOBS.add(new ResourceLocation("iceandfire", "hydra"));
-        ICE_AND_FIRE_MOBS.add(new ResourceLocation("iceandfire", "sea_serpent"));
-        ICE_AND_FIRE_MOBS.add(new ResourceLocation("goety", "wraith"));
+        ICE_AND_FIRE_MOBS.add(ResourceLocation.fromNamespaceAndPath("iceandfire", "hippocampus"));
+        ICE_AND_FIRE_MOBS.add(ResourceLocation.fromNamespaceAndPath("iceandfire", "hippogryph"));
+        ICE_AND_FIRE_MOBS.add(ResourceLocation.fromNamespaceAndPath("iceandfire", "cockatrice"));
+        ICE_AND_FIRE_MOBS.add(ResourceLocation.fromNamespaceAndPath("iceandfire", "siren"));
+        ICE_AND_FIRE_MOBS.add(ResourceLocation.fromNamespaceAndPath("iceandfire", "pixie"));
+        ICE_AND_FIRE_MOBS.add(ResourceLocation.fromNamespaceAndPath("iceandfire", "deathworm"));
+        ICE_AND_FIRE_MOBS.add(ResourceLocation.fromNamespaceAndPath("iceandfire", "hydra"));
+        ICE_AND_FIRE_MOBS.add(ResourceLocation.fromNamespaceAndPath("iceandfire", "sea_serpent"));
+        ICE_AND_FIRE_MOBS.add(ResourceLocation.fromNamespaceAndPath("goety", "wraith"));
     }
 
     @Override
@@ -72,15 +72,15 @@ public class Dragon_Greedy extends NoLevelsModifier implements ProcessLootModifi
     private ItemStack getRareDrop(ResourceLocation id) {
         Item item = null;
         switch (id.getPath()) {
-            case "hippocampus" -> item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("iceandfire", "hippocampus_fin"));
-            case "hippogryph" -> item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("iceandfire", "hippogryph_talon"));
-            case "cockatrice" -> item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("iceandfire", "cockatrice_eye"));
-            case "siren" -> item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("iceandfire", "siren_tear"));
-            case "pixie" -> item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("iceandfire", "pixie_wings"));
-            case "deathworm" -> item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("iceandfire", "deathworm_tongue"));
-            case "hydra" -> item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("iceandfire", "hydra_heart"));
-            case "sea_serpent" -> item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("iceandfire", "sea_serpent_fang"));
-            case "wraith" -> item = ForgeRegistries.ITEMS.getValue(new ResourceLocation("iceandfire", "ghost_ingot"));
+            case "hippocampus" -> item = ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("iceandfire", "hippocampus_fin"));
+            case "hippogryph" -> item = ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("iceandfire", "hippogryph_talon"));
+            case "cockatrice" -> item = ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("iceandfire", "cockatrice_eye"));
+            case "siren" -> item = ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("iceandfire", "siren_tear"));
+            case "pixie" -> item = ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("iceandfire", "pixie_wings"));
+            case "deathworm" -> item = ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("iceandfire", "deathworm_tongue"));
+            case "hydra" -> item = ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("iceandfire", "hydra_heart"));
+            case "sea_serpent" -> item = ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("iceandfire", "sea_serpent_fang"));
+            case "wraith" -> item = ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath("iceandfire", "ghost_ingot"));
         }
         return item != null ? new ItemStack(item) : ItemStack.EMPTY;
     }

@@ -27,20 +27,16 @@ public class EternalBlood extends NoLevelsModifier implements InventoryTickModif
         if (!(holder instanceof Player player)) return;
 
         VampirePlayer vampire = VampirePlayer.get(player);
-        if (vampire.getLevel() <= 0) return; // 不是吸血鬼，不处理
+        if (vampire.getLevel() <= 0) return;
 
-        // ★ 防止 Vampirism 向匠魂 TankItem 注血（根本解决崩溃）
         fixTinkersTankNBT(player);
 
-        // ★ 安全喝血，不会崩
         try {
             vampire.drinkBlood(1, 1, null);
         } catch (Exception ignored) {
-            // 吃掉 Vampirism 的异常，不影响游戏
         }
     }
 
-    /** 修复匠魂 TankItem 的空 NBT，避免 FluidStack.EMPTY 引发崩溃 */
     private void fixTinkersTankNBT(Player player) {
         for (net.minecraft.world.item.ItemStack inv : player.getInventory().items) {
             if (inv.getItem().getClass().getName().contains("TankItem")) {

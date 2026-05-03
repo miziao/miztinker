@@ -29,7 +29,7 @@ public class Randomizer_Launcher extends NoLevelsModifier implements GeneralInte
     public InteractionResult onToolUse(IToolStackView tool, ModifierEntry modifier, Player player, InteractionHand hand, InteractionSource source) {
         if (!player.level().isClientSide && source == InteractionSource.RIGHT_CLICK) {
 
-            EntityType<?> randomizerType = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("projecte", "mob_randomizer"));
+            EntityType<?> randomizerType = ForgeRegistries.ENTITY_TYPES.getValue(ResourceLocation.fromNamespaceAndPath("projecte", "mob_randomizer"));
 
             if (randomizerType != null) {
                 Entity entity = randomizerType.create(player.level());

@@ -1,5 +1,6 @@
 package com.mizi.miztinker.modifier.modifiers;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -32,6 +33,10 @@ import static com.mizi.miztinker.modifier.modifiers.base.LivingEntityUtil.forceS
 
 public class Death_Note_KingMode extends NoLevelsModifier implements GeneralInteractionModifierHook {
 
+    private static final String KEY_ANNOUNCE = "modifier.miztinker.death_note.announce";
+    private static final String KEY_NO_LIST = "modifier.miztinker.death_note.no_list";
+    private static final String KEY_KING_SUMMARY = "modifier.miztinker.death_note.king_summary";
+
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.GENERAL_INTERACT);
@@ -47,7 +52,7 @@ public class Death_Note_KingMode extends NoLevelsModifier implements GeneralInte
         Set<EntityType<?>> targets = new HashSet<>();
         for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
             ItemStack invStack = player.getInventory().getItem(i);
-            if (invStack.is(Items.WRITABLE_BOOK)) {
+            if (invStack.is(Items.WRITABLE_BOOK) || invStack.is(Items.WRITTEN_BOOK)) {
                 CompoundTag nbt = invStack.getTag();
                 if (nbt != null && nbt.contains("pages", Tag.TAG_LIST)) {
                     ListTag pages = nbt.getList("pages", Tag.TAG_STRING);
@@ -62,22 +67,36 @@ public class Death_Note_KingMode extends NoLevelsModifier implements GeneralInte
         }
 
         if (targets.isEmpty()) {
-            player.displayClientMessage(Component.literal("§c未发现有效名单"), true);
+            player.displayClientMessage(Component.translatable(KEY_NO_LIST).withStyle(ChatFormatting.RED), true);
             return InteractionResult.FAIL;
         }
 
-        boolean killedAny = false;
+        int totalKilled = 0;
+        Set<EntityType<?>> actuallyKilledTypes = new HashSet<>();
+
         for (LivingEntity living : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(512))) {
-            if (targets.contains(living.getType()) && living.isAlive()) {
+            EntityType<?> type = living.getType();
+            if (targets.contains(type) && living.isAlive()) {
                 forceHurtWithNoHealable(living, level.damageSources().generic(), living.getHealth());
                 forceSetAllCandidateHealth(living, 0F);
-                killedAny = true;
+
+                actuallyKilledTypes.add(type);
+                totalKilled++;
             }
         }
 
-        if (killedAny) {
+        if (totalKilled > 0) {
+            for (EntityType<?> type : actuallyKilledTypes) {
+                player.displayClientMessage(Component.translatable(KEY_ANNOUNCE, type.getDescription())
+                        .withStyle(ChatFormatting.DARK_RED, ChatFormatting.ITALIC), false);
+            }
+
+            player.displayClientMessage(Component.translatable(KEY_KING_SUMMARY, totalKilled)
+                    .withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD), true);
+
             level.playSound(null, player.getX(), player.getY(), player.getZ(),
                     SoundEvents.VILLAGER_WORK_LIBRARIAN, SoundSource.PLAYERS, 1.0F, 0.8F);
+
             return InteractionResult.SUCCESS;
         }
 

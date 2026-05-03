@@ -12,6 +12,6 @@
     "upgrades": 1
   },
   "tools": {
-    "tag": "tconstruct:modifiable/interactable/right"
+    "tag": "tconstruct:modifiable"
   }
 }

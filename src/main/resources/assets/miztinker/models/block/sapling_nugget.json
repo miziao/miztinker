@@ -1,0 +1,29 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "miztinker:block/sapling_nugget",
+    "cross": "miztinker:block/sapling_nugget"
+  },
+  "elements": [
+    {
+      "from": [6.5, 0, 8],
+      "to": [9.5, 8, 8],
+      "shade": false,
+      "rotation": { "angle": 45, "axis": "y", "origin": [8, 0, 8] },
+      "faces": {
+        "north": { "uv": [6.5, 8, 9.5, 16], "texture": "#cross" },
+        "south": { "uv": [6.5, 8, 9.5, 16], "texture": "#cross" }
+      }
+    },
+    {
+      "from": [8, 0, 6.5],
+      "to": [8, 8, 9.5],
+      "shade": false,
+      "rotation": { "angle": 45, "axis": "y", "origin": [8, 0, 8] },
+      "faces": {
+        "west": { "uv": [6.5, 8, 9.5, 16], "texture": "#cross" },
+        "east": { "uv": [6.5, 8, 9.5, 16], "texture": "#cross" }
+      }
+    }
+  ]
+}

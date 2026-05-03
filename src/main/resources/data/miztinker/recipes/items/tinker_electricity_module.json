@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "bad",
+    "gcg",
+    "egf"
+  ],
+  "key": {
+    "c": {
+      "tag": "tconstruct:seared_bricks"
+    },
+    "a": {
+      "item": "minecraft:repeater"
+    },
+    "b": {
+      "item": "tconstruct:ichor_slime_crystal"
+    },
+    "d": {
+      "item": "tconstruct:earth_slime_crystal"
+    },
+    "e": {
+      "item": "tconstruct:ender_slime_crystal"
+    },
+    "f": {
+      "item": "tconstruct:sky_slime_crystal"
+    },
+    "g": {
+      "tag": "forge:storage_blocks/redstone"
+    }
+  },
+  "result": {
+    "item": "miztinker:tinker_electricity_module",
+    "count": 1
+  }
+}

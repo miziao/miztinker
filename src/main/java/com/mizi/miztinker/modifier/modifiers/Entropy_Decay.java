@@ -21,7 +21,7 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 public class Entropy_Decay extends NoLevelsModifier implements MeleeHitModifierHook, ToolStatsModifierHook {
 
-    private static final ResourceLocation DAMAGE_KEY = new ResourceLocation("miztinker", "entropy_decay_damage");
+    private static final ResourceLocation DAMAGE_KEY = ResourceLocation.fromNamespaceAndPath("miztinker", "entropy_decay_damage");
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {

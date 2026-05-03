@@ -27,5 +27,20 @@ public class ModifierRegister {
 
     public static final StaticModifier<DiademaModifier> MUSICGAME_STATIC_MODIFIER=
             MODIFIERS.register("musicgame", CommonDiademaModifier.Create(DiademaRegister.MUSICGAME::get));
+
+    public static final StaticModifier<DiademaModifier> TRINKETHATE=
+            MODIFIERS.register("trinket_hate_diadema", CommonDiademaModifier.Create(DiademaRegister.TRINKETHATE::get));
+
+    public static final StaticModifier<DiademaModifier> TANDEMPAPERBOMB=
+            MODIFIERS.register("tandem_paper_bomb", CommonDiademaModifier.Create(DiademaRegister.TANDEMPAPERBOMB::get));
+
+    public static final StaticModifier<DiademaModifier> BANSHOTENIN=
+            MODIFIERS.register("banshotenin", CommonDiademaModifier.Create(DiademaRegister.BANSHOTENIN::get));
+
+    public static final StaticModifier<DiademaModifier> HUNTERGAME=
+            MODIFIERS.register("hunter_game", CommonDiademaModifier.Create(DiademaRegister.HUNTERGAME::get));
+
+    public static final StaticModifier<DiademaModifier> RESPECT_PLAY=
+            MODIFIERS.register("respect_play", CommonDiademaModifier.Create(DiademaRegister.RESPECT_PLAY::get));
 }
 

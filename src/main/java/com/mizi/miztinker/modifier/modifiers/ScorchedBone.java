@@ -21,7 +21,7 @@ import java.util.List;
 
 public class ScorchedBone extends NoLevelsModifier implements ProcessLootModifierHook {
 
-    private static final ResourceLocation NECROTIC_BONE_ID = new ResourceLocation("tconstruct", "necrotic_bone");
+    private static final ResourceLocation NECROTIC_BONE_ID = ResourceLocation.fromNamespaceAndPath("tconstruct", "necrotic_bone");
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {

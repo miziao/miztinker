@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "miztinker:block/reinforced_seared_brick",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "miztinker:reinforced_seared_brick"
+        }
+      ]
+    }
+  ]
+}

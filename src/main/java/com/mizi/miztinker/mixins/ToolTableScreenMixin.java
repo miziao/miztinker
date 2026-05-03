@@ -11,7 +11,7 @@ import slimeknights.tconstruct.tables.client.inventory.ToolTableScreen;
 @Mixin(ToolTableScreen.class)
 public abstract class ToolTableScreenMixin {
 
-    @Shadow
+    @Shadow(remap = false)
     protected boolean enableArmorStandPreview;
 
     @Inject(method = "init", at = @At("HEAD"))

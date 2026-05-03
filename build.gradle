@@ -127,9 +127,11 @@ dependencies {
 
     //tic
     implementation fg.deobf("curse.maven:mantle-74924:6819217")
-    implementation fg.deobf("curse.maven:tinkers-construct-74072:6777068")
+    implementation fg.deobf("curse.maven:tinkers-construct-74072:7449219")
 
     implementation fg.deobf("curse.maven:slashblade-resharped-1022428:7073488")
+
+    implementation fg.deobf("curse.maven:curios-309927:6418456")
 
     implementation fileTree("lib")
 
@@ -145,6 +147,8 @@ dependencies {
     implementation fg.deobf("curse.maven:momotinker-1224077:7024699")
 
     implementation fg.deobf("curse.maven:goety-586095:7112220")
+
+    implementation fg.deobf("curse.maven:l2hostility-909207:7550889")
 
 
 }

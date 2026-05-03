@@ -160,61 +160,45 @@ public class MiziAoBartest {
     @SubscribeEvent
     public static void bartest(CustomizeGuiOverlayEvent.BossEventProgress event) {
         LerpingBossEvent bossStatusInfo = event.getBossEvent();
-        GLFW.glfwSetWindowOpacity(window.getWindow(), 1.0f);
-        Component eventName = event.getBossEvent().getName();
 
-        // 这种比较方式不受语言和格式代码影响，非常可靠
-//        if (eventName.equals(NORMAL_NAME) || eventName.equals(CHUJING_NAME)) {
-        if (event.getBossEvent().getName().getString().startsWith(Component.translatable("entity.jzyy.mizi_ao").getString()) ||
-                event.getBossEvent().getName().getString().startsWith(Component.translatable("entity.jzyy.mizi_ao.chujing").getString())
-        ){
+        String nameStr = bossStatusInfo.getName().getString();
+        String targetName = Component.translatable("entity.jzyy.mizi_ao").getString();
+        String targetNameChujing = Component.translatable("entity.jzyy.mizi_ao.chujing").getString();
+
+        if (nameStr.startsWith(targetName) || nameStr.startsWith(targetNameChujing)) {
 
             event.setCanceled(true);
 
             if (mc.level != null) {
                 RenderSystem.enableBlend();
+                RenderSystem.defaultBlendFunc();
+
                 GuiGraphics guiGraphics = event.getGuiGraphics();
 
-                // 血条尺寸
                 int width = 256;
-                int height = 8; // 增加高度以适应波浪效果
-                int x = window.getGuiScaledWidth() / 2 - width / 2;
-                int y = event.getY() + 10; // 调整位置
+                int height = 8;
+                int x = event.getWindow().getGuiScaledWidth() / 2 - width / 2;
+                int y = event.getY();
 
-                // 绘制不规则边框
                 drawIrregularBorder(guiGraphics, x, y, width, height);
 
-                // 背景 (半透明)
-                guiGraphics.fill(x, y, x + width, y + height, rgba(30, 30, 30, 180));
+                guiGraphics.fill(x, y, x + width, y + height, 0xB41E1E1E);
 
-                // 血条进度
                 float healthPercentage = bossStatusInfo.getProgress();
                 int progressWidth = (int) (width * healthPercentage);
 
-                // 使用青白色填充血条
                 if (progressWidth > 0) {
                     fillStripedBar(guiGraphics, x, y, progressWidth, height);
                 }
-
-
-                // 绘制Boss名称
-                String bossName = bossStatusInfo.getName().getString();
                 Font font = mc.font;
-                int nameColor = Color.CYAN.getRGB();
-
-                // 名称背景效果
-                int nameWidth = font.width(bossName);
+                int nameWidth = font.width(nameStr);
                 int nameX = x + (width / 2) - (nameWidth / 2);
                 int nameY = y - 12;
 
-                // 名称装饰性背景
-                guiGraphics.fill(nameX - 2, nameY - 2, nameX + nameWidth + 2, nameY + 10, rgba(0, 0, 0, 150));
-                guiGraphics.fill(nameX - 1, nameY - 1, nameX + nameWidth + 1, nameY + 9, rgba(20, 20, 20, 180));
-
-                // 绘制名称
-                guiGraphics.drawString(font, bossName, nameX, nameY, nameColor | 0xFF000000, true);
+                guiGraphics.drawString(font, nameStr, nameX, nameY, 0xFF00FFFF, true);
 
                 RenderSystem.disableBlend();
+                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             }
         }
     }

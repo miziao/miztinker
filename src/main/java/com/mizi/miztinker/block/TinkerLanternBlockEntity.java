@@ -19,21 +19,18 @@ public class TinkerLanternBlockEntity extends BlockEntity {
     private int scanTimer = 0;
     private static final int ACCELERATION_FACTOR = 200;
 
-    // 新增：红石控制标志位
     private boolean disabledByRedstone = false;
 
     public TinkerLanternBlockEntity(BlockPos pos, BlockState state) {
         super(MiztinkerBlocks.TINKER_LANTERN_BE.get(), pos, state);
     }
 
-    // 提供给 Block 类调用的方法
     public void setDisabledByRedstone(boolean disabled) {
         this.disabledByRedstone = disabled;
-        this.setChanged(); // 标记数据已改变
+        this.setChanged();
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, TinkerLanternBlockEntity be) {
-        // 如果被红石激活（通电），则跳过加速逻辑
         if (be.disabledByRedstone) {
             return;
         }
@@ -92,7 +89,6 @@ public class TinkerLanternBlockEntity extends BlockEntity {
         }
     }
 
-    // 必须重写持久化方法，否则存档重启后红石状态会丢失
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);

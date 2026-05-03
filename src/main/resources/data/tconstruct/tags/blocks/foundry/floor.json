@@ -3,6 +3,7 @@
     "#tconstruct:scorched_blocks",
     "tconstruct:scorched_drain",
     "tconstruct:scorched_chute",
-    "tconstruct:scorched_duct"
+    "tconstruct:scorched_duct",
+    "miztinker:reinforced_seared_brick"
   ]
 }

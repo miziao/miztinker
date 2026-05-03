@@ -66,6 +66,11 @@ public class MiztinkerFluidRegister {
 
     public static final FluidObject<ForgeFlowingFluid> MOLTEN_AETERNALIS_FUEL = registerHotBurning(FLUIDS,"molten_aeternalis_fuel",3500,4,18,4f,false);
 
+    public static final FluidObject<ForgeFlowingFluid> RAINBOW_MATERIAL = registerHotBurning(FLUIDS,"molten_rainbow_material",6666,14,32,777f,false);
+
+    public static final FluidObject<ForgeFlowingFluid> MOLTEN_PARADOX_MANYULLYN = registerHotBurning(FLUIDS,"molten_paradox_manyullyn",1500,4,18,4f,false);
+
+    public static final FluidObject<ForgeFlowingFluid> MOLTEN_SAKURA_GOLD = registerHotBurning(FLUIDS,"molten_sakura_gold",1500,4,18,4f,false);
 
 
 

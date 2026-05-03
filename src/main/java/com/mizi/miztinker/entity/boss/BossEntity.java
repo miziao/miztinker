@@ -254,6 +254,7 @@ public class BossEntity extends Monster {
     public void setNoAi(boolean noAi) {
     }
 
+
     @Override
     public void updateFluidHeightAndDoFluidPushing(Predicate<FluidState> shouldUpdate) {
 

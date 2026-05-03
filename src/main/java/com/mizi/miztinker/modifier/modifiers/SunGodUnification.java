@@ -32,7 +32,7 @@ public class SunGodUnification extends NoLevelsModifier implements
         ToolStatsModifierHook,
         SlotStackModifierHook {
 
-    private static final ResourceLocation SACRIFICED_HEALTH = new ResourceLocation("miztinker", "sacrificed_health");
+    private static final ResourceLocation SACRIFICED_HEALTH = ResourceLocation.fromNamespaceAndPath("miztinker", "sacrificed_health");
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {

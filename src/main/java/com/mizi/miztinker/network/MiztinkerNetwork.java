@@ -1,10 +1,8 @@
 package com.mizi.miztinker.network;
 
+import com.mizi.miztinker.network.packets.*;
 import com.mizi.miztinker.network.packets.HudCharge.MurasamaEnergyPointCharge;
 import com.mizi.miztinker.network.packets.HudCharge.MurasamaEnergyQuantityCharge;
-import com.mizi.miztinker.network.packets.MizitinkerKeyInputPKT;
-import com.mizi.miztinker.network.packets.PlaySoundPacket;
-import com.mizi.miztinker.network.packets.ScabbardPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
@@ -35,8 +33,52 @@ public class MiztinkerNetwork {
         INSTANCE.messageBuilder(MurasamaEnergyQuantityCharge.class, id(), NetworkDirection.PLAY_TO_CLIENT).decoder(MurasamaEnergyQuantityCharge::new).encoder(MurasamaEnergyQuantityCharge::encode).consumerMainThread(MurasamaEnergyQuantityCharge::handle).add();
         INSTANCE.messageBuilder(MurasamaEnergyPointCharge.class, id(), NetworkDirection.PLAY_TO_CLIENT).decoder(MurasamaEnergyPointCharge::new).encoder(MurasamaEnergyPointCharge::encode).consumerMainThread(MurasamaEnergyPointCharge::handle).add();
 
+
         INSTANCE.messageBuilder(PlaySoundPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT).decoder(PlaySoundPacket::decode).encoder(PlaySoundPacket::encode).consumerMainThread(PlaySoundPacket::handle).add();
+        INSTANCE.messageBuilder(TimeStopPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(TimeStopPacket::decode)
+                .encoder(TimeStopPacket::encode)
+                .consumerMainThread(TimeStopPacket::handle)
+                .add();
+
+        INSTANCE.messageBuilder(HolyProtectionParticlePacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(HolyProtectionParticlePacket::decode)
+                .encoder(HolyProtectionParticlePacket::encode)
+                .consumerMainThread(HolyProtectionParticlePacket::handle)
+                .add();
+
+        INSTANCE.messageBuilder(MizLeftClickEmptyPacket.class, packetId++, NetworkDirection.PLAY_TO_SERVER)
+                .decoder(MizLeftClickEmptyPacket::new)
+                .encoder(MizLeftClickEmptyPacket::toBytes)
+                .consumerMainThread(MizLeftClickEmptyPacket::handle)
+                .add();
+
+            INSTANCE.messageBuilder(WeatherChangePacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                    .decoder(WeatherChangePacket::decode)
+                    .encoder(WeatherChangePacket::encode)
+                    .consumerMainThread(WeatherChangePacket::handle)
+                    .add();
+
+        INSTANCE.messageBuilder(TimeChangePacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(TimeChangePacket::decode)
+                .encoder(TimeChangePacket::encode)
+                .consumerMainThread(TimeChangePacket::handle)
+                .add();
+
+        INSTANCE.messageBuilder(ShieldSyncPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(ShieldSyncPacket::new)
+                .encoder(ShieldSyncPacket::encode)
+                .consumerMainThread(ShieldSyncPacket::handle)
+                .add();
+
+        INSTANCE.messageBuilder(EntityColorPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(EntityColorPacket::decode)
+                .encoder(EntityColorPacket::encode)
+                .consumerMainThread(EntityColorPacket::handle)
+                .add();
+
     }
+
 
     public static <MSG> void sendToServer(MSG msg){
         INSTANCE.sendToServer(msg);

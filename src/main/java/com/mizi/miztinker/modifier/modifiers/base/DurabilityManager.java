@@ -9,7 +9,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 
 public class DurabilityManager {
-    public static final ResourceLocation THEORETICAL_MAX_KEY = new ResourceLocation("miztinker", "theoretical_max_durability");
+    public static final ResourceLocation THEORETICAL_MAX_KEY = ResourceLocation.fromNamespaceAndPath("miztinker", "theoretical_max_durability");
 
     public static long getTheoreticalMax(IToolContext context) {
         IModDataView persistentData = context.getPersistentData();

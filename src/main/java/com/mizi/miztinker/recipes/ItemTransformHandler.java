@@ -1,152 +1,110 @@
 package com.mizi.miztinker.recipes;
 
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import com.mizi.miztinker.recipes.rules.*;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.lang.ref.WeakReference;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Mod.EventBusSubscriber(modid = "miztinker")
 public class ItemTransformHandler {
 
-    private static final Map<Integer, TimerData> timers = new ConcurrentHashMap<>();
+    private static final String TAG_TRANSFORMABLE = "miztinker:transformable";
 
-    static class TimerData {
-        final WeakReference<ItemEntity> ref;
-        final long startTick;
-        final ResourceLocation target;
+    private static final List<ITransformRule> RULES = Arrays.asList(
+            new StarMetalRule(),
+            new DeathNoteRule(),
+            new StormBookRule()
+    );
 
-        TimerData(ItemEntity entity, long startTick, ResourceLocation target) {
-            this.ref = new WeakReference<>(entity);
-            this.startTick = startTick;
-            this.target = target;
-        }
-    }
+    private static final Map<Integer, ActiveProcess> activeProcesses = new ConcurrentHashMap<>();
 
-    /** 标记生成的掉落物，并记录初始高度 */
+    record ActiveProcess(ITransformRule rule, long startTick) {}
+
     @SubscribeEvent
     public static void onEntityJoinLevel(EntityJoinLevelEvent event) {
+        if (event.getLevel().isClientSide) return;
+
         if (event.getEntity() instanceof ItemEntity item) {
             ItemStack stack = item.getItem();
+            for (ITransformRule rule : RULES) {
+                if (rule.isInput(stack)) {
 
-            if (stack.getItem() == Items.IRON_INGOT
-                    || stack.getItem() == Items.BOOK
-                    || stack.getItem() == Items.WRITABLE_BOOK) {
-
-                item.getPersistentData().putBoolean("miztinker:transformable", true);
-                item.getPersistentData().putDouble("miztinker:origin_y", item.getY());
+                    item.getPersistentData().putBoolean(TAG_TRANSFORMABLE, true);
+                    break;
+                }
             }
         }
     }
 
-    /** 玩家附近扫描掉落物 */
     @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.START) return;
-        if (!(event.player.level() instanceof ServerLevel level)) return;
+    public static void onLevelTick(TickEvent.LevelTickEvent event) {
+        if (event.phase != TickEvent.Phase.START || !(event.level instanceof ServerLevel level) || level.getGameTime() % 20 != 0) return;
 
-        double range = 32.0;
-        AABB area = event.player.getBoundingBox().inflate(range);
-
-        for (ItemEntity item : level.getEntitiesOfClass(
-                ItemEntity.class,
-                area,
-                e -> e.getPersistentData().getBoolean("miztinker:transformable")
-        )) {
-
-            ResourceLocation target;
-
-            // ===== 原有规则 =====
-            if (item.getItem().getItem() == Items.IRON_INGOT
-                    && !level.isDay()
-                    && item.getY() > 300) {
-                target = new ResourceLocation("miztinker:starmetal_ingot");
-
-            } else if (item.getItem().getItem() == Items.BOOK
-                    && (level.isThundering() || level.isRaining())) {
-                target = new ResourceLocation("miztinker:born_of_the_storm");
-
-            }
-            // ===== 新增：书与笔 → 死亡笔记 =====
-            else {
-                target = null;
-                if (item.getItem().getItem() == Items.WRITABLE_BOOK) {
-                    double originY = item.getPersistentData().getDouble("miztinker:origin_y");
-
-                    if (originY >= 320 && item.getY() <= -40) {
-                        // ✅ 直接立刻转化
-                        ItemStack newStack = new ItemStack(
-                                Objects.requireNonNull(
-                                        level.registryAccess()
-                                                .registryOrThrow(Registries.ITEM)
-                                                .get(new ResourceLocation("miztinker:death_note"))
-                                ),
-                                item.getItem().getCount()
-                        );
-
-                        ItemEntity newEntity = new ItemEntity(
-                                level, item.getX(), item.getY(), item.getZ(), newStack
-                        );
-                        level.addFreshEntity(newEntity);
-                        item.discard();
+        for (Entity entity : level.getAllEntities()) {
+            if (entity instanceof ItemEntity item && item.getPersistentData().getBoolean(TAG_TRANSFORMABLE)) {
+                for (ITransformRule rule : RULES) {
+                    if (rule.isInput(item.getItem()) && rule.matches(item, level)) {
+                        handleRuleTrigger(item, level, rule);
+                        break;
                     }
-                    continue; // 不进入计时器
                 }
-            }
-
-            // ===== 原有计时转化逻辑 =====
-            int id = item.getId();
-            long gameTime = level.getGameTime();
-
-            if (target != null) {
-                timers.computeIfAbsent(id, k -> new TimerData(item, gameTime, target));
-            } else {
-                timers.remove(id);
             }
         }
 
-        // ===== 原有 Timer 更新 =====
-        Iterator<Map.Entry<Integer, TimerData>> it = timers.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<Integer, TimerData> entry = it.next();
-            TimerData td = entry.getValue();
-            ItemEntity entity = td.ref.get();
+        updateActiveProcesses(level);
+    }
 
-            if (entity == null || entity.isRemoved() || !(entity.level() instanceof ServerLevel lvl)) {
+    private static void handleRuleTrigger(ItemEntity item, ServerLevel level, ITransformRule rule) {
+        if (rule.getTransformTicks() <= 0) {
+            performTransform(item, level, rule.getResult(item.getItem(), level));
+        } else {
+            activeProcesses.putIfAbsent(item.getId(), new ActiveProcess(rule, level.getGameTime()));
+        }
+    }
+
+    private static void updateActiveProcesses(ServerLevel level) {
+        Iterator<Map.Entry<Integer, ActiveProcess>> it = activeProcesses.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<Integer, ActiveProcess> entry = it.next();
+            Entity rawEntity = level.getEntity(entry.getKey());
+
+            if (!(rawEntity instanceof ItemEntity entity) || entity.isRemoved()) {
                 it.remove();
                 continue;
             }
 
-            long elapsed = lvl.getGameTime() - td.startTick;
+            ActiveProcess process = entry.getValue();
 
-            if (elapsed >= 2400L) {
-                ItemStack newStack = new ItemStack(
-                        Objects.requireNonNull(
-                                lvl.registryAccess()
-                                        .registryOrThrow(Registries.ITEM)
-                                        .get(td.target)
-                        ),
-                        entity.getItem().getCount()
-                );
-                ItemEntity newEntity = new ItemEntity(
-                        lvl, entity.getX(), entity.getY(), entity.getZ(), newStack
-                );
-                lvl.addFreshEntity(newEntity);
-                entity.discard();
+
+            if (!process.rule.matches(entity, level)) {
+                it.remove();
+                continue;
+            }
+
+            if (level.getGameTime() - process.startTick >= process.rule.getTransformTicks()) {
+                performTransform(entity, level, process.rule.getResult(entity.getItem(), level));
                 it.remove();
             }
         }
+    }
+
+    private static void performTransform(ItemEntity oldEntity, ServerLevel level, ItemStack result) {
+        if (result.isEmpty()) return;
+
+        ItemEntity newEntity = new ItemEntity(level, oldEntity.getX(), oldEntity.getY(), oldEntity.getZ(), result.copy());
+        newEntity.setDeltaMovement(oldEntity.getDeltaMovement());
+
+        level.addFreshEntity(newEntity);
+
+
+        oldEntity.discard();
     }
 }

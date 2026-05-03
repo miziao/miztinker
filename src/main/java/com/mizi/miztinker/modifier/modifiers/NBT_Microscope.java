@@ -32,14 +32,12 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
-import static com.mizi.miztinker.miztinker.getResource;
-
 public class NBT_Microscope extends NoLevelsModifier implements
         GeneralInteractionModifierHook,
         EntityInteractionModifierHook,
         BlockInteractionModifierHook {
 
-    private static final String MICROSCOPE_ACTIVE = "microscope_active";
+    public static final ResourceLocation MICROSCOPE_ACTIVE = ResourceLocation.fromNamespaceAndPath("mizi", "microscope_active");
 
     public NBT_Microscope() {
         MinecraftForge.EVENT_BUS.register(this);
@@ -55,7 +53,7 @@ public class NBT_Microscope extends NoLevelsModifier implements
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public void onScreenMouseClick(ScreenEvent.MouseButtonPressed.Pre event) {
-        if (event.getButton() != 1) return;
+        if (event.getButton() != 1) return; // 右键
 
         if (event.getScreen() instanceof AbstractContainerScreen<?> screen) {
             Slot slot = screen.getSlotUnderMouse();
@@ -64,7 +62,6 @@ public class NBT_Microscope extends NoLevelsModifier implements
                 if (player != null && isAnyMicroscopeActive(player)) {
                     inspectItem(player, slot.getItem());
                     player.playSound(SoundEvents.BOOK_PAGE_TURN, 0.5f, 1.5f);
-
                     event.setCanceled(true);
                 }
             }
@@ -72,31 +69,29 @@ public class NBT_Microscope extends NoLevelsModifier implements
     }
 
     private boolean isAnyMicroscopeActive(Player player) {
-        if (checkStack(player.getMainHandItem())) return true;
-        if (checkStack(player.getOffhandItem())) return true;
-        for (ItemStack stack : player.getInventory().items) {
-            if (checkStack(stack)) return true;
+        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+            ItemStack stack = player.getInventory().getItem(i);
+            if (checkStackActive(stack)) return true;
         }
         return false;
     }
 
-    private boolean checkStack(ItemStack stack) {
+    private boolean checkStackActive(ItemStack stack) {
         if (stack.isEmpty() || !stack.getOrCreateTag().contains("tic_modifiers")) return false;
-
         ToolStack tool = ToolStack.from(stack);
         if (tool.getModifierLevel(this) > 0) {
-            return tool.getPersistentData().getBoolean(getResource(MICROSCOPE_ACTIVE));
+            return tool.getPersistentData().getBoolean(MICROSCOPE_ACTIVE);
         }
         return false;
     }
-
 
     @Override
     public InteractionResult afterEntityUse(IToolStackView tool, ModifierEntry modifier, Player player, LivingEntity target, InteractionHand hand, InteractionSource source) {
-        if (!tool.getPersistentData().getBoolean(getResource(MICROSCOPE_ACTIVE)) || player.level().isClientSide) return InteractionResult.PASS;
+        if (!tool.getPersistentData().getBoolean(MICROSCOPE_ACTIVE) || player.level().isClientSide) return InteractionResult.PASS;
+
         ResourceLocation entityId = ForgeRegistries.ENTITY_TYPES.getKey(target.getType());
         if (entityId != null) {
-            sendIdMessage(player, "Entity", entityId.toString());
+            sendIdMessage(player, "entity", entityId.toString());
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.5f, 1.5f);
             return InteractionResult.SUCCESS;
         }
@@ -106,10 +101,11 @@ public class NBT_Microscope extends NoLevelsModifier implements
     @Override
     public InteractionResult beforeBlockUse(IToolStackView tool, ModifierEntry modifier, UseOnContext context, InteractionSource source) {
         Player player = context.getPlayer();
-        if (player == null || !tool.getPersistentData().getBoolean(getResource(MICROSCOPE_ACTIVE)) || player.level().isClientSide) return InteractionResult.PASS;
+        if (player == null || !tool.getPersistentData().getBoolean(MICROSCOPE_ACTIVE) || player.level().isClientSide) return InteractionResult.PASS;
+
         ResourceLocation blockId = ForgeRegistries.BLOCKS.getKey(player.level().getBlockState(context.getClickedPos()).getBlock());
         if (blockId != null) {
-            sendIdMessage(player, "Block", blockId.toString());
+            sendIdMessage(player, "block", blockId.toString());
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.5f, 1.5f);
             return InteractionResult.SUCCESS;
         }
@@ -119,12 +115,17 @@ public class NBT_Microscope extends NoLevelsModifier implements
     @Override
     public @NotNull InteractionResult onToolUse(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, Player player, @NotNull InteractionHand hand, @NotNull InteractionSource source) {
         if (player.level().isClientSide) return InteractionResult.PASS;
+
         if (source == InteractionSource.RIGHT_CLICK && player.isCrouching()) {
             ModDataNBT data = tool.getPersistentData();
-            boolean nowActive = !data.getBoolean(getResource(MICROSCOPE_ACTIVE));
-            data.putBoolean(getResource(MICROSCOPE_ACTIVE), nowActive);
+            boolean nowActive = !data.getBoolean(MICROSCOPE_ACTIVE);
+            data.putBoolean(MICROSCOPE_ACTIVE, nowActive);
 
-            player.displayClientMessage(Component.literal("§6[NBT显微镜] " + (nowActive ? "§b已开启" : "§7已关闭")), true);
+            Component status = nowActive ?
+                    Component.translatable("message.miztinker.microscope.active").withStyle(s -> s.withColor(0x55FFFF)) :
+                    Component.translatable("message.miztinker.microscope.inactive").withStyle(s -> s.withColor(0xAAAAAA));
+
+            player.displayClientMessage(Component.translatable("message.miztinker.microscope.prefix").append(status), true);
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 1.0f, nowActive ? 1.2f : 0.8f);
             return InteractionResult.SUCCESS;
         }
@@ -132,34 +133,38 @@ public class NBT_Microscope extends NoLevelsModifier implements
     }
 
     private void sendIdMessage(Player player, String type, String idStr) {
-        player.sendSystemMessage(Component.literal("§7[" + type + " ID] §b" + idStr).withStyle(s -> s
-                .withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, idStr))
-                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("点击复制注册名")))));
+        player.sendSystemMessage(Component.translatable("message.miztinker.microscope.id_display", type.toUpperCase(), idStr)
+                .withStyle(s -> s.withColor(0x55FFFF)
+                        .withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, idStr))
+                        .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("message.miztinker.microscope.click_to_copy")))));
     }
 
     private void inspectItem(Player player, ItemStack stack) {
         ResourceLocation id = ForgeRegistries.ITEMS.getKey(stack.getItem());
         String idStr = (id != null) ? id.toString() : "unknown";
-        player.sendSystemMessage(Component.literal("§7[Item ID] §b" + idStr).withStyle(s -> s
-                .withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, idStr))
-                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("点击复制注册名")))));
+
+        player.sendSystemMessage(Component.translatable("message.miztinker.microscope.item_id", idStr)
+                .withStyle(s -> s.withColor(0x55FFFF)
+                        .withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, idStr))));
 
         stack.getTags().forEach(tagKey -> {
             String tagStr = "#" + tagKey.location().toString();
-            player.sendSystemMessage(Component.literal("§7[Tag] §d" + tagStr).withStyle(s -> s
-                    .withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, tagStr))
-                    .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("点击复制该 Tag")))));
+            player.sendSystemMessage(Component.translatable("message.miztinker.microscope.tag_display", tagStr)
+                    .withStyle(s -> s.withColor(0xFF55FF)
+                            .withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, tagStr))));
         });
 
         CompoundTag nbt = stack.getTag();
         if (nbt != null) {
             String nbtStr = nbt.toString();
-            player.sendSystemMessage(Component.literal("§7[NBT] §f" + (nbtStr.length() > 60 ? nbtStr.substring(0, 57) + "..." : nbtStr))
-                    .append(Component.literal(" §6[复制]").withStyle(s -> s
+            String displayNbt = nbtStr.length() > 60 ? nbtStr.substring(0, 57) + "..." : nbtStr;
+
+            player.sendSystemMessage(Component.translatable("message.miztinker.microscope.nbt_display", displayNbt)
+                    .append(Component.translatable("message.miztinker.microscope.copy_btn").withStyle(s -> s.withColor(0xFFAA00)
                             .withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, nbtStr))
-                            .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal("点击复制完整 NBT"))))));
+                            .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.translatable("message.miztinker.microscope.copy_nbt_hover"))))));
         } else {
-            player.sendSystemMessage(Component.literal("§8该物品无 NBT"));
+            player.sendSystemMessage(Component.translatable("message.miztinker.microscope.no_nbt").withStyle(s -> s.withColor(0x888888)));
         }
     }
 }

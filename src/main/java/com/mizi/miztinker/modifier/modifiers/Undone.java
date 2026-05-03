@@ -25,26 +25,33 @@ public class Undone extends Modifier implements MeleeHitModifierHook {
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
-        super.registerHooks(hookBuilder);
         hookBuilder.addHook(this, ModifierHooks.MELEE_HIT);
     }
 
+
     @Override
-    public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
+    public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
         LivingEntity target = context.getLivingTarget();
+        LivingEntity attacker = context.getAttacker();
 
-        Level level = context.getAttacker().level();
-
-        if (target == null || !target.isAlive() || level.isClientSide) {
-            return;
+        if (target == null || !target.isAlive() || attacker.level().isClientSide) {
+            return knockback;
         }
 
         float chance = modifier.getLevel() * 0.3f;
         if (RANDOM.nextFloat() > chance) {
-            return;
+            return knockback;
         }
 
+        stripRandomEquipment(target);
+
+        return knockback;
+    }
+
+    private void stripRandomEquipment(LivingEntity target) {
+        Level level = target.level();
         List<EquipmentSlot> filledSlots = new ArrayList<>();
+
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             if (!target.getItemBySlot(slot).isEmpty()) {
                 filledSlots.add(slot);
@@ -67,7 +74,7 @@ public class Undone extends Modifier implements MeleeHitModifierHook {
             level.playSound(null, target.getX(), target.getY(), target.getZ(),
                     SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.PLAYERS, 1.0f, 0.5f);
             level.playSound(null, target.getX(), target.getY(), target.getZ(),
-                    SoundEvents.ITEM_BREAK, SoundSource.PLAYERS, 1.0f, 1.2f);
+                    SoundEvents.ITEM_BREAK, SoundSource.PLAYERS, 1.0f, 0.8f);
         }
     }
 }

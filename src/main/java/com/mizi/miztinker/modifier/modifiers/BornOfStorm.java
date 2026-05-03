@@ -20,18 +20,17 @@ import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
-import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 
 import java.util.List;
 
-/**
- * 匠魂特性：于暴风雨中诞生
- * - 空手点击物品栏工具切换天气：晴天 -> 雨天 -> 雷暴 -> 晴天
- * - Tooltip 显示当前天气状态
- */
 public class BornOfStorm extends NoLevelsModifier implements SlotStackModifierHook, TooltipModifierHook {
 
-    private static final ResourceLocation WEATHER_KEY = new ResourceLocation("miztinker", "bornofstorm.weather");
+    private static final ResourceLocation WEATHER_KEY = ResourceLocation.fromNamespaceAndPath("miztinker", "bornofstorm.weather");
+
+    private static final String KEY_STATUS_SUNNY = "modifier.miztinker.born_of_storm.sunny";
+    private static final String KEY_STATUS_RAIN = "modifier.miztinker.born_of_storm.rain";
+    private static final String KEY_STATUS_STORM = "modifier.miztinker.born_of_storm.storm";
+    private static final String KEY_ACTION_HINT = "modifier.miztinker.born_of_storm.hint";
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
@@ -39,55 +38,53 @@ public class BornOfStorm extends NoLevelsModifier implements SlotStackModifierHo
         hookBuilder.addHook(this, ModifierHooks.TOOLTIP);
     }
 
-    /** 空手点击物品栏工具触发 */
     @Override
     public boolean overrideOtherStackedOnMe(IToolStackView tool, ModifierEntry entry,
                                             ItemStack held, Slot slot, Player player, SlotAccess access) {
         if (!held.isEmpty()) return false;
         if (slot.container != player.getInventory()) return false;
 
-        ModDataNBT data = tool.getPersistentData();
-        int current = data.getInt(WEATHER_KEY);
+        int current = tool.getPersistentData().getInt(WEATHER_KEY);
         int next = (current + 1) % 3;
-        data.putInt(WEATHER_KEY, next);
 
-        // ✅ 客户端发包同步到服务端
+        tool.getPersistentData().putInt(WEATHER_KEY, next);
+
         if (player.level().isClientSide) {
-            MiztinkerNetwork.INSTANCE.send(PacketDistributor.SERVER.noArg(), new WeatherChangePacket(next));
-        }
+            MiztinkerNetwork.INSTANCE.send(PacketDistributor.SERVER.noArg(),
+                    new WeatherChangePacket(next, slot.index));
 
-        // 客户端即时显示提示
-        String msg = switch (next) {
-            case 1 -> "§b现在是§3雨天§b。";
-            case 2 -> "§9现在是§1暴风雨§9！";
-            default -> "§e现在是§6晴天§e。";
-        };
-        player.displayClientMessage(Component.literal(msg), true);
+            String msgKey = switch (next) {
+                case 1 -> KEY_STATUS_RAIN;
+                case 2 -> KEY_STATUS_STORM;
+                default -> KEY_STATUS_SUNNY;
+            };
+            player.displayClientMessage(Component.translatable(msgKey), true);
+        }
 
         return true;
     }
 
-    /** Tooltip 显示当前天气状态 */
     @Override
     public void addTooltip(IToolStackView tool, ModifierEntry modifier, @Nullable Player player,
                            List<Component> tooltip, TooltipKey key, net.minecraft.world.item.TooltipFlag flag) {
 
-        int state = tool.getPersistentData().getInt(WEATHER_KEY);
-
-        // 优先根据世界天气显示
+        int state = 0;
         if (player != null) {
             Level level = player.level();
-            if (level.isRaining()) state = level.isThundering() ? 2 : 1;
-            else state = 0;
+            if (level.isRaining()) {
+                state = level.isThundering() ? 2 : 1;
+            }
+        } else {
+            state = tool.getPersistentData().getInt(WEATHER_KEY);
         }
 
-        String status = switch (state) {
-            case 1 -> "§b当前天气：雨天";
-            case 2 -> "§9当前天气：暴风雨";
-            default -> "§e当前天气：晴天";
+        String statusKey = switch (state) {
+            case 1 -> KEY_STATUS_RAIN;
+            case 2 -> KEY_STATUS_STORM;
+            default -> KEY_STATUS_SUNNY;
         };
 
-        tooltip.add(Component.literal(status).withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.literal("空手右键切换天气模式").withStyle(ChatFormatting.DARK_GRAY));
+        tooltip.add(Component.translatable(statusKey).withStyle(ChatFormatting.AQUA));
+        tooltip.add(Component.translatable(KEY_ACTION_HINT).withStyle(ChatFormatting.DARK_GRAY));
     }
 }

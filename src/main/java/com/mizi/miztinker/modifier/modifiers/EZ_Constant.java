@@ -98,7 +98,7 @@ public class EZ_Constant extends NoLevelsModifier implements InventoryTickModifi
 
     private void drop(ServerLevel world, BlockPos pos, String namespace, String itemName, int count) {
         ItemStack stack = new ItemStack(Objects.requireNonNull(
-                ForgeRegistries.ITEMS.getValue(new ResourceLocation(namespace, itemName))
+                ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath(namespace, itemName))
         ), count);
         world.addFreshEntity(new ItemEntity(
                 world,

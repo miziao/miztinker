@@ -39,14 +39,7 @@ public class DestinedDeath extends MobEffect {
         float reHealth = target.getHealth() - target.getMaxHealth() * 0.001f;
         setAbsoluteSeveranceHealth(target, reHealth);
         forceSetAllCandidateHealth(target,reHealth);
-        if (isFromOmniMod(target)) {
-            CompoundTag tag = new CompoundTag();
-            tag.putFloat("Health", reHealth);
-            try {
-                target.readAdditionalSaveData(tag);
-            } catch (Exception ignored) {
-            }
-        }
+
         if (reHealth <= 0 || target.getHealth() <= 0){
             forceSetAllCandidateHealth(target, 0);
             setAbsoluteSeveranceHealth(target, 0);

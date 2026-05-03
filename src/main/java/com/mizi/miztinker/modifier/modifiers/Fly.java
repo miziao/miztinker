@@ -22,7 +22,6 @@ public class Fly extends NoLevelsModifier implements InventoryTickModifierHook, 
     public void onEquip(@NotNull IToolStackView tool, @NotNull ModifierEntry entry, EquipmentChangeContext context) {
         if (!(context.getEntity() instanceof ServerPlayer player)) return;
 
-        // 直接开启飞行能力，无需等级判断
         player.getAbilities().mayfly = true;
     }
 
@@ -30,13 +29,11 @@ public class Fly extends NoLevelsModifier implements InventoryTickModifierHook, 
     public void onUnequip(@NotNull IToolStackView tool, @NotNull ModifierEntry entry, EquipmentChangeContext context) {
         if (!(context.getEntity() instanceof ServerPlayer player)) return;
 
-        // 如果替换物仍然有该 modifier，则不关闭飞行
         IToolStackView replacement = context.getReplacementTool();
         if (replacement != null && replacement.getModifierLevel(this) > 0) {
             return;
         }
 
-        // 保护创意/旁观模式玩家
         GameType gm = player.gameMode.getGameModeForPlayer();
         if (gm == GameType.SPECTATOR || gm == GameType.CREATIVE) return;
 
@@ -48,9 +45,8 @@ public class Fly extends NoLevelsModifier implements InventoryTickModifierHook, 
     public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world,
                                 LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (!(holder instanceof Player player)) return;
-        if (!isCorrectSlot) return; // 只在正确槽位
+        if (!isCorrectSlot) return;
 
-        // 只要穿上就可以飞，server 上同步
         if (player instanceof ServerPlayer sp) {
             sp.getAbilities().mayfly = true;
         } else {

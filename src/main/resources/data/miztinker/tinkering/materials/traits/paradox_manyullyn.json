@@ -1,0 +1,16 @@
+{
+  "default": [
+    {
+      "name": "miztinker:moon_slasher",
+      "level": 1
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor":[
+      {
+        "name": "miztinker:energy_overdose",
+        "level": 1
+      }
+    ]
+  }
+}

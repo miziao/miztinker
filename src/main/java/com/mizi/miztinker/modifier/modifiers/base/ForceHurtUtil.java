@@ -29,6 +29,7 @@ import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.gameevent.GameEvent;
 
+@SuppressWarnings("removal")
 public class ForceHurtUtil {
     public static sun.misc.Unsafe U = null;
     static {
@@ -352,6 +353,153 @@ public class ForceHurtUtil {
                     entity.remove(Entity.RemovalReason.KILLED);
                     entity.setPos(Double.NaN, Double.NaN, Double.NaN);
                 }
+            }
+        }
+    }
+
+    public static class IncreasingOnlyHealthData extends SynchedEntityData {
+        public float minHealth = -Float.MAX_VALUE;
+
+        public IncreasingOnlyHealthData(SynchedEntityData old) {
+            super(old.entity);
+            this.entity = old.entity;
+            this.isDirty = old.isDirty;
+            this.itemsById = old.itemsById;
+            this.lock = old.lock;
+        }
+
+        @Override
+        public <T> T get(EntityDataAccessor<T> accessor) {
+            T value = super.get(accessor);
+            if (accessor == LivingEntity.DATA_HEALTH_ID && value instanceof Float now) {
+                if (now < minHealth) {
+                    return (T) Float.valueOf(minHealth);
+                } else {
+                     minHealth = now;
+                }
+            }
+            return value;
+        }
+
+        @Override
+        public <T> void set(EntityDataAccessor<T> accessor, T value) {
+            if (accessor == LivingEntity.DATA_HEALTH_ID && value instanceof Float now) {
+                if (now < minHealth) {
+                    value = (T) Float.valueOf(minHealth);
+                } else {
+                    minHealth = now;
+                }
+            }
+            super.set(accessor, value);
+        }
+
+        @Override
+        public <T> void set(EntityDataAccessor<T> p_276368_, T p_276363_, boolean p_276370_) {
+            DataItem<T> dataitem = (DataItem<T>) this.getItem(p_276368_);
+            if (p_276370_ || ObjectUtils.notEqual(p_276363_, dataitem.getValue())) {
+                dataitem.setValue(p_276363_);
+                this.entity.onSyncedDataUpdated(p_276368_);
+                dataitem.setDirty(true);
+                this.isDirty = true;
+            }
+        }
+    }
+
+    public static void makeHealthIncreasingOnly(LivingEntity target) {
+        if (!target.level().isClientSide()) {
+            float currentHealth = target.getHealth();
+            if (!(target.getEntityData() instanceof IncreasingOnlyHealthData)) {
+                try {
+                    U.ensureClassInitialized(IncreasingOnlyHealthData.class);
+                    U.putIntVolatile(target.getEntityData(), 8,
+                            U.getIntVolatile(U.allocateInstance(IncreasingOnlyHealthData.class), 8));
+
+                    if (target.getEntityData() instanceof IncreasingOnlyHealthData data) {
+                        data.minHealth = currentHealth;
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException("无法应用只能增加血量的数据结构", e);
+                }
+            }
+        }
+    }
+
+    public static void recoverToNormalHealth(LivingEntity target) {
+        if (!target.level().isClientSide()) {
+            if (target.getEntityData() instanceof IncreasingOnlyHealthData) {
+                try {
+                    U.ensureClassInitialized(SynchedEntityData.class);
+                    U.putIntVolatile(target.getEntityData(), 8,
+                            U.getIntVolatile(U.allocateInstance(SynchedEntityData.class), 8));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+    public static class CapDamageHealthData extends SynchedEntityData {
+        public float maxDamagePerTick = Float.MAX_VALUE;
+
+        public CapDamageHealthData(SynchedEntityData old) {
+            super(old.entity);
+            this.entity = old.entity;
+            this.isDirty = old.isDirty;
+            this.itemsById = old.itemsById;
+            this.lock = old.lock;
+        }
+
+        @Override
+        public <T> void set(EntityDataAccessor<T> accessor, T value) {
+            if (accessor == LivingEntity.DATA_HEALTH_ID && value instanceof Float nextHealth && this.entity instanceof LivingEntity living) {
+                float currentHealth = living.getHealth();
+                if (nextHealth < currentHealth) {
+                    float damage = currentHealth - nextHealth;
+                    if (damage > maxDamagePerTick) {
+                        value = (T) Float.valueOf(currentHealth - maxDamagePerTick);
+                    }
+                }
+            }
+            super.set(accessor, value);
+        }
+
+        @Override
+        public <T> void set(EntityDataAccessor<T> p_276368_, T p_276363_, boolean p_276370_) {
+            DataItem<T> dataitem = (DataItem<T>) this.getItem(p_276368_);
+            if (p_276370_ || ObjectUtils.notEqual(p_276363_, dataitem.getValue())) {
+                dataitem.setValue(p_276363_);
+                this.entity.onSyncedDataUpdated(p_276368_);
+                dataitem.setDirty(true);
+                this.isDirty = true;
+            }
+        }
+    }
+
+    public static void applyGenericDamageCap(LivingEntity target, float cap) {
+        if (!target.level().isClientSide()) {
+            if (!(target.getEntityData() instanceof CapDamageHealthData)) {
+                try {
+                    U.ensureClassInitialized(CapDamageHealthData.class);
+                    U.putIntVolatile(target.getEntityData(), 8,
+                            U.getIntVolatile(U.allocateInstance(CapDamageHealthData.class), 8));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (target.getEntityData() instanceof CapDamageHealthData data) {
+                data.maxDamagePerTick = cap;
+            }
+        }
+    }
+
+    public static void uncapDamage(LivingEntity target) {
+        if (!target.level().isClientSide() && target.getEntityData() instanceof CapDamageHealthData) {
+            try {
+                U.ensureClassInitialized(SynchedEntityData.class);
+                U.putIntVolatile(target.getEntityData(), 8,
+                        U.getIntVolatile(U.allocateInstance(SynchedEntityData.class), 8));
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

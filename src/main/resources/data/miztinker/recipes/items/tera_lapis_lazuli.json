@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "tag": "forge:gems/lapis" },
+    { "item": "miztinker:tera_orb" }
+  ],
+  "result": {
+    "item": "miztinker:tera_lapis_lazuli",
+    "count": 1
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "miztinker:add_loot",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/village/village_toolsmith"
+    }
+  ],
+  "key": "miztinker:inject/village_toolsmith"
+}
