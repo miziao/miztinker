@@ -7,9 +7,12 @@ import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.loading.RuntimeDistCleaner;
 import javax.annotation.Nullable;
 
+@OnlyIn(value = Dist.CLIENT)
 public class BossMusic extends AbstractTickableSoundInstance {
     BossEntity boss;
     private final float baseVolume; // 新增：用于存储这个音乐的基础音量

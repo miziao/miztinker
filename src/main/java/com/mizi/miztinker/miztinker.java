@@ -40,30 +40,27 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import slimeknights.tconstruct.library.client.model.TinkerItemProperties;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
-
 import static com.mizi.miztinker.item.tool.until.MiztinkerTools.*;
 import static com.mizi.miztinker.miztinker.MODID;
-
 // The value here should match an entry in the META-INF/mods.toml file
 
 @SuppressWarnings("removal")
 @Mod(MODID)
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class miztinker {
-    //Minecart mc =Minecart.getInstance();
+    // Minecart mc =Minecart.getInstance();
     public static final String MODID = "miztinker";
-
     public static ModifierDeferredRegister MODIFIERS = ModifierDeferredRegister.create(MODID);
+
     public static ResourceLocation location(String string) {
         return ResourceLocation.fromNamespaceAndPath(MODID, string);
     }
+
     public miztinker() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
-
         MiztinkerItems.ITEMS.register(modBus);
         MiztinkerModifiers.MODIFIERS.register(modBus);
         MiztinkerSounds.SOUND_EVENTS.register(modBus);
@@ -84,19 +81,17 @@ public class miztinker {
         MiztinkerTools.initRegisters();
         MiztinkerParticlesRegister.PARTICLE_TYPES.register(modBus);
         MinecraftForge.EVENT_BUS.register(new ServerTickHandler());
-
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MiztinkerConfig.SPEC);
-
-
         MiztinkerRegistry.RECIPE_SERIALIZERS.register(modBus);
         MiZiTab.CREATIVE_MODE_TABS.register(modBus);
         modBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
-        if(FMLEnvironment.dist == Dist.CLIENT){
+        if (FMLEnvironment.dist == Dist.CLIENT) {
             modBus.addListener(PostPasses::register);
         }
         new com.mizi.miztinker.recipes.VillagerTradeHandler();
     }
+
     public static void initOptionalModifiers() {
         MiztinkerOptionalModifiers.voidregisterOptionalModifiers();
     }
@@ -104,19 +99,16 @@ public class miztinker {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void addAttribute(EntityAttributeCreationEvent event) {
         event.put(MiztinkerEntityRegister.MIZI_AO.get(), MiziAo.createAttributes().build());
-
         event.put(MiztinkerEntityRegister.TITAN_WARDEN.get(), TitanWarden.createAttributes().build());
     }
 
     @SubscribeEvent
     public static void onFMLCommonSetup(FMLCommonSetupEvent event) {
-
         // 以下代码仅在客户端运行
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> MusicSlots::init);
     }
 
     public static class ClientSetup {
-
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
@@ -124,7 +116,6 @@ public class miztinker {
             });
         }
     }
-
 
     public static ResourceLocation getResource(String id) {
         return ResourceLocation.fromNamespaceAndPath(MODID, id);
@@ -134,11 +125,8 @@ public class miztinker {
         event.enqueueWork(() -> {
             initOptionalModifiers();
             MiztinkerNetwork.init();
-
             PotionBrewing.addMix(Potions.MUNDANE, Items.BLAZE_POWDER, MiztinkerPotions.STRENGTH_OLD_POTION.get());
-
             PotionBrewing.addMix(MiztinkerPotions.STRENGTH_OLD_POTION.get(), Items.REDSTONE, MiztinkerPotions.STRENGTH_OLD_POTION_LONG.get());
-
             PotionBrewing.addMix(MiztinkerPotions.STRENGTH_OLD_POTION.get(), Items.GLOWSTONE_DUST, MiztinkerPotions.STRENGTH_OLD_POTION_STRONG.get());
         });
     }
@@ -147,16 +135,8 @@ public class miztinker {
         return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 
-
-        @SubscribeEvent
-        public static void onKeyRegister(RegisterKeyMappingsEvent event) {
-            event.register(MiztinkerKey.KeyBinding.KEY);
-        }
-    }
-
-
-
-
-
-
-
+    //@SubscribeEvent
+    //public static void onKeyRegister(RegisterKeyMappingsEvent event) {
+    //    event.register(MiztinkerKey.KeyBinding.KEY);
+    //}
+}

@@ -1,15 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "forge:conditions": [
-    {
-      "type": "forge:mod_loaded",
-      "modid": "abominations_infection"
-    },
-    {
-      "type": "forge:item_exists",
-      "item": "abominations_infection:parasitic_worm_body"
-    }
-  ],
+  "category": "misc",
   "pattern": [
     "aaa",
     "aba",

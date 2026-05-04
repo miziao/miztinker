@@ -1,15 +1,17 @@
 package com.mizi.miztinker.modifier.modifiers;
 
-import com.mizi.miztinker.network.EntityColorPacket;
-import com.mizi.miztinker.network.MiztinkerNetwork;
-import com.mizi.miztinker.util.ClientOnlyUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -23,6 +25,9 @@ import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,72 +37,45 @@ import static net.minecraft.world.entity.ai.attributes.Attributes.ARMOR;
 
 public class ColorModifier extends NoLevelsModifier implements MeleeHitModifierHook, TooltipModifierHook, MeleeDamageModifierHook {
 
-    public static final String MODID = "miztinker";
-    public static final ResourceLocation ENTITY_COLOR_RED = new ResourceLocation(MODID, "entity_color_red");
-    public static final ResourceLocation ENTITY_COLOR_GREEN = new ResourceLocation(MODID, "entity_color_green");
-    public static final ResourceLocation ENTITY_COLOR_BLUE = new ResourceLocation(MODID, "entity_color_blue");
+    private static final String MODID = "miztinker";
+    private static final ResourceLocation ENTITY_COLOR_RED = ResourceLocation.fromNamespaceAndPath(MODID, "entity_color_red");
+    private static final ResourceLocation ENTITY_COLOR_GREEN = ResourceLocation.fromNamespaceAndPath(MODID, "entity_color_green");
+    private static final ResourceLocation ENTITY_COLOR_BLUE = ResourceLocation.fromNamespaceAndPath(MODID, "entity_color_blue");
 
-    // 2. 修正 getMeleeDamage 中的判断逻辑
     @Override
     public float getMeleeDamage(IToolStackView tool, ModifierEntry entry, ToolAttackContext context, float baseDamage, float damage) {
-        if (context.getAttacker().level().isClientSide && !context.isExtraAttack() && !context.isProjectile()) {
-            LivingEntity target = context.getLivingTarget();
-            if (target != null) {
-                net.minecraftforge.fml.DistExecutor.unsafeRunWhenOn(net.minecraftforge.api.distmarker.Dist.CLIENT, () -> () -> {
-                    int[] rgb = com.mizi.miztinker.util.ClientOnlyUtils.getEntityColorFromClient(target);
-                    MiztinkerNetwork.sendToServer(new EntityColorPacket(rgb[0], rgb[1], rgb[2]));
-                });
-            }
+        LivingEntity target = context.getLivingTarget();
+        if (target != null) {
+            ModDataNBT data = tool.getPersistentData();
+            int[] rgb = getEntityColor(target);
+
+            data.putInt(ENTITY_COLOR_RED, rgb[0]);
+            data.putInt(ENTITY_COLOR_GREEN, rgb[1]);
+            data.putInt(ENTITY_COLOR_BLUE, rgb[2]);
         }
         return damage;
     }
 
-    /**
-     * 钩子：近战击中后处理
-     * 逻辑：在服务端读取 NBT 中保存的颜色数据并触发特殊效果
-     */
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         LivingEntity target = context.getLivingTarget();
-        Player holder = context.getPlayerAttacker(); // 获取攻击者玩家
+        if (target != null) {
+            ModDataNBT data = tool.getPersistentData();
+            var holder = context.getAttacker();
 
-        // 仅在服务端逻辑处理，且确保有攻击目标和攻击者
-        if (target == null || holder == null || holder.level().isClientSide) {
-            return;
+            float greenValue = data.getFloat(ENTITY_COLOR_GREEN);
+            holder.heal(greenValue);
+            if (target.getAttribute(ARMOR) == null) return;
+            float blueValue = data.getFloat(ENTITY_COLOR_BLUE);
+            float armorValue = target.getArmorValue();
+            Objects.requireNonNull(target.getAttribute(ARMOR)).setBaseValue(armorValue - blueValue);
+            if (isFromDummmmmmyMod(target)) return;
+
+            float redValue = data.getFloat(ENTITY_COLOR_RED);
+            reflectionPenetratingDamage(target,holder,redValue);
         }
 
-        ModDataNBT data = tool.getPersistentData();
-        int r = data.getInt(ENTITY_COLOR_RED);
-        int g = data.getInt(ENTITY_COLOR_GREEN);
-        int b = data.getInt(ENTITY_COLOR_BLUE);
-
-        // 如果 RGB 全为 0，说明尚未获取到数据（或者是纯黑色实体），跳过逻辑
-        if (r == 0 && g == 0 && b == 0) {
-            return;
-        }
-
-        // --- 绿色：治疗效果 ---
-        if (g > 0) {
-            holder.heal((float) g / 20f); // 调整了数值比例防止过强
-        }
-
-        // --- 蓝色：削减护甲 ---
-        if (target.getAttribute(ARMOR) != null) {
-            float currentArmor = (float) Objects.requireNonNull(target.getAttribute(ARMOR)).getBaseValue();
-            // 设置下限为 0，防止护甲负数导致溢出伤害
-            Objects.requireNonNull(target.getAttribute(ARMOR)).setBaseValue(Math.max(0, currentArmor - (float) b / 50f));
-        }
-
-        // --- 红色：反击/穿透伤害 ---
-        if (!isFromDummmmmmyMod(target) && r > 0) {
-            reflectionPenetratingDamage(target, holder, (float) r / 10f);
-        }
     }
-
-    /**
-     * 钩子：物品工具提示
-     * 逻辑：显示当前存储在工具上的 RGB 颜色数值
-     */
     @Override
     public void addTooltip(IToolStackView tool, ModifierEntry modifier, @Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
         ModDataNBT data = tool.getPersistentData();
@@ -105,28 +83,88 @@ public class ColorModifier extends NoLevelsModifier implements MeleeHitModifierH
         int green = data.getInt(ENTITY_COLOR_GREEN);
         int blue = data.getInt(ENTITY_COLOR_BLUE);
 
-        // 动态彩虹色标题
         long time = player != null ? player.level().getGameTime() : System.currentTimeMillis() / 50;
         float hue = (time % 120) / 120.0f;
         int rainbow = java.awt.Color.getHSBColor(hue, 0.7f, 0.9f).getRGB() & 0xFFFFFF;
 
-        // 修改第一行名称颜色
         if (!tooltip.isEmpty()) {
             tooltip.set(0, tooltip.get(0).copy().withStyle(s -> s.withColor(rainbow)));
         }
 
-        // 按住 Shift 显示详细 RGB
+        Component nameComp = Component.translatable(getTranslationKey());
+        String nameStripped = nameComp.getString();
+        for (int i = 0; i < tooltip.size(); i++) {
+            if (tooltip.get(i).getString().contains(nameStripped)) {
+                tooltip.set(i, nameComp.copy().withStyle(s -> s.withColor(rainbow)));
+            }
+        }
+
         if (tooltipKey == TooltipKey.SHIFT) {
-            MutableComponent rComp = Component.literal(String.valueOf(red)).withStyle(s -> s.withColor(ChatFormatting.RED));
-            MutableComponent gComp = Component.literal(String.valueOf(green)).withStyle(s -> s.withColor(ChatFormatting.GREEN));
-            MutableComponent bComp = Component.literal(String.valueOf(blue)).withStyle(s -> s.withColor(ChatFormatting.BLUE));
+            MutableComponent rComp = Component.literal(String.valueOf(red)).withStyle(style -> style.withColor(ChatFormatting.RED));
+            MutableComponent gComp = Component.literal(String.valueOf(green)).withStyle(style -> style.withColor(ChatFormatting.GREEN));
+            MutableComponent bComp = Component.literal(String.valueOf(blue)).withStyle(ChatFormatting.BLUE);
+
             MutableComponent separator = Component.literal(", ").withStyle(ChatFormatting.GRAY);
 
-            tooltip.add(Component.translatable("tooltip.miztinker.rgb_values")
-                    .withStyle(s -> s.withColor(rainbow))
-                    .append(Component.literal(": "))
-                    .append(rComp).append(separator).append(gComp).append(separator).append(bComp));
+            MutableComponent rgbDisplay = Component.translatable("tooltip.color_enchant.rgb_values")
+                    .withStyle(style -> style.withColor(rainbow))
+                    .append(rComp).append(separator)
+                    .append(gComp).append(separator)
+                    .append(bComp);
+
+            tooltip.add(rgbDisplay);
         }
+    }
+
+    private int getRainbowColor(long tick, float speed) {
+        float hue = ((tick * speed) % 120) / 120.0f;
+        java.awt.Color color = java.awt.Color.getHSBColor(hue, 0.7f, 0.9f);
+        return color.getRGB() & 0xFFFFFF;
+    }
+    public static int[] getEntityColor(LivingEntity entity) {
+        if (entity == null || !entity.level().isClientSide) {
+            return new int[]{0, 0, 0};
+        }
+
+        if (entity instanceof EnderDragon) return new int[]{0, 0, 0};
+
+        try {
+            EntityRenderer<? super LivingEntity> renderer = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(entity);
+            if (renderer == null) return new int[]{0, 0, 0};
+
+            ResourceLocation texture = renderer.getTextureLocation(entity);
+
+            try (InputStream stream = Minecraft.getInstance().getResourceManager()
+                    .getResource(texture).orElseThrow().open()) {
+                BufferedImage image = ImageIO.read(stream);
+                if (image != null) {
+                    return calculateAverageColor(image);
+                }
+            }
+        } catch (Exception e) {
+        }
+        return new int[]{0, 0, 0};
+    }
+
+    private static int[] calculateAverageColor(BufferedImage image) {
+        final int sampleStep = 8; // 采样步长
+        long r = 0, g = 0, b = 0;
+        int count = 0;
+
+        for (int y = 0; y < image.getHeight(); y += sampleStep) {
+            for (int x = 0; x < image.getWidth(); x += sampleStep) {
+                int argb = image.getRGB(x, y);
+                if (((argb >> 24) & 0xFF) > 128) { // 忽略透明像素
+                    r += (argb >> 16) & 0xFF;
+                    g += (argb >> 8) & 0xFF;
+                    b += argb & 0xFF;
+                    count++;
+                }
+            }
+        }
+
+        if (count == 0) return new int[]{255, 255, 255};
+        return new int[]{(int)(r / count), (int)(g / count), (int)(b / count)};
     }
 
     @Override

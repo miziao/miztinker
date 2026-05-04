@@ -22,7 +22,6 @@ public class NutrientSolutionModuleBlock extends Block {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void neighborChanged(BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Block neighborBlock, @NotNull BlockPos neighborPos, boolean isMoving) {
         if (!level.isClientSide) {
             boolean hasSignal = level.hasNeighborSignal(pos);

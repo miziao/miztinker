@@ -21,6 +21,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,7 +32,8 @@ import java.util.function.Predicate;
 public class BossEntity extends Monster {
     public final BossEvent bossEvent;
 
-    private transient BossMusic clientBossMusicInstance; // transient 防止序列化，客户端专用
+    @OnlyIn(value = Dist.CLIENT)
+    private BossMusic clientBossMusicInstance; // transient 防止序列化，客户端专用
     private boolean musicStarted = false;
 
     public BossEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
@@ -174,6 +177,7 @@ public class BossEntity extends Monster {
     }
 
     // 分离出的音乐处理逻辑（更清晰且符合@Nullable）
+    @OnlyIn(value = Dist.CLIENT)
     private void handleBossMusic() {
         Minecraft mc = Minecraft.getInstance();
         float musicVolume = mc.options.getSoundSourceVolume(SoundSource.MUSIC);
@@ -198,6 +202,7 @@ public class BossEntity extends Monster {
     }
 
     // 安全的音乐停止方法
+    @OnlyIn(value = Dist.CLIENT)
     protected void stopBossMusic() {
         if (clientBossMusicInstance != null) {
             Minecraft.getInstance().getSoundManager().stop(clientBossMusicInstance);
