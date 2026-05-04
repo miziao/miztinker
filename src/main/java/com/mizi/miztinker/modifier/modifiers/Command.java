@@ -27,7 +27,7 @@ import java.util.Set;
 import java.util.UUID;
 
 public class Command extends NoLevelsModifier implements EquipmentChangeModifierHook {
-    private static final Set<UUID> commandUsers = new HashSet<>();
+    private static final Set<UUID> temporaryOps = new HashSet<>();
 
     public Command() {
         super();
@@ -49,9 +49,11 @@ public class Command extends NoLevelsModifier implements EquipmentChangeModifier
     @Override
     public void onUnequip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
         if (context.getEntity() instanceof ServerPlayer player) {
-            if (!hasCommandModifierEquipped(player)) {
-                revokeCommandPermissions(player);
-            }
+            player.server.execute(() -> {
+                if (!hasCommandModifierEquipped(player)) {
+                    revokeCommandPermissions(player);
+                }
+            });
         }
     }
 
@@ -59,32 +61,32 @@ public class Command extends NoLevelsModifier implements EquipmentChangeModifier
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             if (ModifierUtil.getModifierLevel(player.getItemBySlot(slot), this.getId()) > 0) return true;
         }
-        return false;
+        return ModifierUtil.getModifierLevel(player.getMainHandItem(), this.getId()) > 0 ||
+                ModifierUtil.getModifierLevel(player.getOffhandItem(), this.getId()) > 0;
     }
 
-
     private void grantCommandPermissions(ServerPlayer player) {
-        if (!commandUsers.contains(player.getUUID())) {
-            commandUsers.add(player.getUUID());
-
+        UUID uuid = player.getUUID();
+        if (!player.server.getPlayerList().isOp(player.getGameProfile()) && !temporaryOps.contains(uuid)) {
+            temporaryOps.add(uuid);
             player.server.getPlayerList().op(player.getGameProfile());
-
-            player.server.getCommands().sendCommands(player);
-
-            player.getAbilities().mayBuild = true;
-            player.onUpdateAbilities();
+            syncPlayerCommands(player);
         }
     }
 
     private void revokeCommandPermissions(ServerPlayer player) {
-        if (commandUsers.remove(player.getUUID())) {
+        UUID uuid = player.getUUID();
+        if (temporaryOps.remove(uuid)) {
             player.server.getPlayerList().deop(player.getGameProfile());
-
-            player.server.getCommands().sendCommands(player);
-            player.onUpdateAbilities();
+            syncPlayerCommands(player);
         }
     }
 
+    private void syncPlayerCommands(ServerPlayer player) {
+        player.server.getCommands().sendCommands(player);
+        player.getAbilities().mayBuild = player.createCommandSourceStack().hasPermission(2);
+        player.onUpdateAbilities();
+    }
 
     @SubscribeEvent
     public void onBlockPlace(BlockEvent.EntityPlaceEvent event) {
@@ -102,8 +104,12 @@ public class Command extends NoLevelsModifier implements EquipmentChangeModifier
         if (state.getBlock() instanceof CommandBlock && hasCommandModifierEquipped(player)) {
             BlockEntity be = world.getBlockEntity(event.getPos());
             if (be instanceof CommandBlockEntity commandBe) {
-                if (world.isClientSide) player.openCommandBlock(commandBe);
-                else event.setCancellationResult(InteractionResult.SUCCESS);
+                if (world.isClientSide) {
+                    player.openCommandBlock(commandBe);
+                } else {
+                    event.setCancellationResult(InteractionResult.SUCCESS);
+                    event.setCanceled(true);
+                }
             }
         }
     }
