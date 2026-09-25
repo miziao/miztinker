@@ -71,6 +71,12 @@ public class MiztinkerNetwork {
                 .consumerMainThread(ShieldSyncPacket::handle)
                 .add();
 
+        INSTANCE.messageBuilder(ColorSyncPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(ColorSyncPacket::new)
+                .encoder(ColorSyncPacket::toBytes)
+                .consumerMainThread(ColorSyncPacket::handle)
+                .add();
+
 
     }
 

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+  "item":"miztinker:reverse_trinitygobber"
+  },
+  "value": 1,
+  "needed": 1,
+  "material": "miztinker:reverse_trinitygobber"
+}

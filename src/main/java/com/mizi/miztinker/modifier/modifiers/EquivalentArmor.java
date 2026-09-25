@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -28,6 +29,8 @@ public class EquivalentArmor extends Modifier implements DamageBlockModifierHook
     public static final String SHIELD_VAL = "current_shield";
     public static final String SHIELD_COOLDOWN = "recharge_tick";
     public static final String LAST_TICK = "last_update_tick";
+    private static final float SHIELD_PER_LEVEL = 2000.0f;
+    private static final float REGEN_PER_LEVEL = 5.0f;
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
@@ -39,13 +42,13 @@ public class EquivalentArmor extends Modifier implements DamageBlockModifierHook
         if (!(context.getEntity() instanceof ServerPlayer player) || damage <= 0) return false;
 
         CompoundTag persistentData = player.getPersistentData();
-        CompoundTag shieldData = persistentData.getCompound(SHIELD_NBT);
+        CompoundTag shieldData = getStoredShieldData(persistentData);
 
         if (shieldData.getInt(SHIELD_COOLDOWN) > 0) return false;
 
         int totalLevel = getTotalLevel(player);
-        float max = totalLevel * 2000f;
-        float currentShield = shieldData.contains(SHIELD_VAL) ? shieldData.getFloat(SHIELD_VAL) : max;
+        float max = totalLevel * SHIELD_PER_LEVEL;
+        float currentShield = shieldData.contains(SHIELD_VAL) ? Math.max(0.0f, Math.min(max, shieldData.getFloat(SHIELD_VAL))) : max;
 
         return player.getCapability(PECapabilities.KNOWLEDGE_CAPABILITY).map(knowledge -> {
             BigInteger emcPool = knowledge.getEmc();
@@ -67,8 +70,7 @@ public class EquivalentArmor extends Modifier implements DamageBlockModifierHook
                     shieldData.putFloat(SHIELD_VAL, remainingShield);
                 }
 
-                persistentData.put(SHIELD_NBT, shieldData);
-                MiztinkerNetwork.sendToPlayer(new ShieldSyncPacket(shieldData.getFloat(SHIELD_VAL), shieldData.getInt(SHIELD_COOLDOWN)), player);
+                saveAndSyncShield(player, persistentData, shieldData);
                 return true;
             }
             return false;
@@ -79,25 +81,34 @@ public class EquivalentArmor extends Modifier implements DamageBlockModifierHook
     public void onInventoryTick(IToolStackView tool, ModifierEntry entry, Level level, LivingEntity entity, int slotIndex, boolean isSelected, boolean isArmor, ItemStack stack) {
         if (level.isClientSide || !isArmor || !(entity instanceof ServerPlayer player)) return;
 
-        long currentTime = level.getGameTime();
         CompoundTag persistentData = player.getPersistentData();
-        if (!persistentData.contains(SHIELD_NBT)) persistentData.put(SHIELD_NBT, new CompoundTag());
-        CompoundTag shieldData = persistentData.getCompound(SHIELD_NBT);
+        CompoundTag shieldData = getStoredShieldData(persistentData);
+
+        int totalLevel = getTotalLevel(player);
+        if (totalLevel <= 0) return;
+
+        long currentTime = level.getGameTime();
 
         if (shieldData.getLong(LAST_TICK) == currentTime) return;
         shieldData.putLong(LAST_TICK, currentTime);
 
-        int totalLevel = getTotalLevel(player);
-        float max = totalLevel * 2000f;
+        float max = totalLevel * SHIELD_PER_LEVEL;
 
         if (!shieldData.contains(SHIELD_VAL)) {
             shieldData.putFloat(SHIELD_VAL, max);
-            MiztinkerNetwork.sendToPlayer(new ShieldSyncPacket(max, 0), player);
+            shieldData.putInt(SHIELD_COOLDOWN, 0);
+            saveAndSyncShield(player, persistentData, shieldData);
+            return;
+        }
+
+        float currentShield = Math.max(0.0f, Math.min(max, shieldData.getFloat(SHIELD_VAL)));
+        if (currentShield != shieldData.getFloat(SHIELD_VAL)) {
+            shieldData.putFloat(SHIELD_VAL, currentShield);
         }
 
         int cooldown = shieldData.getInt(SHIELD_COOLDOWN);
         if (cooldown > 0) {
-            int nextCooldown = cooldown - 1;
+            int nextCooldown = Math.max(cooldown - 1, 0);
             shieldData.putInt(SHIELD_COOLDOWN, nextCooldown);
 
             if (nextCooldown % ((cooldown < 20) ? 10 : 20) == 0) {
@@ -107,24 +118,65 @@ public class EquivalentArmor extends Modifier implements DamageBlockModifierHook
 
             if (nextCooldown == 0) {
                 shieldData.putFloat(SHIELD_VAL, max);
-                persistentData.put(SHIELD_NBT, shieldData);
-                MiztinkerNetwork.sendToPlayer(new ShieldSyncPacket(max, 0), player);
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), net.minecraft.sounds.SoundEvents.BEACON_ACTIVATE, net.minecraft.sounds.SoundSource.PLAYERS, 0.8f, 2.0f);
-            } else if (currentTime % 5 == 0) {
-                MiztinkerNetwork.sendToPlayer(new ShieldSyncPacket(shieldData.getFloat(SHIELD_VAL), nextCooldown), player);
             }
+            saveAndSyncShield(player, persistentData, shieldData);
         } else {
-            float current = shieldData.getFloat(SHIELD_VAL);
-            if (current < max) {
-                float nextShield = Math.min(max, current + (totalLevel * 5.0f));
+            if (currentShield < max) {
+                float nextShield = Math.min(max, currentShield + (totalLevel * REGEN_PER_LEVEL));
                 shieldData.putFloat(SHIELD_VAL, nextShield);
-                persistentData.put(SHIELD_NBT, shieldData);
-
-                if (currentTime % 3 == 0 || nextShield >= max) {
-                    MiztinkerNetwork.sendToPlayer(new ShieldSyncPacket(nextShield, 0), player);
-                }
+                saveAndSyncShield(player, persistentData, shieldData);
             }
         }
+    }
+
+    public static void syncShieldState(ServerPlayer player) {
+        CompoundTag persistentData = player.getPersistentData();
+        CompoundTag shieldData = getStoredShieldData(persistentData);
+        int totalLevel = getTotalLevel(player);
+
+        if (!shieldData.contains(SHIELD_VAL)) {
+            if (totalLevel <= 0) return;
+            shieldData.putFloat(SHIELD_VAL, totalLevel * SHIELD_PER_LEVEL);
+        } else if (totalLevel > 0 && shieldData.contains(SHIELD_VAL)) {
+            float max = totalLevel * SHIELD_PER_LEVEL;
+            shieldData.putFloat(SHIELD_VAL, Math.max(0.0f, Math.min(max, shieldData.getFloat(SHIELD_VAL))));
+        }
+
+        shieldData.putInt(SHIELD_COOLDOWN, Math.max(shieldData.getInt(SHIELD_COOLDOWN), 0));
+        saveAndSyncShield(player, persistentData, shieldData);
+    }
+
+    public static void copyShieldData(Player source, Player target) {
+        CompoundTag sourceShield = getStoredShieldData(source.getPersistentData());
+        if (sourceShield.isEmpty()) return;
+        saveShieldData(target.getPersistentData(), sourceShield.copy());
+    }
+
+    private static CompoundTag getStoredShieldData(CompoundTag persistentData) {
+        CompoundTag persistedData = persistentData.getCompound(Player.PERSISTED_NBT_TAG);
+        if (persistedData.contains(SHIELD_NBT)) {
+            return persistedData.getCompound(SHIELD_NBT);
+        }
+        if (persistentData.contains(SHIELD_NBT)) {
+            CompoundTag legacyShield = persistentData.getCompound(SHIELD_NBT).copy();
+            persistedData.put(SHIELD_NBT, legacyShield.copy());
+            persistentData.put(Player.PERSISTED_NBT_TAG, persistedData);
+            return legacyShield;
+        }
+        return new CompoundTag();
+    }
+
+    private static void saveShieldData(CompoundTag persistentData, CompoundTag shieldData) {
+        CompoundTag persistedData = persistentData.getCompound(Player.PERSISTED_NBT_TAG);
+        persistedData.put(SHIELD_NBT, shieldData.copy());
+        persistentData.put(Player.PERSISTED_NBT_TAG, persistedData);
+        persistentData.put(SHIELD_NBT, shieldData.copy());
+    }
+
+    private static void saveAndSyncShield(ServerPlayer player, CompoundTag persistentData, CompoundTag shieldData) {
+        saveShieldData(persistentData, shieldData);
+        MiztinkerNetwork.sendToPlayer(new ShieldSyncPacket(shieldData.getFloat(SHIELD_VAL), shieldData.getInt(SHIELD_COOLDOWN)), player);
     }
 
     public static int getTotalLevel(LivingEntity entity) {

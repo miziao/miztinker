@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import slimeknights.tconstruct.smeltery.block.entity.controller.HeatingStructureBlockEntity;
+import slimeknights.tconstruct.smeltery.block.entity.controller.SmelteryBlockEntity;
 import slimeknights.tconstruct.smeltery.block.entity.tank.SmelteryTank;
 
 import java.util.HashSet;
@@ -20,13 +21,18 @@ public abstract class SmelteryRainbowMixin {
 
     @Inject(method = "notifyFluidsChanged", at = @At("TAIL"))
     private void mizi$onFluidsUpdated(CallbackInfo ci) {
-        HeatingStructureBlockEntity smeltery = (HeatingStructureBlockEntity) (Object) this;
+        HeatingStructureBlockEntity structure =
+                (HeatingStructureBlockEntity) (Object) this;
 
-        if (smeltery.getLevel() == null || smeltery.getLevel().isClientSide) {
+        if (!(structure instanceof SmelteryBlockEntity)) {
             return;
         }
 
-        SmelteryTank<?> tank = smeltery.getTank();
+        if (structure.getLevel() == null || structure.getLevel().isClientSide) {
+            return;
+        }
+
+        SmelteryTank<?> tank = structure.getTank();
         int tankCount = tank.getTanks();
 
         if (tankCount < 20) {
@@ -34,31 +40,42 @@ public abstract class SmelteryRainbowMixin {
         }
 
         Set<Fluid> uniqueFluids = new HashSet<>();
+
         for (int i = 0; i < tankCount; i++) {
             FluidStack stack = tank.getFluidInTank(i);
+
             if (!stack.isEmpty()) {
                 uniqueFluids.add(stack.getFluid());
             }
         }
 
         if (uniqueFluids.size() >= 20) {
-            mizi$executeConversion(tank);
+            mizi$executeConversion(structure, tank);
         }
     }
 
-
     @Unique
-    private void mizi$executeConversion(SmelteryTank<?> tank) {
+    private void mizi$executeConversion(
+            HeatingStructureBlockEntity structure,
+            SmelteryTank<?> tank
+    ) {
         for (int i = tank.getTanks() - 1; i >= 0; i--) {
             FluidStack current = tank.getFluidInTank(i);
+
             if (!current.isEmpty()) {
-                tank.drain(current, IFluidHandler.FluidAction.EXECUTE);
+                tank.drain(
+                        current.copy(),
+                        IFluidHandler.FluidAction.EXECUTE
+                );
             }
         }
 
-        FluidStack rainbow = new FluidStack(MiztinkerFluidRegister.RAINBOW_MATERIAL.get(), 900);
-        tank.fill(rainbow, IFluidHandler.FluidAction.EXECUTE);
+        FluidStack rainbow = new FluidStack(
+                MiztinkerFluidRegister.RAINBOW_MATERIAL.get(),
+                900
+        );
 
-        ((HeatingStructureBlockEntity)(Object)this).setChanged();
+        tank.fill(rainbow, IFluidHandler.FluidAction.EXECUTE);
+        structure.setChanged();
     }
 }

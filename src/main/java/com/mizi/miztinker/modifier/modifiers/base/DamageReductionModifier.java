@@ -11,15 +11,9 @@ import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-/**
- * 通用减伤特性
- * reduction = 0.07f → 7% 减伤
- * reduction = 1.0f  → 100% 减伤
- */
 public class DamageReductionModifier extends NoLevelsModifier
         implements ModifyDamageModifierHook {
 
-    /** 减伤率（0~1） */
     private final float reduction;
 
     public DamageReductionModifier(float reduction) {

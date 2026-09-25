@@ -127,6 +127,9 @@ public class tinker_loli_pickaxe extends ModifiableItem {
                 // 添加安全检查，防止递归
                 if (!entity.isRemoved() && !entity.isDeadOrDying()) {
                     ToolAttackUtil.attackEntity(stack, player, entity);
+
+                    entity.invulnerableTime = 0;
+
                     entityCount++;
                 }
             }

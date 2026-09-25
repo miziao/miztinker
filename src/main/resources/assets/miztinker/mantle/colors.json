@@ -224,7 +224,19 @@
     "valet_tein":"#FFFF00",
     "autosmelt_i_guess":"#D2691E",
     "makeconcertedefforts": "#B8860B",
-    "trinity": "#B8860B"
+    "trinity": "#B8860B",
+    "trifold_entity": "#B8860B",
+    "triple_blessing": "#B8860B",
+    "sand_shield": "#F4A460",
+    "sand_binding_funeral": "#F4A460",
+    "diamond_body": "#00FFFF",
+    "diamond_of_life": "#3CB371",
+    "magnetic_force": "#BC8F8F",
+    "scrap": "#CD5C5C",
+    "life_stealing": "#696969",
+    "no_suspicion_stomach": "#DCDCDC",
+    "final_return": "#FFA500",
+    "brittle_bones": "#DCDCDC"
 
   },
   "material.miztinker": {

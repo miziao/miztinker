@@ -25,7 +25,6 @@ public class MakeConcertedEfforts extends NoLevelsModifier
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
-        super.registerHooks(hookBuilder);
         hookBuilder.addHook(this, ModifierHooks.VOLATILE_DATA);
         hookBuilder.addHook(this, ModifierHooks.VALIDATE);
         hookBuilder.addHook(this, ModifierHooks.TOOLTIP);
@@ -33,25 +32,27 @@ public class MakeConcertedEfforts extends NoLevelsModifier
 
     @Override
     public void addVolatileData(IToolContext context, ModifierEntry modifier, ToolDataNBT volatileData) {
-        volatileData.setSlots(SlotType.UPGRADE, -20);
-        volatileData.setSlots(SlotType.ABILITY, -20);
-        volatileData.setSlots(SlotType.DEFENSE, -20);
+        for (SlotType type : SlotType.getAllSlotTypes()) {
+            int current = volatileData.getSlots(type);
+            if (current > 0) {
+                volatileData.addSlots(type, -current);
+            }
+        }
     }
 
     @Override
     public @Nullable Component validate(IToolStackView tool, ModifierEntry modifier) {
-        if (tool.getModifierList().size() > 1) {
+        if (!tool.getUpgrades().isEmpty()) {
             return Component.translatable("modifier.miztinker.makeconcertedefforts.no_modifiers");
         }
+
         return null;
     }
 
     @Override
     public void addTooltip(IToolStackView tool, ModifierEntry modifier, @Nullable Player player,
                            List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
-        if (player != null) {
-            tooltip.add(Component.translatable("modifier.miztinker.makeconcertedefforts.curse")
-                    .withStyle(ChatFormatting.DARK_BLUE));
-        }
+        tooltip.add(Component.translatable("modifier.miztinker.makeconcertedefforts.curse")
+                .withStyle(ChatFormatting.DARK_BLUE));
     }
 }

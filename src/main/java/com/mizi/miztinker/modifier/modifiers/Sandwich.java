@@ -43,6 +43,13 @@ public class Sandwich extends NoLevelsModifier implements SlotStackModifierHook,
     private static final String TAG_HUNGER = "TotalHunger";
     private static final String TAG_SATURATION = "TotalSaturation";
 
+    private static final String KEY_PREFIX = "modifier.miztinker.sandwich.";
+    private static final String MSG_DUPLICATE = KEY_PREFIX + "duplicate";
+    private static final String MSG_ADDED = KEY_PREFIX + "added";
+    private static final String TIP_COUNT = KEY_PREFIX + "tooltip.count";
+    private static final String TIP_STATS = KEY_PREFIX + "tooltip.stats";
+    private static final String TIP_EMPTY = KEY_PREFIX + "tooltip.empty";
+
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.SLOT_STACK, ModifierHooks.GENERAL_INTERACT, ModifierHooks.TOOLTIP);
@@ -59,7 +66,7 @@ public class Sandwich extends NoLevelsModifier implements SlotStackModifierHook,
 
             for (int i = 0; i < absorbedList.size(); i++) {
                 if (absorbedList.getString(i).equals(itemRegistryName)) {
-                    player.displayClientMessage(Component.literal("§c[三明治] 已经吸收过这种配料了！"), true);
+                    player.displayClientMessage(Component.translatable(MSG_DUPLICATE), true);
                     return false;
                 }
             }
@@ -75,7 +82,7 @@ public class Sandwich extends NoLevelsModifier implements SlotStackModifierHook,
                 data.put(FOOD_STORAGE, sandwichNBT);
 
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 1.0F, 1.0F);
-                player.displayClientMessage(Component.literal("§6[三明治] §a成功加入了配料: " + held.getHoverName().getString()), true);
+                player.displayClientMessage(Component.translatable(MSG_ADDED, held.getHoverName()), true);
 
                 if (!player.getAbilities().instabuild) {
                     held.shrink(1);
@@ -139,16 +146,17 @@ public class Sandwich extends NoLevelsModifier implements SlotStackModifierHook,
             float sat = nbt.getFloat(TAG_SATURATION);
             ListTag list = nbt.getList(TAG_ABSORBED_LIST, Tag.TAG_STRING);
 
-            tooltips.add(Component.literal("§e已吸收配料: §f" + list.size()));
+            tooltips.add(Component.translatable(TIP_COUNT, list.size()));
+
             if (!list.isEmpty() && tooltipKey == TooltipKey.SHIFT) {
                 for (int i = 0; i < list.size(); i++) {
                     ResourceLocation id = ResourceLocation.parse(list.getString(i));
-                    tooltips.add(Component.literal(" §7- " + Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(id)).getDescription().getString()));
+                    tooltips.add(Component.literal("  - ").append(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(id)).getDescription()));
                 }
             }
-            tooltips.add(Component.literal("§7总回复: §6" + hunger + " 饥饿值 §e/ " + String.format("%.1f", sat) + " 饱和度"));
+            tooltips.add(Component.translatable(TIP_STATS, hunger, String.format("%.1f", sat)));
         } else {
-            tooltips.add(Component.literal("§8空空如也的三明治面胚"));
+            tooltips.add(Component.translatable(TIP_EMPTY));
         }
     }
 }

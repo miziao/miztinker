@@ -43,5 +43,8 @@ public class MiztinkerSounds {
 
     public static final RegistryObject<SoundEvent> ALL_JUSTICE = SOUND_EVENTS.register("all_justice",
             () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(miztinker.MODID, "all_justice")));
+
+    public static final RegistryObject<SoundEvent> SAKUYA = SOUND_EVENTS.register("sakuya",
+            () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(miztinker.MODID, "sakuya")));
 }
 

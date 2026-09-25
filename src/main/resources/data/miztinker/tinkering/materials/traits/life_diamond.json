@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "name": "miztinker:diamond_of_life",
+      "level": 1
+    },
+    {
+      "name": "miztinker:diamond_body",
+      "level": 1
+    }
+  ]
+}

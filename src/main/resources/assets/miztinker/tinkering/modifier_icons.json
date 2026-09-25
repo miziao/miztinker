@@ -11,5 +11,7 @@
   "miztinker:old_king": "miztinker:gui/modifiers/old_king",
   "miztinker:extraterrestrial_forces_botania": "miztinker:item/bot_book",
   "miztinker:tandem_paper_bomb": "miztinker:gui/modifiers/tandem_paper_bomb",
-  "miztinker:banshotenin": "miztinker:gui/modifiers/banshotenin"
+  "miztinker:banshotenin": "miztinker:gui/modifiers/banshotenin",
+   "miztinker:awakenknight_of_night": "miztinker:gui/modifiers/awakenknight_of_night",
+    "miztinker:knight_of_night": "miztinker:gui/modifiers/knight_of_night"
 }

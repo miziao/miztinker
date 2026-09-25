@@ -19,7 +19,7 @@ import java.util.Objects;
 @Mod.EventBusSubscriber(modid = "miztinker")
 public class SleepTransformHandler {
 
-    private static final double CHANCE = 0.0001;
+    private static final double CHANCE = 0.1;
 
     @SubscribeEvent
     public static void onPlayerWakeUp(PlayerWakeUpEvent event) {

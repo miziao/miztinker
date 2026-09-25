@@ -854,6 +854,38 @@ public class MiztinkerItems {
                 public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
                     tooltip.add(Component.translatable("tooltip.miztinker.imitation_trinitygobber"));
                 }
+            });
+
+    public static final RegistryObject<Item> REVERSE_TRINITYGOBBER = ITEMS.register(
+            "reverse_trinitygobber",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.RARE)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.reverse_trinitygobber"));
+                }
+            }
+    );
+
+    public static final RegistryObject<Item> LIFE_DIAMOND = ITEMS.register(
+            "life_diamond",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.RARE)) {
+            }
+    );
+
+    public static final RegistryObject<Item> COMPRESSION_SMELTERY = ITEMS.register(
+            "compression_smeltery",
+            () -> new CompressionSmelteryItem(new Item.Properties()
+                    .stacksTo(1)
+                    .rarity(net.minecraft.world.item.Rarity.EPIC))
+    );
+
+    public static final RegistryObject<Item> YORUNINA = ITEMS.register(
+            "yorunina",
+            () -> new Item(new Item.Properties().stacksTo(64).rarity(Rarity.RARE)) {
+                @Override
+                public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.miztinker.yorunina"));
+                }
             }
     );
 

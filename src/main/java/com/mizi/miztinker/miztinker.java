@@ -29,6 +29,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.world.ForgeChunkManager;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -92,9 +93,6 @@ public class miztinker {
         new com.mizi.miztinker.recipes.VillagerTradeHandler();
     }
 
-    public static void initOptionalModifiers() {
-        MiztinkerOptionalModifiers.voidregisterOptionalModifiers();
-    }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void addAttribute(EntityAttributeCreationEvent event) {
@@ -123,13 +121,22 @@ public class miztinker {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            initOptionalModifiers();
             MiztinkerNetwork.init();
+
+            ForgeChunkManager.setForcedChunkLoadingCallback(
+                    "miztinker",
+                    (level, ticketHelper) -> ticketHelper.getEntityTickets()
+                            .keySet()
+                            .forEach(ticketHelper::removeAllTickets)
+            );
+
             PotionBrewing.addMix(Potions.MUNDANE, Items.BLAZE_POWDER, MiztinkerPotions.STRENGTH_OLD_POTION.get());
             PotionBrewing.addMix(MiztinkerPotions.STRENGTH_OLD_POTION.get(), Items.REDSTONE, MiztinkerPotions.STRENGTH_OLD_POTION_LONG.get());
             PotionBrewing.addMix(MiztinkerPotions.STRENGTH_OLD_POTION.get(), Items.GLOWSTONE_DUST, MiztinkerPotions.STRENGTH_OLD_POTION_STRONG.get());
         });
     }
+
+
 
     public static ResourceLocation loc(String path) {
         return ResourceLocation.fromNamespaceAndPath(MODID, path);

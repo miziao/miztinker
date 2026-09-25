@@ -63,9 +63,9 @@
   "modifier.miztinker.abyssal_protection.flavor": "来自深渊的力量庇护着你",
   "modifier.miztinker.abyssal_protection.description": "使你的最大生命值提升30",
 
-  "modifier.miztinker.bloodshield": "血液护盾",
-  "modifier.miztinker.bloodshield.flavor": "你对血液的控制力更上一层楼,凝聚出血液护盾",
-  "modifier.miztinker.bloodshield.description": "免疫30点及以下的伤害,此外每1点伤害消耗0.005血液值(最小消耗1),同时只要你的血液值没有消耗殆尽,就不会迎来真正的死亡",
+  "modifier.miztinker.blood_shield": "血液护盾",
+  "modifier.miztinker.blood_shield.flavor": "你对血液的控制力更上一层楼,凝聚出血液护盾",
+  "modifier.miztinker.blood_shield.description": "免疫30点及以下的伤害,此外每1点伤害消耗0.005血液值(最小消耗1),同时只要你的血液值没有消耗殆尽,就不会迎来真正的死亡",
   "modifier.miztinker.blood_shield.consume": "§c[血液护盾]§f 消耗了 %s 点血液抵挡伤害",
   "modifier.miztinker.blood_shield.immortal": "§4[血液永生]§f",
 
@@ -152,6 +152,9 @@
   "modifier.miztinker.sleepinstant": "便携式床",
   "modifier.miztinker.sleepinstant.flavor": "为什么床可以安装在匠魂工具上",
   "modifier.miztinker.sleepinstant.description": "手持时使用下蹲加右键即可进入梦乡",
+  "miztinker.modifier.sleep_instant.not_now": "§7你现在睡不着……",
+  "miztinker.modifier.sleep_instant.start": "§b你慢慢进入了梦乡……",
+  "miztinker.modifier.sleep_instant.wake_up": "§a天亮了！你感觉神清气爽！",
 
   "modifier.miztinker.death_eye": "死神之眼",
   "modifier.miztinker.death_eye.flavor": "是的,你不支付一半的寿命也可以拥有了",
@@ -223,9 +226,10 @@
   "modifier.miztinker.awakenknight_of_night": "ナイト・オブ・ナイツ(骑士之夜)·觉醒",
   "modifier.miztinker.awakenknight_of_night.flavor": "from Izayoi Sakuya and Dio",
   "modifier.miztinker.awakenknight_of_night.description": "下蹲右键使全图生物时间停止",
-  "message.miztinker.timestop.active": "§e砸瓦鲁多！时间停止了流动",
+  "message.miztinker.timestop.active": "§e你将会在无法理解中死去...",
   "message.miztinker.timestop.resume": "§a时间恢复了流动...",
   "message.miztinker.timestop.force_resume": "§7时停发起者离开了,时间被迫恢复",
+  "message.miztinker.timestop.busy": "§c时间已经被其他玩家停止",
 
   "modifier.miztinker.guanyu": "关羽之歌",
   "modifier.miztinker.guanyu.flavor": "三军听令，战至最后一刻，自刎归天！",
@@ -642,7 +646,15 @@
 
 "modifier.miztinker.digitization": "数据化",
 "modifier.miztinker.digitization.flavor": "like 吉尔巴里斯",
-"modifier.miztinker.digitization.description":"下蹲右键任意方块将该方块完整的存储在工具里,下次下蹲右键释放出来",
+"modifier.miztinker.digitization.description":"下蹲右键任意方块或生物将其完整的存储在工具里,下次下蹲右键释放出来",
+"message.miztinker.digitization.stored": "§b已数据化: §f%s",
+  "message.miztinker.digitization.type.entity": "生命体",
+  "message.miztinker.digitization.type.block": "物质方块",
+  "message.miztinker.digitization.type.fluid": "液态能",
+  "tooltip.miztinker.digitization.entity": "§a▶ 载入实体: §e%s",
+  "tooltip.miztinker.digitization.block": "§d▶ 载入方块: §e%s",
+  "tooltip.miztinker.digitization.fluid": "§b▶ 载入流体: §e%s",
+  "tooltip.miztinker.digitization.empty": "§7▷ 缓存区空闲",
 
 "modifier.miztinker.energy_overdose": "能量超载",
 "modifier.miztinker.energy_overdose.flavor": "崩坏 热爱 包容 疯狂",
@@ -781,10 +793,23 @@
 "modifier.miztinker.sandwich": "自定义三明治",
 "modifier.miztinker.sandwich.flavor": "Make a Sandwiches",
 "modifier.miztinker.sandwich.description":"你可以给你的三明治加料,然后吃下它",
+"modifier.miztinker.sandwich.duplicate": "§c[三明治] 已经吸收过这种配料了！",
+  "modifier.miztinker.sandwich.added": "§6[三明治] §a成功加入了配料: %s",
+  "modifier.miztinker.sandwich.tooltip.count": "§e已吸收配料: §f%s",
+  "modifier.miztinker.sandwich.tooltip.stats": "§7总回复: §6%s 饥饿值 §e/ %s 饱和度",
+  "modifier.miztinker.sandwich.tooltip.empty": "§8空空如也的三明治面胚",
 
 "modifier.miztinker.wireless_crafting_grid": "无线合成终端",
 "modifier.miztinker.wireless_crafting_grid.flavor": "自带区块加载和无限电量功能",
 "modifier.miztinker.wireless_crafting_grid.description":"下蹲右键绑定控制器,然后就可以按右键打开它",
+"message.miztinker.wireless_crafting_grid.bound": "已绑定 RS 控制器",
+"message.miztinker.wireless_crafting_grid.not_bound": "未绑定 RS 控制器",
+"message.miztinker.wireless_crafting_grid.bound_data_broken": "绑定数据损坏，请重新绑定",
+"message.miztinker.wireless_crafting_grid.dimension_missing": "绑定的维度不存在",
+"message.miztinker.wireless_crafting_grid.chunk_load_failed": "无法加载绑定的 RS 区块，可能超过 Forge 强加载区块限制",
+"message.miztinker.wireless_crafting_grid.network_missing": "绑定的 RS 网络不存在或未运行",
+"message.miztinker.wireless_crafting_grid.no_permission": "没有权限访问该 RS 网络",
+"message.miztinker.wireless_crafting_grid.open_failed": "无线合成终端打开失败",
 
 "modifier.miztinker.old_king": "老国王",
 "modifier.miztinker.old_king.flavor": "嘿嘿嘿哈",
@@ -927,6 +952,8 @@
 "gui.miztinker.search_system.target": "§7目标: §f%s",
 "gui.miztinker.search_system.range": "§7半径: §b%d 格",
 "gui.miztinker.search_system.count": "§7已发现: §a%d",
+ "message.miztinker.search_beacon.invalid_name": "请使用注册名，例如 minecraft:stone 或 fluid:minecraft:water",
+  "message.miztinker.search_beacon.not_found": "未找到注册名：%s",
 
 "modifier.miztinker.jinkela": "金坷垃",
 "modifier.miztinker.jinkela.flavor": "金坷垃好处都有啥,谁说对了就给他",
@@ -1001,7 +1028,61 @@
   "modifier.miztinker.trinity.description": "每级使你的工具拥有30%全属性加成，若等级刚好为三，则改为60%",
   "modifier.miztinker.trinity.peak_warning": "我已达顶点，往后只有衰落",
 
+  "modifier.miztinker.triple_blessing": "三重祝福",
+  "modifier.miztinker.triple_blessing.flavor": "三种戈伯(?)联合起来为你的工具诞下了祝福",
+  "modifier.miztinker.triple_blessing.description": "每次强化将为你的工具提升30%全属性,若强化数量为3的倍数,则修改为60%",
 
+  "modifier.miztinker.trifold_entity": "一位三体",
+  "modifier.miztinker.trifold_entity.flavor": "另一个次元的俯首戈伯...但俯首戈伯是谁?",
+  "modifier.miztinker.trifold_entity.description": "每级使你工具全属性降低30%并且随机获得1个槽位,如果刚好为1级,则修改为180%并且获得7个随机槽位",
+  "modifier.miztinker.trifold_entity.peak_warning": "我已达底点，往后只有上升",
+
+"modifier.miztinker.sand_shield": "砂之护盾",
+"modifier.miztinker.sand_shield.flavor": "母亲的力量",
+"modifier.miztinker.sand_shield.description":"每次受伤-2盔甲值和盔甲韧性,修复可以还原",
+"modifier.miztinker.sand_shield.debuff": "§c砂之护盾损耗：-%.1f 护甲/韧性",
+  "modifier.miztinker.sand_shield.active": "§6砂之护盾：完好",
+
+  "modifier.miztinker.sand_binding_funeral": "砂瀑送葬",
+"modifier.miztinker.sand_binding_funeral.flavor": "守鹤的力量",
+"modifier.miztinker.sand_binding_funeral.description":"每次攻击消耗全部耐久,根据消耗的耐久造成巨量窒息伤害,并且在目标头顶召唤沙子",
+
+"modifier.miztinker.diamond_body": "宝钻之躯",
+"modifier.miztinker.diamond_body.flavor": "他简直像个战神",
+"modifier.miztinker.diamond_body.description":"你的生命值将为你等比提供护甲值防护",
+
+"modifier.miztinker.diamond_of_life": "生息宝钻",
+"modifier.miztinker.diamond_of_life.flavor": "身上的宝石将完全抵消冲击",
+"modifier.miztinker.diamond_of_life.description":"每1点护甲值将为你承受1点伤害,随呼吸回复,填饱肚子可以加快回复速度",
+
+"modifier.miztinker.magnetic_force": "磁力",
+"modifier.miztinker.magnetic_force.flavor": "磁磁果实能力者",
+"modifier.miztinker.magnetic_force.description":"拿在主手上会逐渐吸收背包中的铁质物品增强自身,并且在更高级时会有质的飞跃",
+
+"modifier.miztinker.scrap": "废料",
+"modifier.miztinker.scrap.flavor": "冶炼过程中产生的废料",
+"modifier.miztinker.scrap.description":"维持基本形态已经是极限,更改会有风险",
+
+"modifier.miztinker.life_stealing": "生命窃取",
+"modifier.miztinker.life_stealing.flavor": "源自tic2",
+"modifier.miztinker.life_stealing.description":"吸取你造成伤害的10%转化为生命,随等级提升比例",
+"modifier.miztinker.life_stealing.tooltip": "§8生命窃取: %s%%",
+
+"modifier.miztinker.no_suspicion_stomach": "无胃之疑",
+"modifier.miztinker.no_suspicion_stomach.flavor": "可能你需要看看自己的胃还在不在",
+"modifier.miztinker.no_suspicion_stomach.description":"每次最多回复1饥饿值,同时加倍消耗饥饿值",
+
+"modifier.miztinker.final_return": "终局=重启",
+"modifier.miztinker.final_return.flavor": "让故事『开始』结束。",
+"modifier.miztinker.final_return.description":"开始30日倒计时,每过一段时间你的力量就会增强,直到30日到达",
+
+"modifier.miztinker.brittle_bones": "脆骨",
+"modifier.miztinker.brittle_bones.flavor": "并不是在影射同名整合包",
+"modifier.miztinker.brittle_bones.description":"攻击他们让他们的骨头变得更脆",
+
+"modifier.miztinker.crystallization": "晶化",
+"modifier.miztinker.crystallization.flavor": "水晶之速，必有得失",
+"modifier.miztinker.crystallization.description":"穿戴盔甲时增加攻击速度，但下降护甲数值",
 
 
 
@@ -1298,6 +1379,30 @@
   "material.miztinker.imitation_trinitygobber.flavor": "铁锭cos三一戈伯",
   "material.miztinker.imitation_trinitygobber.encyclopedia": "铁的cos水平真的好高啊",
 
+  "material.miztinker.coarse_dirt": "砂土",
+  "material.miztinker.coarse_dirt.flavor": "如果你是嘎啦就可以持续修复",
+  "material.miztinker.coarse_dirt.encyclopedia": "没有查克拉和守鹤的你只能用着超低的耐久慢慢修复",
+
+  "material.miztinker.reverse_trinitygobber": "一位三体戈伯",
+  "material.miztinker.reverse_trinitygobber.flavor": "反转了",
+  "material.miztinker.reverse_trinitygobber.encyclopedia": "另一个维度的伏首戈伯",
+
+  "material.miztinker.life_diamond": "生命宝钻",
+  "material.miztinker.life_diamond.flavor": "简直就像天晶玉",
+  "material.miztinker.life_diamond.encyclopedia": "反转护甲和生命的作用",
+
+  "material.miztinker.scrap": "废料",
+  "material.miztinker.scrap.flavor": "字面意思的材料",
+  "material.miztinker.scrap.encyclopedia": "已经为了维持基本的形态拼尽了全力",
+
+  "material.miztinker.heavy_iron": "重铁",
+  "material.miztinker.heavy_iron.flavor": "超级重的铁!",
+  "material.miztinker.heavy_iron.encyclopedia": "磁力更大!",
+
+  "material.miztinker.yorunina": "鹦鹉母亲",
+  "material.miztinker.yorunina.flavor": "其实只是鸟的母亲的意思,绝对没有影射某个人",
+  "material.miztinker.yorunina.encyclopedia": "现在谁想要喝奶奶啊",
+
 
 
 
@@ -1382,6 +1487,8 @@
 
   "item.miztinker.resonant_dream_membrane": "谐振梦膜",
 
+  "item.miztinker.life_diamond": "生命宝钻",
+
   "item.miztinker.bot_book": "植物魔法辞典?",
   "tooltip.miztinker.bot_book.right_click":"这并不是正品,请前往官网获取植物魔法",
   "tooltip.miztinker.bot_book.desc":"由一本书和一组煤炭块丢在一起转化",
@@ -1408,6 +1515,12 @@
   "item.miztinker.hallowed_bar": "神圣锭",
   "tooltip.miztinker.hallowed_bar":"§b击败凋灵以开启'困难模式'",
 
+  "item.miztinker.compression_smeltery": "压缩冶炼炉",
+  "tooltip.miztinker.compression_smeltery":"§b遇水变大变高,某个别墅里能发现这个东西",
+
+  "item.miztinker.yorunina": "鹦鹉母亲锭",
+  "tooltip.miztinker.yorunina":"§b使用奶桶右键鹦鹉获得",
+
   "item.miztinker.bottled_crying_obsidian": "瓶装哭泣黑曜石",
   "tooltip.miztinker.bottled_crying_obsidian":"可以给你和农夫饮用",
 
@@ -1429,6 +1542,9 @@
 
   "item.miztinker.imitation_trinitygobber": "仿制三位一体戈伯",
   "tooltip.miztinker.imitation_trinitygobber":"§b虽然没有戈伯,但你一样可以制作戈伯",
+
+  "item.miztinker.reverse_trinitygobber": "一位三体戈伯",
+  "tooltip.miztinker.reverse_trinitygobber":"§b还有反转,还有反",
 
   "item.miztinker.exp_moss": "经验苔藓",
   "tooltip.miztinker.exp_moss":"§b由特殊合金制成,所以拥有比普通修复苔藓更强大的力量",
@@ -1685,7 +1801,7 @@
 
 
   "item.miztinker.starmetal_ingot": "星辉锭",
-  "tooltip.miztinker.starmetal_ingot": "将铁锭放在夜晚y大于300的地方露天放置2分钟转化",
+  "tooltip.miztinker.starmetal_ingot": "将铁锭放在夜晚y大于300的地方露天放置30秒转化",
 
   "item.miztinker.terrestrial_artifact_item": "天地宝晶",
   "tooltip.miztinker.terrestrial_artifact_item": "§b天地至宝,日月灵气",
@@ -1697,7 +1813,7 @@
   "tooltip.miztinker.fumo_gold_ingot": "金锭右键书架转化",
 
   "item.miztinker.born_of_the_storm": "《暴风雨所诞生的》",
-  "tooltip.miztinker.born_of_the_storm": "在雷暴天的情况下露天放置2分钟转化",
+  "tooltip.miztinker.born_of_the_storm": "书在雷暴天的情况下露天放置30秒转化",
 
   "item.miztinker.salt_ingot": "盐砖锭",
 

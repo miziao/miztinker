@@ -1,0 +1,24 @@
+{
+  "default": [
+    {
+      "name": "miztinker:final_return",
+      "level": 1
+    },
+    {
+      "name": "miztinker:brittle_bones",
+      "level": 1
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor":[
+      {
+        "name": "miztinker:no_suspicion_stomach",
+        "level": 1
+      },
+      {
+        "name": "miztinker:crystallization",
+        "level": 21
+      }
+    ]
+  }
+}

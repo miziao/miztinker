@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "name": "tconstruct:magnetic",
+      "level": 1
+    },
+    {
+      "name": "miztinker:magnetic_force",
+      "level": 1
+    }
+  ]
+}

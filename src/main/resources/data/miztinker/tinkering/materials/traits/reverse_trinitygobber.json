@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "name": "miztinker:triple_blessing",
+      "level": 1
+    },
+    {
+      "name": "miztinker:trifold_entity",
+      "level": 1
+    }
+  ]
+}

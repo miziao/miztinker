@@ -29,6 +29,7 @@ import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.gameevent.GameEvent;
 
+
 @SuppressWarnings("removal")
 public class ForceHurtUtil {
     public static sun.misc.Unsafe U = null;
@@ -439,7 +440,6 @@ public class ForceHurtUtil {
     }
 
     public static class CapDamageHealthData extends SynchedEntityData {
-        public float maxDamagePerTick = Float.MAX_VALUE;
 
         public CapDamageHealthData(SynchedEntityData old) {
             super(old.entity);
@@ -450,61 +450,265 @@ public class ForceHurtUtil {
         }
 
         @Override
-        public <T> void set(EntityDataAccessor<T> accessor, T value) {
-            if (accessor == LivingEntity.DATA_HEALTH_ID && value instanceof Float nextHealth && this.entity instanceof LivingEntity living) {
-                float currentHealth = living.getHealth();
-                if (nextHealth < currentHealth) {
-                    float damage = currentHealth - nextHealth;
-                    if (damage > maxDamagePerTick) {
-                        value = (T) Float.valueOf(currentHealth - maxDamagePerTick);
-                    }
+        public <T> T get(EntityDataAccessor<T> accessor) {
+            T value = super.get(accessor);
+
+            if (accessor == LivingEntity.DATA_HEALTH_ID
+                    && value instanceof Float now
+                    && this.entity instanceof LivingEntity living) {
+
+                float fixed = protectHealthValue(living, now);
+
+                if (Float.compare(fixed, now) != 0) {
+                    rawSet(accessor, (T) Float.valueOf(fixed), true);
+                    return (T) Float.valueOf(fixed);
                 }
             }
-            super.set(accessor, value);
+
+            return value;
         }
 
         @Override
-        public <T> void set(EntityDataAccessor<T> p_276368_, T p_276363_, boolean p_276370_) {
-            DataItem<T> dataitem = (DataItem<T>) this.getItem(p_276368_);
-            if (p_276370_ || ObjectUtils.notEqual(p_276363_, dataitem.getValue())) {
-                dataitem.setValue(p_276363_);
-                this.entity.onSyncedDataUpdated(p_276368_);
+        public <T> void set(EntityDataAccessor<T> accessor, T value) {
+            if (accessor == LivingEntity.DATA_HEALTH_ID
+                    && value instanceof Float nextHealth
+                    && this.entity instanceof LivingEntity living) {
+
+                float fixed = protectHealthValue(living, nextHealth);
+                rawSet(accessor, (T) Float.valueOf(fixed), false);
+                return;
+            }
+
+            rawSet(accessor, value, false);
+        }
+
+        @Override
+        public <T> void set(EntityDataAccessor<T> accessor, T value, boolean force) {
+            if (accessor == LivingEntity.DATA_HEALTH_ID
+                    && value instanceof Float nextHealth
+                    && this.entity instanceof LivingEntity living) {
+
+                float fixed = protectHealthValue(living, nextHealth);
+                rawSet(accessor, (T) Float.valueOf(fixed), force);
+                return;
+            }
+
+            rawSet(accessor, value, force);
+        }
+
+        private <T> void rawSet(EntityDataAccessor<T> accessor, T value, boolean force) {
+            DataItem<T> dataitem = (DataItem<T>) this.getItem(accessor);
+
+            if (force || ObjectUtils.notEqual(value, dataitem.getValue())) {
+                dataitem.setValue(value);
+                this.entity.onSyncedDataUpdated(accessor);
                 dataitem.setDirty(true);
                 this.isDirty = true;
             }
         }
     }
 
-    public static void applyGenericDamageCap(LivingEntity target, float cap) {
-        if (!target.level().isClientSide()) {
-            if (!(target.getEntityData() instanceof CapDamageHealthData)) {
-                try {
-                    U.ensureClassInitialized(CapDamageHealthData.class);
-                    U.putIntVolatile(target.getEntityData(), 8,
-                            U.getIntVolatile(U.allocateInstance(CapDamageHealthData.class), 8));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            if (target.getEntityData() instanceof CapDamageHealthData data) {
-                data.maxDamagePerTick = cap;
-            }
+    private enum DamageProtectMode {
+        CAP,
+        IMMUNE
+    }
+
+    private static class DamageProtectState {
+        float value;
+        DamageProtectMode mode;
+        float protectedHealth;
+
+        DamageProtectState(float value, DamageProtectMode mode, float protectedHealth) {
+            this.value = value;
+            this.mode = mode;
+            this.protectedHealth = protectedHealth;
         }
     }
 
-    public static void uncapDamage(LivingEntity target) {
-        if (!target.level().isClientSide() && target.getEntityData() instanceof CapDamageHealthData) {
+    private static final java.util.Map<java.util.UUID, DamageProtectState> DAMAGE_PROTECT_MAP =
+            new java.util.concurrent.ConcurrentHashMap<>();
+
+    /**
+     * 直接读取 DATA_HEALTH_ID 的原始值。
+     *
+     * 重点：
+     * 这里不能用 entity.getHealth()，
+     * 否则会重新进入 CapDamageHealthData.get()，造成 StackOverflow。
+     */
+    private static float rawGetHealthNoProtect(LivingEntity entity) {
+        if (entity == null) {
+            return 1.0f;
+        }
+
+        try {
+            SynchedEntityData data = entity.getEntityData();
+            SynchedEntityData.DataItem<Float> item = data.getItem(LivingEntity.DATA_HEALTH_ID);
+            Float value = item.getValue();
+
+            if (value == null || value.isNaN()) {
+                return 1.0f;
+            }
+
+            return value;
+        } catch (Throwable ignored) {
+            return 1.0f;
+        }
+    }
+
+    private static float protectHealthValue(LivingEntity living, float requestedHealth) {
+        if (living == null || living.level().isClientSide()) {
+            return requestedHealth;
+        }
+
+        DamageProtectState state = DAMAGE_PROTECT_MAP.get(living.getUUID());
+
+        if (state == null) {
+            return requestedHealth;
+        }
+
+        float rawHealth = rawGetHealthNoProtect(living);
+
+        if (Float.isNaN(state.protectedHealth)) {
+            state.protectedHealth = Math.max(rawHealth, requestedHealth);
+        }
+
+        /*
+         * 这里不能写 living.getHealth()
+         * 否则会递归：
+         * getHealth -> CapDamageHealthData.get -> protectHealthValue -> getHealth
+         */
+        float currentHealth = Math.max(rawHealth, state.protectedHealth);
+
+        // 回血、加血允许
+        if (requestedHealth >= currentHealth) {
+            state.protectedHealth = requestedHealth;
+            return requestedHealth;
+        }
+
+        float loss = currentHealth - requestedHealth;
+
+        if (state.mode == DamageProtectMode.CAP) {
+            /*
+             * MiziAo：
+             * 单次生命值下降最多 value。
+             */
+            if (loss > state.value) {
+                float cappedHealth = currentHealth - state.value;
+                cappedHealth = Math.max(cappedHealth, 1.0f);
+
+                state.protectedHealth = cappedHealth;
+                return cappedHealth;
+            }
+
+            state.protectedHealth = Math.max(requestedHealth, 1.0f);
+            return requestedHealth;
+        }
+
+        if (state.mode == DamageProtectMode.IMMUNE) {
+            /*
+             * 完美套 / AP：
+             * 生命值下降量 >= value 时完全免疫。
+             */
+            if (loss >= state.value) {
+                return currentHealth;
+            }
+
+            state.protectedHealth = Math.max(requestedHealth, 1.0f);
+            return requestedHealth;
+        }
+
+        return requestedHealth;
+    }
+
+    public static void applyGenericDamageCap(LivingEntity target, float cap) {
+        applyGenericDamageProtection(target, cap, DamageProtectMode.CAP);
+    }
+
+    public static void applyGenericDamageImmune(LivingEntity target, float threshold) {
+        applyGenericDamageProtection(target, threshold, DamageProtectMode.IMMUNE);
+    }
+
+    private static void applyGenericDamageProtection(LivingEntity target, float value, DamageProtectMode mode) {
+        if (target == null || target.level().isClientSide()) {
+            return;
+        }
+
+        /*
+         * 注意：
+         * 这里也不要用 target.getHealth()
+         * 因为 target 可能已经是 CapDamageHealthData。
+         */
+        float currentHealth = Math.max(rawGetHealthNoProtect(target), 1.0f);
+
+        DamageProtectState oldState = DAMAGE_PROTECT_MAP.get(target.getUUID());
+
+        if (oldState == null) {
+            DAMAGE_PROTECT_MAP.put(
+                    target.getUUID(),
+                    new DamageProtectState(value, mode, currentHealth)
+            );
+        } else {
+            oldState.value = value;
+            oldState.mode = mode;
+            oldState.protectedHealth = Math.max(oldState.protectedHealth, currentHealth);
+        }
+
+        if (!(target.getEntityData() instanceof CapDamageHealthData)) {
             try {
-                U.ensureClassInitialized(SynchedEntityData.class);
-                U.putIntVolatile(target.getEntityData(), 8,
-                        U.getIntVolatile(U.allocateInstance(SynchedEntityData.class), 8));
+                U.ensureClassInitialized(CapDamageHealthData.class);
+                U.putIntVolatile(
+                        target.getEntityData(),
+                        8,
+                        U.getIntVolatile(U.allocateInstance(CapDamageHealthData.class), 8)
+                );
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
+    public static void uncapDamage(LivingEntity target) {
+        if (target == null || target.level().isClientSide()) {
+            return;
+        }
 
+        DAMAGE_PROTECT_MAP.remove(target.getUUID());
+
+        if (target.getEntityData() instanceof CapDamageHealthData) {
+            try {
+                U.ensureClassInitialized(SynchedEntityData.class);
+                U.putIntVolatile(
+                        target.getEntityData(),
+                        8,
+                        U.getIntVolatile(U.allocateInstance(SynchedEntityData.class), 8)
+                );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static boolean shouldCancelProtectedDeath(LivingEntity entity) {
+        if (entity == null || entity.level().isClientSide()) {
+            return false;
+        }
+
+        return DAMAGE_PROTECT_MAP.containsKey(entity.getUUID());
+    }
+
+    public static float getProtectedSafeHealth(LivingEntity entity) {
+        if (entity == null) {
+            return 1.0f;
+        }
+
+        DamageProtectState state = DAMAGE_PROTECT_MAP.get(entity.getUUID());
+
+        if (state == null) {
+            return Math.max(rawGetHealthNoProtect(entity), 1.0f);
+        }
+
+        return Math.max(state.protectedHealth, 1.0f);
+    }
 
 
 }

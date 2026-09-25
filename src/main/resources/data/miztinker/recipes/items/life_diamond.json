@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "gag",
+    "cbe",
+    "gfg"
+  ],
+  "key": {
+    "a": {
+      "tag": "forge:gems/diamond"
+    },
+    "b": {
+      "item": "miztinker:uno_card"
+    },
+    "c": {
+      "item": "minecraft:hay_block"
+    },
+    "g": {
+      "item": "minecraft:grass"
+    },
+    "e": {
+      "tag": "forge:crops/carrot"
+    },
+    "f": {
+      "tag": "forge:crops/potato"
+    }
+  },
+  "result": {
+    "item": "miztinker:life_diamond",
+    "count": 1
+  }
+}

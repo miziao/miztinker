@@ -21,11 +21,19 @@ import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = "miztinker")
 public class SearchBeaconClientHandler {
+    private static final int MAX_FOUND_POSITIONS = 200;
+    private static final int MAX_RENDERED_BEAMS = 64;
+    private static final int SCAN_HEIGHT_PER_TICK = 24;
+
     private static final Set<BlockPos> FOUND_POSITIONS = ConcurrentHashMap.newKeySet();
     private static int lastMinY = 0;
     private static BlockState lastTarget = null;
@@ -78,15 +86,18 @@ public class SearchBeaconClientHandler {
     private static void runOptimizedScan(Player player, Level level, BlockState target, int expandedLevel) {
         BlockPos center = player.blockPosition();
         int radius = (expandedLevel + 1) * 16;
+        long maxCachedDistanceSqr = (long) radius * radius * 4L;
 
         FOUND_POSITIONS.removeIf(p -> {
+            if (horizontalDistSqr(p, center) > maxCachedDistanceSqr) {
+                return true;
+            }
             if (level.isLoaded(p)) {
                 return !level.getBlockState(p).is(target.getBlock());
             }
             return false;
         });
 
-        int scanHeightPerTick = 24;
         int minY = level.getMinBuildHeight();
         int maxY = level.getMaxBuildHeight();
 
@@ -94,32 +105,67 @@ public class SearchBeaconClientHandler {
             lastMinY = minY;
         }
 
-        int currentMaxY = Math.min(lastMinY + scanHeightPerTick, maxY);
+        int currentMaxY = Math.min(lastMinY + SCAN_HEIGHT_PER_TICK, maxY);
+        PriorityQueue<BlockPos> farthestFirst = new PriorityQueue<>(
+                Comparator.comparingLong((BlockPos p) -> horizontalDistSqr(p, center)).reversed()
+        );
+        farthestFirst.addAll(FOUND_POSITIONS);
 
         for (int y = lastMinY; y < currentMaxY; y++) {
             for (int x = center.getX() - radius; x <= center.getX() + radius; x += 16) {
                 for (int z = center.getZ() - radius; z <= center.getZ() + radius; z += 16) {
                     if (level.isLoaded(new BlockPos(x, y, z))) {
-                        searchSubArea(level, x, z, y, target);
+                        searchSubArea(level, x, z, y, target, center, maxCachedDistanceSqr, farthestFirst);
                     }
                 }
             }
         }
         lastMinY = currentMaxY;
-
-        FOUND_POSITIONS.removeIf(p -> p.distSqr(player.blockPosition()) > (radius * radius * 4));
     }
 
-    private static void searchSubArea(Level level, int startX, int startZ, int y, BlockState target) {
+    private static void searchSubArea(
+            Level level,
+            int startX,
+            int startZ,
+            int y,
+            BlockState target,
+            BlockPos center,
+            long maxCachedDistanceSqr,
+            PriorityQueue<BlockPos> farthestFirst
+    ) {
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
                 BlockPos p = new BlockPos(startX + i, y, startZ + j);
-                if (level.getBlockState(p).is(target.getBlock())) {
-                    if (FOUND_POSITIONS.size() < 200) {
-                        FOUND_POSITIONS.add(p.immutable());
-                    }
+                long distanceSqr = horizontalDistSqr(p, center);
+                if (distanceSqr <= maxCachedDistanceSqr && level.getBlockState(p).is(target.getBlock())) {
+                    addFoundPosition(p.immutable(), distanceSqr, center, farthestFirst);
                 }
             }
+        }
+    }
+
+    private static void addFoundPosition(
+            BlockPos pos,
+            long distanceSqr,
+            BlockPos center,
+            PriorityQueue<BlockPos> farthestFirst
+    ) {
+        if (FOUND_POSITIONS.contains(pos)) {
+            return;
+        }
+
+        if (FOUND_POSITIONS.size() < MAX_FOUND_POSITIONS) {
+            FOUND_POSITIONS.add(pos);
+            farthestFirst.offer(pos);
+            return;
+        }
+
+        BlockPos farthest = farthestFirst.peek();
+        if (farthest != null && distanceSqr < horizontalDistSqr(farthest, center)) {
+            FOUND_POSITIONS.remove(farthest);
+            farthestFirst.poll();
+            FOUND_POSITIONS.add(pos);
+            farthestFirst.offer(pos);
         }
     }
 
@@ -147,8 +193,8 @@ public class SearchBeaconClientHandler {
             playerPos = mc.player.blockPosition();
         }
 
-        for (BlockPos pos : FOUND_POSITIONS) {
-            if (playerPos != null && pos.distSqr(playerPos) > 4225) continue;
+        List<BlockPos> renderPositions = getNearestRenderPositions(playerPos);
+        for (BlockPos pos : renderPositions) {
 
             poseStack.pushPose();
             poseStack.translate(pos.getX() - camX, pos.getY() - camY, pos.getZ() - camZ);
@@ -162,6 +208,26 @@ public class SearchBeaconClientHandler {
             );
             poseStack.popPose();
         }
+    }
+
+    private static List<BlockPos> getNearestRenderPositions(BlockPos playerPos) {
+        List<BlockPos> renderPositions = new ArrayList<>(FOUND_POSITIONS);
+
+        if (playerPos != null) {
+            renderPositions.sort(Comparator.comparingLong(p -> horizontalDistSqr(p, playerPos)));
+        }
+
+        if (renderPositions.size() > MAX_RENDERED_BEAMS) {
+            return renderPositions.subList(0, MAX_RENDERED_BEAMS);
+        }
+
+        return renderPositions;
+    }
+
+    private static long horizontalDistSqr(BlockPos a, BlockPos b) {
+        long dx = (long) a.getX() - b.getX();
+        long dz = (long) a.getZ() - b.getZ();
+        return dx * dx + dz * dz;
     }
 
     private static ToolStack getHeldSearchTool(Player player) {

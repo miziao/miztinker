@@ -1,20 +1,37 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "pattern": [
-    "aaa",
-    "aba",
-    "aaa"
-  ],
-  "key": {
-    "a": {
-      "item": "abominations_infection:parasitic_worm_body"
-    },
-    "b": {
-      "tag": "forge:ingots/iron"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "abominations_infection"
+        },
+        {
+          "type": "forge:item_exists",
+          "item": "abominations_infection:parasitic_worm_body"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "pattern": [
+          "aaa",
+          "aba",
+          "aaa"
+        ],
+        "key": {
+          "a": {
+            "item": "abominations_infection:parasitic_worm_body"
+          },
+          "b": {
+            "tag": "forge:ingots/iron"
+          }
+        },
+        "result": {
+          "item": "miztinker:parasitic_iron_item"
+        }
+      }
     }
-  },
-  "result": {
-    "item": "miztinker:parasitic_iron_item"
-  }
+  ]
 }

@@ -86,5 +86,13 @@
         "stream": true
       }
     ]
+  },
+  "sakuya": {
+    "sounds": [
+      {
+        "name":"miztinker:sakuya",
+        "stream": true
+      }
+    ]
   }
 }

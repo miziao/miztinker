@@ -17,18 +17,22 @@ public class StormBookRule implements ITransformRule {
 
     @Override
     public boolean matches(ItemEntity item, ServerLevel level) {
-        return (level.isThundering() || level.isRaining()) && level.canSeeSky(item.blockPosition());
+        return (level.isThundering() || level.isRaining())
+                && level.canSeeSky(item.blockPosition());
     }
 
     @Override
     public int getTransformTicks() {
-        return 1200;
+        return 600;
     }
 
     @Override
     public ItemStack getResult(ItemStack input, ServerLevel level) {
         var item = ForgeRegistries.ITEMS.getValue(ID);
-        if (item == null) return ItemStack.EMPTY;
+        if (item == null) {
+            return ItemStack.EMPTY;
+        }
+
         return new ItemStack(item, input.getCount());
     }
 

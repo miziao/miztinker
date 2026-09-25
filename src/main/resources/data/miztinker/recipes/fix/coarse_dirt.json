@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+  "item":"minecraft:coarse_dirt"
+  },
+  "value":1,
+  "needed": 8,
+  "material": "miztinker:coarse_dirt"
+}

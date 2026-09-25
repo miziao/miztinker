@@ -40,22 +40,38 @@ public class BanshoTeninDiadema extends Diadema {
         AABB area = new AABB(center.x - RADIUS, center.y - RADIUS, center.z - RADIUS,
                 center.x + RADIUS, center.y + RADIUS, center.z + RADIUS);
 
-        List<Entity> entities = level.getEntities(owner, area, e -> e.isAlive() && !e.isSpectator());
+        List<Entity> entities = level.getEntitiesOfClass(Entity.class, area, e -> e.isAlive() && !e.isSpectator());
+
+        double SAFE_ZONE = 1.0;
 
         for (Entity entity : entities) {
-
             if (entity.is(owner) || entity.isAlliedTo(owner) || owner.getVehicle() == entity || entity.getVehicle() == owner) {
                 continue;
             }
 
-            Vec3 targetVector = center.subtract(entity.position());
+            Vec3 entityPos = entity.position();
+            Vec3 targetVector = center.subtract(entityPos);
             double distance = targetVector.length();
 
-            if (distance > 1.0) {
-                Vec3 motion = targetVector.normalize().scale(ATTRACT_SPEED);
-                entity.setDeltaMovement(entity.getDeltaMovement().add(motion));
+            if (distance > SAFE_ZONE) {
+                double strength = Math.min(ATTRACT_SPEED, Math.max(0.1, distance * 0.15));
+                Vec3 attractMotion = targetVector.normalize().scale(strength);
+
+                Vec3 currentMotion = entity.getDeltaMovement();
+
+                double nextX = currentMotion.x * 0.6 + attractMotion.x * 0.15;
+                double nextY = currentMotion.y * 0.6 + attractMotion.y * 0.15;
+                double nextZ = currentMotion.z * 0.6 + attractMotion.z * 0.15;
+
+                Vec3 finalMotion = new Vec3(nextX, nextY, nextZ);
+                entity.setDeltaMovement(finalMotion);
+
+                entity.hasImpulse = true;
                 entity.hurtMarked = true;
+            } else {
+                entity.setDeltaMovement(entity.getDeltaMovement().scale(0.5));
             }
         }
-        }
     }
+    }
+

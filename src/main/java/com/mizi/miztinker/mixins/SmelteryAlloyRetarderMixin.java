@@ -18,6 +18,7 @@ import slimeknights.tconstruct.smeltery.block.entity.module.alloying.MultiAlloyi
 import slimeknights.tconstruct.smeltery.block.entity.tank.SmelteryTank;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 @Mixin(value = MultiAlloyingModule.class, remap = false)
 public abstract class SmelteryAlloyRetarderMixin {
@@ -27,8 +28,8 @@ public abstract class SmelteryAlloyRetarderMixin {
     @Shadow protected abstract List<AlloyRecipe> getRecipes();
     @Shadow protected abstract Level getLevel();
 
-    @Inject(method = "canAlloy", at = @At("HEAD"), cancellable = true)
-    private void mizi$optimizedCanAlloy(CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "iterateRecipes", at = @At("HEAD"), cancellable = true)
+    private void mizi$onIterateRecipes(Predicate<AlloyRecipe> predicate, CallbackInfoReturnable<Boolean> cir) {
         if (!(this.parent instanceof HeatingStructureBlockEntity smeltery)) return;
 
         if (SmelteryComponentHelper.isRetarderActive(smeltery)) {
@@ -36,15 +37,23 @@ public abstract class SmelteryAlloyRetarderMixin {
             if (recipes.isEmpty()) return;
 
             Level world = this.getLevel();
+            boolean hasAnyValidAlloy = false;
+
             for (AlloyRecipe recipe : recipes) {
                 if (recipe.matches(this.alloyTank, world)) {
                     Fluid resultFluid = recipe.getOutput().getFluid();
+
                     if (mizi$hasFluidInTank(smeltery, resultFluid)) {
-                        return;
+                        if (predicate.test(recipe)) {
+                            cir.setReturnValue(true);
+                            return;
+                        }
+                        hasAnyValidAlloy = true;
                     }
                 }
             }
-            cir.setReturnValue(false);
+
+            cir.setReturnValue(hasAnyValidAlloy);
         }
     }
 

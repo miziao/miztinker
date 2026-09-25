@@ -80,7 +80,7 @@ public class BloodShield extends NoLevelsModifier implements DamageBlockModifier
                 if (!stack.isEmpty()) {
                     try {
                         IToolStackView tool = ToolStack.from(stack);
-                        if (tool.getModifierLevel(MiztinkerModifiers.BLOODSHIDID.get()) > 0) {
+                        if (tool.getModifierLevel(MiztinkerModifiers.BLOOD_SHIELD_STATIC_MODIFIER.get()) > 0) {
                             return true;
                         }
                     } catch (Exception ignored) {}

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+  "item":"minecraft:iron_nugget"
+  },
+  "value": 1,
+  "needed": 1,
+  "material": "miztinker:scrap"
+}

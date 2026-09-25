@@ -21,17 +21,17 @@ public class MiztinkerModifiers {
     public static final StaticModifier<Ironman> IRONMAN = MODIFIERS.register("ironman", Ironman::new);
 
     //血液蝙蝠
-    public static StaticModifier<?> BLOOD_BAT  = null;
+    public static final StaticModifier<Blood_bat> BLOOD_BAT_STATIC_MODIFIER= ModList.get().isLoaded("vampirism") ? MODIFIERS.register("blood_bat",Blood_bat::new) : null;
 
     //永恒防晒霜
-    public static StaticModifier<?> ETERNALSUNSCREEN  = null;
+    public static final StaticModifier<EternalSunscreen> ETERNAL_SUNSCREEN_STATIC_MODIFIER= ModList.get().isLoaded("vampirism") ? MODIFIERS.register("eternalsunscreen",EternalSunscreen::new) : null;
 
     //德古拉之血
-    public static StaticModifier<?> DRACULASBLOOD  = null;
+    public static final StaticModifier<DraculasBlood> DRACULAS_BLOOD_STATIC_MODIFIER= ModList.get().isLoaded("vampirism") ? MODIFIERS.register("draculasblood",DraculasBlood::new) : null;
 
     //永恒之血
 
-    public static StaticModifier<?> ETERNALBOOLD  = null;
+    public static final StaticModifier<EternalBlood> ETERNAL_BLOOD_STATIC_MODIFIER= ModList.get().isLoaded("vampirism") ? MODIFIERS.register("eternalblood",EternalBlood::new) : null;
 
     //极巨化
     public static StaticModifier<Dynamax> DYNAMAX = MODIFIERS.register("dynamax", Dynamax::new);
@@ -39,7 +39,7 @@ public class MiztinkerModifiers {
     //极巨化
     public static final StaticModifier<Dynamax_armor> DYNAMAX_ARMOR = MODIFIERS.register("dynamax_armor", Dynamax_armor::new);
 
-    public static StaticModifier<?> BLOOD_WING = null;
+    public static final StaticModifier<Blood_Wing> BLOOD_WING_STATIC_MODIFIER= ModList.get().isLoaded("vampirism") ? MODIFIERS.register("blood_wing",Blood_Wing::new) : null;
 
     //蝎毒
     public static final StaticModifier<Venom> VENOM = MODIFIERS.register("venom", Venom::new);
@@ -60,11 +60,10 @@ public class MiztinkerModifiers {
     public static final StaticModifier<Fly> FLY = MODIFIERS.register("fly", Fly::new);
 
 
-
     public static final StaticModifier<Chloroplast> CHLOROPLAST_STATIC_MODIFIER = MODIFIERS.register("chloroplast", Chloroplast::new);
 
     //血液护盾
-    public static StaticModifier<?> BLOODSHIDID = null;
+    public static final StaticModifier<BloodShield> BLOOD_SHIELD_STATIC_MODIFIER= ModList.get().isLoaded("vampirism") ? MODIFIERS.register("blood_shield",BloodShield::new) : null;
 
     //水龙之力
     public static final StaticModifier<Water_Power> WATER_POWER = MODIFIERS.register("water_power", Water_Power::new);
@@ -88,7 +87,7 @@ public class MiztinkerModifiers {
     public static final StaticModifier<Grasp_Heart> GRASP_HEART = MODIFIERS.register("grasp_heart", Grasp_Heart::new);
 
     //骸骨障壁
-    public static StaticModifier<?> WALL_OF_SKELETON  = null;
+    public static StaticModifier<Wall_of_Skeleton> WALL_OF_SKELETON  = ModList.get().isLoaded("irons_spellbooks") ? MODIFIERS.register("wall_of_skeleton",Wall_of_Skeleton::new) : null;
     //噬魂
     public static final StaticModifier<SoulEat> SOUL_EAT = MODIFIERS.register("souleat", SoulEat::new);
 
@@ -96,16 +95,15 @@ public class MiztinkerModifiers {
     public static final StaticModifier<SB_cancel> SB_CANCEL = MODIFIERS.register("sb_cancel", SB_cancel::new);
 
 
-    public static StaticModifier<?> STREDGEUNIVERSE = null;
+    public static final StaticModifier<Stredgeuniverse> STREDGEUNIVERSE_STATIC_MODIFIER= ModList.get().isLoaded("stredgeuniverse") ? MODIFIERS.register("stredgeuniverse",Stredgeuniverse::new) : null;
 
-    //取消后腰
-    public static StaticModifier<?> GATLING_SWORD = null;
+    public static final StaticModifier<Gatling_Sword> GATLING_SWORD_STATIC_MODIFIER= ModList.get().isLoaded("slashblade_addon") ? MODIFIERS.register("gatling_sword",Gatling_Sword::new) : null;
 
     //欺骗恶魔
     public static final StaticModifier<DeceiveDevil> DECEIVE_DEVIL = MODIFIERS.register("deceivedevil", DeceiveDevil::new);
 
-    //圆刃
-    public static StaticModifier<?> CIRCLE_SLASH = null;
+
+    public static final StaticModifier<CircleSlash> CIRCLE_SLASH= ModList.get().isLoaded("slashblade") ? MODIFIERS.register("circleslash",CircleSlash::new) : null;
 
     //捕捉
     public static final StaticModifier<Capturin> CAPTURIN = MODIFIERS.register("capturin", Capturin::new);
@@ -114,7 +112,7 @@ public class MiztinkerModifiers {
     public static final StaticModifier<Dragon_Greedy> DRAGON_GREEDY = MODIFIERS.register("dragon_greedy", Dragon_Greedy::new);
 
     //原子斩
-    public static StaticModifier<?> ATOMSLASH = null;
+    public static final StaticModifier<Atomslash> ATOMSLASH_STATIC_MODIFIER= ModList.get().isLoaded("slashblade") ? MODIFIERS.register("atomslash",Atomslash::new) : null;
 
     //便携式睡袋
     public static final StaticModifier<SleepInstant> SLEEP_INSTANT = MODIFIERS.register("sleepinstant", SleepInstant::new);
@@ -135,7 +133,7 @@ public class MiztinkerModifiers {
     public static final StaticModifier<KineticAmplifier > KINETICAMPLIFIER = MODIFIERS.register("kineticamplifier", KineticAmplifier ::new);
 
     //动能冲击
-    public static StaticModifier<?> VEXSUMMONER = null;
+    public static final StaticModifier<VexSummoner> VEX_SUMMONER_STATIC_MODIFIER= ModList.get().isLoaded("goety") ? MODIFIERS.register("vexsummoner",VexSummoner::new) : null;
 
     //动能冲击
     public static final StaticModifier<Entropy_Decay > ENTROPY_DECAY = MODIFIERS.register("entropy_decay", Entropy_Decay ::new);
@@ -173,9 +171,9 @@ public class MiztinkerModifiers {
 
     public static StaticModifier<AwakenDoomGuy> awakenDoomGuyStaticModifier =MODIFIERS.register("awaken_doomguy", AwakenDoomGuy::new);
 
-    public static final StaticModifier<AwakenUltraman> AWAKEN_ULTRAMAN_STATIC_MODIFIER = MODIFIERS.register("awaken_ultraman", AwakenUltraman::new);
+    public static final StaticModifier<AwakenUltraman> AWAKEN_ULTRAMAN_STATIC_MODIFIER= ModList.get().isLoaded("pehkui") ? MODIFIERS.register("awaken_ultraman",AwakenUltraman::new) : null;
 
-    public static StaticModifier<?> GREY_MATTER_STATIC_MODIFIER = MODIFIERS.register("greymatter", GreyMatter::new);
+    public static final StaticModifier<GreyMatter> GREY_MATTER_STATIC_MODIFIER= ModList.get().isLoaded("pehkui") ? MODIFIERS.register("greymatter",GreyMatter::new) : null;
 
     public static final StaticModifier<WoundEffectAttack > WOUND_EFFECT_ATTACK_STATIC_MODIFIER = MODIFIERS.register("woundeffectattack", WoundEffectAttack ::new);
 
@@ -237,11 +235,11 @@ public class MiztinkerModifiers {
 
     public static final StaticModifier<CelestialStrike> CELESTIAL_STRIKE_STATIC_MODIFIER = MODIFIERS.register("celestial_strike", CelestialStrike::new);
 
-    public static StaticModifier<?> LUNGS_PAST_STATIC_MODIFIER = null;
+    public static final StaticModifier<LungsPast> LUNGS_PAST_STATIC_MODIFIER= ModList.get().isLoaded("vampirism") ? MODIFIERS.register("lungspast",LungsPast::new) : null;
 
-    public static StaticModifier<?> EMC_TORRENT = null;
+    public static final StaticModifier<EMC_torrent> EMC_TORRENT_STATIC_MODIFIER= ModList.get().isLoaded("projecte") ? MODIFIERS.register("emc_torrent",EMC_torrent::new) : null;
 
-    public static StaticModifier<?> TINKERSCROWN = null;
+    public static StaticModifier<TinkersCrown> TINKERSCROWN =  ModList.get().isLoaded("irons_spellbooks") ? MODIFIERS.register("tinkerscrown",TinkersCrown::new) : null;
 
     public static StaticModifier<LoveStone> LOVESTONE = MODIFIERS.register("lovestone", LoveStone::new);
 
@@ -362,8 +360,6 @@ public class MiztinkerModifiers {
 
     public static final StaticModifier<Arcana> ARCANA_STATIC_MODIFIER = ModList.get().isLoaded("projecte") ? MODIFIERS.register("arcana",Arcana::new) : null;
 
-    public static final StaticModifier<EMC_torrent> EMC_TORRENT_STATIC_MODIFIER = ModList.get().isLoaded("projecte") ? MODIFIERS.register("emc_torrent", EMC_torrent::new) : null;
-
     public static final StaticModifier<Double_Evolution_Pill> DOUBLE_EVOLUTION_PILL_STATIC_MODIFIER = ModList.get().isLoaded("tinkerslevellingaddon") ? MODIFIERS.register("double_evolution_pill",Double_Evolution_Pill::new) : null;
 
     public static final StaticModifier<Beta_Evolution_Pill> BETA_EVOLUTION_PILL_STATIC_MODIFIER = ModList.get().isLoaded("tinkerslevellingaddon") ? MODIFIERS.register("beta_evolution_pill",Beta_Evolution_Pill::new) : null;
@@ -472,6 +468,30 @@ public class MiztinkerModifiers {
     public static final StaticModifier<MakeConcertedEfforts> MAKE_CONCERTED_EFFORTS_STATIC_MODIFIER = MODIFIERS.register("makeconcertedefforts", MakeConcertedEfforts::new);
 
     public static final StaticModifier<Trinity> TRINITY_STATIC_MODIFIER = MODIFIERS.register("trinity", Trinity::new);
+
+    public static final StaticModifier<Scrap> scrap = MODIFIERS.register("scrap", Scrap::new);
+
+    public static final StaticModifier<LifeStealing> LIFE_STEALING_STATIC_MODIFIER = MODIFIERS.register("life_stealing", LifeStealing::new);
+
+    public static final StaticModifier<TrifoldEntity> TRIFOLD_ENTITY_STATIC_MODIFIER = MODIFIERS.register("trifold_entity", TrifoldEntity::new);
+
+    public static final StaticModifier<TripleBlessing> TRIPLE_BLESSING_STATIC_MODIFIER = MODIFIERS.register("triple_blessing", TripleBlessing::new);
+
+    public static final StaticModifier<SandShield> SAND_SHIELD_STATIC_MODIFIER = MODIFIERS.register("sand_shield", SandShield::new);
+
+    public static final StaticModifier<DiamondBody> DIAMOND_BODY_STATIC_MODIFIER = MODIFIERS.register("diamond_body", DiamondBody::new);
+
+    public static final StaticModifier<MagneticForce> MAGNETIC_FORCE_STATIC_MODIFIER = MODIFIERS.register("magnetic_force", MagneticForce::new);
+
+    public static final StaticModifier<DiamondOfLife> DIAMOND_OF_LIFE_STATIC_MODIFIER = MODIFIERS.register("diamond_of_life", DiamondOfLife::new);
+
+    public static final StaticModifier<FinalReturn> FINAL_RETURN_STATIC_MODIFIER= MODIFIERS.register("final_return", FinalReturn::new);
+
+    public static final StaticModifier<Brittle_Bones> BRITTLE_BONES_STATIC_MODIFIER= MODIFIERS.register("brittle_bones", Brittle_Bones::new);
+
+    public static final StaticModifier<SandBindingFuneral> SAND_BINDING_FUNERAL_STATIC_MODIFIER = MODIFIERS.register("sand_binding_funeral", SandBindingFuneral::new);
+
+    public static final StaticModifier<NoLevelsModifier> No_suspicion_stomach = MODIFIERS.register("no_suspicion_stomach", NoLevelsModifier::new);
 
     public static final StaticModifier<AutosmeltIGuess> AUTOSMELT_I_GUESS_STATIC_MODIFIER = MODIFIERS.register("autosmelt_i_guess", AutosmeltIGuess::new);
 

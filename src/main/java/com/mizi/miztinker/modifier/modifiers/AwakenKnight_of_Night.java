@@ -1,12 +1,11 @@
 package com.mizi.miztinker.modifier.modifiers;
 
 import com.mizi.miztinker.modifier.register.MiztinkerModifiers;
-import com.mizi.miztinker.network.MiztinkerNetwork;
-import com.mizi.miztinker.network.TimeStopPacket;
+import com.mizi.miztinker.sounds.MiztinkerSounds;
 import com.mizi.miztinker.util.MizTimeStopHandler;
-import com.mizi.miztinker.util.Time;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -27,7 +26,8 @@ public class AwakenKnight_of_Night extends NoLevelsModifier implements
         RequirementsModifierHook,
         ValidateModifierHook {
 
-    private static final ResourceLocation ACTIVE = ResourceLocation.fromNamespaceAndPath("miztinker", "timestop_active");
+    private static final ResourceLocation ACTIVE =
+            ResourceLocation.fromNamespaceAndPath("miztinker", "timestop_active");
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
@@ -41,21 +41,31 @@ public class AwakenKnight_of_Night extends NoLevelsModifier implements
                                        Player player, InteractionHand hand,
                                        InteractionSource source) {
 
-        if (player.level().isClientSide) return InteractionResult.SUCCESS;
+        if (player.level().isClientSide) {
+            return InteractionResult.SUCCESS;
+        }
 
-        if (source != InteractionSource.RIGHT_CLICK || !player.isCrouching() || tool.isBroken())
+        if (source != InteractionSource.RIGHT_CLICK || !player.isCrouching() || tool.isBroken()) {
             return InteractionResult.PASS;
+        }
 
-        if (player.getCooldowns().isOnCooldown(tool.getItem())) return InteractionResult.FAIL;
+        if (player.getCooldowns().isOnCooldown(tool.getItem())) {
+            return InteractionResult.FAIL;
+        }
+
         player.getCooldowns().addCooldown(tool.getItem(), 20);
 
+        boolean nowActive = !MizTimeStopHandler.isControllingTimeStop(player);
+
+        if (!MizTimeStopHandler.toggle(player, nowActive)) {
+            player.sendSystemMessage(Component.translatable("message.miztinker.timestop.busy"));
+            return InteractionResult.FAIL;
+        }
+
         ModDataNBT data = tool.getPersistentData();
-        boolean nowActive = !data.getBoolean(ACTIVE);
         data.putBoolean(ACTIVE, nowActive);
 
-        MizTimeStopHandler.toggle(player, nowActive);
-
-        MiztinkerNetwork.sendToClient(new TimeStopPacket(nowActive));
+        playSakuyaSound(player, nowActive);
 
         if (nowActive) {
             player.sendSystemMessage(Component.translatable("message.miztinker.timestop.active"));
@@ -66,10 +76,29 @@ public class AwakenKnight_of_Night extends NoLevelsModifier implements
         return InteractionResult.SUCCESS;
     }
 
+    private static void playSakuyaSound(Player player, boolean starting) {
+        float volume = 1.0F;
+
+        float pitch = starting ? 1.0F : 0.85F;
+
+        player.level().playSound(
+                null,
+                player.getX(),
+                player.getY(),
+                player.getZ(),
+                MiztinkerSounds.SAKUYA.get(),
+                SoundSource.PLAYERS,
+                volume,
+                pitch
+        );
+    }
+
     @Override
     public @Nullable Component validate(IToolStackView tool, ModifierEntry entry) {
-        if (tool.getModifierLevel(MiztinkerModifiers.KNIGHT_OF_NIGHT.getId()) > 0)
+        if (tool.getModifierLevel(MiztinkerModifiers.KNIGHT_OF_NIGHT.getId()) > 0) {
             return null;
+        }
+
         return requirementsError(entry);
     }
 

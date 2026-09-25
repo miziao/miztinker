@@ -13,8 +13,6 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = "miztinker")
 public class ShieldGuiHandler {
-    private static float lerpShield = -1;
-
     @SubscribeEvent
     public static void onRenderGui(RenderGuiEvent.Post event) {
         Minecraft mc = Minecraft.getInstance();
@@ -23,29 +21,22 @@ public class ShieldGuiHandler {
         int totalLevel = EquivalentArmor.getTotalLevel(mc.player);
         if (totalLevel <= 0) return;
 
+        float maxShield = totalLevel * 2000.0f;
         CompoundTag data = mc.player.getPersistentData().getCompound(EquivalentArmor.SHIELD_NBT);
-        float currentShield = data.getFloat(EquivalentArmor.SHIELD_VAL);
-        float maxShield = totalLevel * 2000f;
-        int cooldown = data.getInt(EquivalentArmor.SHIELD_COOLDOWN);
-
-        if (lerpShield < 0) lerpShield = currentShield;
-        if (cooldown > 0) {
-            lerpShield = 0;
-        } else {
-            lerpShield = Mth.lerp(0.15f, lerpShield, currentShield);
-            if (Math.abs(lerpShield - currentShield) < 0.5f) lerpShield = currentShield;
-        }
+        float currentShield = data.contains(EquivalentArmor.SHIELD_VAL) ? data.getFloat(EquivalentArmor.SHIELD_VAL) : maxShield;
+        currentShield = Mth.clamp(currentShield, 0.0f, maxShield);
+        int cooldown = Math.max(data.getInt(EquivalentArmor.SHIELD_COOLDOWN), 0);
 
         GuiGraphics graphics = event.getGuiGraphics();
         int screenWidth = mc.getWindow().getGuiScaledWidth();
         int screenHeight = mc.getWindow().getGuiScaledHeight();
 
         if (cooldown > 0) {
-            float pulse = 0;
+            float pulse = 0.0f;
             if (mc.level != null) {
-                pulse = (float) Math.abs(Math.sin(mc.level.getGameTime() * 0.2));
+                pulse = (float)Math.abs(Math.sin(mc.level.getGameTime() * 0.2));
             }
-            int alpha = (int) (25 + (pulse * 40));
+            int alpha = (int)(25 + (pulse * 40));
             int pulseColor = (alpha << 24) | 0x660000;
             graphics.fill(0, 0, screenWidth, 2, pulseColor);
             graphics.fill(0, screenHeight - 2, screenWidth, screenHeight, pulseColor);
@@ -64,11 +55,11 @@ public class ShieldGuiHandler {
         graphics.fill(x - 4, y, x - 1, y + height, 0xFF000000);
         graphics.fill(x - 3, y + 1, x - 2, y + height - 1, accentColor);
 
-        graphics.drawString(mc.font, "§c" + Component.translatable("gui.miztinker.emc_shield.title").getString(), x + 5, y + 5, 0xFFFFFF);
+        graphics.drawString(mc.font, "\u00A7c" + Component.translatable("gui.miztinker.emc_shield.title").getString(), x + 5, y + 5, 0xFFFFFF);
 
         String statusKey = cooldown > 0 ? "gui.miztinker.emc_shield.recharging" : "gui.miztinker.emc_shield.stable";
         int statusColor = cooldown > 0 ? 0xFF5555 : 0x00FFFF;
-        graphics.drawString(mc.font, "§l» §r" + Component.translatable(statusKey).getString(), x + 8, y + 17, statusColor, false);
+        graphics.drawString(mc.font, "\u00A7l> \u00A7r" + Component.translatable(statusKey).getString(), x + 8, y + 17, statusColor, false);
 
         int barX = x + 8;
         int barY = y + 30;
@@ -78,21 +69,21 @@ public class ShieldGuiHandler {
         graphics.fill(barX - 1, barY - 1, barX + barW + 1, barY + barH + 1, 0xFF000000);
         graphics.fill(barX, barY, barX + barW, barY + barH, 0xFF222222);
 
-        float pct = maxShield > 0 ? Mth.clamp(lerpShield / maxShield, 0, 1) : 0;
-        int currentBarW = (int) (barW * pct);
+        float pct = maxShield > 0 ? Mth.clamp(currentShield / maxShield, 0.0f, 1.0f) : 0.0f;
+        int currentBarW = (int)(barW * pct);
         if (currentBarW > 0) {
             graphics.fill(barX, barY, barX + currentBarW, barY + barH, accentColor);
             int glowAlpha = 0;
             if (mc.level != null) {
-                glowAlpha = (int) (80 + 40 * Math.sin(mc.level.getGameTime() * 0.1));
+                glowAlpha = (int)(80 + 40 * Math.sin(mc.level.getGameTime() * 0.1));
             }
             graphics.fill(barX, barY, barX + currentBarW, barY + 1, (glowAlpha << 24) | 0xFFFFFF);
         }
 
         String formattedValue = Component.translatable("gui.miztinker.emc_shield.value",
-                (int)Math.ceil(lerpShield),
+                (int)Math.ceil(currentShield),
                 (int)maxShield).getString();
 
-        graphics.drawString(mc.font, "§7" + formattedValue, barX, y + 38, 0xCCCCCC, false);
+        graphics.drawString(mc.font, "\u00A77" + formattedValue, barX, y + 38, 0xCCCCCC, false);
     }
 }

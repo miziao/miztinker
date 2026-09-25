@@ -38,10 +38,15 @@ public class Neptune extends NoLevelsModifier implements MeleeHitModifierHook {
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        if (!(context.getAttacker().level() instanceof ServerLevel world) || damageDealt <= 0) return;
+        if (!(context.getAttacker().level() instanceof ServerLevel world)) return;
 
         Entity attacker = context.getAttacker();
         Entity target = context.getTarget();
+
+        generateNeptuneLoot(world, attacker, target, tool);
+    }
+
+    private void generateNeptuneLoot(ServerLevel world, Entity attacker, Entity target, IToolStackView tool) {
         BlockPos pos = target.blockPosition();
 
         boolean isWetEnvironment = hasWaterVertical(world, attacker.blockPosition())
@@ -50,7 +55,6 @@ public class Neptune extends NoLevelsModifier implements MeleeHitModifierHook {
 
         ItemStack fakeRod = new ItemStack(Items.FISHING_ROD);
         int luckLevel = tool.getModifierLevel(LUCK_MODIFIER_ID);
-
         if (luckLevel > 0) {
             fakeRod.enchant(Enchantments.FISHING_LUCK, luckLevel);
         }
@@ -61,8 +65,8 @@ public class Neptune extends NoLevelsModifier implements MeleeHitModifierHook {
         LootParams lootparams = new LootParams.Builder(world)
                 .withParameter(LootContextParams.ORIGIN, target.position())
                 .withParameter(LootContextParams.TOOL, fakeRod)
-                .withParameter(LootContextParams.THIS_ENTITY, target)
-                .withParameter(LootContextParams.KILLER_ENTITY, attacker)
+                .withOptionalParameter(LootContextParams.THIS_ENTITY, target)
+                .withOptionalParameter(LootContextParams.KILLER_ENTITY, attacker)
                 .withLuck(totalLuck)
                 .create(LootContextParamSets.FISHING);
 
@@ -88,9 +92,9 @@ public class Neptune extends NoLevelsModifier implements MeleeHitModifierHook {
                         stack.copy()
                 );
                 itemEntity.setDeltaMovement(
-                        world.random.nextGaussian() * 0.02D,
+                        world.random.nextGaussian() * 0.05D,
                         0.3D,
-                        world.random.nextGaussian() * 0.02D
+                        world.random.nextGaussian() * 0.05D
                 );
                 world.addFreshEntity(itemEntity);
             }

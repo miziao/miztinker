@@ -4,6 +4,7 @@ import com.mizi.miztinker.block.TinkerElectricityModuleBlock.TinkerElectricityMo
 import com.mizi.miztinker.modifier.register.MiztinkerBlocks;
 import com.mizi.miztinker.util.IFuelModuleMiziHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,6 +27,12 @@ public abstract class HeatingStructureMixin {
     @Unique
     private final List<BlockPos> mizi$electricityModuleCache = new ArrayList<>();
 
+
+    @Inject(method = "saveSynced", at = @At("RETURN"))
+    private void mizi$syncFuelModule(CompoundTag tag, CallbackInfo ci) {
+        HeatingStructureBlockEntity self = (HeatingStructureBlockEntity)(Object)this;
+        self.getFuelModule().writeToTag(tag);
+    }
 
     @Inject(method = "setStructure", at = @At("RETURN"))
     private void mizi$updateModuleCache(StructureData structure, CallbackInfo ci) {

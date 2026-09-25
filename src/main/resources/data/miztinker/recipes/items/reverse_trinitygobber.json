@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "miztinker:uno_card" },
+    { "item": "miztinker:imitation_trinitygobber" }
+  ],
+  "result": {
+    "item": "miztinker:reverse_trinitygobber",
+    "count": 1
+  }
+}

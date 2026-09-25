@@ -1,6 +1,7 @@
 package com.mizi.miztinker.modifier.modifiers;
 
 import moze_intel.projecte.api.capabilities.PECapabilities;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -12,14 +13,16 @@ import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
-public class EMC_torrent extends NoLevelsModifier
-        implements MeleeDamageModifierHook, MeleeHitModifierHook {
+import static com.mizi.miztinker.miztinker.getResource;
+
+public class EMC_torrent extends NoLevelsModifier implements MeleeDamageModifierHook, MeleeHitModifierHook {
+
+    public static final ResourceLocation EMC_TORRENT_ID = getResource("emc_torrent");
 
     private static final float EMC_RATE = 6.0f;
-
-    private float cachedFinalDamage = 0;
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
@@ -29,7 +32,7 @@ public class EMC_torrent extends NoLevelsModifier
 
     @Override
     public int getPriority() {
-        return 1000; // 比 SoulEat、附魔、倍率都晚
+        return 1000;
     }
 
     @Override
@@ -40,7 +43,14 @@ public class EMC_torrent extends NoLevelsModifier
             float baseDamage,
             float damage
     ) {
-        this.cachedFinalDamage = damage; // ← 已包含噬魂、附魔、效果等
+        if (!(context.getAttacker() instanceof ServerPlayer player)) {
+            return damage;
+        }
+
+        float theoreticalDamage = estimateTheoreticalDamage(context, baseDamage, damage);
+
+        EmcTorrentDamageTracker.cacheTheoreticalDamage(player, theoreticalDamage);
+
         return damage;
     }
 
@@ -51,16 +61,54 @@ public class EMC_torrent extends NoLevelsModifier
             @NotNull ToolAttackContext context,
             float damageDealt
     ) {
-        if (!(context.getAttacker() instanceof ServerPlayer player)) return;
-        if (cachedFinalDamage <= 0) return;
+        if (!(context.getAttacker() instanceof ServerPlayer player)) {
+            return;
+        }
 
-        long emcToAdd = (long) (cachedFinalDamage * EMC_RATE);
-        cachedFinalDamage = 0;
+        float cachedTheoreticalDamage = EmcTorrentDamageTracker.popTheoreticalDamage(player);
+        float eventFinalDamage = EmcTorrentDamageTracker.popFinalDamage(player);
+
+        float finalDamage = Math.max(
+                Math.max(eventFinalDamage, cachedTheoreticalDamage),
+                damageDealt
+        );
+
+        if (finalDamage > 0.0f) {
+            addEmc(player, finalDamage);
+        }
+    }
+
+    private static float estimateTheoreticalDamage(
+            ToolAttackContext context,
+            float baseDamage,
+            float damage
+    ) {
+        float result = Math.max(0.0f, damage);
+
+        float cooldown = context.getCooldown();
+        if (cooldown < 1.0f) {
+            result *= 0.2f + cooldown * cooldown * 0.8f;
+        }
+
+        return Math.max(0.0f, result);
+    }
+
+    private static void addEmc(ServerPlayer player, float damage) {
+        if (damage <= 0.0f || Float.isNaN(damage) || Float.isInfinite(damage)) {
+            return;
+        }
+
+        BigInteger emcToAdd = BigDecimal.valueOf((double) damage)
+                .multiply(BigDecimal.valueOf((double) EMC_RATE))
+                .toBigInteger();
+
+        if (emcToAdd.signum() <= 0) {
+            return;
+        }
 
         player.getCapability(PECapabilities.KNOWLEDGE_CAPABILITY).ifPresent(knowledge -> {
-            knowledge.setEmc(
-                    knowledge.getEmc().add(BigInteger.valueOf(emcToAdd))
-            );
+            BigInteger currentEmc = knowledge.getEmc();
+            knowledge.setEmc(currentEmc.add(emcToAdd));
             knowledge.syncEmc(player);
         });
     }
